@@ -1,0 +1,33 @@
+/* Estilos de la navegación */
+
+/* Vars of colors */
+:root {
+    --bg-green: #199552;
+}
+
+
+/* Color of navigation */
+.bg-green {
+    background-color: var(--bg-green) !important;
+}
+
+/* Styles for form */
+.mt-6 {
+    margin-top: 10rem !important;
+    margin-bottom: 10rem !important;
+}
+
+/* Hero image form */
+.bg-hero {
+    background-image: url('../img/Banner_esperanza.png') !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+}
+
+/* Styles for card form */
+.card {
+    opacity: 0.9 !important;
+}
