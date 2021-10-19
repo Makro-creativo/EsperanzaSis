@@ -1,16 +1,26 @@
 <?php 
     include "./config/conexion.php";
 
-    if(isset($_POST['saveClient'])) {
+    if(isset($_GET["id"])) {
+        $id = $_GET['id'];
+
+        $query = "SELECT * FROM clients WHERE id = $id";
+        $result = mysqli_query($conexion, $query);
+
+        if($result) {
+            $row = mysqli_fetch_array($result);
+
+            $name_client = $row['name_client'];
+            $address = $row['address'];
+        }
+    }
+
+    if(isset($_POST['editClient'])) {
         $name_client = $_POST['name_client'];
         $address = $_POST['address'];
 
-        $query_client = "INSERT INTO clients(name_client, address) VALUES('$name_client', '$address')";
-        $result = mysqli_query($conexion, $query_client);
-
-        if(!$result) {
-            die("No se pudo guardar el cliente, verifique de nuevo sus datos");
-        }
+        $query_update = "UPDATE clients set name_client='$name_client', address='$address'";
+        mysqli_query($conexion, $query_update);
 
         header("location: show-clients.php");
     }
@@ -25,10 +35,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EsperanzaSis</title>
 
-
     <!-- Custom fonts for this template-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -49,32 +58,30 @@
 
                 <div class="container">
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Nuevo cliente</h2>
+                        <h2 class="d-flex justify-content-start mb-4">Editar cliente</h2>
 
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
-                            <div class="card shadow-lg">
-                                <div class="card-header">Registrar nuevo cliente</div>
+                            <div class="card shadow-lg mb-4">
+                                <div class="card-header">Editar cliente</div>
 
                                 <div class="card-body">
-                                    <form action="new-client.php" method="POST">
+                                    <form action="edit-client.php" method="POST">
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Nombre completo del cliente: </label>
-                                                    <input name="name_client" type="text" placeholder="Ejemplo: jose Rogriguez gonzales." class="form-control">
+                                                    <label>Editar nombre del cliente: </label>
+                                                    <input type="text" placeholder="Editar nombre del cliente" name="name_client" value="<?php echo $name_client ?>" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
-                                                <div class="form-group">
-                                                    <label>Dirección: </label>
-                                                    <input name="address" type="text" placeholder="Ejemplo: Av los arcos 24 etc.." class="form-control">
-                                                </div>
+                                                <label>Editar Dirección del cliente: </label>
+                                                <input type="text" class="form-control" placeholder="Editar dirección del cliente" name="address" value="<?php echo $address; ?>">
                                             </div>
                                         </div>
 
                                         <div class="d-grid gap-2">
-                                            <input type="submit" value="Registrar" class="btn btn-outline-success mt-4" name="saveClient">
+                                            <input type="submit" value="Editar" class="btn btn-outline-success mt-4" name="editClient">
                                         </div>
                                     </form>
                                 </div>
@@ -85,12 +92,11 @@
 
             </div>
 
-    
+
             <?php include "./partials/footer.php" ?>
         </div>
 
     </div>
-
 
 
 

@@ -40,33 +40,33 @@
 
                     <!-- Modal -->
                     <div class="modal fade" id="modal-order" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Nuevo pedido</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Selecciona tu producto</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="" method="POST">
-                                    <select class="form-select" name="status" id="status" onchange="showForms(this.value)">
-                                        <option selected disabled value="">Selecciona un Producto</option>
-                                        <option value="Totopos">Totopos especial para Chilaquiles</option>
-                                        <option value="Tortilla">Tortilla de Maíz</option>
+                                <form action="new-order.php" method="POST">
+                                    <select class="form-select" name="status" id="status" onChange="show(this.value);">
+                                        <option selected disabled>---- Selecciona un Producto ---</option>
+                                        <option value="totopos">Totopos especial para Chilaquiles</option>
+                                        <option value="tortilla">Tortilla de Maíz</option>
                                     </select>
                                 </form>
 
-                                <div id="totopos" style="display: none;">
-                                    <form action="" method="POST">
+                                <div id="totopos" style="display: none;" class="mt-4">
+                                    <form action="new-order.php" method="POST">
                                         <div class="form-group">
                                             <label>Nombre del Producto: </label>
                                             <input type="text" placeholder="Nombre del producto" class="form-control">
                                         </div>
                                     </form>
                                 </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-success">Guardar</button>
                             </div>
                             </div>
                         </div>
@@ -88,10 +88,11 @@
                                                     <th>Nombre del producto</th>
                                                     <th>Nombre del cliente</th>
                                                     <th>Dirección de envió</th>
-                                                    <th>Precio</th>
+                                                    <th>Cantidad en exitencia</th>
                                                     <th>Kilogramos</th>
                                                     <th>Fecha de envió</th>
                                                     <th>Hora de envió</th>
+                                                    <th>Nombre de quien hace el pedido</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -118,8 +119,8 @@
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -141,14 +142,12 @@
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
     <script>
-        function showForId(id) {
+        function show(id) {
             if(id === "totopos") {
                 $("#totopos").show();
 
             }
         }
-
-        showForId();
     </script>
 </body>
 </html>

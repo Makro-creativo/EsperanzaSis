@@ -1,14 +1,11 @@
 <?php 
     include "./config/conexion.php";
 
-    $name_product = '';
-    $quantity = '';
-    $kilograms = '';
 
     if(isset($_GET['id'])) {
         $id = $_GET['id'];
 
-        $query = "SELECT * FROM products WHERE id = '$id'   ";
+        $query = "SELECT * FROM products WHERE id = $id";
         $result = mysqli_query($conexion, $query);
 
         if($result) {
@@ -66,6 +63,8 @@
 
                 <div class="container">
                     <div class="row">
+                        <h2 class="d-flex justify-content-start mb-4">Editar producto</h2>
+
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
                             <div class="card shadow-lg">
                                 <div class="card-header">Editar producto</div>
@@ -76,21 +75,21 @@
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Editar nombre del producto: </label>
-                                                    <input type="text" placeholder="Editar nombre del producto" class="form-control" value="<?php echo $name_product; ?>">
+                                                    <input type="text" name="name_product" placeholder="Editar nombre del producto" class="form-control" value="<?php echo $name_product; ?>">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Editar cantidad: </label> 
-                                                    <input type="number" placeholder="Editar cantidad del producto" class="form-control" value="<?php echo $quantity; ?>">
+                                                    <input type="number" name="quantity" placeholder="Editar cantidad del producto" class="form-control" value="<?php echo $quantity; ?>">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Editar kilogramos: </label>
-                                            <input type="text" placeholder="Editar los kilogramos del producto" class="form-control" value="<?php echo $kilograms; ?>">
+                                            <input type="text" name="kilograms" placeholder="Editar los kilogramos del producto" class="form-control" value="<?php echo $kilograms; ?>">
                                         </div>
 
                                         <div class="d-grid gap-2">

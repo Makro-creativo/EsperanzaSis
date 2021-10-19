@@ -51,7 +51,7 @@
 
                 <div class="container">
                     <div class="row">
-                        <h2 class="d-flex justify-content-start">Nuevo Producto</h2>
+                        <h2 class="d-flex justify-content-start mb-4">Nuevo Producto</h2>
 
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
                             <div class="card shadow-lg">

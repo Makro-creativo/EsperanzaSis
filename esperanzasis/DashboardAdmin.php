@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    error_reporting(0);
+
+    $typeUser = $_SESSION['Tipo'];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,8 +33,84 @@
 
             <!-- Content -->
             <div class="container">
+            <h2 class="text-dark d-flex justify-content-start mb-4">Panel de Control</h2>
                 <div class="row">
-                    <h2 class="text-dark">Panel de Control</h2>
+
+                        <div class="col-xl-4 col-lg-4 col-xxl-4 col-sm-12 col-md-4 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Productos (Registrados)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php 
+                                                    include "./config/conexion.php";
+
+                                                    $query = mysqli_query($conexion, "SELECT * FROM products");
+
+                                                    $products_count = mysqli_num_rows($query);
+
+                                                    echo $products_count;
+                                                ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-box-open fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                            <div class="col-xl-4 col-lg-4 col-xxl-4 col-sm-12 col-md-4 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Clientes (Registrados)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php  
+                                                        include "./config/conexion.php";
+
+                                                        $query = mysqli_query($conexion, "SELECT * FROM clients");
+
+                                                        $clients_count = mysqli_num_rows($query);
+
+                                                        echo $clients_count;
+                                                    
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-users fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-xxl-4 col-sm-12 col-md-4 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Pedidos (Realizados)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    0
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
                 </div>
             </div>
 
