@@ -12,6 +12,8 @@
             die("No se pudo guardar el cliente, verifique de nuevo sus datos");
         }
 
+        json_encode($result);
+
         header("location: show-clients.php");
     }
 
@@ -55,20 +57,20 @@
                             <div class="card shadow-lg">
                                 <div class="card-header">Registrar nuevo cliente</div>
 
-                                <div class="card-body">
-                                    <form action="new-client.php" method="POST">
+                                <div class="card-body" id="app">
+                                    <form @submit.prevent="createClient()" method="POST">
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Nombre completo del cliente: </label>
-                                                    <input name="name_client" type="text" placeholder="Ejemplo: jose Rogriguez gonzales." class="form-control">
+                                                    <input v-model="name" name="name_client" type="text" placeholder="Ejemplo: jose Rogriguez gonzales." class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Dirección: </label>
-                                                    <input name="address" type="text" placeholder="Ejemplo: Av los arcos 24 etc.." class="form-control">
+                                                    <input v-model="address" name="address" type="text" placeholder="Ejemplo: Av los arcos 24 etc.." class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -120,5 +122,7 @@
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="./assets/js/clients.js"></script>
 </body>
 </html>
