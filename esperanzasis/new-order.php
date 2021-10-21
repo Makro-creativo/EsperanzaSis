@@ -1,3 +1,36 @@
+<?php 
+    error_reporting(0);
+    session_start();
+
+    $typeUser = $_SESSION['Tipo'];
+
+    include "./config/conexion.php";
+
+    if(isset($_POST['sendOrder'])) {
+        $product_name = $_POST['name_product'];
+        $client_name = $_POST['name_client'];
+        $address_send = $_POST['address_send'];
+        $quantity_product = $_POST['quantity_product'];
+        $kilograms_order = $_POST['kilograms_order'];
+        $date_send = $_POST['date_send'];
+        $hour_send = $_POST['hour_send'];
+        $people_order = $_POST['people_order'];
+
+        $query = "INSERT INTO 
+        orders(product_name, client_name, address_send, quantity_product, kilograms_order, date_send, hour_send, people_order)
+        VALUES ('$product_name', '$client_name', '$address_send', '$quantity_product', '$kilograms_order', '$date_send', '$hour_send', '$people_order')";
+
+        $result = mysqli_query($conexion, $query);
+
+        if(!$result) {
+            die("No se pudo enviar el pedido, verifique que sus datos sean correctos...");
+        }
+
+        header("location: new-order.php");
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,13 +64,14 @@
 
                 <!-- Content main -->
                 <div class="d-flex justify-content-around align-items-center my-5">
+                <?php if($typeUser === "Client") {?>
                     <h2 class="text-dark">Nuevo pedido</h2>
 
                     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-order">
                         Hacer un pedido
                         <i class="fas fa-plus-square mr-2"></i>
                     </button>
-
+                <?php }?>
                     <!-- Modal -->
                     <div class="modal fade" id="modal-order" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
@@ -56,10 +90,76 @@
                                 </form>
 
                                 <div id="totopos" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
                                     <form action="new-order.php" method="POST">
                                         <div class="form-group">
-                                            <label>Nombre del Producto: </label>
-                                            <input type="text" placeholder="Nombre del producto" class="form-control">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envió: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envió" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envió: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Kilogramos a pedir: </label>
+                                            <input name="kilograms_order" type="text" placeholder="Ejemplo: 2kilogramos, etc..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha de envió: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envió..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Horaro de envió: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envió..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
                                         </div>
                                     </form>
                                 </div>
@@ -79,6 +179,7 @@
 
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xx-12 mx-auto">
                             <div class="card shadow-lg mb-4">
+                                <h3 class="d-flex justify-content-start mr-3 p-2 text-dark">últimos pedidos realizados</h3>
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -88,15 +189,59 @@
                                                     <th>Nombre del producto</th>
                                                     <th>Nombre del cliente</th>
                                                     <th>Dirección de envió</th>
-                                                    <th>Cantidad en exitencia</th>
+                                                    <th>Cantidad de envió</th>
                                                     <th>Kilogramos</th>
                                                     <th>Fecha de envió</th>
                                                     <th>Hora de envió</th>
                                                     <th>Pedido a nombre de:</th>
+                                                    <?php if($typeUser === "Administrador") {?>
+                                                        <th>Editar</th>
+                                                    <?php }?>
+
+                                                    <?php if($typeUser === "Administrador") {?>
+                                                        <th>Eliminar</th>
+                                                    <?php }?>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php 
+                                                    include "./config/conexion.php";
 
+                                                    $query = "SELECT * FROM orders ORDER BY id ASC";
+                                                    $result = mysqli_query($conexion, $query);
+
+                                                    while($row = mysqli_fetch_array($result)) {
+                                                ?>
+
+                                                <tr>
+                                                    <td><?php echo $row['id']; ?></td>
+                                                    <td><?php echo $row['product_name']; ?></td>
+                                                    <td><?php echo $row['client_name']; ?></td>
+                                                    <td><?php echo $row['address_send']; ?></td>
+                                                    <td><?php echo $row['quantity_product']; ?></td>
+                                                    <td><?php echo $row['kilograms_order']; ?></td>
+                                                    <td><?php echo $row['date_send']; ?></td>
+                                                    <td><?php echo $row['hour_send']; ?></td>
+                                                    <td><?php echo $row['people_order']; ?></td>
+                                                    
+                                                    <?php if($typeUser === "Administrador") {?>
+                                                        <td>
+                                                            <a href="edit-order.php?id=<?php echo $row['id']; ?>" class="btn btn-success">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                    <?php }?>
+
+                                                    <?php if($typeUser === "Administrador") {?>
+                                                        <td>
+                                                            <a href="delete-order.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    <?php }?>
+                                                </tr>
+
+                                                <?php }?>
                                             </tbody>
                                         </table>
                                     </div>

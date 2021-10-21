@@ -60,6 +60,13 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="card-footer">
+                                        <a href="show-products.php">
+                                            Ver lista de productos
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
                             </div>
                         </div>
                         
@@ -89,6 +96,13 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-clients.php">
+                                            Ver lista de clientes
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -100,13 +114,29 @@
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     Pedidos (Realizados)</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    0
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $query = mysqli_query($conexion, "SELECT* FROM orders");
+
+                                                        $orders_count = mysqli_num_rows($query);
+
+                                                        echo $orders_count;
+                                                    ?>
                                                 </div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
                                             </div>
                                         </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="new-order.php">
+                                            Ver lista de pedidos
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

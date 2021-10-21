@@ -30,4 +30,6 @@
 /* Styles for card form */
 .card {
     opacity: 0.9 !important;
+    position: absolute;
 }
+
