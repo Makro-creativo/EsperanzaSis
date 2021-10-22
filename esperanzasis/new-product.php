@@ -3,11 +3,9 @@
 
     if(isset($_POST['savedProducts'])) {
         $name_product = $_POST['name_product'];
-        $quantity = $_POST['quantity'];
-        $kilograms = $_POST['kilograms'];
 
 
-        $query_products = "INSERT INTO products(name_product, quantity, kilograms) VALUES('$name_product', '$quantity', '$kilograms')";
+        $query_products = "INSERT INTO products(name_product) VALUES('$name_product')";
         $result = mysqli_query($conexion, $query_products);
 
         if(!$result) {
@@ -60,25 +58,14 @@
                                 <div class="card-body">
                                     <form action="new-product.php" method="POST">
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                                 <div class="form-group">
                                                     <label>Nombre del producto: </label>
                                                     <input name="name_product" type="text" placeholder="Ejemplo: Totopos" class="form-control">
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
-                                                <div class="form-group">
-                                                    <label>Cantidad: </label>
-                                                    <input name="quantity" type="number" placeholder="Ejemplo: 2 piezas etc." class="form-control">
-                                                </div>
-                                            </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>Kilogramos</label>
-                                            <input name="kilograms" type="text" placeholder="Ejemplo: 1.5 kilogramo - 13 paquetes, etc." class="form-control">
-                                        </div>
 
                                         <div class="d-grid gap-2">
                                             <input type="submit" class="btn btn-outline-success mt-4" value="Guardar" name="savedProducts">

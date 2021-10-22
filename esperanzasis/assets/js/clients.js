@@ -6,7 +6,12 @@ const app = new Vue({
 
     data: {
         name: '',
-        address: '',
+        address_fiscal: '',
+        name_company: '',
+        rfc: '',
+        address_company: '',
+        giro_company: '',
+        manager_payments: '',
         clients: [],
     },
 
@@ -14,10 +19,16 @@ const app = new Vue({
         createClient() {
             return axios.post('/new-client.php', {
                 name: this.name,
-                address: this.address
+                address_fiscal: this.address_fiscal,
+                name_company: this.name_company,
+                rfc: this.rfc,
+                address_company: this.address_company,
+                giro_company: this.giro_company,
+                manager_payments: this.manager_payments,
+
             })
             .then(function(response) {
-                if(!this.name && !this.address && this.name === null && this.address === null) {
+                if(!this.name && !this.address_fiscal && this.name === null && this.address_fiscal === null) {
                     return;
                 }
 
@@ -25,7 +36,12 @@ const app = new Vue({
 
 
                 this.name = '';
-                this.address = '';
+                this.address_fiscal = '';
+                this.name_company = '';
+                this.rfc = '';
+                this.address_company = '';
+                this.giro_company = '';
+                this.manager_payments = '';
             })
             .catch(function(error) {
                 console.log(error);

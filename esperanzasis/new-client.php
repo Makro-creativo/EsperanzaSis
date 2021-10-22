@@ -3,9 +3,14 @@
 
     if(isset($_POST['saveClient'])) {
         $name_client = $_POST['name_client'];
-        $address = $_POST['address'];
+        $address_fiscal = $_POST['address_fiscal'];
+        $name_company = $_POST['name_company'];
+        $address_company = $_POST['address_company'];
+        $giro_company = $_POST['giro_company'];
+        $rfc = $_POST['rfc'];
+        $manager_payments = $_POST['manager_payments'];
 
-        $query_client = "INSERT INTO clients(name_client, address) VALUES('$name_client', '$address')";
+        $query_client = "INSERT INTO clients(name_client, address_fiscal, name_company, address_company, giro_company, rfc, manager_payments) VALUES('$name_client', '$address_fiscal', '$name_company', '$address_company', '$giro_company', '$rfc', '$manager_payments')";
         $result = mysqli_query($conexion, $query_client);
 
         if(!$result) {
@@ -63,14 +68,53 @@
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Nombre completo del cliente: </label>
-                                                    <input v-model="name" name="name_client" type="text" placeholder="Ejemplo: jose Rogriguez gonzales." class="form-control">
+                                                    <input v-model="name" name="name_client" type="text" placeholder="Ejemplo: jose Rogriguez gonzales." class="form-control" required autofocus>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Dirección: </label>
-                                                    <input v-model="address" name="address" type="text" placeholder="Ejemplo: Av los arcos 24 etc.." class="form-control">
+                                                    <label>Dirección Fiscal: </label>
+                                                    <input v-model="address_fiscal" name="address" type="text" placeholder="Dirección Fiscal" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Nombre de la empresa: </label>
+                                                    <input type="text" placeholder="Nombre de la empresa" class="form-control" name="name_company" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Dirección de la empres: </label>
+                                                    <input type="text" placeholder="Dirección de la empresa" class="form-control" name="address_company" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Giro de la empresa: </label>
+                                                    <input type="text" placeholder="Giro de la empresa" class="form-control" name="giro_company" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>RFC: </label>
+                                                    <input type="text" placeholder="RFC" class="form-control" name="rfc" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Encargado de compras: </label>
+                                                    <input type="text" placeholder="Nombre del encargado de compras" class="form-control" name="manager_company" required>
                                                 </div>
                                             </div>
                                         </div>

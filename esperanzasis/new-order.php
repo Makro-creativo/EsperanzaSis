@@ -11,14 +11,13 @@
         $client_name = $_POST['name_client'];
         $address_send = $_POST['address_send'];
         $quantity_product = $_POST['quantity_product'];
-        $kilograms_order = $_POST['kilograms_order'];
         $date_send = $_POST['date_send'];
         $hour_send = $_POST['hour_send'];
         $people_order = $_POST['people_order'];
 
         $query = "INSERT INTO 
-        orders(product_name, client_name, address_send, quantity_product, kilograms_order, date_send, hour_send, people_order)
-        VALUES ('$product_name', '$client_name', '$address_send', '$quantity_product', '$kilograms_order', '$date_send', '$hour_send', '$people_order')";
+        orders(product_name, client_name, address_send, quantity_product, date_send, hour_send, people_order)
+        VALUES ('$product_name', '$client_name', '$address_send', '$quantity_product', '$date_send', '$hour_send', '$people_order')";
 
         $result = mysqli_query($conexion, $query);
 
@@ -129,27 +128,23 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Dirección de envió: </label>
+                                            <label>Dirección de envio: </label>
                                             <input name="address_send" type="text" placeholder="Dirección de envió" class="form-control">
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Cantidad de envió: </label>
+                                            <label>Cantidad de envio: </label>
                                             <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>Kilogramos a pedir: </label>
-                                            <input name="kilograms_order" type="text" placeholder="Ejemplo: 2kilogramos, etc..." class="form-control">
-                                        </div>
 
                                         <div class="form-group">
-                                            <label>Fecha de envió: </label>
+                                            <label>Fecha de envio: </label>
                                             <input name="date_send" type="date" placeholder="Fecha de envió..." class="form-control">
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Horaro de envió: </label>
+                                            <label>Hora de entrega: </label>
                                             <input name="hour_send" type="time" placeholder="Selecciona horario para tu envió..." class="form-control">
                                         </div>
 
@@ -186,14 +181,17 @@
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>Nombre del producto</th>
-                                                    <th>Nombre del cliente</th>
-                                                    <th>Dirección de envió</th>
-                                                    <th>Cantidad de envió</th>
-                                                    <th>Kilogramos</th>
-                                                    <th>Fecha de envió</th>
-                                                    <th>Hora de envió</th>
-                                                    <th>Pedido a nombre de:</th>
+                                                    <th>Producto</th>
+                                                    <th>Cliente</th>
+                                                    <th>Dirección de envio</th>
+                                                    <th>Cantidad de envio</th>
+                                                    <th>Fecha de envio</th>
+                                                    <th>Hora de entrega</th>
+                                                    <th>Recibe</th>
+
+                                                    <th>Pedido</th>
+                                                    
+
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <th>Editar</th>
                                                     <?php }?>
@@ -219,10 +217,17 @@
                                                     <td><?php echo $row['client_name']; ?></td>
                                                     <td><?php echo $row['address_send']; ?></td>
                                                     <td><?php echo $row['quantity_product']; ?></td>
-                                                    <td><?php echo $row['kilograms_order']; ?></td>
                                                     <td><?php echo $row['date_send']; ?></td>
                                                     <td><?php echo $row['hour_send']; ?></td>
                                                     <td><?php echo $row['people_order']; ?></td>
+
+                                
+                                                        <td>
+                                                            <a href="show-order.php?id=<?php echo $row['id']; ?>" class="btn btn-dark">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                        </td>
+                                                   
                                                     
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>

@@ -43,14 +43,14 @@
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
-            <div class="col-xl-6 col-lg-6 col-md-6">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 
-                <div class="card o-hidden border-0 shadow-lg mt-6">
+                <div class="card border-0 shadow-lg mt-6">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <img src="assets/img/logo_tortilleria_la_esperanza.svg" alt="Logo la esperanza" class="img-fluid mx-auto mt-2" style="width: 80px; height: 80px;">
-                            <div class="col-lg-12 mx-auto">
+                            <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Iniciar Sesión</h1>

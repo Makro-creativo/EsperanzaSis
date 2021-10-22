@@ -49,6 +49,11 @@
                                                     <td>Id</td>
                                                     <td>Nombre completo del cliente</td>
                                                     <td>Dirección del cliente</td>
+                                                    <td>Nombre de la empresa</td>
+                                                    <td>Dirección de la empresa</td>
+                                                    <td>Giro de la empresa</td>
+                                                    <td>RFC</td>
+                                                    <td>Encargado de compras</td>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>Editar</td>
@@ -72,7 +77,12 @@
                                             <tr>
                                                 <td><?php echo $row['id']; ?></td>
                                                 <td><?php echo $row['name_client']; ?></td>
-                                                <td><?php echo $row['address']; ?></td>
+                                                <td><?php echo $row['address_fiscal']; ?></td>
+                                                <td><?php echo $row['name_company']; ?></td>
+                                                <td><?php echo $row['address_company']; ?></td>
+                                                <td><?php echo $row['giro_company']; ?></td>
+                                                <td><?php echo $row['rfc']; ?></td>
+                                                <td><?php echo $row['manager_payments']; ?></td>
 
 
                                                 <?php if($typeUser === "Administrador") {?>
