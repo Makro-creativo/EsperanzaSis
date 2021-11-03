@@ -11,6 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/img/logo_tortilleria_la_esperanza.svg">
     <title>EsperanzaSis</title>
 
    <!-- Custom fonts for this template-->
@@ -47,8 +48,7 @@
                                             <tr>
                                                 <td>Id</td>
                                                 <td>Nombre del producto</td>
-                                                <td>Cantidad del producto</td>
-                                                <td>Kilogramos</td>
+                        
                     
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>Editar</td>
@@ -71,8 +71,6 @@
                                             <tr>
                                                 <td><?php echo $row['id']; ?></td>
                                                 <td><?php echo $row['name_product']; ?></td>
-                                                <td><?php echo $row['quantity']; ?></td>
-                                                <td><?php echo $row['kilograms']; ?></td>
 
 
                                                 <?php if($typeUser === "Administrador") {?>

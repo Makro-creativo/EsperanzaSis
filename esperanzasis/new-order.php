@@ -36,6 +36,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/img/logo_tortilleria_la_esperanza.svg"> 
     <title>EsperazaSis</title>
 
      <!-- Custom fonts for this template-->
@@ -84,8 +85,25 @@
                                     <select class="form-select" name="status" id="status" onChange="show(this.value);">
                                         <option selected disabled>---- Selecciona un Producto ---</option>
                                         <option value="totopos">Totopos especial para Chilaquiles</option>
-                                        <option value="tortilla">Tortilla de Maíz</option>
+                                        <option value="tortillas_de_maiz">Tortilla de Maíz</option>
+                                        <option value="tortilla_de_harina">Tortilla de Harina</option>
+                                        <option value="tortilla_artesanal">Tortilla Artesanal</option>
+                                        <option value="masa">Masa</option>
+                                        <option value="masa_azul">Masa Azul</option>
+                                        <option value="tortilla_para_taco">Tortilla para Taco</option>
+                                        <option value="tortilla_para_flauta">Tortilla para Flauta</option>
+                                        <option value="huarache">Huarache</option>
+                                        <option value="sopes">Sopes</option>
+                                        <option value="mini_bolillo">Mini Bolillo (Fleima)</option>
+                                        <option value="bolillo">Bolillo (Fleima)</option>
+                                        <option value="bolillo_mini_salado">Bolillo mini Salado</option>
+                                        <option value="bolillo_salado">Bolillo Salado</option>
+                                        <option value="tostada">Tostada</option>
                                     </select>
+
+                                    <div class="d-flex justify-content-end">
+                                        <input type="submit" value="Agregar Producto" class="btn btn-dark mt-3">
+                                    </div>
                                 </form>
 
                                 <div id="totopos" style="display: none;" class="mt-4">
@@ -129,7 +147,78 @@
 
                                         <div class="form-group">
                                             <label>Dirección de envio: </label>
-                                            <input name="address_send" type="text" placeholder="Dirección de envió" class="form-control">
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envió..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envió..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="tortillas_de_maiz" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php   
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
                                         </div>
 
                                         <div class="form-group">
@@ -146,6 +235,930 @@
                                         <div class="form-group">
                                             <label>Hora de entrega: </label>
                                             <input name="hour_send" type="time" placeholder="Selecciona horario para tu envió..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="tortilla_de_harina" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envió..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envió..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="tortilla_artesanal" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="masa" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="masa_azul" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="tortilla_para_taco" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="tortilla__para_flauta" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="huarache" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envip" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="sopes" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="mini_bolillo" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="bolillo" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <div id="bolillo_mii_salado" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="bolillo_salado" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombre a quien va el pedido: </label>
+                                            <input name="people_order" type="text" placeholder="Nombre completo de la persona a quien va el pedido..." class="form-control">
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="sendOrder">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="tostada" style="display: none;" class="mt-4">
+                                <h2 class="d-flex justify-content-start mt-3">Crear pedido</h2>
+                                    <form action="new-order.php" method="POST">
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM products");
+                                            ?>
+                                            <label>Selecciona el producto: </label>
+                                            <select name="name_product" name="tipo" require class="form-select">
+                                                <option selected disabled value="">Selecciona el producto</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_product = $row['name_product'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_product; ?>"><?php echo $name_product; ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <?php 
+                                                include "./config/conexion.php";
+
+                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
+                                            ?>
+                                            <label>Seleccionar cliente: </label>
+                                            <select name="name_client" name="tipo" require class="form-select">
+                                                <option selected disabled>Seleccionar cliente</option>
+                                                <?php 
+                                                    while($row = mysqli_fetch_array($query)) {
+                                                        $name_client = $row['name_client'];
+                                                    }
+                                                ?>
+                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?><?php echo $row['quantity'] ?></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección de envio: </label>
+                                            <input name="address_send" type="text" placeholder="Dirección de envio" class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad de envio: </label>
+                                            <input name="quantity_product" type="text" placeholder="Ejemplo: 2 bollilos, etc" class="form-control">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Fecha de envio: </label>
+                                            <input name="date_send" type="date" placeholder="Fecha de envio..." class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Hora de entrega: </label>
+                                            <input name="hour_send" type="time" placeholder="Selecciona horario para tu envio..." class="form-control">
                                         </div>
 
                                         <div class="form-group">
@@ -295,8 +1308,286 @@
         function show(id) {
             if(id === "totopos") {
                 $("#totopos").show();
-
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortilla_artesanl").hide();
+                $("#masa").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
             }
+
+            if(id === "tortillas_de_maiz") {
+                $("#totopos").hide();
+                $("#tortillas_de_maiz").show();
+                $("#tortilla_de_harina").hide();
+                $("#tortilla_artesanl").hide();
+                $("#masa").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "tortilla_de_harina") {
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").show();
+                $("#totopos").hide();
+                $("#tortilla_artesanl").hide();
+                $("#masa").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "tortilla_artesanal") {
+                $("#tortilla_de_harina").hide();
+                $("#tortilla_artesanal").show();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "masa") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").show();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "masa_azul") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").show();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "tortilla_para_taco") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").show();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "tortilla_para_flauta") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").show();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "huarache") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").show();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "sopes") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").show();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "mini_bolillo") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").show();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "bolillo") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").show();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "bolillo_mini_salado") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").show();
+                $("#bolillo_salado").hide();
+                $("#tostada").hide();
+            }
+
+            if(id === "bolillo_salado") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").show();
+                $("#tostada").hide();
+            }
+
+            if(id === "tostada") {
+                $("#tortilla_artesanal").hide();
+                $("#masa").hide();
+                $("#tortilla_de_harina").hide();
+                $("#tortillas_de_maiz").hide();
+                $("#tortilla_de_harina").hide();
+                $("#totopos").hide();
+                $("#masa_azul").hide();
+                $("#tortilla_para_taco").hide();
+                $("#tortilla_para_flauta").hide();
+                $("#huarache").hide();
+                $("#sopes").hide();
+                $("#mini_bolillo").hide();
+                $("#bolillo").hide();
+                $("#bolillo_mini_salado").hide();
+                $("#bolillo_salado").hide();
+                $("#tostada").show();
+            }
+
         }
     </script>
 </body>

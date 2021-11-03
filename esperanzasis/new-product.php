@@ -61,7 +61,7 @@
                                             <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                                 <div class="form-group">
                                                     <label>Nombre del producto: </label>
-                                                    <input name="name_product" type="text" placeholder="Ejemplo: Totopos" class="form-control">
+                                                    <input name="name_product" type="text" placeholder="Ejemplo: Totopos" class="form-control" required autofocus>
                                                 </div>
                                             </div>
                                         </div>

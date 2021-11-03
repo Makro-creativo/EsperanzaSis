@@ -66,7 +66,7 @@
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-order.php">Crear un nuevo pedido</a>
+            <a class="collapse-item" href="order.php">Crear un nuevo pedido</a>
         </div>
     </div>
 </li>
