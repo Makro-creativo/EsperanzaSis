@@ -1,5 +1,5 @@
 <!-- Sales Details -->
-<div class="modal fade" id="details<?php echo $row['purchaseid']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="details <?php echo $row['purchaseid']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -58,3 +58,8 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+
+<td><a href="#details<?php echo $row['purchaseid']; ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> View </a>
+	<?php include('sales_modal.php'); ?>
+</td>

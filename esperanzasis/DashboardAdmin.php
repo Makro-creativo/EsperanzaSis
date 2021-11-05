@@ -134,7 +134,7 @@
                                     </div>
 
                                     <div class="card-footer">
-                                        <a href="new-order.php">
+                                        <a href="show-sales.php">
                                             Ver lista de pedidos
                                             <i class="fas fa-long-arrow-alt-right mr-2"></i>
                                         </a>

@@ -2,43 +2,52 @@
 	include('./config/conexion.php');
 	
 	if(isset($_POST['saveOrder'])){
+        $client_name = $_POST['name_client'];
+        $address_send = $_POST['address_send'];
+        $quantity_product = $_POST['quantity_product'];
+        $date_send = $_POST['date_send'];
+        $hour_send = $_POST['hour_send'];
+        $people_order = $_POST['people_order'];
  
 		$query = "INSERT INTO orders (client_name, address_send, date_send, hour_send, people_order, date_purchase) VALUES ('$client_name', '$address_send', '$date_send', '$hour_send', '$people_order', NOW())";
 		$result = mysqli_query($conexion, $query);
 		
 		$pid = $conexion->insert_id;
  
-		$total=0;
+		$total = 0;
  
 		foreach($_POST['productid'] as $product):
-		$proinfo = explode("||",$product);
-		$productid = $proinfo[0];
-		$iterate = $proinfo[1];
+		$productInfo = explode("||",$product);
+		$productid = $productInfo[0];
+		$iterate = $productInfo[1];
 
-		$query = "SELECT * FROM product WHERE productid='$productid'";
+		$query = "SELECT * FROM products WHERE productid='$productid'";
 		$result = mysqli_query($conexion, $query);
 		
 		$row = mysqli_fetch_array($result);
 		
  
 		if (isset($_POST['quantity_'.$iterate])){
-			$subt = $row['price']*$_POST['quantity_'.$iterate];
-			$total+=$subt;
+			$subTotal = $row['price'] * $_POST['quantity_'.$iterate];
+			$total+=$subTotal;
 
-			$sql="INSERT INTO purchase_detail (purchaseid, productid, quantity) values ('$pid', '$productid', '".$_POST['quantity_'.$iterate]."')";
-			$conexion->query($sql);
+			$query = "INSERT INTO purchase_detail (purchaseid, productid, quantity) VALUES ('$pid', '$productid', '".$_POST['quantity_'.$iterate]."')";
+			$result = mysqli_query($conexion, $query);
 		}
 		endforeach;
  		
- 		$sql="UPDATE purchase set total='$total' where purchaseid='$pid'";
- 		$conexion->query($sql);
-		header('location:sales.php');		
+ 		$query = "UPDATE purchase SET total='$total' WHERE purchaseid='$pid'";
+		$result = mysqli_query($conexion, $query);
+ 		
+		
+
+		header('location: show-sales.php');		
 	}
 	else{
 		?>
 		<script>
-			window.alert('Please select a product');
-			window.location.href='order.php';
+			window.alert('Por favor selecciona un producto');
+			window.location.href='new-order.php';
 		</script>
 		<?php
 	}

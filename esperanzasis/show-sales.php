@@ -1,6 +1,3 @@
-<?php include('./config/conexion.php'); ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,30 +30,46 @@
 				<div class="container">
 					<div class="row">
 						<h2 class="d-flex justify-content-start mb-4">Lista de los últimos pedidos</h2>
-						<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+						<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
 							<div class="card shadow-lg">
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 											<thead>
-												<th>Date</th>
-												<th>Customer</th>
-												<th>Total Sales</th>
-												<th>Details</th>
+												<th>Cliente</th>
+												<th>Dirección a enviar</th>
+												<th>Fecha de envío</th>
+												<th>Hora de envío</th>
+												<th>Encargado del pedido</th>
+												<th>Fecha que se hizo el pedido</th>
+												<th>Ver pedido completo</th>
 											</thead>
 											<tbody>
 												<?php 
-													$sql="select * from purchase order by purchaseid desc";
-													$query=$conexion->query($sql);
-													while($row=$query->fetch_array()){
+													include "./config/conexion.php";
+
+													$purchaseid = $_GET['purchaseid'];
+
+													$query = "SELECT * FROM orders ORDER BY purchaseid DESC";
+													$result = mysqli_query($conexion, $query);
+													while($row = mysqli_fetch_array($result)){
 														?>
 														<tr>
+															<td><?php echo $row['client_name']; ?></td>
+															<td><?php echo $row['address_send']; ?></td>
+															<td><?php echo $row['date_send']; ?></td>
+															<td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
+															<td><?php echo $row['people_order']; ?></td>
 															<td><?php echo date('M d, Y h:i A', strtotime($row['date_purchase'])) ?></td>
-															<td><?php echo $row['customer']; ?></td>
-															<td class="text-right">&#8369; <?php echo number_format($row['total'], 2); ?></td>
-															<td><a href="#details<?php echo $row['purchaseid']; ?>" data-toggle="modal" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span> View </a>
-																<?php include('sales_modal.php'); ?>
+															
+
+															<td>
+																<a href="show-details.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary">
+																	Ver pedido
+																</a>
 															</td>
+
+															
 														</tr>
 														<?php
 													}
@@ -69,6 +82,38 @@
 						</div>
 					</div>
 				</div>
+					
+
+
+				<!-- Modal -->
+				<div class="modal fade" id="details<?php echo $row['purchaseid']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Detalles del pedido</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<?php 
+								include "./config/conexion.php";
+
+								$quwery = ""
+							
+							?>
+							<div class="container">
+								<h5>Cliente: <b><?php echo $row['client_name']; ?></b></h5>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+								<i class="fas fa-times"></i>
+								Cerrar
+							</button>
+						</div>
+						</div>
+					</div>
+				</div>
+				<!-- End modal -->
 
 			</div>
 
@@ -106,5 +151,31 @@
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
+
+	<script>
+		const table = $('#dataTable').DataTable({
+			language: {
+				"decimal": "",
+				"emptyTable": "No hay información",
+				"info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+				"infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+				"infoFiltered": "(Filtrado de _MAX_ total entradas)",
+				"infoPostFix": "",
+				"thousands": ",",
+				"lengthMenu": "Mostrar _MENU_ Entradas",
+				"loadingRecords": "Cargando...",
+				"processing": "Procesando...",
+				"search": "Buscar:",
+				"zeroRecords": "Sin resultados encontrados",
+				"paginate": {
+					"first": "Primero",
+					"last": "Ultimo",
+					"next": "Siguiente",
+					"previous": "Anterior"
+				}
+			},
+			
+		});
+	</script>
 </body>
 </html>
