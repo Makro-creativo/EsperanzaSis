@@ -9,8 +9,12 @@
         $giro_company = $_POST['giro_company'];
         $rfc = $_POST['rfc'];
         $manager_payments = $_POST['manager_payments'];
+        $activate = $_POST['activate'];
+        $tel = $_POST['tel'];
+        $cel = $_POST['cel'];
+        $email = $_POST['email'];
 
-        $query_client = "INSERT INTO clients(name_client, address_fiscal, name_company, address_company, giro_company, rfc, manager_payments) VALUES('$name_client', '$address_fiscal', '$name_company', '$address_company', '$giro_company', '$rfc', '$manager_payments')";
+        $query_client = "INSERT INTO clients(name_client, address_fiscal, name_company, address_company, giro_company, rfc, manager_payments, activate, tel, cel, email) VALUES('$name_client', '$address_fiscal', '$name_company', '$address_company', '$giro_company', '$rfc', '$manager_payments', '$activate', '$tel', '$cel', '$email')";
         $result = mysqli_query($conexion, $query_client);
 
         if(!$result) {
@@ -76,7 +80,7 @@
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Dirección Fiscal: </label>
-                                                    <input v-model="address_fiscal" name="address" type="text" placeholder="Dirección Fiscal" class="form-control" required>
+                                                    <input v-model="address_fiscal" name="address_fiscal" type="text" placeholder="Ejemplo: Calle santa cecilia #345" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -85,37 +89,72 @@
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Nombre de la empresa: </label>
-                                                    <input type="text" placeholder="Nombre de la empresa" class="form-control" name="name_company" required>
+                                                    <input type="text" placeholder="Ejemplo: Lisport" class="form-control" name="name_company" required>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Dirección de la empres: </label>
-                                                    <input type="text" placeholder="Dirección de la empresa" class="form-control" name="address_company" required>
+                                                    <input type="text" placeholder="Ejemplo: Avenida los Arcos..." class="form-control" name="address_company" required>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Giro de la empresa: </label>
-                                                    <input type="text" placeholder="Giro de la empresa" class="form-control" name="giro_company" required>
+                                                    <input type="text" placeholder="Ejemplo: Mueblería, ferreteería, etc..." class="form-control" name="giro_company" required>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>RFC: </label>
-                                                    <input type="text" placeholder="RFC" class="form-control" name="rfc" required>
+                                                    <input type="text" placeholder="MELM8305281H0" class="form-control" name="rfc" required>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Encargado de compras: </label>
-                                                    <input type="text" placeholder="Nombre del encargado de compras" class="form-control" name="manager_company" required>
+                                                    <input type="text" placeholder="Ejemplo: Mariano gonzales" class="form-control" name="manager_payments" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Estado: </label>
+                                                    <select name="activate" require class="form-select">
+                                                        <option selected disabled>Elije una opción</option>
+                                                        <option value="Activo">Activo</option>
+                                                        <option value="Inactivo">Inactivo</option>
+                                                        <option value="Suspendido">Suspendido</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Número de teléfono: </label>
+                                                    <input type="text" placeholder="Ejemplo: 393 93 5 35 13" name="tel" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Número de celular: </label>
+                                                    <input type="text" placeholder="Ejemplo: 333 102 3456" name="cel" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Correo electronico: </label>
+                                                    <input type="email" placeholder="Ejemplo: jose@gmail.com" name="email" class="form-control">
                                                 </div>
                                             </div>
                                         </div>

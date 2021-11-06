@@ -16,12 +16,10 @@
     }
 
     if(isset($_POST['editProduct'])) {
-        $productid = $_GET['productid'];
-
         $name_product = $_POST['name_product'];
         
 
-        $query = "UPDATE products set name_product='$name_product' WHERE productid = $productid";
+        $query = "UPDATE products SET name_product='$name_product'";
         mysqli_query($conexion, $query);
 
 
@@ -68,7 +66,7 @@
                                 <div class="card-header">Editar producto</div>
 
                                 <div class="card-body">
-                                    <form action="edit-product.phpid" method="POST">
+                                    <form action="edit-product.php" method="POST">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                                 <div class="form-group">

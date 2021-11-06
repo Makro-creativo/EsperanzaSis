@@ -101,6 +101,20 @@
         </div>
     </div>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-user-tag"></i>
+        <span>Roles de Usuario</span>
+    </a>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-rol.php">Crear nuevo rol usuario  </a>
+            <a class="collapse-item" href="show-roles.php">Lista de roles de usuarios </a>
+        </div>
+    </div>
+</li>
 <?php }?>
 
 
