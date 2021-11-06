@@ -77,20 +77,20 @@
 								<div class="row">
 									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
 									<div class="form-group">
-                                            <?php 
-                                                include "./config/conexion.php";
-
-                                                $query = mysqli_query($conexion, "SELECT * FROM clients");
-                                            ?>
                                             <label>Seleccionar cliente: </label>
                                             <select name="name_client" name="tipo" require class="form-select">
                                                 <option selected disabled>Seleccionar cliente</option>
                                                 <?php 
-                                                    while($row = mysqli_fetch_array($query)) {
+													include "./config/conexion.php";
+													$query = "SELECT * FROM clients";
+													$result = mysqli_query($conexion, $query);
+
+                                                    while($row = mysqli_fetch_array($result)) {
                                                         $name_client = $row['name_client'];
-                                                    }
+                                                    
                                                 ?>
                                                 <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+												<?php }?>
                                             </select>
                                         </div>
 									</div>

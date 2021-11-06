@@ -28,11 +28,45 @@
 </a>
 <?php }?>
 
+<?php if($typeUser === "Cliente1") {?>
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="DashboardCliente1.php">
+    <div class="sidebar-brand-icon rotate-n-15">
+        <img src="assets/img/logo_tortilleria_la_esperanza.svg" alt="Logo la esperanza" class="img-fluid" style="width: 150px; height: 150px;">
+    </div>
+    <div class="sidebar-brand-text mx-3">EsperanzaSis</div>
+</a>
+<?php }?>
+
+<?php if($typeUser === "Cliente2") {?>
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="DashboardCliente2.php">
+    <div class="sidebar-brand-icon rotate-n-15">
+        <img src="assets/img/logo_tortilleria_la_esperanza.svg" alt="Logo la esperanza" class="img-fluid" style="width: 150px; height: 150px;">
+    </div>
+    <div class="sidebar-brand-text mx-3">EsperanzaSis</div>
+</a>
+<?php }?>
+
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
 
 <!-- Nav Item - Dashboard -->
 <?php if($typeUser === "Client") {?>
+<li class="nav-item active">
+    <a class="nav-link" href="DashboardClient.php">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Panel de Control</span></a>
+</li>
+<?php }?>
+
+<?php if($typeUser === "Cliente1") {?>
+<li class="nav-item active">
+    <a class="nav-link" href="DashboardClient.php">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Panel de Control</span></a>
+</li>
+<?php }?>
+
+<?php if($typeUser === "Cliente2") {?>
 <li class="nav-item active">
     <a class="nav-link" href="DashboardClient.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -58,6 +92,38 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <?php if($typeUser === "Client") {?>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-sort-amount-up-alt"></i>
+        <span>Gestión de Pedidos</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-order.php">Crear un nuevo pedido</a>
+            <a class="collapse-item" href="show-sales.php">Lista de pedidos</a>
+        </div>
+    </div>
+</li>
+<?php }?>
+
+<?php if($typeUser === "Cliente1") {?>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-sort-amount-up-alt"></i>
+        <span>Gestión de Pedidos</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-order.php">Crear un nuevo pedido</a>
+            <a class="collapse-item" href="show-sales.php">Lista de pedidos</a>
+        </div>
+    </div>
+</li>
+<?php }?>
+
+<?php if($typeUser === "Cliente2") {?>
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">

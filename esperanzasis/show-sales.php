@@ -48,12 +48,13 @@
 												<?php 
 													include "./config/conexion.php";
 
-													$purchaseid = $_GET['purchaseid'];
 
-													$query = "SELECT * FROM orders ORDER BY purchaseid DESC";
-													$result = mysqli_query($conexion, $query);
-													while($row = mysqli_fetch_array($result)){
+														$query = "SELECT * FROM orders ORDER BY purchaseid DESC";
+														$result = mysqli_query($conexion, $query);
+														while($row = mysqli_fetch_array($result)){
+															
 														?>
+														
 														<tr>
 															<td><?php echo $row['client_name']; ?></td>
 															<td><?php echo $row['address_send']; ?></td>

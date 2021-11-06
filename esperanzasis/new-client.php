@@ -95,7 +95,7 @@
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Dirección de la empres: </label>
+                                                    <label>Dirección de la empresa: </label>
                                                     <input type="text" placeholder="Ejemplo: Avenida los Arcos..." class="form-control" name="address_company" required>
                                                 </div>
                                             </div>
@@ -119,7 +119,7 @@
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Encargado de compras: </label>
-                                                    <input type="text" placeholder="Ejemplo: Mariano gonzales" class="form-control" name="manager_payments" required>
+                                                    <input type="text" placeholder="Ejemplo: Mariano gonzales" class="form-control" name="manager_payments">
                                                 </div>
                                             </div>
 

@@ -2,7 +2,7 @@
 	include('./config/conexion.php');
 	
 	if(isset($_POST['saveOrder'])){
-        $client_name = $_POST['name_client'];
+        $client_name = $_POST['name_cliente'];
         $address_send = $_POST['address_send'];
         $quantity_product = $_POST['quantity_product'];
         $date_send = $_POST['date_send'];

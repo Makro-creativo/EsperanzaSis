@@ -25,6 +25,10 @@
             echo "<script>window.location='DashboardClient.php'; </script>";
         } else  if($profile == "Administrador") {
             echo "<script>window.location='DashboardAdmin.php'; </script>";
+        } else if($profile == "Cliente1") {
+            echo "<script>window.location='DashboardCliente1.php'; </script>";
+        } else if($profile == "Cliente2") {
+            echo "<script>window.location='DashboardCliente2.php'; </script>";
         } else {
             echo "<script>window.location='login.php?error'; </script>";
         }

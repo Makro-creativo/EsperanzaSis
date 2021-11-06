@@ -58,7 +58,24 @@
                             <div class="card shadow-lg">
                                 <div class="card-header">
                                     <div class="d-flex justify-content-around">
-                                        <h5>Cliente: <b><?php echo $client_name; ?></b></h5>
+                                        <?php 
+                                            include "./config/conexion.php";
+
+                                            if(isset($_GET['id'])) {
+                                                $id = $_GET['id'];
+
+                                                $query = "SELECT * FROM users WHERE id = $id";
+                                                $result = mysqli_query($conexion, $query);
+
+                                                if($result) {
+                                                    $row = mysqli_fetch_array($result);
+
+                                                    $name = $row['name'];
+                                                }
+                                            }
+
+                                        ?>
+                                        <h5>Cliente: <b><?php echo $name; ?></b></h5>
 
                                         <span>Fecha: <?php echo date('M d, Y h:i A', strtotime($date_purchase)) ?></span>
                                     </div>

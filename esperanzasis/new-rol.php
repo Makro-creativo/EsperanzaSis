@@ -59,22 +59,22 @@
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <?php  
-                                                        include "./config/conexion.php";
-
-                                                        $query = mysqli_query($conexion, "SELECT* FROM clients");
-                                                    
-                                                    ?>
                                                     <label>Elije un usuario: </label>
                                                     <select name="name_client" require class="form-select">
                                                         <option selected disabled>Elije un usuario</option>
                                                         <?php 
-                                                            while($row = mysqli_fetch_array($query)) {
+                                                            include "./config/conexion.php";
+
+                                                            $query = "SELECT * FROM clients";
+                                                            $result = mysqli_query($conexion, $query);
+
+                                                            while($row = mysqli_fetch_array($result)) {
                                                                 $name_client = $row['name_client'];
-                                                            }
                                                         
-                                                        ?>
-                                                        <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                                            ?>
+
+                                                            <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                                        <?php }?>
                                                     </select>
                                                 </div>
                                             </div>
