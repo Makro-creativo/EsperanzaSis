@@ -69,38 +69,39 @@
 
                                 <div class="card-body" id="app">
                                     <form @submit.prevent="createClient()" method="POST">
+                                    
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Nombre completo del cliente: </label>
-                                                    <input v-model="name" name="name_client" type="text" placeholder="Ejemplo: jose Rogriguez gonzales." class="form-control" required autofocus>
+                                                    <label>Nombre de la empresa: </label>
+                                                    <input v-model="name" name="name_client" type="text" placeholder="Ejemplo: Hotel malibu, Hotel hd, etc ..." autocomplete="off" class="form-control" required autofocus>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Dirección Fiscal: </label>
-                                                    <input v-model="address_fiscal" name="address_fiscal" type="text" placeholder="Ejemplo: Calle santa cecilia #345" class="form-control" required>
+                                                    <input v-model="address_fiscal" name="address_fiscal" type="text" placeholder="Ejemplo: Calle santa cecilia #345" autocomplete="off" class="form-control" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Código postal: </label>
+                                                    <input v-model="cp" name="cp" type="text" placeholder="Ejemplo: 47910, etc.." autocomplete="off" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Nombre de la empresa: </label>
-                                                    <input type="text" placeholder="Ejemplo: Lisport" class="form-control" name="name_company" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Dirección de la empresa: </label>
                                                     <input type="text" placeholder="Ejemplo: Avenida los Arcos..." class="form-control" name="address_company" required>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Giro de la empresa: </label>
                                                     <input type="text" placeholder="Ejemplo: Mueblería, ferreteería, etc..." class="form-control" name="giro_company" required>
@@ -125,7 +126,7 @@
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Estado: </label>
+                                                    <label>Estatus del cliente: </label>
                                                     <select name="activate" require class="form-select">
                                                         <option selected disabled>Elije una opción</option>
                                                         <option value="Activo">Activo</option>

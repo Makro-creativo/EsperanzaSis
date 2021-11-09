@@ -75,7 +75,7 @@
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-success">
+                                                        <a href="edit-product.php?productid=<?php echo $row['productid']; ?>" class="btn btn-success">
                                                             Editar
                                                             <i class="fas fa-edit mr-2"></i>
                                                         </a>
@@ -84,7 +84,7 @@
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a href="delete-product.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">
+                                                        <a href="delete-product.php?productid=<?php echo $row['productid']; ?>" class="btn btn-danger">
                                                             Eliminar
                                                             <i class="fas fa-trash-alt mr-2"></i>
                                                         </a>

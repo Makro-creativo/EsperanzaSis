@@ -1,9 +1,4 @@
 <?php 
-    session_start();
-    error_reporting(0);
-
-    $typeUser = $_SESSION['Tipo'];
-
     include "./config/conexion.php";
 
     if(isset($_GET['purchaseid'])) {
@@ -20,6 +15,7 @@
             $date_send = $row['date_send'];
             $hour_send = $row['hour_send'];
             $people_order = $row['people_order'];
+            $comments = $row['comments'];
             $date_purchase = $row['date_purchase'];
         }
     }
@@ -59,43 +55,34 @@
                     <div class="row">
                         <div class="d-flex justify-content-around align-items-center">
                             <h2 class="mb-4">Detalles del pedido</h2>
-                            <?php if($typeUser === "Administrador") {?>
-                                <a href="show-all-orders.php" class="btn btn-success">
-                                    <i class="fas fa-arrow-left"></i>
-                                    Regresar atras
-                                </a>
-                            <?php }?>
-
-                            <?php if($typeUser === "Cliente") {?>
-                                <a href="show-sales.php" class="btn btn-success">
-                                    <i class="fas fa-arrow-left"></i>
-                                    Regresar atras
-                                </a>
-                            <?php }?>
+                            <a href="show-all-orders.php" class="btn btn-success">
+                                <i class="fas fa-arrow-left"></i>
+                                Regresar atras
+                            </a>
                         </div>
 
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
                                 <div class="card-header">
-                                    <div class="d-flex justify-content-around">
+                                    <div class="d-flex justify-content-around" id="printBotton">
                                         <?php 
                                             include "./config/conexion.php";
 
                                             if(isset($_GET['id_user'])) {
                                                 $id = $_GET['id_user'];
 
-                                                $query = "SELECT * FROM users WHERE id_user = $id_user";
+                                                $query = "SELECT * FROM orders";
                                                 $result = mysqli_query($conexion, $query);
 
                                                 if($result) {
                                                     $row = mysqli_fetch_array($result);
 
-                                                    $name = $row['name'];
+                                                    $client_name = $row['client_name'];
                                                 }
                                             }
 
                                         ?>
-                                        <h5>Cliente: <b><?php echo $name; ?></b></h5>
+                                        <h5>Cliente: <b><?php echo $client_name; ?></b></h5>
 
                                         <span>Fecha: <?php echo date('M d, Y h:i A', strtotime($date_purchase)) ?></span>
                                     </div>
@@ -111,8 +98,9 @@
                                    </div>
 
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="render-data">
+                                        <table class="table table-bordered" id="generatePdf">
                                             <thead>
+                                                <th>Cliente</th>
                                                 <th>Nombre del producto</th>
                                                 <th>Cantidad</th>
                                                 <th>Dirección de envío</th>
@@ -125,15 +113,19 @@
                                         <tbody>
                                             <?php 
                                                 include "./config/conexion.php";
+
                                                 $id_pedido = $_GET['purchaseid'];
 
                                                 //$query = "SELECT * FROM purchase_detail LEFT JOIN products ON products.productid=purchase_detail.productid WHERE purchaseid='".$row['purchaseid']."'";
-                                                $query = "SELECT * FROM orders INNER JOIN purchase_detail ON orders.purchaseid = purchase_detail.purchaseid INNER JOIN products ON purchase_detail.productid = products.productid WHERE orders.id_user = '$uid' AND purchase_detail.purchaseid = '$id_pedido'";
+                                                $query = "SELECT * FROM orders INNER JOIN purchase_detail ON orders.purchaseid = purchase_detail.purchaseid INNER JOIN products ON purchase_detail.productid = products.productid AND purchase_detail.purchaseid = '$id_pedido'";
                                                 $result = mysqli_query($conexion, $query);
 
                                                 while($row = mysqli_fetch_array($result)) {
                                             ?>
                                             <tr>
+                                                <td>
+                                                    <?php echo $row['client_name']; ?>
+                                                </td>
                                                 <td>
                                                     <i class="fas fa-dolly"></i>
                                                     <?php echo $row['name_product']; ?>
@@ -172,7 +164,6 @@
                                         </tbody>
                                         </table>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -196,7 +187,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-   
 
     <!-- Core plugin JavaScript-->
     <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -232,7 +222,7 @@
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
-            jQuery('#render-data').DataTable({
+            jQuery('#generatePdf').DataTable({
                 rowReorder: {
                 selector: 'td:nth-child(2)'
             },

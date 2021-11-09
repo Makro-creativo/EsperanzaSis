@@ -17,10 +17,10 @@
     </button>
 
     <!-- Topbar Search -->
-    <?php if($typeUser === "Client") {?>
+    <?php if($typeUser === "Cliente") {?>
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a href="DashboardClient.php" class="nav-link">Inicio</a>
+            <a href="DashboardCliente.php" class="nav-link">Inicio</a>
         </li>
     </ul>
     <?php }?> 
@@ -33,21 +33,6 @@
     </ul>
     <?php }?>
     
-    <?php if($typeUser === "Cliente1") {?>
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a href="DashboardCliente1.php" class="nav-link">Inicio</a>
-        </li>
-    </ul>
-    <?php }?>
-
-    <?php if($typeUser === "Cliente2") {?>
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a href="DashboardCliente2.php" class="nav-link">Inicio</a>
-        </li>
-    </ul>
-    <?php }?>
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">   

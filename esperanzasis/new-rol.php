@@ -1,20 +1,22 @@
 <?php 
     include "./config/conexion.php";
 
+
     if(isset($_POST['saveRol'])) {
         $name = $_POST['name_client'];
         $user = $_POST['user'];
         $pass = $_POST['pass'];
         $tipo = $_POST['tipo'];
+        
 
-        $query = "INSERT INTO users(name, user, pass, tipo) VALUES('$name', '$user', '$pass', '$tipo')";
-        $result = mysqli_query($conexion, $query);
+        echo $query = "INSERT INTO users(name, user, pass, tipo) VALUES('$name', '$user', '$pass', '$tipo')";
+        //$result = mysqli_query($conexion, $query);
 
         if(!$result) {
             die("No se pudo registrar el usuario, verifica de nuevo por favor...");
         }
 
-        header("location: show-roles.php");
+        //header("location: show-roles.php");
     }
 
 ?>
@@ -63,17 +65,18 @@
                                                     <select name="name_client" require class="form-select">
                                                         <option selected disabled>Elije un usuario</option>
                                                         <?php 
-                                                            include "./config/conexion.php";
+                                                            include "./config/conexion.php"; 
+
 
                                                             $query = "SELECT * FROM clients";
                                                             $result = mysqli_query($conexion, $query);
 
                                                             while($row = mysqli_fetch_array($result)) {
-                                                                $name_client = $row['name_client'];
+                                                                $id = $row['id'];
                                                         
                                                             ?>
 
-                                                            <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                                            <option value="<?php echo $id; ?>"><?php echo $id; ?></option>
                                                         <?php }?>
                                                     </select>
                                                 </div>
@@ -81,8 +84,8 @@
 
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Rol de usuario: </label>
-                                                    <input type="text" placeholder="Ejemplo: Cliente1, Cliente2, etc..." name="user" class="form-control">
+                                                    <label>Nombre de usuario: </label>
+                                                    <input type="text" placeholder="Ejemplo: HotelHg, HotelMali, etc..." name="user" autocomplete="off" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -99,9 +102,7 @@
                                                     <select name="tipo" require class="form-select">
                                                         <option selected disabled>Eliga un Rol para el usuario</option>
                                                         <option value="Administrador">Administrador</option>
-                                                        <option value="Cliente1">Cliente1</option>
-                                                        <option value="Cliente2">Cliente2</option>
-                                                        <option value="Cliente3">Cliente3</option>
+                                                        <option value="Cliente">Cliente</option>
                                                     </select>
                                                 </div>
                                             </div>

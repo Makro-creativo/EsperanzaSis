@@ -29,7 +29,7 @@
 
 				<div class="container">
 					<div class="row">
-						<h2 class="d-flex justify-content-start mb-4">Lista de los últimos pedidos</h2>
+						<h2 class="d-flex justify-content-start mb-4">Mis pedidos</h2>
 						<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
 							<div class="card shadow-lg">
 								<div class="card-body">
@@ -41,15 +41,17 @@
 												<th>Fecha de envío</th>
 												<th>Hora de envío</th>
 												<th>Encargado del pedido</th>
+												<th>Comentarios del cliente</th>
 												<th>Fecha que se hizo el pedido</th>
-												<th>Ver pedido completo</th>
+												<th>Eliminar</th>
+												<th>Detalles del pedido</th>
 											</thead>
 											<tbody>
 												<?php 
 													include "./config/conexion.php";
 
 
-														$query = "SELECT * FROM orders ORDER BY purchaseid DESC";
+														$query = "SELECT * FROM orders WHERE id_user = '$uid' ORDER BY date_purchase, date_send DESC LIMIT 10 OFFSET 0";
 														$result = mysqli_query($conexion, $query);
 														while($row = mysqli_fetch_array($result)){
 															
@@ -58,19 +60,27 @@
 														<tr>
 															<td><?php echo $row['client_name']; ?></td>
 															<td><?php echo $row['address_send']; ?></td>
-															<td><?php echo $row['date_send']; ?></td>
+															<td><?php echo date("d/m/Y", strtotime($row['date_send'])); ?></td>
 															<td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
 															<td><?php echo $row['people_order']; ?></td>
+															<td><?php echo $row['comments']; ?></td>
 															<td><?php echo date('M d, Y h:i A', strtotime($row['date_purchase'])) ?></td>
-															
 
-															<td>
-																<a href="show-details.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary">
-																	Ver pedido
+															
+															<td class="text-center">
+																<a href="delete-order-id.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-danger">
+																	<i class="fas fa-trash-alt"></i>
 																</a>
 															</td>
 
-															
+															<td class="text-center">
+																<input type="hidden" name="id_pedido" value="<?php echo $row['purchaseid']; ?>">
+																<a href="show-details.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary">
+																	<i class="fas fa-eye"></i>
+																	
+																</a>
+															</td>
+
 														</tr>
 														<?php
 													}

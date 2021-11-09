@@ -44,8 +44,9 @@
 							<div class="card shadow-lg">
 								<div class="card-body">
 								<form method="POST" action="purchase.php">
+									<input type="hidden" name="id_user_active" value="<?php echo $uid; ?>">
 								<div class="table-responsive">
-									<table class="table">
+								<table class="table">
 										<thead>
 											<th class="text-center"><input type="checkbox" id="checkAll"></th>
 											<th>Nombre del producto</th>
@@ -63,7 +64,9 @@
 													<tr>
 														<td class="text-center"><input type="checkbox" value="<?php echo $row['productid']; ?>||<?php echo $iterate; ?>" name="productid[]" style=""></td>
 														<td><?php echo $row['name_product']; ?></td>
-														<td><input type="text" class="form-control" name="quantity_<?php echo $iterate; ?>"></td>
+														<td>
+															<input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity_<?php echo $iterate; ?>">
+														</td>
 													</tr>
 													<?php
 													$iterate++;
@@ -75,7 +78,8 @@
 
 
 								<div class="row">
-									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+									
+									<!--<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
 									<div class="form-group">
                                             <label>Seleccionar cliente: </label>
                                             <select name="name_client" name="tipo" require class="form-select">
@@ -94,11 +98,29 @@
                                             </select>
                                         </div>
 									</div>
+									
 
 									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
 										<div class="form-group">
 											<label>Dirección de envió: </label>
 											<input type="text" name="address_send" placeholder="Ejemplo: Avenida los Arcos #345" class="form-control" required>
+										</div>
+									</div>
+									-->
+								</div>
+
+								<div class="row">
+									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+										<div class="form-group">
+											<label>Hora de entrega: </label>
+											<input type="time" name="hour_send" class="form-control" required>
+										</div>
+									</div>
+
+									<div class="col-md-4 col-sm-12 col-lg-4 colxl-4 col-xxl-4">
+										<div class="form-group">
+											<label>Persona que va recibir el pedido: </label>
+											<input type="text" name="people_order" required autocomplete="off" placeholder="Ejemplo: Maria Rodriguez Hernandez..." class="form-control" required>
 										</div>
 									</div>
 
@@ -111,23 +133,17 @@
 								</div>
 
 								<div class="row">
-									<div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
-										<div class="form-group">
-											<label>Hora de entrega: </label>
-											<input type="time" name="hour_send" class="form-control" required>
-										</div>
-									</div>
-
-									<div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
-										<div class="form-group">
-											<label>Nombre a quien va el pedido: </label>
-											<input type="text" name="people_order" placeholder="Ejemplo: Maria Rodriguez Hernandez..." class="form-control" required>
-										</div>
+									<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+										<label>Comentarios del cliente: </label>
+										<textarea name="comments" rows="4" class="form-control" placeholder="Ejemplo: La recepción es en la cocina o preguntar por el chef, etc..." autocomplete="off" required></textarea>
 									</div>
 								</div>
 
-								<div class="d-grid-gap-2">
-									<input type="submit" value="Enviar pedido" class="btn btn-outline-success" name="saveOrder">
+								<div class="d-grid-gap-2 d-flex justify-content-end mt-3">
+									<button type="submit" class="btn btn-outline-success" name="saveOrder">
+										Enviar pedido
+										<i class="fas fa-paper-plane"></i>
+									</button>
 								</div>
 							</form>
 								</div>

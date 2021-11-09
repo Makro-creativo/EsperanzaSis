@@ -2,14 +2,24 @@
 	include('./config/conexion.php');
 	
 	if(isset($_POST['saveOrder'])){
-        $client_name = $_POST['name_cliente'];
-        $address_send = $_POST['address_send'];
+        $id_user = $_POST['id_user_active'];
+
+		$search = "SELECT * FROM clients WHERE id_user = '$id_user'";
+		$queryS = mysqli_query($conexion, $search);
+		$rowClient = mysqli_fetch_array($queryS);
+
+		$nameClient = $rowClient['name_client'];
+		$addressClient = $rowClient['address_fiscal'];
+		
+		//$client_name = $_POST['name_cliente'];
+        //$address_send = $_POST['address_send'];
         $quantity_product = $_POST['quantity_product'];
         $date_send = $_POST['date_send'];
         $hour_send = $_POST['hour_send'];
         $people_order = $_POST['people_order'];
+		$comments = $_POST['comments'];
  
-		$query = "INSERT INTO orders (client_name, address_send, date_send, hour_send, people_order, date_purchase) VALUES ('$client_name', '$address_send', '$date_send', '$hour_send', '$people_order', NOW())";
+		$query = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, date_purchase)VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', NOW())";
 		$result = mysqli_query($conexion, $query);
 		
 		$pid = $conexion->insert_id;

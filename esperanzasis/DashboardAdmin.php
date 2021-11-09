@@ -118,7 +118,7 @@
                                                     <?php 
                                                         include "./config/conexion.php";
 
-                                                        $query = mysqli_query($conexion, "SELECT* FROM orders");
+                                                        $query = mysqli_query($conexion, "SELECT * FROM orders");
 
                                                         $orders_count = mysqli_num_rows($query);
 
@@ -134,8 +134,8 @@
                                     </div>
 
                                     <div class="card-footer">
-                                        <a href="show-sales.php">
-                                            Ver lista de pedidos
+                                        <a href="show-all-orders.php">
+                                            Ver lista de todos los pedidos
                                             <i class="fas fa-long-arrow-alt-right mr-2"></i>
                                         </a>
                                     </div>

@@ -42,7 +42,7 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $query = mysqli_query($conexion, "SELECT * FROM orders");
+                                                    $query = mysqli_query($conexion, "SELECT * FROM orders WHERE id_user = '$uid'");
 
                                                     $orders_count = mysqli_num_rows($query);
 

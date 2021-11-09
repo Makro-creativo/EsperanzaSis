@@ -1,10 +1,10 @@
 <?php 
     include "./config/conexion.php";
 
-    if(isset($_GET['id'])) {
-        $id = $_GET['id'];
+    if(isset($_GET['productid'])) {
+        $productid = $_GET['productid'];
 
-        $query = "DELETE FROM products WHERE id = $id";
+        echo $query = "DELETE FROM products WHERE productid = $productid";
         $result = mysqli_query($conexion, $query);
 
         if(!$result) {

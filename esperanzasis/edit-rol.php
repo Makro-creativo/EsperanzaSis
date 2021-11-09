@@ -1,10 +1,10 @@
 <?php 
     include "./config/conexion.php";
 
-    if(isset($_GET['id'])) {
-        $id = $_GET['id'];
+    if(isset($_GET['id_user'])) {
+        $id_user = $_GET['id_user'];
 
-        $query = "SELECT * FROM users WHERE id = $id";
+        $query = "SELECT * FROM users WHERE id_user = $id_user";
         $result = mysqli_query($conexion, $query);
 
         if($result) {
@@ -24,7 +24,7 @@
         $tipo = $_POST['tipo'];
 
 
-        $query = "UPDATE users SET name='$name', user='$user', pass='$pass', tipo='$tipo' WHERE id = $id";
+        $query = "UPDATE users SET name='$name', user='$user', pass='$pass', tipo='$tipo' WHERE id_user = $id_user";
         mysqli_query($conexion, $query);
 
         header("location: show-roles.php");

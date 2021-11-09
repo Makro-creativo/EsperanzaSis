@@ -49,7 +49,14 @@
 
                 <div class="container">
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Nuevo Producto</h2>
+                        <div class="d-flex justify-content-around align-items-center">
+                            <h2 class="mb-4">Nuevo Producto</h2>
+                            <a href="DashboardAdmin.php" class="btn btn-success">
+                                <i class="fas fa-arrow-left"></i>
+                                Regresar atras
+                            </a>
+                        </div>
+                
 
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
                             <div class="card shadow-lg">

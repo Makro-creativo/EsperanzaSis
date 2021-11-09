@@ -57,14 +57,14 @@
                                             <?php  
                                                 include "./config/conexion.php";
 
-                                                $query = "SELECT * FROM users ORDER BY id ASC";
+                                                $query = "SELECT * FROM users ORDER BY id_user ASC";
                                                 $result = mysqli_query($conexion, $query);
 
                                                 while($row = mysqli_fetch_array($result)) {
                                             ?>
                                             
                                             <tr>
-                                                <td><?php echo $row['id']; ?></td>
+                                                <td><?php echo $row['id_user']; ?></td>
                                                 <td><?php echo $row['name']; ?></td>
                                                 <td><?php echo $row['user']; ?></td>
                                                 <td><?php echo $row['pass']; ?></td>
@@ -73,7 +73,7 @@
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a href="edit-rol.php?id=<?php echo $row['id']; ?>" class="btn btn-success">
+                                                        <a href="edit-rol.php?id_user=<?php echo $row['id_user']; ?>" class="btn btn-success">
                                                             Editar
                                                             <i class="fas fa-edit mr-2"></i>
                                                         </a>
@@ -82,7 +82,7 @@
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a href="delete-rol.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">
+                                                        <a href="delete-rol.php?id_user=<?php echo $row['id_user']; ?>" class="btn btn-danger">
                                                             Eliminar
                                                             <i class="fas fa-trash-alt mr-2"></i>
                                                         </a>

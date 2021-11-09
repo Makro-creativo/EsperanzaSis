@@ -1,10 +1,10 @@
 <?php 
     include "./config/conexion.php";
 
-    if(isset($_GET['id'])) {
-        $id = $_GET['id'];
+    if(isset($_GET['id_user'])) {
+        $id_user = $_GET['id_user'];
 
-        $query = "DELETE FROM users WHERE id = $id";
+        $query = "DELETE FROM users WHERE id_user = $id_user";
         $result = mysqli_query($conexion, $query);
 
         if(!$result) {
