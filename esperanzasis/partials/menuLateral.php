@@ -79,7 +79,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-sort-amount-up-alt"></i>
+        <i class="fas fa-truck"></i>
         <span>Gestión de Pedidos</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -95,12 +95,12 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-sort-amount-up-alt"></i>
+        <i class="fas fa-truck"></i>
         <span>Gestión de Pedidos</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="show-sales.php">Lista de pedidos</a>
+            <a class="collapse-item" href="show-all-orders.php">Lista de pedidos</a>
         </div>
     </div>
 </li>
@@ -110,7 +110,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-sort-amount-up-alt"></i>
+        <i class="fas fa-truck"></i>
         <span>Gestión de Pedidos</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
