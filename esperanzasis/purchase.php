@@ -18,8 +18,10 @@
         $hour_send = $_POST['hour_send'];
         $people_order = $_POST['people_order'];
 		$comments = $_POST['comments'];
+		$calification = $_POST['calification'];
+	
  
-		$query = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, date_purchase)VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', NOW())";
+		$query = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, calification, date_purchase) VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', '$calification', NOW())";
 		$result = mysqli_query($conexion, $query);
 		
 		$pid = $conexion->insert_id;

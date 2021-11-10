@@ -1,31 +1,17 @@
 <?php 
     include "./config/conexion.php";
 
-    if(isset($_GET['id_user'])) {
-        $id_user = $_GET['id_user'];
-
-        $query = "SELECT * FROM users WHERE id_user = $id_user";
-        $result = mysqli_query($conexion, $query);
-
-        if($result) {
-            $row = mysqli_fetch_array($result);
-
-            $name = $row['name'];
-            $user = $row['user'];
-            $pass = $row['pass'];
-            $tipo = $row['tipo'];
-        }
-    }
 
     if(isset($_POST['editRol'])) {
+        $id_rol = $_POST['id_rol_edit'];
         $name = $_POST['name_client'];
         $user = $_POST['user'];
         $pass = $_POST['pass'];
-        $tipo = $_POST['tipo'];
+        $tipo = $_POST['Tipo'];
 
 
-        $query = "UPDATE users SET name='$name', user='$user', pass='$pass', tipo='$tipo' WHERE id_user = $id_user";
-        mysqli_query($conexion, $query);
+        $query_update = "UPDATE users SET name='$name', user='$user', pass='$pass', tipo='$tipo' WHERE id_user = $id_rol";
+        mysqli_query($conexion, $query_update);
 
         header("location: show-roles.php");
     }
@@ -62,6 +48,26 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
                 <?php include "./partials/header.php" ?>
+
+                <?php 
+                    include "./config/conexion.php";
+
+                    if(isset($_GET['id_user'])) {
+                        $id_user = $_GET['id_user'];
+                    }
+                
+                    $query = "SELECT * FROM users WHERE id_user = $id_user";
+                    $result = mysqli_query($conexion, $query);
+                
+                    if($result) {
+                        $row = mysqli_fetch_array($result);
+                
+                        $name = $row['name'];
+                        $user = $row['user'];
+                        $pass = $row['pass'];
+                        $tipo = $row['Tipo'];
+                    }
+                ?>
                 
                 <div class="container">
                     <div class="row">
@@ -71,25 +77,26 @@
 
                                 <div class="card-body">
                                     <form action="edit-rol.php" method="POST">
+                                    <input type="hidden" name="id_rol_edit" value="<?php echo $id_user; ?>">
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <?php  
-                                                        include "./config/conexion.php";
-
-                                                        $query = mysqli_query($conexion, "SELECT * FROM clients");
-                                                    
-                                                    ?>
                                                     <label>Elije un usuario: </label>
                                                     <select name="name_client" require class="form-select">
                                                         <option selected disabled>Elije un usuario</option>
-                                                        <?php 
-                                                            while($row = mysqli_fetch_array($query)) {
-                                                                $name_client = $row['name_client'];
-                                                            }
+                                                            <?php 
+                                                                include "./config/conexion.php"; 
+
+
+                                                                $query = "SELECT * FROM clients";
+                                                                $result = mysqli_query($conexion, $query);
+
+                                                                while($row = mysqli_fetch_array($result)) {
+                                                                    $name_client = $row['name_client'];
                                                         
-                                                        ?>
+                                                            ?>
                                                         <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+                                                        <?php }?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -111,12 +118,11 @@
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Asignar tipo de permiso para nuevo usuario</label>
-                                                    <select name="tipo" require class="form-select">
+                                                    <select name="Tipo" require class="form-select">
                                                         <option selected disabled>Eliga un Rol para el usuario</option>
                                                         <option value="Administrador" <?php if($tipo == "Administrador"){?> selected <?php } ?>>Administrador</option>
-                                                        <option value="Cliente1" <?php if($tipo == "Cliente1"){?> selected <?php } ?>>Cliente1</option>
-                                                        <option value="Cliente2" <?php if($tipo == "Cliente2"){?> selected <?php } ?>>Cliente2</option>
-                                                        <option value="Cliente3" <?php if($tipo == "Cliente3"){?> selected <?php } ?>>Cliente3</option>
+                                                        <option value="Cliente" <?php if($tipo == "Cliente"){?> selected <?php } ?>>Cliente</option>
+                                                        <option value="Repartidor" <?php if($tipo == "Repartidor"){?> selected <?php } ?>>Repartidor</option>
                                                     </select>
                                                 </div>
                                             </div>

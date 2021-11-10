@@ -50,7 +50,6 @@
                                                     <td>Id</td>
                                                     <td>Nombre completo del cliente</td>
                                                     <td>Dirección del cliente</td>
-                                                    <td>Nombre de la empresa</td>
                                                     <td>Dirección de la empresa</td>
                                                     <td>Giro de la empresa</td>
                                                     <td>RFC</td>
@@ -59,6 +58,7 @@
                                                     <td>Número de teléfono</td>
                                                     <td>Celular</td>
                                                     <td>Correo electronico</td>
+                                                    <td>Código postal</td>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>Editar</td>
@@ -83,7 +83,6 @@
                                                 <td><?php echo $row['id']; ?></td>
                                                 <td><?php echo $row['name_client']; ?></td>
                                                 <td><?php echo $row['address_fiscal']; ?></td>
-                                                <td><?php echo $row['name_company']; ?></td>
                                                 <td><?php echo $row['address_company']; ?></td>
                                                 <td><?php echo $row['giro_company']; ?></td>
                                                 <td><?php echo $row['rfc']; ?></td>
@@ -92,6 +91,7 @@
                                                 <td><?php echo $row['tel']; ?></td>
                                                 <td><?php echo $row['cel']; ?></td>
                                                 <td><?php echo $row['email']; ?></td>
+                                                <td><?php echo $row['cp']; ?></td>
 
 
                                                 <?php if($typeUser === "Administrador") {?>

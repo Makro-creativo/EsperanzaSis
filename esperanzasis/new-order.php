@@ -133,9 +133,21 @@
 								</div>
 
 								<div class="row">
-									<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+									<div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
 										<label>Comentarios del cliente: </label>
 										<textarea name="comments" rows="4" class="form-control" placeholder="Ejemplo: La recepción es en la cocina o preguntar por el chef, etc..." autocomplete="off" required></textarea>
+									</div>
+
+									<div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-5">
+										<label>Califica nuestro servicio: </label>
+										<select name="calification" require class="form-select">
+											<option selected disabled>Elija una calificación</option>
+											<option value="1 estrella">1 estrella</option>
+											<option value="2 estrellas">2 estrellas</option>
+											<option value="3 estrellas">3 estrellas</option>
+											<option value="4 estrellas">4 estrellas</option>
+											<option value="5 estrellas">5 estrellas</option>
+										</select>
 									</div>
 								</div>
 

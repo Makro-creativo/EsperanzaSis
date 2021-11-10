@@ -4,7 +4,6 @@
     if(isset($_POST['saveClient'])) {
         $name_client = $_POST['name_client'];
         $address_fiscal = $_POST['address_fiscal'];
-        $name_company = $_POST['name_company'];
         $address_company = $_POST['address_company'];
         $giro_company = $_POST['giro_company'];
         $rfc = $_POST['rfc'];
@@ -13,8 +12,9 @@
         $tel = $_POST['tel'];
         $cel = $_POST['cel'];
         $email = $_POST['email'];
+        $cp = $_POST['cp'];
 
-        $query_client = "INSERT INTO clients(name_client, address_fiscal, name_company, address_company, giro_company, rfc, manager_payments, activate, tel, cel, email) VALUES('$name_client', '$address_fiscal', '$name_company', '$address_company', '$giro_company', '$rfc', '$manager_payments', '$activate', '$tel', '$cel', '$email')";
+        $query_client = "INSERT INTO clients(name_client, address_fiscal, address_company, giro_company, rfc, manager_payments, activate, tel, cel, email, cp) VALUES('$name_client', '$address_fiscal', '$address_company', '$giro_company', '$rfc', '$manager_payments', '$activate', '$tel', '$cel', '$email', '$cp')";
         $result = mysqli_query($conexion, $query_client);
 
         if(!$result) {
@@ -81,7 +81,7 @@
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Dirección Fiscal: </label>
-                                                    <input v-model="address_fiscal" name="address_fiscal" type="text" placeholder="Ejemplo: Calle santa cecilia #345" autocomplete="off" class="form-control" required>
+                                                    <input v-model="address_fiscal" autocomplete="off" name="address_fiscal" type="text" placeholder="Ejemplo: Calle santa cecilia #345" autocomplete="off" class="form-control" required>
                                                 </div>
                                             </div>
 

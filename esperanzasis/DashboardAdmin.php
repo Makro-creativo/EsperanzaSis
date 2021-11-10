@@ -37,7 +37,7 @@
             <h2 class="text-dark d-flex justify-content-start mb-4">Panel de Control</h2>
                 <div class="row">
 
-                        <div class="col-xl-4 col-lg-4 col-xxl-4 col-sm-12 col-md-4 mb-4">
+                        <div class="col-xl-3 col-lg-3 col-xxl-3 col-sm-12 col-md-3 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -72,7 +72,7 @@
                         </div>
                         
                         
-                            <div class="col-xl-4 col-lg-4 col-xxl-4 col-sm-12 col-md-4 mb-4">
+                            <div class="col-xl-3 col-lg-3 col-xxl-3 col-sm-12 col-md-3 mb-4">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xl-4 col-lg-4 col-xxl-4 col-sm-12 col-md-4 mb-4">
+                            <div class="col-xl-3 col-lg-3 col-xxl-3 col-sm-12 col-md-3 mb-4">
                                 <div class="card border-left-info shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -141,7 +141,83 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-xl-3 col-lg-3 col-xxl-3 col-sm-12 col-md-3 mb-4">
+                                <div class="card border-left-secondary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Roles de usuario (Creados)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $query = mysqli_query($conexion, "SELECT * FROM users");
+
+                                                        $users_count = mysqli_num_rows($query);
+
+                                                        echo $users_count;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-user-check fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-roles.php">
+                                            lista de roles de usuario
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                <div class="col-xl-3 col-lg-3 col-xxl-3 col-sm-12 col-md-3 mb-4">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Pedidos (Entregados)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $status_pedido = $_GET['status_pedido'];
+
+                                                        $query = mysqli_query($conexion, "SELECT status_pedido FROM orders WHERE status_pedido = '1'");
+
+                                                        $orders_delivery = mysqli_num_rows($query);
+
+                                                        echo $orders_delivery;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-truck fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-all-orders.php">
+                                            Pedidos entregados
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                 </div>
             </div>
 

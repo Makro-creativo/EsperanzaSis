@@ -5,7 +5,7 @@
         $name_product = $_POST['name_product'];
 
 
-        $query_products = "INSERT INTO products(name_product) VALUES('$name_product')";
+        $query_products = "INSERT INTO products(name_product) VALUES ('$name_product')";
         $result = mysqli_query($conexion, $query_products);
 
         if(!$result) {
@@ -68,7 +68,7 @@
                                             <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                                 <div class="form-group">
                                                     <label>Nombre del producto: </label>
-                                                    <input name="name_product" type="text" placeholder="Ejemplo: Totopos" class="form-control" required autofocus>
+                                                    <input name="name_product" autocomplete="off" type="text" placeholder="Ejemplo: Totopos" class="form-control" required autofocus>
                                                 </div>
                                             </div>
                                         </div>

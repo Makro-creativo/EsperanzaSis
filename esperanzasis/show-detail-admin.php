@@ -103,9 +103,9 @@
                                                 <th>Cliente</th>
                                                 <th>Nombre del producto</th>
                                                 <th>Cantidad</th>
-                                                <th>Dirección de envío</th>
-                                                <th>Hora de envío</th>
-                                                <th>Fecha de envío</th>
+                                                <th>Dirección de entrega</th>
+                                                <th>Hora de entrega</th>
+                                                <th>Fecha de entrega</th>
                                                 <th>Persona que solicito pedido</th>
                                                 <th>Comentario del cliente</th>
                                             </thead>

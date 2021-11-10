@@ -10,13 +10,13 @@
         
 
         echo $query = "INSERT INTO users(name, user, pass, tipo) VALUES('$name', '$user', '$pass', '$tipo')";
-        //$result = mysqli_query($conexion, $query);
+        $result = mysqli_query($conexion, $query);
 
         if(!$result) {
             die("No se pudo registrar el usuario, verifica de nuevo por favor...");
         }
 
-        //header("location: show-roles.php");
+        header("location: show-roles.php");
     }
 
 ?>
@@ -103,6 +103,7 @@
                                                         <option selected disabled>Eliga un Rol para el usuario</option>
                                                         <option value="Administrador">Administrador</option>
                                                         <option value="Cliente">Cliente</option>
+                                                        <option value="Repartidor">Repartidor</option>
                                                     </select>
                                                 </div>
                                             </div>

@@ -27,6 +27,7 @@
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="assets/css/orders.css">
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -46,12 +47,14 @@
 										<table class="table table-bordered" id="dataTable" id="export" width="100%" cellspacing="0">
 											<thead>
 												<th>Cliente</th>
-												<th>Dirección a enviar</th>
-												<th>Fecha de envío</th>
-												<th>Hora de envío</th>
+												<th>Dirección de entrega</th>
+												<th>Fecha de entrega</th>
+												<th>Hora de entrega</th>
 												<th>Encargado del pedido</th>
 												<th>Comentario del cliente</th>
-												<th>Fecha que se hizo el pedido</th>
+												<th>Fecha del pedido</th>
+												
+
 												<?php if($typeUser === "Cliente") {?>
 													<th>Eliminar</th>
 												<?php  }?>
@@ -63,6 +66,23 @@
 												<?php if($typeUser === "Administrador") {?>
 													<th>Detalles del pedido</th>
 												<?php }?>
+
+												<?php if($typeUser === "Repartidor") {?>
+													<th>Detalles del pedido</th>
+												<?php }?>
+
+												<?php if($typeUser === "Repartidor") {?>
+													<th>Estatus de entrega</th>
+												<?php }?>
+
+
+												<?php if($typeUser === "Administrador") {?>
+													<th>Estatus de entrega</th>
+												<?php }?>
+
+												<th>Hora que se entrego</th>
+
+												
 											</thead>
 											<tbody>
 												<?php 
@@ -83,6 +103,7 @@
 															<td><?php echo $row['people_order']; ?></td>
 															<td><?php echo $row['comments']; ?></td>
 															<td><?php echo date('M d, Y h:i A', strtotime($row['date_purchase'])) ?></td>
+														
 															
 															<?php if($typeUser === "Cliente") {?>
 																<td class="text-center">
@@ -109,7 +130,37 @@
 																</td>
 															<?php } ?>
 
+															<?php if($typeUser === "Repartidor") {?>
+																<td class="text-center">
+																	<input type="hidden" name="id_pedido" value="<?php echo $row['purchaseid']; ?>">
+																	<a href="show-detail-admin.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary">
+																		<i class="fas fa-eye"></i>
+																	</a>
+																</td>
+															<?php } ?>
+
+					
+															
+															<td>
+																<?php 
+																	if($row['status_pedido'] == "1") 
+											
+																		echo "<a href=desactivate.php?purchaseid=".$row['purchaseid']." class='btn-status green'>Entregado</a>";
+																	else 
+																		echo "<a href=activate.php?purchaseid=".$row['purchaseid']." class='btn-status red'>Sin entregar</a>";
+																?>
+															</td>
+
+															<td>
+																<form action="create-delivery.php" method="POST">
+																	<input type="date" name="date_delivery" class="form-control">
+																</form>
+															</td>
+															
+															
+
 														</tr>
+
 														<?php
 													}
 												?>

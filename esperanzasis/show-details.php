@@ -115,11 +115,12 @@
                                             <thead>
                                                 <th>Nombre del producto</th>
                                                 <th>Cantidad</th>
-                                                <th>Dirección de envío</th>
-                                                <th>Hora de envío</th>
-                                                <th>Fecha de envío</th>
+                                                <th>Dirección de entrega</th>
+                                                <th>Hora de entrega</th>
+                                                <th>Fecha de entrega</th>
                                                 <th>Persona que solicito pedido</th>
                                                 <th>Comentario del cliente</th>
+                                                <th>calificación</th>
                                             </thead>
                                         
                                         <tbody>
@@ -163,6 +164,11 @@
                                                 <td>
                                                     <i class="fas fa-comment-alt"></i>
                                                     <?php echo $row['comments']; ?>
+                                                </td>
+
+                                                <td>
+                                                    <i class="fas fa-star"></i>
+                                                    <?php echo $row['calification']; ?>
                                                 </td>
                                             
                                             </tr>

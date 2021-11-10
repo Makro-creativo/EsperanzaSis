@@ -4,7 +4,7 @@
     if(isset($_GET['productid'])) {
         $productid = $_GET['productid'];
 
-        echo $query = "DELETE FROM products WHERE productid = $productid";
+        $query = "DELETE FROM products WHERE productid = $productid";
         $result = mysqli_query($conexion, $query);
 
         if(!$result) {

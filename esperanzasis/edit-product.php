@@ -1,26 +1,13 @@
 <?php 
     include "./config/conexion.php";
 
-
-    if(isset($_GET['productid'])) {
-        $productid = $_GET['productid'];
-
-        $query = "SELECT * FROM products WHERE productid = $productid";
-        $result = mysqli_query($conexion, $query);
-
-        if($result) {
-            $row = mysqli_fetch_array($result);
-
-            $name_product = $row['name_product'];
-        }
-    }
-
     if(isset($_POST['editProduct'])) {
+        $Id_product = $_POST['id_product_edit'];
         $name_product = $_POST['name_product'];
         
 
-        $query = "UPDATE products SET name_product='$name_product'";
-        mysqli_query($conexion, $query);
+        $queryUpdate = "UPDATE products SET name_product='$name_product' WHERE productid = '$Id_product'";
+        mysqli_query($conexion, $queryUpdate);
 
 
         header("location: show-products.php");
@@ -57,6 +44,21 @@
             <div id="content">
                 <?php include "./partials/header.php" ?>
 
+                <?php
+                    if(isset($_GET['productid'])) {
+                        $productid = $_GET['productid'];
+                    }
+                    
+                    $query = "SELECT * FROM products WHERE productid = $productid";
+                        $result = mysqli_query($conexion, $query);
+                
+                        if($result) {
+                            $row = mysqli_fetch_array($result);
+                
+                            $name_product = $row['name_product'];
+                        }
+                ?>
+
                 <div class="container">
                     <div class="row">
                         <h2 class="d-flex justify-content-start mb-4">Editar producto</h2>
@@ -64,14 +66,15 @@
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
                             <div class="card shadow-lg">
                                 <div class="card-header">Editar producto</div>
-
+                                
                                 <div class="card-body">
                                     <form action="edit-product.php" method="POST">
+                                    <input type="hidden" name="id_product_edit" value="<?php echo $productid; ?>">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                                 <div class="form-group">
                                                     <label>Editar nombre del producto: </label>
-                                                    <input type="text" name="name_product" placeholder="Editar nombre del producto" class="form-control" value="<?php echo $name_product; ?>">
+                                                    <input type="text" autocomplete="off" name="name_product" placeholder="Editar nombre del producto" class="form-control" value="<?php echo $name_product; ?>">
                                                 </div>
                                             </div>
 

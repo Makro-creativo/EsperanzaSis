@@ -1,0 +1,44 @@
+.btn-status {
+    background-color: #003d00;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.btn-status:hover {
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.green {
+    background-color: #003d00;
+}
+
+.red {
+    background-color: #9f0000   ;
+}
+
+table, th {
+    border-style : solid;
+    border-width : 1;
+    text-align :center;
+}
+
+td {
+    text-align :center;
+}

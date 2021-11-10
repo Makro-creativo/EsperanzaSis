@@ -37,9 +37,9 @@
 										<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 											<thead>
 												<th>Cliente</th>
-												<th>Dirección a enviar</th>
-												<th>Fecha de envío</th>
-												<th>Hora de envío</th>
+												<th>Dirección de entrega</th>
+												<th>Fecha de entrega</th>
+												<th>Hora de entrega</th>
 												<th>Encargado del pedido</th>
 												<th>Comentarios del cliente</th>
 												<th>Fecha que se hizo el pedido</th>
@@ -64,8 +64,8 @@
 															<td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
 															<td><?php echo $row['people_order']; ?></td>
 															<td><?php echo $row['comments']; ?></td>
+															
 															<td><?php echo date('M d, Y h:i A', strtotime($row['date_purchase'])) ?></td>
-
 															
 															<td class="text-center">
 																<a href="delete-order-id.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-danger">
