@@ -108,6 +108,8 @@
                                                 <th>Fecha de entrega</th>
                                                 <th>Persona que solicito pedido</th>
                                                 <th>Comentario del cliente</th>
+                                                <th>Precio</th>
+                                                <th>Total</th>
                                             </thead>
                                         
                                         <tbody>
@@ -155,6 +157,16 @@
                                                 <td>
                                                     <i class="fas fa-comment-alt"></i>
                                                     <?php echo $row['comments']; ?>
+                                                </td>
+
+                                                <td>
+                                                    <i class="fas fa-dollar-sign"></i>
+                                                    <?php echo number_format($row['price'], 2); ?>
+                                                </td>
+
+                                                <td>
+                                                    <i class="fas fa-hand-holding-usd"></i>
+                                                    <?php echo number_format($row['total'], 2); ?>
                                                 </td>
                                             
                                             </tr>

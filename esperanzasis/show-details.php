@@ -121,6 +121,8 @@
                                                 <th>Persona que solicito pedido</th>
                                                 <th>Comentario del cliente</th>
                                                 <th>calificación</th>
+                                                <th>Precio</th>
+                                                <th>Total</th>
                                             </thead>
                                         
                                         <tbody>
@@ -169,6 +171,16 @@
                                                 <td>
                                                     <i class="fas fa-star"></i>
                                                     <?php echo $row['calification']; ?>
+                                                </td>
+
+                                                <td>
+                                                    <i class="fas fa-dollar-sign"></i>
+                                                    <?php echo number_format($row['price'], 2); ?>
+                                                </td>
+
+                                                <td>
+                                                    <i class="fas fa-hand-holding-usd"></i>
+                                                    <?php echo number_format($row['total'], 2); ?>
                                                 </td>
                                             
                                             </tr>

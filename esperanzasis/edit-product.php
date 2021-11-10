@@ -4,9 +4,10 @@
     if(isset($_POST['editProduct'])) {
         $Id_product = $_POST['id_product_edit'];
         $name_product = $_POST['name_product'];
+        $price = $_POST['price'];
         
 
-        $queryUpdate = "UPDATE products SET name_product='$name_product' WHERE productid = '$Id_product'";
+        $queryUpdate = "UPDATE products SET name_product='$name_product', price='$price' WHERE productid = '$Id_product'";
         mysqli_query($conexion, $queryUpdate);
 
 
@@ -56,6 +57,7 @@
                             $row = mysqli_fetch_array($result);
                 
                             $name_product = $row['name_product'];
+                            $price = $row['price'];
                         }
                 ?>
 
@@ -71,13 +73,19 @@
                                     <form action="edit-product.php" method="POST">
                                     <input type="hidden" name="id_product_edit" value="<?php echo $productid; ?>">
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Editar nombre del producto: </label>
                                                     <input type="text" autocomplete="off" name="name_product" placeholder="Editar nombre del producto" class="form-control" value="<?php echo $name_product; ?>">
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Editar precio: </label>
+                                                    <input type="text" name="price" class="form-control" autocomplete="off" value="<?php echo number_format($row['price'], 2); ?>">
+                                                </div>
+                                            </div>
                                         </div>
 
                         

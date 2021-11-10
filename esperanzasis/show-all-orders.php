@@ -81,6 +81,7 @@
 												<?php }?>
 
 												<th>Hora que se entrego</th>
+												
 
 												
 											</thead>
@@ -153,7 +154,7 @@
 
 															<td>
 																<form action="create-delivery.php" method="POST">
-																	<input type="date" name="date_delivery" class="form-control">
+																	<input type="time" name="date_delivery" class="form-control">
 																</form>
 															</td>
 															

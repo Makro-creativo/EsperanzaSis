@@ -48,7 +48,7 @@
 		}
 		endforeach;
  		
- 		$query = "UPDATE purchase SET total='$total' WHERE purchaseid='$pid'";
+ 		$query = "UPDATE orders SET total='$total' WHERE purchaseid='$pid'";
 		$result = mysqli_query($conexion, $query);
  		
 		

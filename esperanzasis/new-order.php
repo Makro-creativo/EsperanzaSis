@@ -51,6 +51,7 @@
 											<th class="text-center"><input type="checkbox" id="checkAll"></th>
 											<th>Nombre del producto</th>
 											<th>Cantidad</th>
+											<th>Precio</th>
 										</thead>
 										<tbody>
 											<?php 
@@ -66,6 +67,9 @@
 														<td><?php echo $row['name_product']; ?></td>
 														<td>
 															<input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity_<?php echo $iterate; ?>">
+														</td>
+														<td>
+															<?php echo number_format($row['price'], 2); ?>
 														</td>
 													</tr>
 													<?php

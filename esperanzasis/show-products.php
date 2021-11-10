@@ -48,6 +48,7 @@
                                             <tr>
                                                 <td>Id</td>
                                                 <td>Nombre del producto</td>
+                                                <td>Precio</td>
                         
                     
                                                 <?php if($typeUser === "Administrador") {?>
@@ -71,6 +72,7 @@
                                             <tr>
                                                 <td><?php echo $row['productid']; ?></td>
                                                 <td><?php echo $row['name_product']; ?></td>
+                                                <td><?php echo number_format($row['price'], 2); ?></td>
 
 
                                                 <?php if($typeUser === "Administrador") {?>

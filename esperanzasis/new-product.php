@@ -65,11 +65,16 @@
                                 <div class="card-body">
                                     <form action="new-product.php" method="POST">
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Nombre del producto: </label>
                                                     <input name="name_product" autocomplete="off" type="text" placeholder="Ejemplo: Totopos" class="form-control" required autofocus>
                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-xm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <label>Precio: </label>
+                                                <input type="text" name="price" class="form-control" placeholder="Ejemplo: 20" autocomplete="off">
                                             </div>
                                         </div>
 
