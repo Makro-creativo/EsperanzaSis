@@ -1,0 +1,8 @@
+.hero-shadow {
+    background-image: url('../img/shadow-profile.jpg');
+    background-position: center, center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 45vh;
+}
