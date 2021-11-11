@@ -123,7 +123,10 @@
                                                 <th>Comentario del cliente</th>
                                                 <th>calificación</th>
                                                 <th>Precio</th>
+                                                <th>Subtotal</th>
                                                 <th>Total</th>
+                                                
+                                                <th>Vaciar pedido</th>
                                             </thead>
                                         
                                         <tbody>
@@ -180,14 +183,30 @@
                                                 </td>
 
                                                 <td>
+                                                    <i class="fas fa-money-check-alt"></i>
+                                                    <?php
+                                                        $subt = $row['price']*$row['quantity'];
+                                                        echo number_format($subt, 2);
+                                                    ?>
+                                                </td>
+
+                                                <td>
                                                     <i class="fas fa-hand-holding-usd"></i>
                                                     <?php echo number_format($row['total'], 2); ?>
                                                 </td>
+
+                                                <td>
+                                                    <a href="clear-order.php?purchaseid=<?php echo $row['purchaseid'] ?>" class="btn btn-info">
+                                                        Vaciar pedido
+                                                    </a>
+                                                </td>
                                             
                                             </tr>
-
+                                        
+                                            
                                             <?php }?>
-
+                                            
+                                            
                                         </tbody>
                                         </table>
                                     </div>
