@@ -128,7 +128,7 @@
                                                 
                                                 <th>Vaciar pedido</th>
                                             </thead>
-                                        
+                                           
                                         <tbody>
                                             <?php 
                                                 include "./config/conexion.php";
@@ -202,7 +202,7 @@
                                                 </td>
                                             
                                             </tr>
-                                        
+                                                
                                             
                                             <?php }?>
                                             

@@ -2,7 +2,7 @@
     include "./config/conexion.php";
 
     if(isset($_POST['editClient'])) {
-        $id_client = $_POST['id_clients_edit'];
+        $id_user = $_POST['id_clients_edit'];
         $name_client = $_POST['name_client'];
         $address_fiscal = $_POST['address_fiscal'];
         $address_company = $_POST['address_company'];
@@ -15,7 +15,7 @@
         $email = $_POST['email'];
         $cp = $_POST['cp'];
 
-        $query_update = "UPDATE clients SET name_client='$name_client', address_fiscal='$address_fiscal', address_company='$address_company', giro_company='$giro_company', rfc='$rfc', manager_payments='$manager_payments', activate='$activate', tel='$tel', cel='$cel', email='$email', cp='$cp' WHERE id = '$id_client'";
+        $query_update = "UPDATE clients SET name_client='$name_client', address_fiscal='$address_fiscal', address_company='$address_company', giro_company='$giro_company', rfc='$rfc', manager_payments='$manager_payments', activate='$activate', tel='$tel', cel='$cel', email='$email', cp='$cp' WHERE id_user = '$id_user'";
         mysqli_query($conexion, $query_update);
 
         header("location: show-clients.php");
@@ -57,11 +57,11 @@
                 <?php 
                     include "./config/conexion.php";
 
-                    if(isset($_GET["id"])) {
-                        $id = $_GET['id'];
+                    if(isset($_GET["id_user"])) {
+                        $id_user = $_GET['id_user'];
                     }
                 
-                        $query = "SELECT * FROM clients WHERE id = $id";
+                        $query = "SELECT * FROM clients WHERE id_user = $id_user";
                         $result = mysqli_query($conexion, $query);
                 
                         if($result) {
@@ -93,7 +93,7 @@
 
                                 <div class="card-body">
                                     <form action="edit-client.php" method="POST">
-                                    <input type="hidden" name="id_clients_edit" value="<?php echo $id; ?>">
+                                    <input type="hidden" name="id_clients_edit" value="<?php echo $id_user; ?>">
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">

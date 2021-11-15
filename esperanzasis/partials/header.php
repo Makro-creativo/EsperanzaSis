@@ -17,6 +17,14 @@
     </button>
 
     <!-- Topbar Search -->
+    <?php if($typeUser === "SuperAdmin") {?>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a href="DashboardSuperAdmin.php" class="nav-link">Inicio</a>
+        </li>
+    </ul>
+    <?php }?>
+
     <?php if($typeUser === "Cliente") {?>
     <ul class="navbar-nav">
         <li class="nav-item">

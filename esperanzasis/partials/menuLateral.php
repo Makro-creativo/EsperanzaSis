@@ -10,6 +10,15 @@
  <ul class="navbar-nav bg-green sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
+<?php if($typeUser === "SuperAdmin") {?>
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="DashboardSuperAdmin.php">
+    <div class="sidebar-brand-icon rotate-n-15">
+        <img src="assets/img/logo_tortilleria_la_esperanza.svg" alt="Logo la esperanza" class="img-fluid" style="width: 150px; height: 150px;">
+    </div>
+    <div class="sidebar-brand-text mx-3">EsperanzaSis</div>
+</a>
+<?php }?>
+
 <?php if($typeUser === "Cliente") {?>
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="DashboardCliente.php">
     <div class="sidebar-brand-icon rotate-n-15">
@@ -41,6 +50,14 @@
 <hr class="sidebar-divider my-0">
 
 <!-- Nav Item - Dashboard -->
+<?php if($typeUser === "SuperAdmin") {?>
+<li class="nav-item active">
+    <a class="nav-link" href="DashboardSuperAdmin.php">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Panel de Control</span></a>
+</li>
+<?php }?>
+
 <?php if($typeUser === "Cliente") {?>
 <li class="nav-item active">
     <a class="nav-link" href="DashboardCliente.php">
@@ -159,11 +176,27 @@
     </a>
     <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-rol.php">Crear nuevo rol usuario  </a>
-            <a class="collapse-item" href="show-roles.php">Lista de roles de usuarios </a>
+            <a class="collapse-item" href="show-roles.php">Roles de usuarios</a>
         </div>
     </div>
 </li>
+<?php }?>
+
+<?php if($typeUser === "SuperAdmin") {?>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-user-tag"></i>
+            <span>Roles de Usuario</span>
+        </a>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="new-admin.php">Registrar nuevo Admin</a>
+                <a class="collapse-item" href="show-admin.php">Roles de admin</a>
+                <a class="collapse-item" href="show-roles.php">Roles de usuario</a>
+            </div>
+        </div>
+    </li>
 <?php }?>
 
 

@@ -1,6 +1,7 @@
 <?php 
     include "./config/conexion.php";
 
+
     if(isset($_GET['purchaseid'])) {
         $purchaseid = $_GET['purchaseid'];
 
@@ -19,6 +20,11 @@
             $date_purchase = $row['date_purchase'];
         }
     }
+
+    session_start();
+    error_reporting(0);
+
+    $typeUser = $_SESSION['Tipo'];
 
 ?>
 
@@ -111,6 +117,7 @@
                                                 <th>Comentario del cliente</th>
                                                 <th>Precio</th>
                                                 <th>Total</th>
+                                
                                             </thead>
                                         
                                         <tbody>
@@ -182,8 +189,56 @@
                         </div>
                     </div>
                 </div>
+                <br>
+
+                <!-- Form for delivery time -->
+                    <div class="container">
+                        <div class="row">
+                            <?php if($typeUser === "Repartidor") {?>
+                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                              <div class="card shadow-lg">
+                                  <div class="card-body">
+                                      <form action="create-delivery.php" method="POST">
+                                          <input type="hidden" name="id_delivery" class="form-control" value="<?php echo $purchaseid; ?>">
+
+                                          <div class="form-group">
+                                              <label>Hora en que se entrego pedido: </label>
+                                              <input type="time" class="form-control" name="hour_order_delivery">
+
+                                              <input type="submit" value="Guardar" class="btn btn-success mt-3" name="saveDelivery">
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                            </div> 
+                            <?php }?>
+                            <!-- Card for print time of delivery -->
+                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                <?php 
+                                    include "./config/conexion.php";
+
+                                    $query_time = "SELECT * FROM delivery WHERE purchaseid = '$purchaseid'";
+                                    $result_query = mysqli_query($conexion, $query_time);
+
+                                    while($row = mysqli_fetch_array($result_query)) {
+                                ?>
+                                <div class="card shadow-lg">
+                                    <div class="card-body">
+                                        <h5 class="text-center font-weight-bold text-dark">Hora de entrega: <?php echo date('g:i A', strtotime(($row['hour_order_delivery']))); ?></h5>
+                                    </div>
+                                </div>
+
+                                <?php }?>
+                            </div>
+                        <!-- End print of tme delivery -->
+
+                        </div>
+                    </div>                                                     
+
+                <!-- End of delivery time -->
 
             </div>
+            <br>
 
             <?php include "./partials/footer.php"  ?>
 

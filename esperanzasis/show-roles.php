@@ -30,7 +30,13 @@
 
                 <div class="container">
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Lista de usuarios</h2>
+                        <div class="d-flex justify-content-around align-items-center">
+                            <h2 class="mb-4">Roles de usuario</h2>
+                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#rol">
+                                Registrar nuevo rol
+                                <i class="fas fa-plus-square mr-2"></i>
+                            </button>
+                        </div>
 
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
                             <div class="card shadow-lg">
@@ -39,7 +45,6 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <td>Id</td>
                                                 <td>Nombre de usuario</td>
                                                 <td>nombre de Rol de usuario</td>
                                                 <td>Contraseña</td>
@@ -65,7 +70,6 @@
                                             ?>
                                             
                                             <tr>
-                                                <td><?php echo $row['id_user']; ?></td>
                                                 <td><?php echo $row['name']; ?></td>
                                                 <td><?php echo $row['user']; ?></td>
                                                 <td><?php echo $row['pass']; ?></td>
@@ -102,6 +106,133 @@
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="rol" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Registrar nuevo rol</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                <label>Selecciona una opción: </label>
+                                <select name="status" id="status" onChange="showForm(this.value);" class="form-select">
+                                    <option selected disabled>Elije una opción</option>
+                                    <option value="rol-client">Rol de cliente</option>
+                                    <option value="rol-repartidor">Rol de repartidor</option>
+                                </select>
+                            </form>
+
+                            <div id="rol-client" style="display: none;">
+                                    <form action="new-rol.php" method="POST">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6 mt-4">
+                                                <div class="form-group">
+                                                    <label>Elije un usuario: </label>
+                                                    <select name="info_client" require class="form-select">
+                                                        <option selected disabled>Elije un usuario</option>
+                                                        <?php 
+                                                            include "./config/conexion.php"; 
+
+                                                            $query = "SELECT * FROM clients";
+                                                            $result = mysqli_query($conexion, $query);
+
+                                                            while($row = mysqli_fetch_array($result)) {
+                                                                $id_client = $row['id_user'];
+                                                                $name_client = $row['name_client'];
+                                                        
+                                                            ?>
+
+                                                            <option value="<?php echo $id_client."_".$name_client; ?>"><?php echo $name_client; ?></option>
+                                                        <?php }?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6 mt-4">
+                                                <div class="form-group">
+                                                    <label>Nombre de usuario: </label>
+                                                    <input type="text" placeholder="Ejemplo: HotelHg, HotelMali, etc..." name="user" autocomplete="off" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <label>Contraseña para el usuario: </label>
+                                                <input type="password" placeholder="Ejemplo: cliente1234, cliente*2021, etc..." name="pass" class="form-control">
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Asignar tipo de permiso para nuevo usuario</label>
+                                                    <select name="tipo" require class="form-select">
+                                                        <option selected disabled>Eliga un Rol para el usuario</option>
+                                                        <option value="Cliente">Cliente</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Crear nuevo rol" class="btn btn-outline-success" name="saveRol">
+                                        </div>
+                                </form>
+
+                            </div>
+
+                            <div id="rol-repartidor" style="display: none;">
+                                
+                            <form action="new-rol-repartidor.php" method="POST">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6 mt-4">
+                                                <div class="form-group">
+                                                    <label>Elije un usuario: </label>
+                                                    <input type="text" name="name" class="form-control" placeholder="Ejemplo: Jose, Miguel, etc.." autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6 mt-4">
+                                                <div class="form-group">
+                                                    <label>Nombre de usuario: </label>
+                                                    <input type="text" placeholder="Ejemplo: HotelHg, HotelMali, etc..." name="user" autocomplete="off" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <label>Contraseña para el usuario: </label>
+                                                <input type="password" placeholder="Ejemplo: cliente1234, cliente*2021, etc..." name="pass" class="form-control">
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Asignar tipo de permiso para nuevo usuario</label>
+                                                    <select name="tipo" require class="form-select">
+                                                        <option selected disabled>Eliga un Rol para el usuario</option>
+                                                        <option value="Repartidor">Repartidor</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" value="Crear nuevo rol" class="btn btn-outline-success" name="saveRepartidor">
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Modal -->
 
             </div>
 
@@ -167,5 +298,19 @@
 			
 		});
 	</script>
+
+    <script>
+        function showForm(id) {
+            if(id === "rol-client") {
+                $("#rol-client").show();
+                $("#rol-repartidor").hide();
+            }
+
+            if(id === "rol-repartidor") {
+                $("#rol-client").hide();
+                $("#rol-repartidor").show();
+            }
+        }
+    </script>
 </body>
 </html>

@@ -104,7 +104,7 @@
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Giro de la empresa: </label>
-                                                    <input type="text" placeholder="Ejemplo: Mueblería, ferreteería, etc..." class="form-control" name="giro_company" required>
+                                                    <input type="text" placeholder="Ejemplo: Mueblería, ferretería, etc..." class="form-control" name="giro_company" required>
                                                 </div>
                                             </div>
                                         </div>

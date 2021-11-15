@@ -3,14 +3,20 @@
 
 
     if(isset($_POST['editRol'])) {
-        $id_rol = $_POST['id_rol_edit'];
+        
+        $info_client = $_POST['info_client'];
+        $array = explode("_", $info_client);
+        $idClient = $array[0];
+        $nameClient = $array[1];
+
+
         $name = $_POST['name_client'];
         $user = $_POST['user'];
         $pass = $_POST['pass'];
         $tipo = $_POST['Tipo'];
 
 
-        $query_update = "UPDATE users SET name='$name', user='$user', pass='$pass', tipo='$tipo' WHERE id_user = $id_rol";
+        $query_update = "UPDATE users SET name='$nameClient', user='$user', pass='$pass', tipo='$tipo' WHERE id_user = $idClient";
         mysqli_query($conexion, $query_update);
 
         header("location: show-roles.php");
@@ -78,7 +84,7 @@
 
                                 <div class="card-body">
                                     <form action="edit-rol.php" method="POST">
-                                    <input type="hidden" name="id_rol_edit" value="<?php echo $id_user; ?>">
+                                    <input type="text" name="id_rol_edit" value="<?php echo $id_user; ?>">
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
@@ -93,10 +99,12 @@
                                                                 $result = mysqli_query($conexion, $query);
 
                                                                 while($row = mysqli_fetch_array($result)) {
+                                                                    $id_client = $row['id_user'];
                                                                     $name_client = $row['name_client'];
                                                         
                                                             ?>
-                                                        <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
+
+                                                            <option value="<?php echo $id_client."_".$name_client; ?>"><?php echo $name_client; ?></option>
                                                         <?php }?>
                                                     </select>
                                                 </div>

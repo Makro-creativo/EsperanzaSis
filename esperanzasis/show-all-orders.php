@@ -81,9 +81,6 @@
 													<th>Estatus de entrega</th>
 												<?php }?>
 
-												<th>Hora que se entrego</th>
-												
-
 												
 											</thead>
 											<tbody>
@@ -117,7 +114,7 @@
 															
 															<?php if($typeUser === "Cliente") {?>
 																<td class="text-center">
-																	<a href="show-details.php?pdidid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary">
+																	<a href="show-details.php?purchaseid =<?php echo $row['purchaseid']; ?>" class="btn btn-primary">
 																		<i class="fas fa-eye"></i>
 																	</a>
 																</td>
@@ -153,19 +150,14 @@
 																?>
 															</td>
 
-															<td>
-																<form action="create-delivery.php" method="POST">
-																	<input type="time" name="date_delivery" class="form-control">
-																</form>
-															</td>
-															
-															
-
+														
 														</tr>
 
 														<?php
 													}
 												?>
+
+												
 											</tbody>
 										</table>
 									</div>
@@ -174,38 +166,7 @@
 						</div>
 					</div>
 				</div>
-					
-
-
-				<!-- Modal -->
-				<div class="modal fade" id="details<?php echo $row['purchaseid']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Detalles del pedido</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<?php 
-								include "./config/conexion.php";
-
-								$quwery = ""
-							
-							?>
-							<div class="container">
-								<h5>Cliente: <b><?php echo $row['client_name']; ?></b></h5>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-								<i class="fas fa-times"></i>
-								Cerrar
-							</button>
-						</div>
-						</div>
-					</div>
-				</div>
-				<!-- End modal -->
+				
 
 			</div>
 

@@ -1,9 +1,10 @@
 <?php 
-    error_reporting(0);
+    include "./config/conexion.php";
+
     session_start();
+    error_reporting(0);
 
     $typeUser = $_SESSION['Tipo'];
-
 ?>
 
 <!DOCTYPE html>
@@ -16,8 +17,8 @@
     <title>EsperanzaSis</title>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -37,76 +38,60 @@
                 <?php include "./partials/header.php" ?>
 
                 <div class="container">
+                    <h2 class="mb-4 d-flex justify-content-start">Lista de Administradores</h2>
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Lista de clientes</h2>
-
-                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
-                            <div class="card shadow-lg mb-4">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                        <div class="card shadow-lg">
                                 <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <td>Id</td>
-                                                    <td>Nombre completo del cliente</td>
-                                                    <td>Dirección del cliente</td>
-                                                    <td>Dirección de la empresa</td>
-                                                    <td>Giro de la empresa</td>
-                                                    <td>RFC</td>
-                                                    <td>Encargado de compras</td>
-                                                    <td>Estatus</td>
-                                                    <td>Número de teléfono</td>
-                                                    <td>Celular</td>
-                                                    <td>Correo electronico</td>
-                                                    <td>Código postal</td>
-
-                                                    <?php if($typeUser === "Administrador") {?>
-                                                        <td>Editar</td>
-                                                    <?php }?>
-
-                                                    <?php if($typeUser === "Administrador") {?>
-                                                        <td>Eliminar</td>
-                                                    <?php }?>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <td>Nombre de usuario</td>
+                                                <td>nombre de Rol de usuario</td>
+                                                <td>Contraseña</td>
+                                                <td>Tipo de usuario</td>
+                        
+                    
+                                                <?php if($typeUser === "SuperAdmin") {?>
+                                                    <td>Editar</td>
+                                                <?php }?>
+                                                <?php if($typeUser === "SuperAdmin") {?>
+                                                    <td>Eliminar</td>
+                                                <?php }?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             <?php  
                                                 include "./config/conexion.php";
 
-                                                $query = "SELECT * FROM clients ORDER BY id_user ASC";
+                                                $query = "SELECT * FROM users WHERE Tipo = 'Administrador'";
                                                 $result = mysqli_query($conexion, $query);
 
                                                 while($row = mysqli_fetch_array($result)) {
                                             ?>
                                             
                                             <tr>
-                                                <td><?php echo $row['id_user']; ?></td>
-                                                <td><?php echo $row['name_client']; ?></td>
-                                                <td><?php echo $row['address_fiscal']; ?></td>
-                                                <td><?php echo $row['address_company']; ?></td>
-                                                <td><?php echo $row['giro_company']; ?></td>
-                                                <td><?php echo $row['rfc']; ?></td>
-                                                <td><?php echo $row['manager_payments']; ?></td>
-                                                <td><?php echo $row['activate']; ?></td>
-                                                <td><?php echo $row['tel']; ?></td>
-                                                <td><?php echo $row['cel']; ?></td>
-                                                <td><?php echo $row['email']; ?></td>
-                                                <td><?php echo $row['cp']; ?></td>
+                                                <td><?php echo $row['name']; ?></td>
+                                                <td><?php echo $row['user']; ?></td>
+                                                <td><?php echo $row['pass']; ?></td>
+                                                <td><?php echo $row['tipo']; ?></td>
 
 
-                                                <?php if($typeUser === "Administrador") {?>
+                                                <?php if($typeUser === "SuperAdmin") {?>
                                                     <td>
-                                                        <a href="edit-client.php?id_user=<?php echo $row['id_user']; ?>" class="btn btn-success">
-                                                            
+                                                        <a href="edit-rol.php?id_user=<?php echo $row['id_user']; ?>" class="btn btn-success">
+                                                            Editar
                                                             <i class="fas fa-edit mr-2"></i>
                                                         </a>
                                                     </td>
                                                 <?php }?>
 
-                                                <?php if($typeUser === "Administrador") {?>
+                                                <?php if($typeUser === "SuperAdmin") {?>
                                                     <td>
-                                                        <a href="delete-client.php?id_user=<?php echo $row['id_user']; ?>" class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt mr-2 "></i>
+                                                        <a href="delete-rol.php?id_user=<?php echo $row['id_user']; ?>" class="btn btn-danger">
+                                                            Eliminar
+                                                            <i class="fas fa-trash-alt mr-2"></i>
                                                         </a>
                                                     </td>
                                                 <?php }?>
@@ -115,8 +100,8 @@
                                         
 
                                             <?php }?>
-                                            </tbody>
-                                        </table>
+                                        </tbody>
+                                    </table>
                                     </div>
                                 </div>
                             </div>
@@ -131,6 +116,7 @@
         </div>
 
     </div>
+
 
 
 
