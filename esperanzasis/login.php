@@ -58,7 +58,7 @@
                                     </div>
                                     <form class="user" action="access.php" method="POST">
                                         <div class="form-group">
-                                            <input name="user" type="text" class="form-control form-control-user" placeholder="Nombre de usuario...">
+                                            <input name="user" autocomplete="off" type="text" class="form-control form-control-user" placeholder="Nombre de usuario...">
                                         </div>
                                         <div class="form-group">
                                             <input name="password" type="password" class="form-control form-control-user" placeholder="Contraseña">

@@ -120,7 +120,7 @@
 
                                                         $status_pedido = $_GET['status_pedido'];
 
-                                                        $query = mysqli_query($conexion, "SELECT * FROM orders WHERE status_pedido = '0'");
+                                                        $query = mysqli_query($conexion, "SELECT * FROM orders");
 
                                                         $orders_count = mysqli_num_rows($query);
 

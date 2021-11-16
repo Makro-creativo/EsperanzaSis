@@ -15,7 +15,7 @@
             die("No se pudo guardar la hora de entrega");
         }
 
-        header("location: show-all-orders.php?purchaseid='.&_GET.'");
+        header("location: show-all-orders.php");
 
     }
 
