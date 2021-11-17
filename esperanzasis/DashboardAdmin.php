@@ -155,7 +155,7 @@
                                                     <?php 
                                                         include "./config/conexion.php";
 
-                                                        $query = mysqli_query($conexion, "SELECT * FROM users");
+                                                        $query = mysqli_query($conexion, "SELECT * FROM users WHERE Tipo != 'SuperAdmin'");
 
                                                         $users_count = mysqli_num_rows($query);
 

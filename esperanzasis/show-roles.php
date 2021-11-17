@@ -63,7 +63,7 @@
                                             <?php  
                                                 include "./config/conexion.php";
 
-                                                $query = "SELECT * FROM users ORDER BY id_user ASC";
+                                                $query = "SELECT * FROM users WHERE Tipo != 'SuperAdmin'";
                                                 $result = mysqli_query($conexion, $query);
 
                                                 while($row = mysqli_fetch_array($result)) {

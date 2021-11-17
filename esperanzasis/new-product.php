@@ -3,9 +3,10 @@
 
     if(isset($_POST['savedProducts'])) {
         $name_product = $_POST['name_product'];
+        $price = number_format($_POST['price'], 2);
 
 
-        $query_products = "INSERT INTO products(name_product) VALUES ('$name_product')";
+        $query_products = "INSERT INTO products(name_product, price) VALUES ('$name_product', '$price')";
         $result = mysqli_query($conexion, $query_products);
 
         if(!$result) {
@@ -75,7 +76,7 @@
 
                                             <div class="col-md-6 col-xm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <label>Precio: </label>
-                                                <input type="text" name="price" class="form-control" placeholder="Ejemplo: 20" autocomplete="off">
+                                                <input type="text" name="price" class="form-control" placeholder="Ejemplo: 20.00" autocomplete="off">
                                             </div>
                                         </div>
 
