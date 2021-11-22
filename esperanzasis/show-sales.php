@@ -44,6 +44,7 @@
 												<th>Encargado del pedido</th>
 												<th>Comentarios del cliente</th>
 												<th>Fecha que se hizo el pedido</th>
+												<th>Total a pagar</th>
 												<th>Eliminar</th>
 												<th>Detalles del pedido</th>
 											</thead>
@@ -67,6 +68,7 @@
 															<td><?php echo $row['comments']; ?></td>
 															
 															<td><?php echo date('M d, Y h:i A', strtotime($row['date_purchase'])) ?></td>
+															<td><?php echo number_format($row['total'], 2); ?></td>
 															
 															<td class="text-center">
 																<a href="delete-order-id.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-danger">
@@ -128,6 +130,7 @@
 				<!-- End modal -->
 
 			</div>
+			<br>
 
 			<?php include "./partials/footer.php" ?>
 		</div>

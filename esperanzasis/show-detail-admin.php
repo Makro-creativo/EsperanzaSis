@@ -1,6 +1,10 @@
 <?php 
     include "./config/conexion.php";
 
+    session_start();
+
+    $typeUser = $_SESSION['Tipo'];
+
 
     if(isset($_GET['purchaseid'])) {
         $purchaseid = $_GET['purchaseid'];
@@ -20,11 +24,6 @@
             $date_purchase = $row['date_purchase'];
         }
     }
-
-    session_start();
-    error_reporting(0);
-
-    $typeUser = $_SESSION['Tipo'];
 
 ?>
 
@@ -202,10 +201,15 @@
                                           <input type="hidden" name="id_delivery" class="form-control" value="<?php echo $purchaseid; ?>">
 
                                           <div class="form-group">
-                                              <label>Hora en que se entrego pedido: </label>
-                                              <input type="time" class="form-control" name="hour_order_delivery">
+                                              <label class="text-center">Registrar hora y fecha de entrega del pedido: </label>
+                                              <input type="hidden" class="form-control" name="hour_order_delivery">
 
-                                              <input type="submit" value="Guardar" class="btn btn-success mt-3" name="saveDelivery">
+                                              <div class="d-flex justify-content-center">
+                                                <button type="submit" class="btn btn-success mt-3" name="click">
+                                                    <i class="fas fa-clock"></i>
+                                                </button>
+                                              </div>
+                                             
                                           </div>
                                       </form>
                                   </div>
@@ -224,7 +228,7 @@
                                 ?>
                                 <div class="card shadow-lg">
                                     <div class="card-body">
-                                        <h5 class="text-center font-weight-bold text-dark">Hora de entrega: <?php echo date('g:i A', strtotime(($row['hour_order_delivery']))); ?></h5>
+                                        <p class="text-center font-weight-bold text-dark">Hora y Fecha de entrega: <?php echo date('Y-m-d h:i A', strtotime(($row['hour_order_delivery']))); ?></p>
                                     </div>
                                 </div>
 
@@ -308,6 +312,18 @@
                     text:      '<i class="fas fa-file-pdf"></i>',
                     titleAttr: 'PDF',
                     className: "btn btn-primary"
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fas fa-print"></i>',
+                    titleAttr: 'PRINT',
+                    className: 'btn btn-danger'
+                },
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i>',
+                    titleAttr: 'EXCEL',
+                    className: 'btn btn-success'
                 }
             ],
             

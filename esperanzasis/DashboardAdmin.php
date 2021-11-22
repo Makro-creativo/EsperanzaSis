@@ -150,7 +150,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Roles de usuario (Creados)</div>
+                                                    Roles de usuarios (Creados)</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                     <?php 
                                                         include "./config/conexion.php";
@@ -220,6 +220,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            
                 </div>
             </div>
 

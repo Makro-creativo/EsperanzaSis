@@ -12,7 +12,7 @@
   
         // SQL query that sets the status
         // to 1 to indicate activation.
-        $query = "UPDATE `orders` SET `status_pedido`=1 WHERE purchaseid='$purchaseid'";
+        $query = "UPDATE orders SET status_pedido = 1 WHERE purchaseid='$purchaseid'";
   
         // Execute the query
         mysqli_query($conexion, $query);

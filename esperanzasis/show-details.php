@@ -135,7 +135,8 @@
                                                 $id_pedido = $_GET['purchaseid'];
 
                                                 //$query = "SELECT * FROM purchase_detail LEFT JOIN products ON products.productid=purchase_detail.productid WHERE purchaseid='".$row['purchaseid']."'";
-                                                $query = "SELECT * FROM orders INNER JOIN purchase_detail ON orders.purchaseid = purchase_detail.purchaseid INNER JOIN products ON purchase_detail.productid = products.productid WHERE orders.id_user = '$uid' AND purchase_detail.purchaseid = '$id_pedido'";
+                                                echo $query = "SELECT * FROM orders INNER JOIN purchase_detail ON orders.purchaseid = purchase_detail.purchaseid INNER JOIN products ON purchase_detail.productid = products.productid WHERE orders.id_user = '$uid' AND purchase_detail.purchaseid = '$id_pedido'";
+                                                //$query = "SELECT * FROM orders LEFT JOIN purchase_detail ON orders.purchaseid = purchase_detail.purchaseid LEFT JOIN products ON purchase_detail.productid = products.productid WHERE orders.id_user = '$uid' AND purchase_detail.purchaseid = '$id_pedido'";
                                                 $result = mysqli_query($conexion, $query);
 
                                                 while($row = mysqli_fetch_array($result)) {
@@ -202,12 +203,12 @@
                                                 </td>
                                             
                                             </tr>
-                                                
+                                            
+                                            
                                             
                                             <?php }?>
-                                            
-                                            
-                                        </tbody>
+                                                
+                                        </tbody> 
                                         </table>
                                     </div>
 
@@ -218,6 +219,7 @@
                 </div>
 
             </div>
+            <br>
 
             <?php include "./partials/footer.php"  ?>
 
@@ -287,7 +289,19 @@
                     extend:    'pdfHtml5',
                     text:      '<i class="fas fa-file-pdf"></i>',
                     titleAttr: 'PDF',
-                    className: "btn btn-primary"
+                    className: 'btn btn-primary'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fas fa-print"></i>',
+                    titleAttr: 'PRINT',
+                    className: 'btn btn-danger'
+                },
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i>',
+                    titleAttr: 'EXCEL',
+                    className: 'btn btn-success'
                 }
             ],
             

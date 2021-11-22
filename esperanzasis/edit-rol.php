@@ -122,7 +122,6 @@
                                                     <label>Asignar tipo de permiso para nuevo usuario</label>
                                                     <select name="Tipo" require class="form-select">
                                                         <option selected disabled>Eliga un Rol para el usuario</option>
-                                                        <option value="Administrador" <?php if($tipo == "Administrador"){?> selected <?php } ?>>Administrador</option>
                                                         <option value="Cliente" <?php if($tipo == "Cliente"){?> selected <?php } ?>>Cliente</option>
                                                         <option value="Repartidor" <?php if($tipo == "Repartidor"){?> selected <?php } ?>>Repartidor</option>
                                                     </select>
