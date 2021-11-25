@@ -13,8 +13,9 @@
         $cel = $_POST['cel'];
         $email = $_POST['email'];
         $cp = $_POST['cp'];
+        $descuento = number_format($_POST['descuento'], 2);
 
-        $query_client = "INSERT INTO clients(name_client, address_fiscal, address_company, giro_company, rfc, manager_payments, activate, tel, cel, email, cp) VALUES('$name_client', '$address_fiscal', '$address_company', '$giro_company', '$rfc', '$manager_payments', '$activate', '$tel', '$cel', '$email', '$cp')";
+        echo $query_client = "INSERT INTO clients(name_client, address_fiscal, address_company, giro_company, rfc, manager_payments, activate, tel, cel, email, cp, descuento) VALUES('$name_client', '$address_fiscal', '$address_company', '$giro_company', '$rfc', '$manager_payments', '$activate', '$tel', '$cel', '$email', '$cp', '$descuento')";
         $result = mysqli_query($conexion, $query_client);
 
         if(!$result) {
@@ -23,7 +24,7 @@
 
         json_encode($result);
 
-        header("location: show-clients.php");
+        //header("location: show-clients.php");
     }
 
 ?>
@@ -171,6 +172,7 @@
                 </div>
 
             </div>
+            <br>
 
     
             <?php include "./partials/footer.php" ?>

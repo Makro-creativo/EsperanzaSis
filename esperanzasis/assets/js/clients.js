@@ -26,7 +26,7 @@ const app = new Vue({
                 address_company: this.address_company,
                 giro_company: this.giro_company,
                 manager_payments: this.manager_payments,
-                cp: this.cp,
+                cp: this.cp
 
             })
             .then(function(response) {
@@ -45,6 +45,7 @@ const app = new Vue({
                 this.giro_company = '';
                 this.manager_payments = '';
                 this.cp = '';
+
             })
             .catch(function(error) {
                 console.log(error);

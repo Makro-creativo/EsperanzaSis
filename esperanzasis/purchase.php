@@ -1,10 +1,18 @@
 <?php
 	include('./config/conexion.php');
 	
+	
 	if(isset($_POST['saveOrder'])){
         $id_user = $_POST['id_user_active'];
 
-		$search = "SELECT * FROM clients WHERE id_user = '$id_user'";
+		$search_table_promotion = "SELECT discount FROM promotions WHERE id_user = '$id_user'";
+		$query_discount_table = mysqli_query($conexion, $search_table_promotion);
+		$rowDiscount = mysqli_fetch_array($query_discount_table);
+
+		$discount = $rowDiscount['discount'];
+
+		//$search = "SELECT * FROM clients WHERE id_user = '$id_user'";
+		$search = "SELECT name_client, address_fiscal FROM clients WHERE id_user = '$id_user'";
 		$queryS = mysqli_query($conexion, $search);
 		$rowClient = mysqli_fetch_array($queryS);
 
@@ -21,7 +29,7 @@
 		$calification = $_POST['calification'];
 	
  
-		$query = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, calification, date_purchase) VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', '$calification', NOW())";
+		$query = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, calification, discount_order, date_purchase) VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', '$calification', '$discount', NOW())";
 		$result = mysqli_query($conexion, $query);
 		
 		$pid = $conexion->insert_id;
@@ -42,6 +50,9 @@
 		if (isset($_POST['quantity_'.$iterate])){
 			$subTotal = $row['price'] * $_POST['quantity_'.$iterate];
 			$total+=$subTotal;
+
+			$total-=$discount;
+			
 
 			$query = "INSERT INTO purchase_detail (purchaseid, productid, quantity) VALUES ('$pid', '$productid', '".$_POST['quantity_'.$iterate]."')";
 			$result = mysqli_query($conexion, $query);

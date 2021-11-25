@@ -21,6 +21,7 @@
             $hour_send = $row['hour_send'];
             $people_order = $row['people_order'];
             $date_purchase = $row['date_purchase'];
+            $total = $row['total'];
         }
     }
 
@@ -124,7 +125,7 @@
                                                 <th>calificación</th>
                                                 <th>Precio</th>
                                                 <th>Subtotal</th>
-                                                <th>Total</th>
+                                                
                                                 
                                                 <th>Vaciar pedido</th>
                                             </thead>
@@ -135,7 +136,7 @@
                                                 $id_pedido = $_GET['purchaseid'];
 
                                                 //$query = "SELECT * FROM purchase_detail LEFT JOIN products ON products.productid=purchase_detail.productid WHERE purchaseid='".$row['purchaseid']."'";
-                                                echo $query = "SELECT * FROM orders INNER JOIN purchase_detail ON orders.purchaseid = purchase_detail.purchaseid INNER JOIN products ON purchase_detail.productid = products.productid WHERE orders.id_user = '$uid' AND purchase_detail.purchaseid = '$id_pedido'";
+                                                $query = "SELECT * FROM orders INNER JOIN purchase_detail ON orders.purchaseid = purchase_detail.purchaseid INNER JOIN products ON purchase_detail.productid = products.productid WHERE orders.id_user = '$uid' AND purchase_detail.purchaseid = '$id_pedido'";
                                                 //$query = "SELECT * FROM orders LEFT JOIN purchase_detail ON orders.purchaseid = purchase_detail.purchaseid LEFT JOIN products ON purchase_detail.productid = products.productid WHERE orders.id_user = '$uid' AND purchase_detail.purchaseid = '$id_pedido'";
                                                 $result = mysqli_query($conexion, $query);
 
@@ -191,10 +192,10 @@
                                                     ?>
                                                 </td>
 
-                                                <td>
+                                                <!-- <td>
                                                     <i class="fas fa-hand-holding-usd"></i>
                                                     <?php echo number_format($row['total'], 2); ?>
-                                                </td>
+                                                </td>-->
 
                                                 <td>
                                                     <a href="clear-order.php?purchaseid=<?php echo $row['purchaseid'] ?>" class="btn btn-info">
@@ -207,7 +208,12 @@
                                             
                                             
                                             <?php }?>
-                                                
+                                            
+                                            
+                                            <h3 class="text-dark font-weight-bold">
+                                                TOTAL:
+                                                <?php echo number_format($total, 2); ?>
+                                            </h3>
                                         </tbody> 
                                         </table>
                                     </div>
@@ -289,7 +295,7 @@
                     extend:    'pdfHtml5',
                     text:      '<i class="fas fa-file-pdf"></i>',
                     titleAttr: 'PDF',
-                    className: 'btn btn-primary'
+                    className: "btn btn-primary"
                 },
                 {
                     extend: 'print',
@@ -309,5 +315,6 @@
     });
 
 </script>
+
 </body>
 </html>

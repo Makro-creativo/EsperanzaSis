@@ -4,7 +4,7 @@
     if(isset($_POST['editProduct'])) {
         $Id_product = $_POST['id_product_edit'];
         $name_product = $_POST['name_product'];
-        $price = $_POST['price'];
+        $price = number_format($_POST['price'], 2);
         
 
         $queryUpdate = "UPDATE products SET name_product='$name_product', price='$price' WHERE productid = '$Id_product'";
@@ -87,7 +87,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                         
 
                                         <div class="d-grid gap-2">

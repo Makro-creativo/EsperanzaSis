@@ -22,8 +22,12 @@
             $people_order = $row['people_order'];
             $comments = $row['comments'];
             $date_purchase = $row['date_purchase'];
+            $total = $row['total'];
         }
+
     }
+
+    
 
 ?>
 
@@ -91,6 +95,7 @@
                                         <h5>Cliente: <b><?php echo $client_name; ?></b></h5>
 
                                         <span>Fecha: <?php echo date('M d, Y h:i A', strtotime($date_purchase)) ?></span>
+
                                     </div>
 
                                 </div>
@@ -103,8 +108,17 @@
                                        
                                    </div>
 
-                                    <div class="table-responsive">
+                                    <div class="table-responsive" id="printable">
                                         <table class="table table-bordered" id="generatePdf">
+                                        
+                                        <?php if($typeUser === "Administrador") {?>
+                                            <div class="d-flex justify-content-end">
+                                                <a class="btn btn-dark" href="show-ticket.php?purchaseid=<?php echo $row['purchaseid']; ?>">
+                                                    Ticket de Compra
+                                                </a>
+                                            </div>
+                                        <?php }?>
+
                                             <thead>
                                                 <th>Cliente</th>
                                                 <th>Nombre del producto</th>
@@ -113,9 +127,9 @@
                                                 <th>Hora de entrega</th>
                                                 <th>Fecha de entrega</th>
                                                 <th>Persona que solicito pedido</th>
-                                                <th>Comentario del cliente</th>
+                                                <!--<th>Comentario del cliente</th>-->
                                                 <th>Precio</th>
-                                                <th>Total</th>
+                                               
                                 
                                             </thead>
                                         
@@ -161,24 +175,30 @@
                                                     <?php echo $row['people_order']; ?>
                                                 </td>
 
-                                                <td>
+                                                <!-- <td>
                                                     <i class="fas fa-comment-alt"></i>
                                                     <?php echo $row['comments']; ?>
-                                                </td>
+                                                </td>-->
 
                                                 <td>
                                                     <i class="fas fa-dollar-sign"></i>
                                                     <?php echo number_format($row['price'], 2); ?>
                                                 </td>
 
-                                                <td>
+                                                <!-- <td>
                                                     <i class="fas fa-hand-holding-usd"></i>
                                                     <?php echo number_format($row['total'], 2); ?>
-                                                </td>
+                                                </td> -->
                                             
                                             </tr>
-
+                                        
+                                        
                                             <?php }?>
+
+                                                <h3 class="text-dark font-weight-bold">
+                                                    Total a Pagar:
+                                                    <?php echo number_format($total, 2); ?> Pesos
+                                                </h3>
 
                                         </tbody>
                                         </table>
@@ -188,6 +208,8 @@
                         </div>
                     </div>
                 </div>
+
+                
                 <br>
 
                 <!-- Form for delivery time -->
@@ -331,5 +353,6 @@
     });
 
 </script>
+
 </body>
 </html>

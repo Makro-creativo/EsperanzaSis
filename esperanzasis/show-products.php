@@ -74,6 +74,8 @@
                                                 <td><?php echo $row['name_product']; ?></td>
                                                 <td><?php echo number_format($row['price'], 2); ?></td>
 
+                                                
+
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>

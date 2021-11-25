@@ -4,6 +4,7 @@
 
     $name = $_SESSION['name'];
     $typeUser = $_SESSION['Tipo'];
+    $id_user = $_SESSION['id_user'];
  ?>
 
  <!-- Sidebar -->
@@ -177,6 +178,20 @@
     <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="show-roles.php">Roles de usuarios</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-tags"></i>
+        <span>Gestión de descuentos</span>
+    </a>
+    <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-promotion.php">Crear nuevo descuento</a>
+            <a class="collapse-item" href="show-promotions.php">Lista de descuentos</a>
         </div>
     </div>
 </li>

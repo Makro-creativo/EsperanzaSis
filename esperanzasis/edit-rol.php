@@ -78,7 +78,7 @@
 
                                 <div class="card-body">
                                     <form action="edit-rol.php" method="POST">
-                                    <input type="text" name="id_rol_edit" value="<?php echo $id_user; ?>">
+                                    <input type="hidden" name="id_rol_edit" value="<?php echo $id_user; ?>">
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">

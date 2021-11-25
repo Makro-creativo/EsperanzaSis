@@ -14,8 +14,9 @@
         $cel = $_POST['cel'];
         $email = $_POST['email'];
         $cp = $_POST['cp'];
+        $descuento = $_POST['descuento'];
 
-        $query_update = "UPDATE clients SET name_client='$name_client', address_fiscal='$address_fiscal', address_company='$address_company', giro_company='$giro_company', rfc='$rfc', manager_payments='$manager_payments', activate='$activate', tel='$tel', cel='$cel', email='$email', cp='$cp' WHERE id_user = '$id_user'";
+        $query_update = "UPDATE clients SET name_client='$name_client', address_fiscal='$address_fiscal', address_company='$address_company', giro_company='$giro_company', rfc='$rfc', manager_payments='$manager_payments', activate='$activate', tel='$tel', cel='$cel', email='$email', cp='$cp', descuento='$descuento' WHERE id_user = '$id_user'";
         mysqli_query($conexion, $query_update);
 
         header("location: show-clients.php");
@@ -79,6 +80,7 @@
                             $cel = $row['cel'];
                             $email = $row['email'];
                             $cp = $row['cp'];
+                            $descuento = $row['descuento'];
                         }
                 
                 ?>

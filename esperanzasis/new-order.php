@@ -1,9 +1,10 @@
 <?php
   	include "./config/conexion.php";
 
+
 	$query = "SELECT * FROM products order by productid asc limit 1";
 	
-	$result = mysqli_query($conexion, $query);
+	$result = mysqli_query($conexion, $query);	
 	$row = mysqli_fetch_array($result);
 ?>
 
@@ -49,13 +50,13 @@
 								<div class="table-responsive">
 								<table class="table">
 										<thead>
-											<th class="text-center"><input type="checkbox" id="checkAll"></th>
+											<th class="text-center">Seleccionar productos<input type="hidden" id="checkAll"></th>
 											<th>Nombre del producto</th>
 											<th>Cantidad</th>
 											<th>Precio</th>
 										</thead>
 										<tbody>
-											<?php 
+											<?php
 												$query = "SELECT * FROM products";
 												$result = mysqli_query($conexion, $query);
 												
@@ -69,9 +70,11 @@
 														<td>
 															<input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity_<?php echo $iterate; ?>">
 														</td>
+
 														<td>
 															<?php echo number_format($row['price'], 2); ?>
 														</td>
+														
 													</tr>
 													<?php
 													$iterate++;
@@ -172,6 +175,7 @@
 				</div>
 
 			</div>
+			<br>
 			
 			<?php include "./partials/footer.php" ?>
 
