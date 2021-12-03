@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="d-flex justify-content-center mt-3">
-                                <p>Chevere Trotillería</p>
+                                <p>Tortillería la EsperanzaSis</p>
                                 <p>Av. Cruz del Sur 3874A Loma Bonita Ejidal</p>
                                 <p>3315 422122/3319 819626</p>
                             </div>
@@ -50,7 +50,6 @@
                                         <th>Cantidad</th>
                                         <th>Descripción</th>
                                         <th>$Precio Unitario</th>
-                                        <th>Importe</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,6 +61,14 @@
                                         $result = mysqli_query($conexion, $query_ticket);
 
                                         while($rowTicket = mysqli_fetch_array($result)) {
+                                            $idProduct = $rowTicket['productid'];
+                                            $price_normal = number_format($row['price'], 2);
+
+                                            $searchDiscount = "SELECT * FROM promotions WHERE productid='$idProduct'";
+                                            $resultDiscount = mysqli_query($conexion, $searchDiscount);
+
+                                            $rowProduct = mysqli_fetch_array($resultDiscount);
+                                            $productDiscount = $rowProduct['discount'];
                                     
                                     ?>
 
@@ -74,20 +81,16 @@
                                             <?php echo $rowTicket['name_product']; ?>
                                         </td>
 
-                                        <td>
-                                            <?php echo number_format($rowTicket['price'], 2); ?>
+                                        <td class="d-flex justify-content-center">
+                                           <?php 
+                                            if($productDiscount) {
+                                                echo $productDiscount;
+                                            } else {
+                                                echo $price_normal;
+                                            }
+                                           
+                                           ?>
                                         </td>
-
-                                        <td>
-                                            <?php
-                                                $subt = $rowTicket['price']*$rowTicket['quantity'];
-                                                echo number_format($subt, 2);
-                                            ?>
-                                        </td>
-
-                                        <!-- <td>
-                                            <?php echo number_format($total, 2); ?>
-                                        </td> -->
                                     </tr>
 
                                     
@@ -102,8 +105,8 @@
                                 <?php echo number_format($total, 2); ?>
                             </h3>
                             
-                            <?php if($ty) ?>
-                            <button class="btn btn-outline-success print mt-4">
+                            
+                            <button class="btn btn-outline-success print mt-4" id="hide-button">
                                 Imprimir Ticker
                             </button>
                         </div>
@@ -119,5 +122,13 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="assets/js/jQuery.print.js"></script>
     <script src="assets/js/print-ticket.js"></script>
+
+    <script>
+        $(function() {
+            $('#hide-button').click(function() {
+                $('button').hide();
+            })
+        });
+    </script>
 </body>
 </html>

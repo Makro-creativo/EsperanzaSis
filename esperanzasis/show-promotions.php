@@ -41,15 +41,22 @@
                                                 <th>Nombre del cliente</th>
                                                 <th>Precio</th>
                                                 <th>Descuento</th>
-                                                <th>Editar</th>
-                                                <th>Eliminar</th>
+
+                                                <?php if($typeUser === "Administrador") {?>
+                                                    <th>Editar</th>
+                                                <?php }?>
+
+                                                <?php if($typeUser === "Administrador") {?>
+                                                    <th>Eliminar</th>
+                                                <?php }?>
+                                        
                                             </thead>
 
                                             <tbody>
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $query_join = "SELECT * FROM promotions INNER JOIN products ON promotions.id_product = products.productid";
+                                                    $query_join = "SELECT * FROM promotions INNER JOIN products ON promotions.productid = products.productid";
                                                     $result_join = mysqli_query($conexion, $query_join);
 
                                                     while($rowJoin = mysqli_fetch_array($result_join)) {
@@ -68,20 +75,25 @@
                                                     </td>
 
                                                     <td>
-                                                        <?php echo $rowJoin['discount']; ?>
+                                                        -
+                                                        <?php echo number_format($rowJoin['discount'], 2); ?>
                                                     </td>
-
-                                                    <td>
-                                                        <a href="edit-promotion.php?id_product=<?php echo $rowJoin['id_product']; ?>" class="btn btn-success">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                    </td>
-
-                                                    <td class="d-flex justify-content-center">
-                                                        <a href="delete-promotion.php?id_product=<?php echo $rowJoin['id_product']; ?>" class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </td>
+                                                    
+                                                    <?php if($typeUser === "Administrador") {?>
+                                                        <td>
+                                                            <a href="edit-promotion.php?productid=<?php echo $rowJoin['productid']; ?>" class="btn btn-success">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                    <?php }?>
+                                                    
+                                                    <?php if($typeUser === "Administrador") {?>
+                                                        <td class="d-flex justify-content-center">
+                                                            <a href="delete-promotion.php?productid=<?php echo $rowJoin['productid']; ?>" class="btn btn-danger">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                    <?php }?>
                                                 </tr>
 
                                                 <?php }?>
@@ -95,6 +107,7 @@
                 </div>
 
             </div>
+            <br>
 
             <?php include "./partials/footer.php" ?>
 

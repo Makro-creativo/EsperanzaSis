@@ -17,6 +17,7 @@
     </button>
 
     <!-- Topbar Search -->
+
     <?php if($typeUser === "SuperAdmin") {?>
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -51,7 +52,7 @@
     
 
     <!-- Topbar Navbar -->
-    <ul class="navbar-nav ml-auto">   
+    <ul class="navbar-nav ml-auto">
 
         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -79,7 +80,11 @@
             </div>
         </li>
 
+        
+
     </ul>
+
+    
 
 </nav>
 <!-- End of Topbar -->
@@ -103,4 +108,6 @@
             </div>
         </div>
     </div>
+
+    
 </div>

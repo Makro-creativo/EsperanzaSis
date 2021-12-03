@@ -8,6 +8,8 @@
         $idClient = $array[0];
         $nameClient = $array[1];
 
+
+        
         foreach($_POST['productid'] as $product):
             $productInfo = explode("||",$product);
             $productid = $productInfo[0];
@@ -26,7 +28,7 @@
         $discount = number_format($_POST['discount'], 2);
 	
  
-		$query_promotion = "INSERT INTO promotions (id_product, id_user, name_user, discount) VALUES ('$productid', '$idClient', '$nameClient', '$discount')";
+		$query_promotion = "INSERT INTO promotions (productid, id_user, name_user, discount) VALUES ('$productid', '$idClient', '$nameClient', '$discount')";
 		$result_promotion = mysqli_query($conexion, $query_promotion);
 		
         if(!$result_promotion) {

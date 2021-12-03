@@ -106,7 +106,7 @@
 															
 															<?php if($typeUser === "Cliente") {?>
 																<td class="text-center">
-																	<a href="delete-order-id.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-danger">
+																	<a href="delete-order-id.php?purchaseid=<?php echo$row['purchaseid']; ?>" class="btn btn-danger">
 																		<i class="fas fa-trash-alt"></i>
 																	</a>
 																</td>

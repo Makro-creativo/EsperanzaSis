@@ -6,6 +6,40 @@
 	
 	$result = mysqli_query($conexion, $query);	
 	$row = mysqli_fetch_array($result);
+
+    if(isset($_POST['editDiscount'])){
+        $id_user = $_POST['id_user_promotion_edit'];
+        $array = explode("_", $id_user);
+        $idClient = $array[0];
+        $nameClient = $array[1];
+
+
+        
+        foreach($_POST['productid'] as $product):
+            $productInfo = explode("||",$product);
+            $productid = $productInfo[0];
+            $iterate = $productInfo[1];
+    
+            $query_products = "SELECT * FROM products WHERE productid = '$productid'";
+        endforeach;
+
+		
+		$search_clients = "SELECT name_client, id_user FROM clients WHERE id_user = '$id_user'";
+		$querySearch = mysqli_query($conexion, $search_clients);
+		$rowClient = mysqli_fetch_array($querySearch);
+
+		$nameClient = $rowClient['name_client'];
+		$idClient = $rowClient['id_user'];
+        $discount = number_format($_POST['discount'], 2);
+	
+        
+        $query_update_promotion = "UPDATE promotions SET productid='$productid', id_user='$idClient', name_user='$nameClient', discount='$discount' WHERE productid = '$productid'";
+		//$query_promotion = "INSERT INTO promotions (id_product, id_user, name_user, discount) VALUES ('$productid', '$idClient', '$nameClient', '$discount')";
+		mysqli_query($conexion, $query_update_promotion);
+		
+ 		
+		header('location: show-promotions.php');		
+	}
 ?>
 
 <!DOCTYPE html>
@@ -38,15 +72,31 @@
             <div id="content">
                 <?php include "./partials/header.php" ?>
 
+                <?php
+                    if(isset($_GET['productid'])) {
+                        $productid = $_GET['productid'];
+                    }
+                    
+                    $query = "SELECT * FROM promotions WHERE productid = '$productid'";
+                        $result = mysqli_query($conexion, $query);
+                
+                        if($result) {
+                            $row = mysqli_fetch_array($result);
+                
+                            $name_user = $row['name_user'];
+                            $discount = $row['discount'];
+                        }
+                ?>
+
                 <div class="container">
-                    <h2 class="d-flex justify-content-start mb-4">Registrar descuento</h2>
+                    <h2 class="d-flex justify-content-start mb-4">Editar descuento</h2>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
-                                <div class="card-header">Crear nuevo descuento</div>
+                                <div class="card-header">Editar descuento</div>
 
                                 <div class="card-body">
-                                    <form action="register-promotion.php" method="POST">
+                                    <form action="edit-promotion.php" method="POST">
 
 
                                         <div class="table-responsive">
@@ -87,14 +137,14 @@
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Precio de descuento: </label>
-                                                    <input type="text" name="discount" class="form-control" placeholder="Ejemplo: 5.00" autocomplete="off" required>
+                                                    <input type="text" name="discount" class="form-control" value="<?php echo number_format($discount, 2); ?>" autocomplete="off" required>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Asignar cliente: </label>
-                                                    <select name="id_user_promotion" require class="form-select" required>
+                                                    <select name="id_user_promotion_edit" require class="form-select" required>
                                                         <option selected disabled>Seleccionar cliente</option>
                                                         <?php 
                                                             include "./config/conexion.php"; 
@@ -116,9 +166,9 @@
                                         </div>
                                         
                                         <div class="d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-success mt-3" name="savedDiscount">
-                                                Registrar descuento
-                                                <i class="fas fa-save mr-2"></i>
+                                            <button type="submit" class="btn btn-success mt-3" name="editDiscount">
+                                                Editar descuento
+                                                <i class="fas fa-edit mr-2"></i>
                                             </button>
                                         </div>
                                        
@@ -137,6 +187,7 @@
         </div>
 
     </div>
+
 
 
 

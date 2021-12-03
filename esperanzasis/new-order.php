@@ -62,7 +62,7 @@
 												
 												$iterate=0;
 
-												while($row = mysqli_fetch_array($result)){
+												while($row = mysqli_fetch_array($result)){ 
 													?>
 													<tr>
 														<td class="text-center"><input type="checkbox" value="<?php echo $row['productid']; ?>||<?php echo $iterate; ?>" name="productid[]" style=""></td>
@@ -135,7 +135,7 @@
 									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
 										<div class="form-group">
 											<label>Fecha de envío: </label>
-											<input type="date" name="date_send" class="form-control" required>
+											<input type="date"  min="<?php echo date('Y-m-d'); ?>" name="date_send" class="form-control" required>
 										</div>
 									</div>
 								</div>

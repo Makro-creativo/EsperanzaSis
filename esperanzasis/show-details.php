@@ -141,6 +141,15 @@
                                                 $result = mysqli_query($conexion, $query);
 
                                                 while($row = mysqli_fetch_array($result)) {
+                                                    $idProduct = $row['productid']; //30
+                                                    $priceNormal =  number_format($row['price'], 2);
+
+                                                    //Buscar si es que existe un descuento
+                                                    $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$uid' ";
+                                                    $result_price = mysqli_query($conexion, $searchData);
+                                                                
+                                                    $rowProductDiscount = mysqli_fetch_array($result_price);
+                                                    $discountProduct = $rowProductDiscount['discount'];
                                             ?>
                                             <tr>
                                                 <td>
@@ -181,9 +190,16 @@
 
                                                 <td>
                                                     <i class="fas fa-dollar-sign"></i>
-                                                    <?php echo number_format($row['price'], 2); ?>
+                                                    <?php 
+                                                        if($discountProduct){
+                                                            echo $discountProduct;
+                                                        }else{
+                                                            echo $priceNormal;
+                                                        }
+                                                    ?>
                                                 </td>
-
+                                                
+                                                
                                                 <td>
                                                     <i class="fas fa-money-check-alt"></i>
                                                     <?php
@@ -191,6 +207,7 @@
                                                         echo number_format($subt, 2);
                                                     ?>
                                                 </td>
+                                                
 
                                                 <!-- <td>
                                                     <i class="fas fa-hand-holding-usd"></i>
