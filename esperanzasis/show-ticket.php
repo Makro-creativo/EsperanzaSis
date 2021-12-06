@@ -13,6 +13,8 @@
             $total = $rowTotal['total'];
         }
     }
+
+    $uid = $_SESSION['UID'];
     
 ?>
 
@@ -31,7 +33,7 @@
 
     <div class="container p-5">
         <div class="row">
-            <div class="col-md-5 col-sm-12 col-lg-5 col-xl-5 col-xxl-5 mx-auto">
+            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
                 <div class="card shadow-lg">
                     <div class="card-body">
                         <div class="ticket" id="printable">
@@ -40,7 +42,7 @@
                             </div>
 
                             <div class="d-flex justify-content-center mt-3">
-                                <p>Tortillería la EsperanzaSis</p>
+                                <p>Tortillería la Esperanza</p>
                                 <p>Av. Cruz del Sur 3874A Loma Bonita Ejidal</p>
                                 <p>3315 422122/3319 819626</p>
                             </div>
@@ -60,25 +62,26 @@
                                         $query_ticket = "SELECT * FROM orders INNER JOIN purchase_detail ON orders.purchaseid = purchase_detail.purchaseid INNER JOIN products ON purchase_detail.productid = products.productid AND purchase_detail.purchaseid = '$id_pedido'";
                                         $result = mysqli_query($conexion, $query_ticket);
 
-                                        while($rowTicket = mysqli_fetch_array($result)) {
-                                            $idProduct = $rowTicket['productid'];
-                                            $price_normal = number_format($row['price'], 2);
+                                        while($row = mysqli_fetch_array($result)) {
+                                            $idProduct = $row['productid']; //30
+                                            $priceNormal =  number_format($row['price'], 2);
 
-                                            $searchDiscount = "SELECT * FROM promotions WHERE productid='$idProduct'";
-                                            $resultDiscount = mysqli_query($conexion, $searchDiscount);
-
-                                            $rowProduct = mysqli_fetch_array($resultDiscount);
-                                            $productDiscount = $rowProduct['discount'];
+                                            //Buscar si es que existe un descuento
+                                            $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$uid'";
+                                            $result_price = mysqli_query($conexion, $searchData);
+                                                        
+                                            $rowProductDiscount = mysqli_fetch_array($result_price);
+                                            $discountProduct = $rowProductDiscount['discount'];
                                     
                                     ?>
 
                                     <tr>
                                         <td>
-                                            <?php echo $rowTicket['quantity']; ?>
+                                            <?php echo $row['quantity']; ?>
                                         </td>
 
                                         <td>
-                                            <?php echo $rowTicket['name_product']; ?>
+                                            <?php echo $row['name_product']; ?>
                                         </td>
 
                                         <td class="d-flex justify-content-center">
@@ -86,7 +89,7 @@
                                             if($productDiscount) {
                                                 echo $productDiscount;
                                             } else {
-                                                echo $price_normal;
+                                                echo $priceNormal;
                                             }
                                            
                                            ?>
@@ -99,16 +102,21 @@
                                     
                                 </tbody>
                             </table>
-
-                            <h3 class="text-dark mt-4">
-                                TOTAL:
-                                <?php echo number_format($total, 2); ?>
-                            </h3>
+                            
+                            <div class="d-flex justify-content-end">
+                                <h3 class="text-dark mt-4">
+                                    TOTAL:
+                                    <?php echo number_format($total, 2); ?>
+                                </h3>
+                            </div>
                             
                             
-                            <button class="btn btn-outline-success print mt-4" id="hide-button">
-                                Imprimir Ticker
-                            </button>
+                            <div class="d-flex justify-content-center">
+                                <button class="btn btn-outline-success print mt-4" id="hide-button">
+                                    Imprimir Ticker
+                                </button>
+                            </div>
+                
                         </div>
                     </div>
                 </div>

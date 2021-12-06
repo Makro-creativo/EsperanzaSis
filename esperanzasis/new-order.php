@@ -54,6 +54,9 @@
 											<th>Nombre del producto</th>
 											<th>Cantidad</th>
 											<th>Precio</th>
+											<?php if($typeUser === "$uid") {?>
+												<th>Descuento</th>
+											<?php }?>
 										</thead>
 										<tbody>
 											<?php
@@ -63,16 +66,35 @@
 												$iterate=0;
 
 												while($row = mysqli_fetch_array($result)){ 
-													?>
+													$idProduct = $row['productid']; //30
+                                                    $priceNormal =  number_format($row['price'], 2);
+
+                                                    //Buscar si es que existe un descuento
+                                                    $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$uid' ";
+                                                    $result_price = mysqli_query($conexion, $searchData);
+                                                                
+                                                    $rowProductDiscount = mysqli_fetch_array($result_price);
+                                                    $discountProduct = $rowProductDiscount['discount'];
+												?>
 													<tr>
-														<td class="text-center"><input type="checkbox" value="<?php echo $row['productid']; ?>||<?php echo $iterate; ?>" name="productid[]" style=""></td>
+														<td required class="text-center"><input type="checkbox" value="<?php echo $row['productid']; ?>||<?php echo $iterate; ?>" name="productid[]" style=""></td>
 														<td><?php echo $row['name_product']; ?></td>
 														<td>
 															<input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity_<?php echo $iterate; ?>">
 														</td>
 
 														<td>
-															<?php echo number_format($row['price'], 2); ?>
+															<?php echo number_format($row['price'], 2); ?>		
+														</td>
+
+														<td>
+															<?php 
+																if($discountProduct) {
+																	echo $discountProduct;
+																} else {
+																	$priceNormal;
+																}
+															?>
 														</td>
 														
 													</tr>
@@ -148,7 +170,7 @@
 
 									<div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-5">
 										<label>Califica nuestro servicio: </label>
-										<select name="calification" require class="form-select">
+										<select name="calification" require class="form-select" required>
 											<option selected disabled>Elija una calificación</option>
 											<option value="1 estrella">1 estrella</option>
 											<option value="2 estrellas">2 estrellas</option>

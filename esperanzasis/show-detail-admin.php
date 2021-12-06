@@ -129,6 +129,7 @@
                                                 <th>Hora de entrega</th>
                                                 <th>Fecha de entrega</th>
                                                 <th>Persona que solicito pedido</th>
+                                                <th>Subtotal</th>
                                                 <!--<th>Comentario del cliente</th>-->
                                                 <th>Precio</th>
                                                
@@ -150,7 +151,7 @@
                                                     $priceNormal =  number_format($row['price'], 2);
 
                                                     //Buscar si es que existe un descuento
-                                                    $searchData = "SELECT * FROM promotions WHERE productid='$idProduct'";
+                                                    $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$uid'";
                                                     $result_price = mysqli_query($conexion, $searchData);
                                                                 
                                                     $rowProductDiscount = mysqli_fetch_array($result_price);
@@ -190,6 +191,13 @@
                                                     <i class="fas fa-comment-alt"></i>
                                                     <?php echo $row['comments']; ?>
                                                 </td>-->
+                                                <td>
+                                                    <i class="fas fa-money-check-alt"></i>
+                                                    <?php
+                                                        $subt = $row['price']*$row['quantity'];
+                                                        echo number_format($subt, 2);
+                                                    ?>
+                                                </td>
 
                                                 <td>
                                                     <i class="fas fa-dollar-sign"></i>
@@ -369,7 +377,7 @@
         });
     });
 
-</script>
+</script>   
 
 </body>
 </html>

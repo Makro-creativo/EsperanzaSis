@@ -57,7 +57,7 @@
 				$unit_price = $row['price']; //$10
 				$apply_discount = $row['discount']; //$5.00
 				//Traer cantidad de product
-				$searchCount = "SELECT * FROM purchase_detail WHERE purchaseid = '$pid' ORDER BY pdid ASC";
+				$searchCount = "SELECT * FROM purchase_detail WHERE purchaseid = '$pid' ORDER BY pdid DESC";
 				$queryCount = mysqli_query($conexion, $searchCount);
 				$rowCount = mysqli_fetch_array($queryCount);
 				
