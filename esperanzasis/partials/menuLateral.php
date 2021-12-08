@@ -92,6 +92,9 @@
     Menú
 </div>
 
+<!-- Divider -->
+<hr class="sidebar-divider">
+
 <!-- Nav Item - Pages Collapse Menu -->
 <?php if($typeUser === "Cliente") {?>
 <li class="nav-item">
@@ -192,6 +195,34 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="new-promotion.php">Crear nuevo descuento</a>
             <a class="collapse-item" href="show-promotions.php">Lista de descuentos</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-receipt"></i>
+        <span>Clientes para facturación</span>
+    </a>
+    <div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-customer.php">Clientes de facturación</a>
+            <a class="collapse-item" href="show-customers.php">Lista clientes con factura</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-file-invoice-dollar"></i>
+        <span>Gestión de facturación</span>
+    </a>
+    <div id="collapseEight" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-invoice.php">Crear nueva factura</a>
+            <a class="collapse-item" href="show-invoices.php">Lista de facturas</a>
         </div>
     </div>
 </li>
