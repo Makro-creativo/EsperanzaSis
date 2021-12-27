@@ -42,12 +42,16 @@
     </ul>
     <?php }?>
 
+    
+
+    
+
     <?php if($typeUser === "Repartidor") {?>
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a href="DashboardRepartidor.php" class="nav-link">Inicio</a>
-        </li>
-    </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="DashboardRepartidor.php" class="nav-link">Inicio</a>
+            </li>
+        </ul>
     <?php }?>
     
 

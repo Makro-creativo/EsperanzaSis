@@ -5,9 +5,9 @@
 
     $typeUser = $_SESSION['Tipo'];
 
-    $id_customer = $_GET['id_user'];
+    $id_provider = $_GET['id_provider'];
 
-    $sql = "SELECT * FROM bills WHERE id_user = '$id_customer'";
+    $sql = "SELECT * FROM bills_to_pay WHERE id_provider = '$id_provider'";
     $query = $conexion->query($sql);
 
     $data = array();
@@ -52,9 +52,9 @@
                 <?php 
                     include "./config/conexion.php";
 
-                    $id_customer = $_GET['id_user'];
+                    $id_provider = $_GET['id_provider'];
 
-                    $search_customer_id = "SELECT * FROM bills WHERE id_user = '$id_customer'";
+                    $search_customer_id = "SELECT * FROM bills_to_pay WHERE id_provider = '$id_provider'";
                     $result_search = mysqli_query($conexion, $search_customer_id);
                 
                 ?>
@@ -70,16 +70,16 @@
                                             <?php 
                                                 include "./config/conexion.php";
 
-                                                $id_customer = $_GET['id_user'];
+                                                $id_provider = $_GET['id_provider'];
 
-                                                $query_date = "SELECT date_bills FROM bills WHERE id_user = '$id_customer'";
+                                                $query_date = "SELECT date_bills_to_pay FROM bills_to_pay WHERE id_provider = '$id_provider'";
                                                 $result_date = mysqli_query($conexion, $query_date);
 
                                                 while($row = mysqli_fetch_array($result_date)) {
                                             ?>
 
                                         
-                                            <strong>Fecha: <?php echo date('M d, Y h:i A', strtotime($row['date_bills'])); ?></strong>
+                                            <strong>Fecha: <?php echo date('M d, Y h:i A', strtotime($row['date_bills_to_pay'])); ?></strong>
                                             
                                             <?php }?>
 
@@ -87,21 +87,16 @@
                                             Estatus: <?php 
                                                     include "./config/conexion.php";
 
-                                                    $search_status = "SELECT payment, CASE WHEN payment = 'Pagada' THEN 'Pagada' WHEN payment = 'Por cobrar' THEN 'Por cobrar' ELSE 'No hay estatus' END FROM payment_status WHERE id_user = '$id_customer'";
+                                                    $search_status = "SELECT payment, CASE WHEN payment = 'Pagada' THEN 'Pagada' WHEN payment = 'Por cobrar' THEN 'Por cobrar' ELSE 'No hay estatus' END FROM payment_status_to_pay WHERE id_provider = '$id_provider'";
                                                     $result_status = mysqli_query($conexion, $search_status);
 
                                                     while($row = mysqli_fetch_array($result_status)) {
-                                                    
                                                 ?>
-
                                                     <strong><?php echo $row['payment']; ?></strong>
                                                 <?php }?>
                                             </strong>
 
-                                           <a href="edit-status-id.php?id_user=<?php echo $id_customer; ?>" class="btn btn-info btn-sm">
-                                               Editar estatus
-                                               <i class="fas fa-edit mr-2"></i>
-                                           </a>
+                                          
                                         </div>
                                         <div class="card-body">
                                             <div class="row mb-4">
@@ -118,9 +113,9 @@
                                                 <div class="col-6 col-md-6">
                                                     <?php 
                                                         include "./config/conexion.php";
-                                                        $id_customer = $_GET['id_user'];
+                                                        $id_provider = $_GET['id_provider'];
 
-                                                        $query_customer_data = "SELECT customer_name FROM bills WHERE id_user = '$id_customer'";
+                                                        $query_customer_data = "SELECT name_customer FROM bills_to_pay WHERE id_provider = '$id_provider'";
                                                         $result_customers_data = mysqli_query($conexion, $query_customer_data);
 
                                                         while($row = mysqli_fetch_array($result_customers_data)) {
@@ -128,7 +123,7 @@
                                                     ?>
                                                     <h6 class="mb-2">Para:</h6>
                                                     <div>
-                                                        <strong>Cliente: <?php echo $row['customer_name']; ?></strong>
+                                                        <strong>Proveedor: <?php echo $row['name_customer']; ?></strong>
                                                     </div>
                                             
                                                     <?php }?>
@@ -141,7 +136,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th scope="col" width="2%" class="center">#</th>
-                                                            <th scope="col" width="20%">Nombre del cliente</th>
+                                                            <th scope="col" width="20%">Nombre del proveedor</th>
                                                             <th scope="col" class="d-none d-sm-table-cell" width="50%">Monto</th>
 
                                                             <th scope="col" width="10%" class="text-left">Iva</th>
@@ -152,16 +147,16 @@
                                                     <tbody>
                                                         <?php 
                                                             include "./config/conexion.php";
-                                                            $id_customer = $_GET['id_user'];
+                                                            $id_provider = $_GET['id_provider'];
 
-                                                            $query_bills = "SELECT * FROM bills WHERE id_user = '$id_customer'";
+                                                            $query_bills = "SELECT * FROM bills_to_pay WHERE id_provider = '$id_provider'";
                                                             $result_bills = mysqli_query($conexion, $query_bills);
 
                                                             while($row = mysqli_fetch_array($result_bills)) {
                                                         ?>
                                                         <tr>
-                                                            <td class="text-left"><?php echo $row['id_customer']; ?></td>
-                                                            <td class="item_name"><?php echo $row['customer_name']; ?></td>
+                                                            <td class="text-left"><?php echo $row['id_provider']; ?></td>
+                                                            <td class="item_name"><?php echo $row['name_customer']; ?></td>
                                                             <td class="item_desc d-none d-sm-table-cell">
                                                                 <?php echo number_format($row['amount'], 2); ?>
                                                             </td>
@@ -170,7 +165,7 @@
                                                             <td class="text-center"><?php echo $row['concept']; ?></td>
                                                             <td class="text-right">
                                                                 <?php 
-                                                                    $result_calculation = ( $row['amount'] ) + ( $row['iva']);
+                                                                    $result_calculation = ( $row['amount'] ) * ( $row['iva']);
 
                                                                     echo number_format($result_calculation, 2);
                                                                 ?>
@@ -190,9 +185,9 @@
                                                         <tbody>
                                                             <?php 
                                                                 include "./config/conexion.php";
-                                                                $id_customer = $_GET['id_user'];
+                                                                $id_provider = $_GET['id_provider'];
 
-                                                                $query_calculation_customer = "SELECT iva, amount FROM bills WHERE id_user = '$id_customer'";
+                                                                $query_calculation_customer = "SELECT iva, amount FROM bills_to_pay WHERE id_provider = '$id_provider'";
                                                                 $result_customer = mysqli_query($conexion, $query_calculation_customer);
                                                                 
                                                                 while($row = mysqli_fetch_array($result_customer)) {
@@ -209,7 +204,7 @@
                                                                 </td>
                                                                 <td class="text-right bg-light">
                                                                     <?php 
-                                                                        $result_calculation = ( $row['amount'] ) + ( $row['iva']);
+                                                                        $result_calculation = ( $row['amount'] ) * ( $row['iva']);
 
                                                                         echo number_format($result_calculation, 2);
                                                                     ?>
@@ -242,27 +237,43 @@
 
 
                 <!-- Start form for save status of payment -->
+                <?php 
+                    include "./config/conexion.php";
+                    
+                    if(isset($_GET['id_provider'])) {
+                        $id_provider = $_GET['id_provider'];
+                    }
+
+                    $query_edit_status = "SELECT * FROM payment_status_to_pay WHERE id_provider = '$id_provider'";
+                    $result_edit_status = mysqli_query($conexion, $query_edit_status);
+
+                    if($result_edit_status) {
+                        $row = mysqli_fetch_array($result_edit_status);
+
+                        $payment = $row['payment'];
+                    }
+                ?>
 
                 <div class="container p-4">
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                             <div class="card shadow-lg card-hide"  style="display: block;">
-                                <div class="card-header">Estatus de la factura</div>
+                                <div class="card-header">Editar estatus de la factura</div>
 
                                 <div class="card-body">
-                                    <form action="save-status-bills.php" method="POST">
-                                        <input type="hidden" name="id_save_payment" value="<?php echo $id_customer; ?>">
+                                    <form action="edit-status-bills_to_pay.php" method="POST">
+                                        <input type="hidden" name="edit_id_save_payment_to_pay" value="<?php echo $id_provider; ?>">
                                         <div class="form-group">
-                                            <label>Registrar status de la factura: </label>
+                                            <label>Editar status de la factura: </label>
                                             <select name="payment" require required class="form-select">
                                                 <option selected disabled>Seleccionar status</option>
-                                                <option value="Pagada">Pagada</option>
-                                                <option value="Por cobrar">Por cobrar</option>
+                                                <option value="Pagada" <?php if($payment == "Pagada") {?> selected <?php }?>>Pagada</option>
+                                                <option value="Por pagar" <?php if($payment == "Por pagar") {?> selected <?php }?>>Por pagar</option>
                                             </select>
                                         </div>
 
-                                        <button id="hideClick" type="submit" class="btn btn-success btn-block" name="saveStatus">
-                                            Guardar
+                                        <button id="hideClick" type="submit" class="btn btn-success btn-block" name="editStatus">
+                                            Actualizar estado
                                         </button>
                                     </form>
                                 </div>
@@ -317,15 +328,14 @@
         let pdf = new jsPDF();
         pdf.text(20,20,"Factura Tortillería la Esperanza");
 
-        var columns = ["Id", "Nombre del cliente", "Monto", "Iva", "Fecha", "Fecha de pago", "Concepto"];
+        var columns = ["Id", "Nombre del cliente", "Monto", "Iva", "Fecha", "Concepto"];
         var data = [
         <?php foreach($data as $bills):?>
             [<?php echo $bills->id_user; ?>, 
             "<?php echo $bills->customer_name; ?>", 
-            "<?php echo number_format($bills->amount, 2); ?>", 
+            "<?php echo number_format($bills->amount, 2, '.', false); ?>", 
             "<?php echo number_format($bills->iva, 2); ?>",
             "<?php echo date("d/m/Y", strtotime($bills->date_saved)); ?>",
-            "<?php echo date("d/m/Y", strtotime($bills->date_to_pay_bills)); ?>",
             "<?php echo $bills->concept; ?>"
             
         ],

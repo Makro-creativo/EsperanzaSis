@@ -200,20 +200,6 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-receipt"></i>
-        <span>Clientes para facturación</span>
-    </a>
-    <div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-customer.php">Clientes de facturación</a>
-            <a class="collapse-item" href="show-customers.php">Lista clientes con factura</a>
-        </div>
-    </div>
-</li>
-
-<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-file-invoice-dollar"></i>
@@ -223,9 +209,98 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="new-invoice.php">Crear nueva factura</a>
             <a class="collapse-item" href="show-invoices.php">Lista de facturas</a>
+            <a class="collapse-item" href="invoices-receivable.php">Facturas por Cobrar</a>
+            <a class="collapse-item" href="bills-paid.php">Facturas Pagadas</a>
         </div>
     </div>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNine"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-list"></i>
+        <span>Categorias de gastos</span>
+    </a>
+    <div id="collapseNine" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-categories.php">Crear nueva categoría</a>
+            <a class="collapse-item" href="show-categories.php">Lista de categorias</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTen"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-list"></i>
+        <span>Categorias de ingresos</span>
+    </a>
+    <div id="collapseTen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-categories-income.php">Crear nueva categoría</a>
+            <a class="collapse-item" href="show-categories-income.php">Lista de categorias</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeenten"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-cash-register"></i>
+        <span>Facturas por pagar</span>
+    </a>
+    <div id="collapseFeenten" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-bills-to-pay.php">Crear factura</a>
+            <a class="collapse-item" href="show-bills-to-pay.php">Lista de facturas</a>
+            <a class="collapse-item" href="bills-to-paid.php">Facturas pagadas</a>
+            <a class="collapse-item" href="bills-not-to-paid.php">Facturas por pagar</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeventen"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-user-tag"></i>
+        <span>Gestión de proveedores</span>
+    </a>
+    <div id="collapseSeventen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-provider.php">Crear proveedor</a>
+            <a class="collapse-item" href="show-providers.php">Lista de proveedores</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEleven"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-money-check-alt"></i>
+        <span>Gastos</span>
+    </a>
+    <div id="collapseEleven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-expense.php">Crear nuevo gasto</a>
+            <a class="collapse-item" href="show-expenses.php">Lista de gastos</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwelven"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-hand-holding-usd"></i>
+        <span>Ingresos</span>
+    </a>
+    <div id="collapseTwelven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-income.php">Crear nuevo ingreso</a>
+            <a class="collapse-item" href="show-incomes.php">Lista de ingresos</a>
+        </div>
+    </div>
+</li>
+
 <?php }?>
 
 <?php if($typeUser === "SuperAdmin") {?>

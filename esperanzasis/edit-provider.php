@@ -1,20 +1,21 @@
 <?php 
     include "./config/conexion.php";
+    
+    if(isset($_POST['edit'])) {
+        $idProvider = $_POST['id_provider'];
 
-    if(isset($_POST['editProduct'])) {
-        $Id_product = $_POST['id_product_edit'];
-        $name_product = $_POST['name_product'];
-        $price = number_format($_POST['price'], 2);
-        $unidad = $_POST['unidad'];
-        
+        $nameProvider = $_POST['name_provider'];
+        $adressProvider = $_POST['adress'];
+        $contactProvider = $_POST['contact'];
+        $dateSave = $_POST['date'];
 
-        $queryUpdate = "UPDATE products SET name_product='$name_product', price='$price', unidad='$unidad' WHERE productid = '$Id_product'";
-        mysqli_query($conexion, $queryUpdate);
+        $query_update = "UPDATE providers SET name_provider='$nameProvider', adress='$adressProvider', contact='$contactProvider', date='$dateSave' WHERE id_provider = '$idProvider'";
+        $result_update_provider = mysqli_query($conexion, $query_update);
 
-
-        header("location: show-products.php");
+        header("location: show-providers.php");
     }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -46,63 +47,69 @@
             <div id="content">
                 <?php include "./partials/header.php" ?>
 
-                <?php
-                    if(isset($_GET['productid'])) {
-                        $productid = $_GET['productid'];
+                <?php 
+                    include "./config/conexion.php";
+
+                    if(isset($_GET['id_provider'])) {
+                        $idProvider = $_GET['id_provider'];
                     }
-                    
-                    $query = "SELECT * FROM products WHERE productid = $productid";
-                        $result = mysqli_query($conexion, $query);
-                
-                        if($result) {
-                            $row = mysqli_fetch_array($result);
-                
-                            $name_product = $row['name_product'];
-                            $price = $row['price'];
-                            $unidad = $row['unidad'];
-                        }
+
+                    $search_provider = "SELECT * FROM providers WHERE id_provider = '$idProvider'";
+                    $result_provider = mysqli_query($conexion, $search_provider);
+
+                    if($result_provider) {
+                        $row = mysqli_fetch_array($result_provider);
+
+                        $nameProvider = $row['name_provider'];
+                        $adressProvider = $row['adress'];
+                        $contactProvider = $row['contact'];
+                        $dateSave = $row['date'];
+                    }
                 ?>
 
                 <div class="container">
+                    <h2 class="d-flex justify-content-start mb-4">Editar Proveedor</h2>
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Editar producto</h2>
-
-                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
-                                <div class="card-header">Editar producto</div>
-                                
+                                <div class="card-header">Editar proveedor</div>
+
                                 <div class="card-body">
-                                    <form action="edit-product.php" method="POST">
-                                    <input type="hidden" name="id_product_edit" value="<?php echo $productid; ?>">
+                                <form action="edit-provider.php" method="POST">
+                                    <input type="hidden" value="<?php echo $idProvider; ?>" name="id_provider">
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Editar nombre del producto: </label>
-                                                    <input type="text" autocomplete="off" name="name_product" placeholder="Editar nombre del producto" class="form-control" value="<?php echo $name_product; ?>">
+                                                    <label>Editar nombre del proveedor: </label>
+                                                    <input value="<?php echo $nameProvider; ?>" type="text" placeholder="Ejemplo: Leche lala, coca cola, etc..." name="name_provider" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Editar precio: </label>
-                                                    <input type="text" name="price" class="form-control" autocomplete="off" value="<?php echo number_format($row['price'], 2); ?>">
+                                                    <label>Editar Dirección: </label>
+                                                    <input value="<?php echo $adressProvider; ?>" type="text" placeholder="Ejemplo: Gardines del bosque, etc..." name="adress" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Editar Tipo de Unidad: </label>
-                                                    <input type="text" placeholder="Ejemplo: Bolsas, Kilos, etc..." class="form-control" name="unidad" value="<?php echo $unidad; ?>">
+                                                    <label>Editar teléfono de contacto: </label>
+                                                    <input value="<?php echo $contactProvider; ?>" type="tel" name="contact" placeholder="Ejemplo: 333 134 4567" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Editar fecha de registro: </label>
+                                                    <input value="<?php echo $dateSave; ?>" type="date" name="date" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
-                        
 
-                                        <div class="d-grid gap-2">
-                                            <input type="submit" value="Editar" class="btn btn-outline-success mt-4" name="editProduct">
-                                        </div>
+                                        <input type="submit" value="Actualizar proveedor" class="btn btn-success btn-block" name="edit">
                                     </form>
                                 </div>
                             </div>
@@ -112,8 +119,8 @@
 
             </div>
 
-
             <?php include "./partials/footer.php" ?>
+
         </div>
 
     </div>

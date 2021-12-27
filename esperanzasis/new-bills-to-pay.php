@@ -1,21 +1,27 @@
 <?php 
     include "./config/conexion.php";
-    
-    if(isset($_POST['editBills'])) {
-        $id_customer = $_POST['info_client_id_edit'];
-        $name_customer = $_POST['customer_name'];
+
+    if(isset($_POST['save'])) {
+        $inforClientId = $_POST['info_client_id'];
+        $array = explode("_", $inforClientId);
+        $idClient = $array[0];
+        $nameClient = $array[1];
+
         $amount = floatval($_POST['amount']);
-        $iva = number_format($_POST['iva'], 2);
+        $iva = floatval($_POST['iva']);
         $concept = $_POST['concept'];
-        $date_saved = $_POST['date_saved'];
-        $date_to_pay_bills = $_POST['date_to_pay_bills'];
+        $dateSaved = $_POST['date_saved'];
+        $dateToPay = $_POST['date_to_pay'];
 
-        echo $query_update_bills = "UPDATE bills SET customer_name='$name_customer', amount='$amount', iva='$iva', concept='$concept', date_saved='$date_saved', date_to_pay_bills='$date_to_pay_bills' WHERE id_user = '$id_customer'";
-        $result_update_bills = mysqli_query($conexion, $query_update_bills);
+        $query_saved_bills = "INSERT INTO bills_to_pay(id_provider, name_customer, amount, iva, concept, date_saved, date_to_pay, date_bills_to_pay) VALUES('$idClient', '$nameClient', '$amount', '$iva', '$concept', '$dateSaved', '$dateToPay', NOW())";
+        $result_bills = mysqli_query($conexion, $query_saved_bills);
 
-        header("location: show-invoices.php");
+        if(!$result_bills) {
+            die("No se pudo guardar correctamente la factura, verifica de nuevo...");
+        }
+
+        header("location: show-bills-to-pay.php");
     }
-
 ?>
 
 
@@ -28,9 +34,9 @@
     <link rel="icon" href="assets/img/logo_tortilleria_la_esperanza.svg">
     <title>EsperanzaSis</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+     <!-- Custom fonts for this template-->
+	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -49,102 +55,77 @@
             <div id="content">
                 <?php include "./partials/header.php" ?>
 
-                <?php 
-                    include "./config/conexion.php";
-
-                    if(isset($_GET['id_user'])) {
-                        $id_customer = $_GET['id_user'];
-                    }
-
-                    $query_search_customer = "SELECT * FROM bills WHERE id_user = '$id_customer'";
-                    $result_search_customer = mysqli_query($conexion, $query_search_customer);
-                    
-                    if($result_search_customer) {
-                        $row = mysqli_fetch_array($result_search_customer);
-
-                        $customer_name = $row['customer_name'];
-                        $amount = $row['amount'];
-                        $iva = $row['iva'];
-                        $concept = $row['concept'];
-                        $date_saved = $row['date_saved'];
-                        $date_to_pay_bills = $row['date_to_pay_bills'];
-                    }
-                ?>
-
                 <div class="container">
-                    <h2 class="d-flex justify-content-start mb-4">Editar Factura</h2>
+                    <h2 class="d-flex justify-content-start mb-4">Capturar factura</h2>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
-                                <div class="card-header">Editar factura</div>
+                                <div class="card-header">Crear factura</div>
 
                                 <div class="card-body">
-                                <form action="edit-invoice.php" method="POST">
-                                    <input type="hidden" name="info_client_id_edit" value="<?php echo $id_customer; ?>">
+                                    <form action="new-bills-to-pay.php" method="POST">
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Elejir cliente: </label>
-                                                    <select name="customer_name" require class="form-select">
+                                                    <select name="info_client_id" require required class="form-select">
                                                         <option selected disabled>Seleccionar cliente</option>
                                                         <?php 
                                                             include "./config/conexion.php";
+                                                            
+                                                            $search_client = "SELECT * FROM providers";
+                                                            $result_search_client = mysqli_query($conexion, $search_client);
 
-                                                            $query_customer_update = "SELECT * FROM clients";
-                                                            $result_customers_update = mysqli_query($conexion, $query_customer_update);
-
-                                                            while($row = mysqli_fetch_array($result_customers_update)) {
-                                                                $name_customer = $row['name_client'];
+                                                            while($row = mysqli_fetch_array($result_search_client)) {
+                                                                $idClient = $row['id_provider'];
+                                                                $nameClient = $row['name_provider'];
                                                         ?>
-                                                        
-                                                        <option value="<?php echo $name_customer; ?>"><?php echo $name_customer; ?></option>
+                                                            <option value="<?php echo $idClient."_".$nameClient; ?>"><?php echo $nameClient; ?></option>
 
                                                         <?php }?>
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Monto: </label>
-                                                    <input value="<?php echo $amount; ?>" type="text" name="amount" class="form-control" placeholder="Ejemplo: 1500">
+                                                    <input type="text" placeholder="Ejemplo: 1250, 1500, etc..." name="amount" class="form-control">
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Iva: </label>
-                                                    <input value="<?php echo $iva; ?>" type="text" name="iva" class="form-control" placeholder="Ejemplo: 0.5">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
-                                                <div class="form-group">
-                                                    <label>Concepto: </label>
-                                                    <input value="<?php echo $concept; ?>" type="text" name="concept" class="form-control" placeholder="Ejemplo: Describir servicio, producto, etc...">
+                                                    <input type="text" placeholder="Ejemplo: 280, 130, etc..." name="iva" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Fecha de la factura: </label>
-                                                    <input value="<?php echo $date_saved; ?>" type="date" name="date_saved" class="form-control">
+                                                    <label>Concepto: </label>
+                                                    <input type="text" placeholder="Ejemplo: Se debe pago de 50 kilos de maíz, etc..." class="form-control" name="concept">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Fecha de factura: </label>
+                                                    <input type="date" name="date_saved" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Fecha de pago de factura: </label>
-                                                    <input value="<?php echo $date_to_pay_bills; ?>" type="date" name="date_to_pay_bills" class="form-control">
+                                                    <input type="date" name="date_to_pay" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <input type="submit" value="Editar factura" class="btn btn-success btn-block" name="editBills">
+                                        <input type="submit" value="Guardar factura" class="btn btn-success btn-block" name="save">
                                     </form>
                                 </div>
                             </div>
@@ -159,6 +140,7 @@
         </div>
 
     </div>
+
 
 
 
@@ -189,6 +171,6 @@
 
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+    <script src="../js/demo/chart-pie-demo.js"></script>    
 </body>
 </html>

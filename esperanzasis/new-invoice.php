@@ -8,12 +8,13 @@
         $nameCustomer = $array[1];
 
         $amount = floatval($_POST['amount']);
-        $iva = number_format($_POST['iva'], 2, '.', ',');
+        $iva = floatval($_POST['iva']   );
         $concept = $_POST['concept'];
         $date_saved = $_POST['date_saved'];
+        $date_to_pay_bills = $_POST['date_to_pay_bills'];
         $date_bills = $_POST['date_bills'];
 
-        $query_bills = "INSERT INTO bills(id_customer, customer_name, amount, iva, concept, date_saved, date_bills) VALUES('$idClient', '$nameCustomer', '$amount', '$iva', '$concept', '$date_saved', NOW())";
+        $query_bills = "INSERT INTO bills(id_user, customer_name, amount, iva, concept, date_saved, date_to_pay_bills, date_bills) VALUES('$idClient', '$nameCustomer', '$amount', '$iva', '$concept', '$date_saved', '$date_to_pay_bills', NOW())";
         $result_bills = mysqli_query($conexion, $query_bills);
 
         if(!$result_bills) {
@@ -56,7 +57,7 @@
                 <?php include "./partials/header.php" ?>
 
                 <div class="container">
-                    <h2 class="d-flex justify-content-start mb-4">Crear nueva factura</h2>
+                    <h2 class="d-flex justify-content-start mb-4">Capturar factura</h2>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
@@ -73,15 +74,15 @@
                                                         <?php 
                                                             include "./config/conexion.php";
 
-                                                            $query_customer = "SELECT * FROM customers";
+                                                            $query_customer = "SELECT * FROM clients";
                                                             $result_customers = mysqli_query($conexion, $query_customer);
 
                                                             while($row = mysqli_fetch_array($result_customers)) {
-                                                                $id_customer = $row['id_customer'];
-                                                                $name_customer = $row['name_customer'];
+                                                                $id_user = $row['id_user'];
+                                                                $name_customer = $row['name_client'];
                                                         ?>
                                                         
-                                                            <option value="<?php echo $id_customer."_".$name_customer; ?>"><?php echo $name_customer; ?></option>
+                                                            <option value="<?php echo $id_user."_".$name_customer; ?>"><?php echo $name_customer; ?></option>
 
                                                         <?php }?>
                                                     </select>
@@ -100,7 +101,7 @@
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Iva: </label>
-                                                    <input type="text" name="iva" class="form-control" placeholder="Ejemplo: 0.5">
+                                                    <input type="text" name="iva" class="form-control" placeholder="Ejemplo: 380,">
                                                 </div>
                                             </div>
 
@@ -113,10 +114,17 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Fecha de la factura: </label>
-                                                    <input type="date" name="date_saved" class="form-control" min="<?php echo date('Y-m-d'); ?>">
+                                                    <input type="date" name="date_saved" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Fecha de pago de factura: </label>
+                                                    <input type="date" name="date_to_pay_bills" class="form-control">
                                                 </div>
                                             </div>
                                         </div>

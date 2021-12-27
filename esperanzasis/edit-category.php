@@ -1,20 +1,17 @@
 <?php 
     include "./config/conexion.php";
+    
+    if(isset($_POST['editCategory'])) {
+        $id_category = $_POST['id_category'];
+        $nameCategory = $_POST['name'];
 
-    if(isset($_POST['editProduct'])) {
-        $Id_product = $_POST['id_product_edit'];
-        $name_product = $_POST['name_product'];
-        $price = number_format($_POST['price'], 2);
-        $unidad = $_POST['unidad'];
-        
+        $query_edit_category = "UPDATE categories SET name='$nameCategory' WHERE id_category = '$id_category'";
+        $result_edit_category = mysqli_query($conexion, $query_edit_category);
 
-        $queryUpdate = "UPDATE products SET name_product='$name_product', price='$price', unidad='$unidad' WHERE productid = '$Id_product'";
-        mysqli_query($conexion, $queryUpdate);
-
-
-        header("location: show-products.php");
+        header("location: show-categories.php");
     }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -46,63 +43,43 @@
             <div id="content">
                 <?php include "./partials/header.php" ?>
 
-                <?php
-                    if(isset($_GET['productid'])) {
-                        $productid = $_GET['productid'];
+                <?php 
+                    include "./config/conexion.php";
+
+                    if(isset($_GET['id_category'])) {
+                        $idCategory = $_GET['id_category'];
                     }
-                    
-                    $query = "SELECT * FROM products WHERE productid = $productid";
-                        $result = mysqli_query($conexion, $query);
-                
-                        if($result) {
-                            $row = mysqli_fetch_array($result);
-                
-                            $name_product = $row['name_product'];
-                            $price = $row['price'];
-                            $unidad = $row['unidad'];
-                        }
+
+                    $query_edit_category = "SELECT * FROM categories WHERE id_category = '$idCategory'";
+                    $result_edit_categories = mysqli_query($conexion, $query_edit_category);
+
+                    if($result_edit_categories) {
+                        $row = mysqli_fetch_array($result_edit_categories);
+
+                        $nameCategory = $row['name'];
+                    }
                 ?>
 
                 <div class="container">
+                    <h2 class="d-flex justify-content-start mb-4">Editar categoría de gastos</h2>
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Editar producto</h2>
-
-                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
-                                <div class="card-header">Editar producto</div>
-                                
+                                <div class="card-header">Editar categoría</div>
+
                                 <div class="card-body">
-                                    <form action="edit-product.php" method="POST">
-                                    <input type="hidden" name="id_product_edit" value="<?php echo $productid; ?>">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
-                                                <div class="form-group">
-                                                    <label>Editar nombre del producto: </label>
-                                                    <input type="text" autocomplete="off" name="name_product" placeholder="Editar nombre del producto" class="form-control" value="<?php echo $name_product; ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
-                                                <div class="form-group">
-                                                    <label>Editar precio: </label>
-                                                    <input type="text" name="price" class="form-control" autocomplete="off" value="<?php echo number_format($row['price'], 2); ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                    <form action="edit-category.php" method="POST">
+                                        <input type="hidden" name="id_category" value="<?php echo $idCategory; ?>">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                                 <div class="form-group">
-                                                    <label>Editar Tipo de Unidad: </label>
-                                                    <input type="text" placeholder="Ejemplo: Bolsas, Kilos, etc..." class="form-control" name="unidad" value="<?php echo $unidad; ?>">
+                                                    <label>Nombre de la categoría</label>
+                                                    <input type="text" value="<?php echo $nameCategory; ?>" name="name" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
-                        
 
-                                        <div class="d-grid gap-2">
-                                            <input type="submit" value="Editar" class="btn btn-outline-success mt-4" name="editProduct">
-                                        </div>
+                                        <input type="submit" value="Actualizar" class="btn btn-success btn-block" name="editCategory">
                                     </form>
                                 </div>
                             </div>
@@ -112,11 +89,12 @@
 
             </div>
 
-
             <?php include "./partials/footer.php" ?>
+
         </div>
 
     </div>
+
 
 
 
@@ -146,6 +124,6 @@
 
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+    <script src="../js/demo/chart-pie-demo.js"></script>   
 </body>
 </html>

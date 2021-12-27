@@ -52,6 +52,7 @@
                                         <th>Cantidad</th>
                                         <th>Descripción</th>
                                         <th>$Precio Unitario</th>
+                                    
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,15 +65,16 @@
 
                                         while($row = mysqli_fetch_array($result)) {
                                             $idProduct = $row['productid']; //30
-                                            $priceNormal =  number_format($row['price'], 2);
+                                            $priceNormal = number_format($row['price'], 2);
+                                            $idUser = $row['id_user'];
 
                                             //Buscar si es que existe un descuento
-                                            $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$uid'";
+                                            $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$idUser'";
                                             $result_price = mysqli_query($conexion, $searchData);
-                                                        
+
                                             $rowProductDiscount = mysqli_fetch_array($result_price);
                                             $discountProduct = $rowProductDiscount['discount'];
-                                    
+                                                        
                                     ?>
 
                                     <tr>
@@ -83,16 +85,18 @@
                                         <td>
                                             <?php echo $row['name_product']; ?>
                                         </td>
-
+    
+                                       
                                         <td class="d-flex justify-content-center">
                                            <?php 
-                                            if($productDiscount) {
-                                                echo $productDiscount;
-                                            } else {
-                                                echo $priceNormal;
-                                            }
+                                                if($discountProduct) {
+                                                    echo number_format($discountProduct, 2);
+                                                } else {
+                                                    echo number_format($priceNormal, 2);
+                                                }
                                            
                                            ?>
+
                                         </td>
                                     </tr>
 

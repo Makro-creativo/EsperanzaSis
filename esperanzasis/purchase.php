@@ -20,7 +20,7 @@
 		
 		//$client_name = $_POST['name_cliente'];
         //$address_send = $_POST['address_send'];
-        $quantity_product = $_POST['quantity_product'];
+        $quantity_product = floatval($_POST['quantity_product']);
         $date_send = $_POST['date_send'];
         $hour_send = $_POST['hour_send'];
         $people_order = $_POST['people_order'];
@@ -28,14 +28,15 @@
 		$calification = $_POST['calification'];
 	
 		//Insercion de registro de orden de compra
-		$query_orders = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, calification, discount_order, date_purchase) VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', '$calification', '$discount', NOW())";
+		$query_orders = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, calification, discount_order, date_purchase) VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', '$calification', '0', NOW())";
 		$result_orders = mysqli_query($conexion, $query_orders);
 		
 		$pid = $conexion->insert_id;
  
 		$total = 0;
- 
-		foreach($_POST['productid'] as $product):
+		$net_total = '';
+		foreach($_POST['productid'] as $product) {
+			
 		$productInfo = explode("||",$product);
 		$productid = $productInfo[0];
 		$iterate = $productInfo[1];
@@ -45,26 +46,29 @@
 		$result_products = mysqli_query($conexion, $query_products);
 
 		$products_contain_discount = mysqli_num_rows($result_products);
+		
 
 		if($products_contain_discount > 0) {
 			$row = mysqli_fetch_array($result_products);
- 			if (isset($_POST['quantity_'.$iterate])){
 
-				$query_purchase_detail = "INSERT INTO purchase_detail (purchaseid, productid, quantity) VALUES ('$pid', '$productid', '".$_POST['quantity_'.$iterate]."')";
+ 			if (isset($_POST['quantity_'.$iterate])){
+				$quantity = $_POST['quantity_'.$iterate];
+
+				$query_purchase_detail = "INSERT INTO purchase_detail (purchaseid, productid, quantity) VALUES ('$pid', '$productid', '$quantity')";
 				$result_purchase_detail = mysqli_query($conexion, $query_purchase_detail);
 
 				//TOTAL DE LOS PRODUCTOS CON DESCUENTO
 				$unit_price = $row['price']; //$10
 				$apply_discount = $row['discount']; //$5.00
 				//Traer cantidad de product
-				$searchCount = "SELECT * FROM purchase_detail WHERE purchaseid = '$pid' ORDER BY pdid DESC";
+				$searchCount = "SELECT * FROM purchase_detail WHERE purchaseid = '$pid' AND productid = '$productid'";
 				$queryCount = mysqli_query($conexion, $searchCount);
 				$rowCount = mysqli_fetch_array($queryCount);
 				
 				$quantity_purchase = $rowCount['quantity']; //8
 
 				$discountPartial = $unit_price - $apply_discount; //5 por pz
-				$net_total = $quantity_purchase * $discountPartial; //8 * 5 = $40.00
+				$net_total += $quantity_purchase * $discountPartial; //8 * 5 = $40.00
 
 				$subTotal = $rowCount['price']*$_POST['quantity_'.$iterate];
 
@@ -91,18 +95,18 @@
 				$idProduct = $rowCount['productid'];
 				$requested_amount = $rowCount['quantity']; 
 
-					//Buscar precio de producto
-					$searchProduct = "SELECT * FROM products WHERE productid='$idProduct'";
-					$queryProduct = mysqli_query($conexion, $searchProduct);
+				//Buscar precio de producto
+				$searchProduct = "SELECT * FROM products WHERE productid='$idProduct'";
+				$queryProduct = mysqli_query($conexion, $searchProduct);
 
-					$rowProduct = mysqli_fetch_array($queryProduct);
-					$price_product = $rowProduct['price'];
-					$net_total += $price_product * $requested_amount; //2 *10 = 20
+				$rowProduct = mysqli_fetch_array($queryProduct);
+				$price_product = $rowProduct['price'];
+				$net_total += $price_product * $requested_amount; //2 *10 = 20
 			}
 	 
 		}
 
-		endforeach;
+	}
  		
  		$query_update_orders = "UPDATE orders SET total='$net_total' WHERE purchaseid = '$pid'";
 		$result_update_orders = mysqli_query($conexion, $query_update_orders);

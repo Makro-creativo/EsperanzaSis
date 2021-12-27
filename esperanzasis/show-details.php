@@ -158,7 +158,7 @@
                                                 </td> 
                                                 <td>
                                                     <i class="fas fa-cart-plus"></i>
-                                                    <?php echo $row['quantity']; ?>
+                                                    <?php echo $row['quantity'] ?> <?php echo $row['unidad']; ?>
                                                 </td>
                                                 <td>
                                                     <i class="fas fa-map-marked-alt"></i>
@@ -192,7 +192,7 @@
                                                     <i class="fas fa-dollar-sign"></i>
                                                     <?php 
                                                         if($discountProduct){
-                                                            echo $discountProduct;
+                                                            echo number_format($discountProduct, 2);
                                                         }else{
                                                             echo $priceNormal;
                                                         }
@@ -202,10 +202,17 @@
                                                 
                                                 <td>
                                                     <i class="fas fa-money-check-alt"></i>
-                                                    <?php
-                                                        $subt = $row['price']*$row['quantity'];
-                                                        echo number_format($subt, 2);
+                                                    <?php 
+                                                        if($discountProduct) {
+                                                            $subt = $discountProduct+=$discountProduct;
+                                                            echo number_format($subt, 2);
+                                                        } else {
+                                                            $subt = $row['price']*$row['quantity'];
+                                                            echo number_format($subt, 2);
+                                                        }
+                                                    
                                                     ?>
+                                                    
                                                 </td>
                                                 
 

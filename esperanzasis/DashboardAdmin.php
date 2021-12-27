@@ -184,15 +184,15 @@
 
             <div class="container">
                 <div class="row">
-                <div class="col-xl-3 col-lg-3 col-xxl-3 col-sm-12 col-md-3 mb-4">
-                                <div class="card border-left-warning shadow h-100 py-2">
+                <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     Pedidos (Entregados)</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    <?php 
+                                                <?php 
                                                         include "./config/conexion.php";
 
                                                         $status_pedido = $_GET['status_pedido'];
@@ -213,13 +213,13 @@
                                     </div>
 
                                     <div class="card-footer">
-                                        <a href="show-all-orders.php">
+                                        <a href="orders-delivered.php">
                                             Pedidos entregados
                                             <i class="fas fa-long-arrow-alt-right mr-2"></i>
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                             </div>
                         
                         <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                             <div class="card border-left-danger shadow h-100 py-2">
@@ -254,10 +254,369 @@
                                     </div>
                                 </div>
                              </div>
+
+
+                             <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Facturas para (Clientes)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $query_bills = mysqli_query($conexion, "SELECT * FROM bills");
+                                                        $bills_count = mysqli_num_rows($query_bills);
+
+                                                        echo $bills_count;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-file-invoice-dollar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-invoices.php">
+                                            Facturas
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                             </div>
+
+                             <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                    <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Categorias de (Gastos)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $query_categories = mysqli_query($conexion, "SELECT * FROM categories");
+                                                        $result_categories = mysqli_num_rows($query_categories);
+
+                                                        echo $result_categories;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-list fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-categories.php">
+                                            Categorias
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
                             
                 </div>
             </div>
 
+
+            </div>
+
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                    <div class="card border-left-secondary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Categorias de (Ingresos)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $query_categories_income = mysqli_query($conexion, "SELECT * FROM categories_income");
+                                                        $result_categories_income = mysqli_num_rows($query_categories_income);
+
+                                                        echo $result_categories_income;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="far fa-list-alt fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-categories.php">
+                                            Categorias
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                            <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Facturas por (Cobrar)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_status = mysqli_query($conexion, "SELECT * FROM bills INNER JOIN payment_status ON bills.id_user = payment_status.id_user AND payment_status.payment = 'Por cobrar'");
+                                                        $result_status = mysqli_num_rows($search_status);
+
+                                                        echo $result_status;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-money-bill fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="invoices-receivable.php">
+                                            Facturas por cobrar
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Facturas (Pagadas)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_status = mysqli_query($conexion, "SELECT * FROM bills INNER JOIN payment_status ON bills.id_user = payment_status.id_user AND payment_status.payment = 'Pagada'");
+                                                        $result_status = mysqli_num_rows($search_status);
+
+                                                        echo $result_status;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-wallet fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="bills-paid.php">
+                                            Facturas Pagadas
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Facturas (Pagadas a Proveedores)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_status = mysqli_query($conexion, "SELECT * FROM bills_to_pay INNER JOIN payment_status_to_pay ON bills_to_pay.id_provider = payment_status_to_pay.id_provider AND payment_status_to_pay.payment = 'Pagada'");
+                                                        $result_status = mysqli_num_rows($search_status);
+
+                                                        echo $result_status;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fab fa-cc-amazon-pay fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="bills-to-paid.php">
+                                            Facturas Pagadas
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-4">
+                <div class="row">
+                <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Facturas por (Pagar a Proveedores)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_status = mysqli_query($conexion, "SELECT * FROM bills_to_pay INNER JOIN payment_status_to_pay ON bills_to_pay.id_provider = payment_status_to_pay.id_provider AND payment_status_to_pay.payment = 'Por pagar'");
+                                                        $result_status = mysqli_num_rows($search_status);
+
+                                                        echo $result_status;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-comment-dollar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="bills-not-to-paid.php">
+                                            Facturas por pagar
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="mt-4 d-flex justify-content-center text-dark">Administración de Gastos e Ingresos</h2>
+
+            <div class="container p-4">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                        <div class="card border-left-primary shadow h-100 py-5">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Total de (Gastos)</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        <?php 
+                                        include "./config/conexion.php";
+
+                                        $query = mysqli_query($conexion, "SELECT * FROM gastos");
+                                        
+                                        $total_real = 0;
+                                        
+                                        while($row = mysqli_fetch_array($query)){
+                                            $real = $row['amount'];
+                                        ?>
+                                        <!--<tr>
+                                            <td class='text-center'><?php echo number_format($real, 2,'.','');?></td>
+                                        </tr>-->
+                                            <?php
+                                                $total_real+=$real;
+                                            }
+                                        ?>
+	
+                                       <tr>
+                                            <th colspan='' class='text-center'>
+                                                <i class="fas fa-dollar-sign"></i>
+                                                <?php echo number_format($total_real, 2);?>
+                                            </th>
+                                        </tr> 
+
+                                    </div>
+                                </div>
+
+                                <div class="col-auto">
+                                    <i class="fas fa-money-check-alt fa-2x text-gray-300"></i>
+                                </div>
+
+                            </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <a href="show-expenses-for-date.php">
+                                    Grafica de gastos
+                                    <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                        <div class="card border-left-success shadow h-100 py-5">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Total de (Ingresos)</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <?php 
+                                        include "./config/conexion.php";
+
+                                        $query_incomes = mysqli_query($conexion, "SELECT * FROM ingresos");
+                                        
+                                        $total_real = 0;
+                                        
+                                        while($row = mysqli_fetch_array($query_incomes)){
+                                            $real = $row['quantity'];
+                                        ?>
+                                        <!--<tr>
+                                            <td class='text-center'><?php echo number_format($real, 2,'.','');?></td>
+                                        </tr>-->
+                                            <?php
+                                                $total_real+=$real;
+                                            }
+                                        ?>
+	
+                                       <tr>
+                                            <th colspan='' class='text-center'>
+                                                <i class="fas fa-dollar-sign"></i>
+                                                <?php echo number_format($total_real, 2);?>
+                                            </th>
+                                        </tr> 
+                                    </div>
+                                </div>
+
+                                <div class="col-auto">
+                                    <i class="fas fa-hand-holding-usd fa-2x text-gray-300"></i>
+                                </div>
+
+                            </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <a href="show-income-for-date.php">
+                                    Grafica de ingresos
+                                    <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <br>
 

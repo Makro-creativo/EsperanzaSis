@@ -2,10 +2,10 @@
   	include "./config/conexion.php";
 
 
-	$query = "SELECT * FROM products order by productid asc limit 1";
+	//$query = "SELECT * FROM products order by productid asc limit 1";
 	
-	$result = mysqli_query($conexion, $query);	
-	$row = mysqli_fetch_array($result);
+	//$result = mysqli_query($conexion, $query);	
+	//$row = mysqli_fetch_array($result);
 ?>
 
 
@@ -45,22 +45,23 @@
 						<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
 							<div class="card shadow-lg">
 								<div class="card-body">
-								<form method="POST" action="purchase.php">
+								<form method="POST" action="purchase2.php" enctype="multipart/form-data">
 									<input type="hidden" name="id_user_active" value="<?php echo $uid; ?>">
 								<div class="table-responsive">
 								<table class="table">
 										<thead>
 											<th class="text-center">Seleccionar productos<input type="hidden" id="checkAll"></th>
 											<th>Nombre del producto</th>
+											<th>Tipo de Unidad</th>
 											<th>Cantidad</th>
 											<th>Precio</th>
-											<?php if($typeUser === "$uid") {?>
-												<th>Descuento</th>
-											<?php }?>
+										
+											<th>Descuento</th>
+										
 										</thead>
 										<tbody>
 											<?php
-												$query = "SELECT * FROM products";
+												$query = "SELECT * FROM products WHERE price != '' AND unidad != ''";
 												$result = mysqli_query($conexion, $query);
 												
 												$iterate=0;
@@ -77,10 +78,15 @@
                                                     $discountProduct = $rowProductDiscount['discount'];
 												?>
 													<tr>
-														<td required class="text-center"><input type="checkbox" value="<?php echo $row['productid']; ?>||<?php echo $iterate; ?>" name="productid[]" style=""></td>
+														<!--<td required class="text-center"><input type="checkbox" value="<?php //echo $row['productid']; ?>||<?php //echo $iterate; ?>" name="productid[]" style=""></td>-->
+														<td required class="text-center"><input type="checkbox" value="<?php echo $row['productid']."_".$row['price']; ?>" name="productid[]" style=""></td>
 														<td><?php echo $row['name_product']; ?></td>
+
+														<td><?php echo $row['unidad']; ?></td>
+
 														<td>
-															<input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity_<?php echo $iterate; ?>">
+															<input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity[]">
+															<!--<input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity">-->
 														</td>
 
 														<td>
@@ -90,7 +96,7 @@
 														<td>
 															<?php 
 																if($discountProduct) {
-																	echo $discountProduct;
+																	echo number_format($discountProduct);
 																} else {
 																	$priceNormal;
 																}
@@ -109,34 +115,7 @@
 
 								<div class="row">
 									
-									<!--<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-									<div class="form-group">
-                                            <label>Seleccionar cliente: </label>
-                                            <select name="name_client" name="tipo" require class="form-select">
-                                                <option selected disabled>Seleccionar cliente</option>
-                                                <?php 
-													include "./config/conexion.php";
-													$query = "SELECT * FROM clients";
-													$result = mysqli_query($conexion, $query);
-
-                                                    while($row = mysqli_fetch_array($result)) {
-                                                        $name_client = $row['name_client'];
-                                                    
-                                                ?>
-                                                <option value="<?php echo $name_client; ?>"><?php echo $name_client; ?></option>
-												<?php }?>
-                                            </select>
-                                        </div>
-									</div>
 									
-
-									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-										<div class="form-group">
-											<label>Dirección de envió: </label>
-											<input type="text" name="address_send" placeholder="Ejemplo: Avenida los Arcos #345" class="form-control" required>
-										</div>
-									</div>
-									-->
 								</div>
 
 								<div class="row">

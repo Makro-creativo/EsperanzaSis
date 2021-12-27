@@ -1,20 +1,17 @@
 <?php 
     include "./config/conexion.php";
 
-    if(isset($_POST['editProduct'])) {
-        $Id_product = $_POST['id_product_edit'];
-        $name_product = $_POST['name_product'];
-        $price = number_format($_POST['price'], 2);
-        $unidad = $_POST['unidad'];
-        
+    if(isset($_POST['editIncome'])) {
+        $idCategories = $_POST['id_categories'];
+        $nameCategories = $_POST['name_category'];
 
-        $queryUpdate = "UPDATE products SET name_product='$name_product', price='$price', unidad='$unidad' WHERE productid = '$Id_product'";
-        mysqli_query($conexion, $queryUpdate);
+        $query_save_income = "UPDATE categories_income SET name_category='$nameCategories' WHERE id_categories = '$idCategories'";
+        $result_income = mysqli_query($conexion, $query_save_income);
 
-
-        header("location: show-products.php");
+        header("location: show-categories-income.php");
     }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -46,63 +43,43 @@
             <div id="content">
                 <?php include "./partials/header.php" ?>
 
-                <?php
-                    if(isset($_GET['productid'])) {
-                        $productid = $_GET['productid'];
+                <?php 
+                    include "./config/conexion.php";
+
+                    if(isset($_GET['id_categories'])) {
+                        $idCategories = $_GET['id_categories'];
                     }
+
+                    $query_edit_income = "SELECT * FROM categories_income WHERE id_categories = '$idCategories'";
+                    $result_income = mysqli_query($conexion, $query_edit_income);
                     
-                    $query = "SELECT * FROM products WHERE productid = $productid";
-                        $result = mysqli_query($conexion, $query);
-                
-                        if($result) {
-                            $row = mysqli_fetch_array($result);
-                
-                            $name_product = $row['name_product'];
-                            $price = $row['price'];
-                            $unidad = $row['unidad'];
-                        }
+                    if($result_income) {
+                        $row = mysqli_fetch_array($result_income);
+
+                        $nameCategories = $row['name_category'];
+                    }
                 ?>
 
                 <div class="container">
+                    <h2 class="d-flex justify-content-start mb-4">Editar Categoría de ingresos</h2>
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Editar producto</h2>
-
-                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
-                                <div class="card-header">Editar producto</div>
-                                
+                                <div class="card-header">Editar categoría</div>
+
                                 <div class="card-body">
-                                    <form action="edit-product.php" method="POST">
-                                    <input type="hidden" name="id_product_edit" value="<?php echo $productid; ?>">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
-                                                <div class="form-group">
-                                                    <label>Editar nombre del producto: </label>
-                                                    <input type="text" autocomplete="off" name="name_product" placeholder="Editar nombre del producto" class="form-control" value="<?php echo $name_product; ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
-                                                <div class="form-group">
-                                                    <label>Editar precio: </label>
-                                                    <input type="text" name="price" class="form-control" autocomplete="off" value="<?php echo number_format($row['price'], 2); ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                    <form action="edit-income.php" method="POST">
+                                        <input type="hidden" name="id_categories" value="<?php echo $idCategories; ?>">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                                 <div class="form-group">
-                                                    <label>Editar Tipo de Unidad: </label>
-                                                    <input type="text" placeholder="Ejemplo: Bolsas, Kilos, etc..." class="form-control" name="unidad" value="<?php echo $unidad; ?>">
+                                                    <label>Editar nombre: </label>
+                                                    <input type="text" value="<?php echo $nameCategories; ?>" name="name_category" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
-                        
 
-                                        <div class="d-grid gap-2">
-                                            <input type="submit" value="Editar" class="btn btn-outline-success mt-4" name="editProduct">
-                                        </div>
+                                        <input type="submit" value="Actualizar" class="btn btn-success btn-block" name="editIncome">
                                     </form>
                                 </div>
                             </div>
@@ -112,11 +89,13 @@
 
             </div>
 
-
             <?php include "./partials/footer.php" ?>
+
         </div>
 
     </div>
+
+
 
 
 
@@ -146,6 +125,6 @@
 
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+    <script src="../js/demo/chart-pie-demo.js"></script>   
 </body>
 </html>

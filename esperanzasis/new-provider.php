@@ -1,20 +1,24 @@
 <?php 
     include "./config/conexion.php";
 
-    if(isset($_POST['editProduct'])) {
-        $Id_product = $_POST['id_product_edit'];
-        $name_product = $_POST['name_product'];
-        $price = number_format($_POST['price'], 2);
-        $unidad = $_POST['unidad'];
-        
 
-        $queryUpdate = "UPDATE products SET name_product='$name_product', price='$price', unidad='$unidad' WHERE productid = '$Id_product'";
-        mysqli_query($conexion, $queryUpdate);
+    if(isset($_POST['save'])) {
+        $nameProvider = $_POST['name_provider'];
+        $adressProvider = $_POST['adress'];
+        $contactProvider = $_POST['contact'];
+        $dateSave = $_POST['date'];
 
+        $query_save_provider = "INSERT INTO providers(name_provider, adress, contact, date) VALUES('$nameProvider', '$adressProvider', '$contactProvider', '$dateSave')";
+        $result_query = mysqli_query($conexion, $query_save_provider);
 
-        header("location: show-products.php");
+        if(!$result_query) {
+            die("No se pudo registrar correctamente el proveedor");
+        }
+
+        header("location: show-providers.php");
     }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -25,8 +29,8 @@
     <link rel="icon" href="assets/img/logo_tortilleria_la_esperanza.svg">
     <title>EsperanzaSis</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <!-- Custom fonts for this template-->
+	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -41,68 +45,53 @@
 <body id="page-top">
     <div id="wrapper">
         <?php include "./partials/menuLateral.php" ?>
-
+        
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
                 <?php include "./partials/header.php" ?>
 
-                <?php
-                    if(isset($_GET['productid'])) {
-                        $productid = $_GET['productid'];
-                    }
-                    
-                    $query = "SELECT * FROM products WHERE productid = $productid";
-                        $result = mysqli_query($conexion, $query);
-                
-                        if($result) {
-                            $row = mysqli_fetch_array($result);
-                
-                            $name_product = $row['name_product'];
-                            $price = $row['price'];
-                            $unidad = $row['unidad'];
-                        }
-                ?>
-
                 <div class="container">
+                    <h2 class="d-flex justify-content-start mb-4">Nuevo proveedor</h2>
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Editar producto</h2>
-
-                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
-                                <div class="card-header">Editar producto</div>
-                                
+                                <div class="card-header">Crear nuevo proveedor</div>
+
                                 <div class="card-body">
-                                    <form action="edit-product.php" method="POST">
-                                    <input type="hidden" name="id_product_edit" value="<?php echo $productid; ?>">
+                                    <form action="new-provider.php" method="POST">
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Editar nombre del producto: </label>
-                                                    <input type="text" autocomplete="off" name="name_product" placeholder="Editar nombre del producto" class="form-control" value="<?php echo $name_product; ?>">
+                                                    <label>Nombre del proveedor: </label>
+                                                    <input type="text" placeholder="Ejemplo: Leche lala, coca cola, etc..." name="name_provider" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Editar precio: </label>
-                                                    <input type="text" name="price" class="form-control" autocomplete="off" value="<?php echo number_format($row['price'], 2); ?>">
+                                                    <label>Dirección: </label>
+                                                    <input type="text" placeholder="Ejemplo: Gardines del bosque, etc..." name="adress" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Editar Tipo de Unidad: </label>
-                                                    <input type="text" placeholder="Ejemplo: Bolsas, Kilos, etc..." class="form-control" name="unidad" value="<?php echo $unidad; ?>">
+                                                    <label>Teléfono de contacto: </label>
+                                                    <input type="tel" name="contact" placeholder="Ejemplo: 333 134 4567" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Fecha de registro: </label>
+                                                    <input type="date" name="date" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
-                        
 
-                                        <div class="d-grid gap-2">
-                                            <input type="submit" value="Editar" class="btn btn-outline-success mt-4" name="editProduct">
-                                        </div>
+                                        <input type="submit" value="Guardar proveedor" class="btn btn-success btn-block" name="save">
                                     </form>
                                 </div>
                             </div>
@@ -112,11 +101,12 @@
 
             </div>
 
-
             <?php include "./partials/footer.php" ?>
+
         </div>
 
     </div>
+
 
 
 

@@ -34,8 +34,23 @@
             <div id="content">
                 <?php include "./partials/header.php" ?>
 
+                <?php 
+                    include "./config/conexion.php";
+                
+                ?>
+
+                <div class="d-flex justify-content-around align-items-center">
+                    <h2>Facturas capturadas</h2>
+
+                    <button type="button" class="btn btn-sm btn-success" onclick="exportTableToExcel('render')">
+                        <i class="fas fa-file-excel mr-2"></i>
+                        Exportar a excel
+                    </button>
+                </div>
+
                 <div class="container">
-                    <h2 class="d-flex justify-content-start mb-4">Lista de facturas</h2>
+                    
+                    
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
@@ -67,29 +82,31 @@
                                             <?php 
                                                 include "./config/conexion.php";
 
-                                                $query = "SELECT * FROM bills ORDER BY id_customer DESC";
+                                                //$query = "SELECT * FROM bills ORDER BY id_customer DESC";
+                                                $query = "SELECT * FROM bills";
                                                 $result = mysqli_query($conexion, $query);
                                                     
                                                 while($row = mysqli_fetch_array($result)) {
                                             ?>
                                             <tr>
                                                 <td><?php echo $row['customer_name']; ?></td>
-                                                <td><?php echo number_format($row['amount'], 2,'.',''); ?></td>
+                                                <td><?php echo number_format($row['amount'], 2); ?></td>
                                                 <td><?php echo number_format($row['iva'], 2); ?></td>
                                                 <td><?php echo $row['concept']; ?></td>
                                                 <td><?php echo date("d/m/Y", strtotime($row['date_saved'])); ?></td>
                                                 
                                                 <td>
                                                     <?php 
-                                                        $result_calculation = ( $row['amount'] ) * ( $row['iva']);
+                                                        $result_calculation = ($row['amount']) + ($row['iva']);
 
-                                                        echo number_format($result_calculation, 2, '.', false);
+                                                        echo number_format($result_calculation, 2);
                                                     ?>
                                                 </td>
 
+
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a class="btn btn-success" href="edit-invoice.php?id_customer=<?php echo $row['id_customer']; ?>">
+                                                        <a class="btn btn-success" href="edit-invoice.php?id_user=<?php echo $row['id_user']; ?>">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                     </td>
@@ -97,7 +114,7 @@
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a class="btn btn-danger" href="delete-invoice.php?id_customer=<?php echo $row['id_customer']; ?>">
+                                                        <a class="btn btn-danger" href="delete-invoice.php?id_user=<?php echo $row['id_user']; ?>">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </td>
@@ -105,7 +122,7 @@
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a class="btn btn-primary" href="show-bills-id.php?id_customer=<?php echo $row['id_customer']; ?>">
+                                                        <a class="btn btn-primary" href="show-bills-id.php?id_user=<?php echo $row['id_user']; ?>">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
                                                     </td>
@@ -123,6 +140,7 @@
                 </div>
 
             </div>
+            <br>
 
             <?php include "./partials/footer.php" ?>
 
@@ -139,6 +157,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
     <!-- Core plugin JavaScript-->
     <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -184,9 +203,35 @@
                 "oAria": {
                     "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                }
+                },
+                
             }
+
         });
 	</script>
+
+<script>
+    function exportTableToExcel(tableID, filename = ''){
+      var downloadLink;
+      var dataType = 'application/vnd.ms-excel';
+      var tableSelect = document.getElementById(tableID);
+      var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+      filename = filename?filename+'.xls':'facturas.xls';
+      downloadLink = document.createElement("a");
+      document.body.appendChild(downloadLink);
+      if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+      }else{
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+        downloadLink.download = filename;
+        downloadLink.click();
+      }
+    }
+
+
+  </script>
 </body>
 </html>
