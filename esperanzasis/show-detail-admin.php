@@ -209,7 +209,7 @@
                                                     <i class="fas fa-money-check-alt"></i>
                                                     <?php 
                                                         if($discountProduct) {
-                                                            $subt = $discountProduct+=$discountProduct;
+                                                            $subt = $discountProduct*$row['quantity'];
                                                             echo number_format($subt, 2);
                                                         } else {
                                                             $subt = $row['price']*$row['quantity'];

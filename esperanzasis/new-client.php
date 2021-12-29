@@ -23,7 +23,7 @@
 
         json_encode($result);
 
-        //header("location: show-clients.php");
+        header("location: show-clients.php");
     }
 
 ?>

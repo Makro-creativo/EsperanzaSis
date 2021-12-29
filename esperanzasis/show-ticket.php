@@ -116,7 +116,7 @@
                             
                             
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-outline-success print mt-4" id="hide-button">
+                                <button class="btn btn-outline-success print mt-4 hidden-print" id="hide-button">
                                     Imprimir Ticker
                                 </button>
                             </div>

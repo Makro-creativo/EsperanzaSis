@@ -31,3 +31,11 @@
 .card {
     opacity: 0.9 !important;
 }
+
+@media print {
+    .hidden-print,
+
+    .hidden-print * {
+        display: none !important;
+    }
+}

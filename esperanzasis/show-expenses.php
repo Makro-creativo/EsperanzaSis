@@ -35,7 +35,14 @@
                 <?php include "./partials/header.php" ?>
 
                 <div class="container">
-                    <h2 class="d-flex justify-content-start mb-4">Lista de Gastos</h2>
+                    <div class="d-flex justify-content-around align-items-center">
+                        <h2>Lista de Gastos</h2>
+                        <button type="button" class="btn btn-sm btn-success" onclick="exportTableToExcel('render')">
+                            <i class="fas fa-file-excel mr-2"></i>
+                            Exportar a excel
+                        </button>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
@@ -166,5 +173,29 @@
             }
         });
 	</script>
+
+<script>
+    function exportTableToExcel(tableID, filename = ''){
+      var downloadLink;
+      var dataType = 'application/vnd.ms-excel';
+      var tableSelect = document.getElementById(tableID);
+      var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+      filename = filename?filename+'.xls':'gastos.xls';
+      downloadLink = document.createElement("a");
+      document.body.appendChild(downloadLink);
+      if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+      }else{
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+        downloadLink.download = filename;
+        downloadLink.click();
+      }
+    }
+
+
+  </script>
 </body>
 </html>

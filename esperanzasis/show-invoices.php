@@ -34,11 +34,6 @@
             <div id="content">
                 <?php include "./partials/header.php" ?>
 
-                <?php 
-                    include "./config/conexion.php";
-                
-                ?>
-
                 <div class="d-flex justify-content-around align-items-center">
                     <h2>Facturas capturadas</h2>
 

@@ -54,12 +54,13 @@
                                                 <thead>
                                                     <th class="text-center">Seleccionar producto<input type="hidden" id="checkAll"></th>
                                                     <th>Nombre del producto</th>
+                                                    <th>Tipo de Unidad</th>
                                                     <th>Precio</th>
                                                 </thead>
 
                                                 <tbody>
                                                     <?php
-                                                        $query = "SELECT * FROM products";
+                                                        $query = "SELECT * FROM products WHERE price != '' AND unidad != ''";
                                                         $result = mysqli_query($conexion, $query);
                                                         
                                                         $iterate=0;
@@ -69,6 +70,8 @@
                                                             <tr>
                                                                 <td class="text-center"><input type="checkbox" value="<?php echo $row['productid']; ?>||<?php echo $iterate; ?>" name="productid[]" style=""></td>
                                                                 <td><?php echo $row['name_product']; ?></td>
+
+                                                                <td><?php echo $row['unidad']; ?></td>
 
                                                                 <td>
                                                                     <?php echo number_format($row['price'], 2); ?>

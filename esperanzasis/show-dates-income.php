@@ -1,16 +1,32 @@
-<?php 
-    header('Content-Type: application/json');
+<?php
+	include "./config/conexion.php";
 
-    include "./config/conexion.php";
+	$year = date('Y');
+	$total = array();
 
-    $search_income = "SELECT created_at, quantity FROM ingresos ORDER BY created_at DESC";
-    $result_income = mysqli_query($conexion, $search_income);
+	for ($month = 1; $month <= 12; $month ++){
+		$sql = "SELECT *, SUM(quantity) AS total FROM ingresos WHERE month(created_at)='$month' AND year(created_at)='$year'";
+        $result_query = mysqli_query($conexion, $sql);
+		
+        $row = mysqli_fetch_array($result_query);
 
-    $data = array();
+		$total[] = $row['total'];
+	}
 
-    foreach($result_income as $row) {
-        $data[] = $row;
-    }
+	$tjan = $total[0];
+	$tfeb = $total[1];
+	$tmar = $total[2];
+	$tapr = $total[3];
+	$tmay = $total[4];
+	$tjun = $total[5];
+	$tjul = $total[6];
+	$taug = $total[7];
+	$tsep = $total[8];
+	$toct = $total[9];
+	$tnov = $total[10];
+	$tdec = $total[11];
 
-    echo json_encode($data);
+	$pyear = $year - 1;
+	$pnum = array();
+
 ?>
