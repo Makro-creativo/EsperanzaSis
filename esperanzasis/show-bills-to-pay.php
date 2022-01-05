@@ -36,13 +36,7 @@
                 <?php include "./partials/header.php" ?>
                 
                 <div class="container">
-                    <div class="d-flex justify-content-around align-items-center">
-                        <h2>Facturas capturadas</h2>
-                        <button type="button" class="btn btn-sm btn-success" onclick="exportTableToExcel('dataTable')">
-                            <i class="fas fa-file-excel mr-2"></i>
-                            Exportar a excel
-                        </button>
-                    </div>
+                    <h2 class="d-flex justify-content-start mb-4">Facturas capturadas</h2>
 
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
@@ -172,8 +166,26 @@
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
 
+    <!-- Scripts for buttons for export to excel -->
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
 	<script>
 		$('#dataTable').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i>',
+                    titleAttr: 'EXCEL',
+                    className: 'btn btn-success'
+                }
+            ],
             "language": {
                 "sProcessing":    "Procesando...",
                 "sLengthMenu":    "Mostrar _MENU_ registros",
@@ -200,29 +212,5 @@
             }
         });
 	</script>
-
-<script>
-    function exportTableToExcel(tableID, filename = ''){
-      var downloadLink;
-      var dataType = 'application/vnd.ms-excel';
-      var tableSelect = document.getElementById(tableID);
-      var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-      filename = filename?filename+'.xls':'facturas.xls';
-      downloadLink = document.createElement("a");
-      document.body.appendChild(downloadLink);
-      if(navigator.msSaveOrOpenBlob){
-        var blob = new Blob(['ufeff', tableHTML], {
-            type: dataType
-        });
-        navigator.msSaveOrOpenBlob( blob, filename);
-      }else{
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-        downloadLink.download = filename;
-        downloadLink.click();
-      }
-    }
-
-
-  </script>
 </body>
 </html>

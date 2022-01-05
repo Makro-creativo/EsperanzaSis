@@ -33,7 +33,7 @@
 
     <div class="container p-5">
         <div class="row">
-            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
+            <div class="col-md-8 col-sm-12 col-lg-8 col-xl-8 col-xxl-8 mx-auto">
                 <div class="card shadow-lg">
                     <div class="card-body">
                         <div class="ticket" id="printable">
@@ -43,8 +43,10 @@
 
                             <div class="d-flex justify-content-center mt-3">
                                 <p>Tortillería la Esperanza</p>
-                                <p>Av. Cruz del Sur 3874A Loma Bonita Ejidal</p>
-                                <p>3315 422122/3319 819626</p>
+                                <p>Av. Paseo de la Primavera número #2195</p>
+                                <p>Colonia Arenales Tapatios Zapopan Jalisco</p>
+                                <p>Código postal: 45060</p>
+                                <p>Telefono: 3312 333924</p>
                             </div>
                             <table class="table mt-4">
                                 <thead>
@@ -52,7 +54,7 @@
                                         <th>Cantidad</th>
                                         <th>Descripción</th>
                                         <th>$Precio Unitario</th>
-                                    
+                                        <th>Descuento</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,6 +69,7 @@
                                             $idProduct = $row['productid']; //30
                                             $priceNormal = number_format($row['price'], 2);
                                             $idUser = $row['id_user'];
+                                            $quantity = $row['quantity'];
 
                                             //Buscar si es que existe un descuento
                                             $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$idUser'";
@@ -89,14 +92,20 @@
                                        
                                         <td class="d-flex justify-content-center">
                                            <?php 
-                                                if($discountProduct) {
-                                                    echo number_format($discountProduct, 2);
-                                                } else {
-                                                    echo number_format($priceNormal, 2);
-                                                }
+                                                echo number_format($priceNormal, 2);
                                            
                                            ?>
 
+                                        </td>
+
+                                        <td>
+                                            <?php 
+                                                if($discountProduct) {
+                                                    echo number_format($discountProduct, 2);
+                                                } else {
+                                                    echo "N/A";
+                                                }
+                                            ?>
                                         </td>
                                     </tr>
 

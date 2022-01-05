@@ -3,19 +3,33 @@
 
 
     if(isset($_POST['save'])) {
+        $dniProvider = $_POST['dni_provider'];
         $nameProvider = $_POST['name_provider'];
         $adressProvider = $_POST['adress'];
         $contactProvider = $_POST['contact'];
         $dateSave = $_POST['date'];
+        $numberCel = $_POST['number_cel'];
+        $rfcProvider = $_POST['rfc_provider'];
+        $giroProvider = $_POST['giro_provider'];
+        $statusProvider = $_POST['status_provider'];
+        $codePostal = $_POST['code_postal'];
+        $municipioProvider = $_POST['municipio_provider'];
+        $emailProvider = $_POST['email_provider'];
 
-        $query_save_provider = "INSERT INTO providers(name_provider, adress, contact, date) VALUES('$nameProvider', '$adressProvider', '$contactProvider', '$dateSave')";
-        $result_query = mysqli_query($conexion, $query_save_provider);
 
-        if(!$result_query) {
-            die("No se pudo registrar correctamente el proveedor");
+        $search_dni = mysqli_query($conexion, "SELECT dni_provider FROM providers WHERE dni_provider='$dniProvider'");
+
+        if(mysqli_num_rows($search_dni) > 0) {
+            echo '<script language="javascript">';
+            echo 'alert("El DNI que intenta registrar ya existe, verifique nuevamente para registrarlo correctamente...")';
+            echo '</script>';
+        } else {
+            $query_save_provider = "INSERT INTO providers(dni_provider, name_provider, adress, contact, date, number_cel, rfc_provider, giro_provider, status_provider, code_postal, municipio_provider, email_provider) VALUES('$dniProvider', '$nameProvider', '$adressProvider', '$contactProvider', '$dateSave', '$numberCel', '$rfcProvider', '$giroProvider', '$statusProvider', '$codePostal', '$municipioProvider', '$emailProvider')";
+            $result_query = mysqli_query($conexion, $query_save_provider);
+
+            header("location: show-providers.php"); 
         }
 
-        header("location: show-providers.php");
     }
 ?>
 
@@ -41,6 +55,9 @@
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
+
+    <!-- Library sweetAlert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body id="page-top">
     <div id="wrapper">
@@ -60,33 +77,98 @@
                                 <div class="card-body">
                                     <form action="new-provider.php" method="POST">
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>DNI: </label>
+                                                    <input type="text" placeholder="Ejemplo: 101, 102, 103, etc..." name="dni_provider" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Nombre del proveedor: </label>
                                                     <input type="text" placeholder="Ejemplo: Leche lala, coca cola, etc..." name="name_provider" class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Dirección: </label>
+                                                    <label>Dirección de la empresa: </label>
                                                     <input type="text" placeholder="Ejemplo: Gardines del bosque, etc..." name="adress" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Teléfono de contacto: </label>
                                                     <input type="tel" name="contact" placeholder="Ejemplo: 333 134 4567" class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Número de celular: </label>
+                                                    <input type="tel" name="number_cel" class="form-control" placeholder="Ejemplo: 33 135 4678">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Fecha de registro: </label>
                                                     <input type="date" name="date" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>RFC: </label>
+                                                    <input type="text" placeholder="Ejemplo: MELM8305281H0" class="form-control" name="rfc_provider">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Giro de la empresa: </label>
+                                                    <input type="text" placeholder="Mueblería, Ferretería, etc..." class="form-control" name="giro_provider">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Estatus del proveedor: </label>
+                                                    <select name="status_provider" require required class="form-select">
+                                                        <option selected disabled>Elije un opción</option>
+                                                        <option value="Activo">Activo</option>
+                                                        <option value="Inactivo">Inactivo</option>
+                                                        <option value="Suspendido">Suspendido</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Código postal: </label>
+                                                    <input type="text" placeholder="Ejemplo: 47910, etc..." class="form-control" name="code_postal">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Municipio: </label>
+                                                    <input type="text" placeholder="Ejemplo: San pedro tlaquepaque, etc..." class="form-control" name="municipio_provider">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Correo electronico: </label>
+                                                    <input type="email" name="email_provider" class="form-control" placeholder="Ejemplo: mail@gmail.com">
                                                 </div>
                                             </div>
                                         </div>

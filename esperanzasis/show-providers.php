@@ -36,25 +36,27 @@
                 <?php include "./partials/header.php" ?>
 
                 <div class="container">
-                    <div class="d-flex justify-content-around align-items-center">
-                        <h2>Lista de Proveedores</h2>
-                        <button type="button" class="btn btn-sm btn-success" onclick="exportTableToExcel('dataTable')">
-                            <i class="fas fa-file-excel mr-2"></i>
-                            Exportar a excel
-                        </button>
-                    </div>
+                    <h2 class="d-flex justify-content-start mb-4">Lista de Proveedores</h2>
 
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <table class="table table-bordered" id="render-table" width="100%" cellspacing="0">
                                             <thead>
+                                                <th>DNI</th>
                                                 <th>Nombre del proveedor</th>
                                                 <th>Dirección</th>
                                                 <th>Teléfono de contacto</th>
                                                 <th>Fecha de registro</th>
+                                                <th>Número de celular</th>
+                                                <th>RFC</th>
+                                                <th>Giro de la empresa</th>
+                                                <th>Estatus del proveedor</th>
+                                                <th>Código postal</th>
+                                                <th>Municipio</th>
+                                                <th>Correo electronico</th>
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <th>Editar</th>
@@ -75,10 +77,18 @@
                                                     while($row = mysqli_fetch_array($result_data_providers)) {
                                                 ?>
                                                 <tr>
+                                                    <td><?php echo $row['dni_provider']; ?></td>
                                                     <td><?php echo $row['name_provider']; ?></td>
                                                     <td><?php echo $row['adress']; ?></td>
                                                     <td><?php echo "(".substr($row['contact'],0,3).")"." ".substr($row['contact'],5,3)."-".substr($row['contact'],6,4); ?></td>
                                                     <td><?php echo date("d/m/Y", strtotime($row['date'])); ?></td>
+                                                    <td><?php echo "(".substr($row['number_cel'],0,3).")"." ".substr($row['number_cel'],5,3)."-".substr($row['number_cel'],6,4); ?></td>
+                                                    <td><?php echo $row['rfc_provider']; ?></td>
+                                                    <td><?php echo $row['giro_provider']; ?></td>
+                                                    <td><?php echo $row['status_provider']; ?></td>
+                                                    <td><?php echo $row['code_postal']; ?></td>
+                                                    <td><?php echo $row['municipio_provider']; ?></td>
+                                                    <td><?php echo $row['email_provider']; ?></td>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>
@@ -108,6 +118,7 @@
                 </div>
 
             </div>
+            <br>
 
             <?php include "./partials/footer.php" ?>
 
@@ -122,10 +133,13 @@
 
 
     <!-- Bootstrap core JavaScript-->
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery-1.12.0.min.js"></script> 
+
 
     <!-- Core plugin JavaScript-->
     <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -147,8 +161,26 @@
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
 
+    <!-- Scripts for buttons for export to excel -->
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
 	<script>
-		$('#dataTable').DataTable({
+		$('#render-table').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i>',
+                    titleAttr: 'EXCEL',
+                    className: 'btn btn-success'
+                }
+            ],
             "language": {
                 "sProcessing":    "Procesando...",
                 "sLengthMenu":    "Mostrar _MENU_ registros",
@@ -175,29 +207,5 @@
             }
         });
 	</script>
-
-<script>
-    function exportTableToExcel(tableID, filename = ''){
-      var downloadLink;
-      var dataType = 'application/vnd.ms-excel';
-      var tableSelect = document.getElementById(tableID);
-      var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-      filename = filename?filename+'.xls':'proveedores.xls';
-      downloadLink = document.createElement("a");
-      document.body.appendChild(downloadLink);
-      if(navigator.msSaveOrOpenBlob){
-        var blob = new Blob(['ufeff', tableHTML], {
-            type: dataType
-        });
-        navigator.msSaveOrOpenBlob( blob, filename);
-      }else{
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-        downloadLink.download = filename;
-        downloadLink.click();
-      }
-    }
-
-
-  </script>
 </body>
 </html>

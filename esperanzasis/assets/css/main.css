@@ -32,6 +32,10 @@
     opacity: 0.9 !important;
 }
 
+.card-primary .card-outline {
+    border-top: 3px solid #4e73df !important;
+}
+
 @media print {
     .hidden-print,
 

@@ -97,11 +97,15 @@
 														<tr>
 															<td><?php echo $row['client_name']; ?></td>
 															<td><?php echo $row['address_send']; ?></td>
-															<td><?php echo date("d/m/Y", strtotime($row['date_send'])); ?></td>
+															<td>
+																<?php 
+																	 echo date('Y-m-d', strtotime($row['date_send']));
+																?>
+															</td>
 															<td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
 															<td><?php echo $row['people_order']; ?></td>
 															<td><?php echo $row['comments']; ?></td>
-															<td><?php echo date('M d, Y h:i A', strtotime($row['date_purchase'])) ?></td>
+															<td><?php echo date('Y-m-d H:i', strtotime($row['date_purchase'])) ?></td>
 														
 															
 															<?php if($typeUser === "Cliente") {?>

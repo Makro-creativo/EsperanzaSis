@@ -2,10 +2,7 @@
   	include "./config/conexion.php";
 
 
-	//$query = "SELECT * FROM products order by productid asc limit 1";
 	
-	//$result = mysqli_query($conexion, $query);	
-	//$row = mysqli_fetch_array($result);
 ?>
 
 
@@ -45,7 +42,7 @@
 						<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
 							<div class="card shadow-lg">
 								<div class="card-body">
-								<form method="POST" action="purchase2.php" enctype="multipart/form-data">
+								<form method="POST" action="purchase.php" enctype="multipart/form-data">
 									<input type="hidden" name="id_user_active" value="<?php echo $uid; ?>">
 								<div class="table-responsive">
 								<table class="table">

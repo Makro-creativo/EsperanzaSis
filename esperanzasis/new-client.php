@@ -13,8 +13,9 @@
         $cel = $_POST['cel'];
         $email = $_POST['email'];
         $cp = $_POST['cp'];
+        $municipio = $_POST['municipio'];
         
-        $query_client = "INSERT INTO clients(name_client, address_fiscal, address_company, giro_company, rfc, manager_payments, activate, tel, cel, email, cp) VALUES('$name_client', '$address_fiscal', '$address_company', '$giro_company', '$rfc', '$manager_payments', '$activate', '$tel', '$cel', '$email', '$cp')";
+        $query_client = "INSERT INTO clients(name_client, address_fiscal, address_company, giro_company, rfc, manager_payments, activate, tel, cel, email, cp, municipio) VALUES('$name_client', '$address_fiscal', '$address_company', '$giro_company', '$rfc', '$manager_payments', '$activate', '$tel', '$cel', '$email', '$cp', '$municipio')";
         $result = mysqli_query($conexion, $query_client);
 
         if(!$result) {
@@ -94,17 +95,24 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Dirección de la empresa: </label>
                                                     <input type="text" placeholder="Ejemplo: Avenida los Arcos..." class="form-control" name="address_company" required>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Giro de la empresa: </label>
                                                     <input type="text" placeholder="Ejemplo: Mueblería, ferretería, etc..." class="form-control" name="giro_company" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Municipio: </label>
+                                                    <input type="text" placeholder="Ejemplo: San pedro tlaquepaque, etc..." class="form-control" name="municipio" required>
                                                 </div>
                                             </div>
                                         </div>

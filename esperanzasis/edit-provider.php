@@ -8,8 +8,15 @@
         $adressProvider = $_POST['adress'];
         $contactProvider = $_POST['contact'];
         $dateSave = $_POST['date'];
+        $numberCel = $_POST['number_cel'];
+        $rfcProvider = $_POST['rfc_provider'];
+        $giroProvider = $_POST['giro_provider'];
+        $statusProvider = $_POST['status_provider'];
+        $codePostal = $_POST['code_postal'];
+        $municipioProvider = $_POST['municipio_provider'];
+        $emailProvider = $_POST['email_provider'];
 
-        $query_update = "UPDATE providers SET name_provider='$nameProvider', adress='$adressProvider', contact='$contactProvider', date='$dateSave' WHERE id_provider = '$idProvider'";
+        $query_update = "UPDATE providers SET name_provider='$nameProvider', adress='$adressProvider', contact='$contactProvider', date='$dateSave', number_cel='$numberCel', rfc_provider='$rfcProvider', giro_provider='$giroProvider', status_provider='$statusProvider', code_postal='$codePostal', municipio_provider='$municipioProvider', email_provider='$emailProvider' WHERE id_provider = '$idProvider'";
         $result_update_provider = mysqli_query($conexion, $query_update);
 
         header("location: show-providers.php");
@@ -60,10 +67,18 @@
                     if($result_provider) {
                         $row = mysqli_fetch_array($result_provider);
 
+                        $dniProvider = $row['dni_provider'];
                         $nameProvider = $row['name_provider'];
                         $adressProvider = $row['adress'];
                         $contactProvider = $row['contact'];
                         $dateSave = $row['date'];
+                        $numberCel = $row['number_cel'];
+                        $rfcProvider = $row['rfc_provider'];
+                        $giroProvider = $row['giro_provider'];
+                        $statusProvider = $row['status_provider'];
+                        $codePostal = $row['code_postal'];
+                        $municipioProvider = $row['municipio_provider'];
+                        $emailProvider = $row['email_provider'];
                     }
                 ?>
 
@@ -76,35 +91,100 @@
 
                                 <div class="card-body">
                                 <form action="edit-provider.php" method="POST">
-                                    <input type="hidden" value="<?php echo $idProvider; ?>" name="id_provider">
+                                    <input type="hidden" value="<?php echo  $idProvider; ?>" name="id_provider">
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Editar nombre del proveedor: </label>
+                                                    <label>DNI: </label>
+                                                    <input value="<?php echo $dniProvider; ?>" type="text" placeholder="Ejemplo: 101, 102, 103 etc..." name="dni_provider" class="form-control" disabled>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Nombre del proveedor: </label>
                                                     <input value="<?php echo $nameProvider; ?>" type="text" placeholder="Ejemplo: Leche lala, coca cola, etc..." name="name_provider" class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Editar Dirección: </label>
+                                                    <label>Dirección de la empresa: </label>
                                                     <input value="<?php echo $adressProvider; ?>" type="text" placeholder="Ejemplo: Gardines del bosque, etc..." name="adress" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Editar teléfono de contacto: </label>
+                                                    <label>Teléfono de contacto: </label>
                                                     <input value="<?php echo $contactProvider; ?>" type="tel" name="contact" placeholder="Ejemplo: 333 134 4567" class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Editar fecha de registro: </label>
+                                                    <label>Número de celular: </label>
+                                                    <input value="<?php echo $numberCel; ?>" type="tel" name="number_cel" class="form-control" placeholder="Ejemplo: 33 135 4678">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Fecha de registro: </label>
                                                     <input value="<?php echo $dateSave; ?>" type="date" name="date" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>RFC: </label>
+                                                    <input value="<?php echo $rfcProvider; ?>" type="text" placeholder="Ejemplo: MELM8305281H0" class="form-control" name="rfc_provider">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Giro de la empresa: </label>
+                                                    <input value="<?php echo $giroProvider; ?>" type="text" placeholder="Mueblería, Ferretería, etc..." class="form-control" name="giro_provider">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Estatus del proveedor: </label>
+                                                    <select name="status_provider" require required class="form-select">
+                                                        <option selected disabled>Elije un opción</option>
+                                                        <option value="Activo" <?php if($statusProvider == "Activo"){?> selected <?php } ?>>Activo</option>
+                                                        <option value="Inactivo" <?php if($statusProvider == "Inactivo"){?> selected <?php } ?>>Inactivo</option>
+                                                        <option value="Suspendido" <?php if($statusProvider == "Suspendido"){?> selected <?php } ?>>Suspendido</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Código postal: </label>
+                                                    <input value="<?php echo $codePostal; ?>" type="text" placeholder="Ejemplo: 47910, etc..." class="form-control" name="code_postal">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Municipio: </label>
+                                                    <input value="<?php echo $municipioProvider; ?>" type="text" placeholder="Ejemplo: San pedro tlaquepaque, etc..." class="form-control" name="municipio_provider">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Correo electronico: </label>
+                                                    <input value="<?php echo $emailProvider; ?>" type="email" name="email_provider" class="form-control" placeholder="Ejemplo: mail@gmail.com">
                                                 </div>
                                             </div>
                                         </div>

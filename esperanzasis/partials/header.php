@@ -42,9 +42,6 @@
     </ul>
     <?php }?>
 
-    
-
-    
 
     <?php if($typeUser === "Repartidor") {?>
         <ul class="navbar-nav">
@@ -59,6 +56,8 @@
     <ul class="navbar-nav ml-auto">
 
         <div class="topbar-divider d-none d-sm-block"></div>
+
+        
 
         <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -75,6 +74,20 @@
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Perfil
                     </a>
+
+                    <?php if($typeUser === "Administrador") {?>
+                        <a class="dropdown-item" href="create-inbox.php">
+                            <i class="fas fa-inbox fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Soporte tecnico
+                        </a>
+                    <?php }?>
+
+                    <?php if($typeUser === "SuperAdmin") {?>
+                        <a class="dropdown-item" href="new-inbox.php">
+                            <i class="fas fa-inbox fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Soporte tecnico
+                        </a>
+                    <?php }?>
                                 
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

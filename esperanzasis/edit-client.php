@@ -14,9 +14,10 @@
         $cel = $_POST['cel'];
         $email = $_POST['email'];
         $cp = $_POST['cp'];
-        $descuento = $_POST['descuento'];
+        //$descuento = $_POST['descuento'];
+        $municipio = $_POST['municipio'];
 
-        $query_update = "UPDATE clients SET name_client='$name_client', address_fiscal='$address_fiscal', address_company='$address_company', giro_company='$giro_company', rfc='$rfc', manager_payments='$manager_payments', activate='$activate', tel='$tel', cel='$cel', email='$email', cp='$cp', descuento='$descuento' WHERE id_user = '$id_user'";
+        $query_update = "UPDATE clients SET name_client='$name_client', address_fiscal='$address_fiscal', address_company='$address_company', giro_company='$giro_company', rfc='$rfc', manager_payments='$manager_payments', activate='$activate', tel='$tel', cel='$cel', email='$email', cp='$cp', municipio='$municipio' WHERE id_user = '$id_user'";
         mysqli_query($conexion, $query_update);
 
         header("location: show-clients.php");
@@ -81,6 +82,7 @@
                             $email = $row['email'];
                             $cp = $row['cp'];
                             $descuento = $row['descuento'];
+                            $municipio = $row['municipio'];
                         }
                 
                 ?>
@@ -116,17 +118,24 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Dirección de la empres: </label>
                                                     <input type="text" value="<?php echo $address_company; ?>" class="form-control" name="address_company" required>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Giro de la empresa: </label>
                                                     <input type="text" value="<?php echo $giro_company; ?>" class="form-control" name="giro_company" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Municipio: </label>
+                                                    <input type="text" value="<?php echo $municipio; ?>" class="form-control" name="municipio" required>
                                                 </div>
                                             </div>
                                         </div>

@@ -96,7 +96,7 @@
                                         ?>
                                         <h5>Cliente: <b><?php echo $client_name; ?></b></h5>
 
-                                        <span>Fecha: <?php echo date('M d, Y h:i A', strtotime($date_purchase)) ?></span>
+                                        <span>Fecha: <?php echo date('Y-m-d A', strtotime($date_purchase)) ?></span>
 
                                     </div>
 
@@ -150,6 +150,7 @@
                                                     $idProduct = $row['productid']; //30
                                                     $priceNormal = number_format($row['price'], 2);
                                                     $idUser = $row['id_user'];
+                                                    $quantity = $row['quantity'];
 
                                                     //Buscar si es que existe un descuento
                                                     $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$idUser'";
@@ -198,7 +199,7 @@
                                                     <i class="fas fa-dollar-sign"></i>
                                                     <?php 
                                                         if($discountProduct) {
-                                                            echo number_format($discountProduct, 2);
+                                                            echo number_format($priceNormal, 2)-number_format($discountProduct, 2);
                                                         } else {
                                                             echo $priceNormal; 
                                                         }
@@ -209,21 +210,20 @@
                                                     <i class="fas fa-money-check-alt"></i>
                                                     <?php 
                                                         if($discountProduct) {
-                                                            $subt = $discountProduct*$row['quantity'];
-                                                            echo number_format($subt, 2);
+                                                            $discountWithSubtotal = $priceNormal - $discountProduct;
+                                                            
+                                                            $subtotal = $quantity * $discountWithSubtotal;
+
+                                                            echo number_format($subtotal, 2);
                                                         } else {
-                                                            $subt = $row['price']*$row['quantity'];
-                                                            echo number_format($subt, 2);
+                                                            $total_original = $priceNormal * $quantity;
+
+                                                            echo number_format($total_original, 2);
                                                         }
                                                     
                                                     ?>
                                                     
                                                 </td>
-
-                                                <!-- <td>
-                                                    <i class="fas fa-hand-holding-usd"></i>
-                                                    <?php echo number_format($row['total'], 2); ?>
-                                                </td> -->
                                             
                                             </tr>
                                         
@@ -339,9 +339,7 @@
 
     <!-- Data tables for PDF -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>

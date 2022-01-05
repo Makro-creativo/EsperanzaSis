@@ -223,7 +223,7 @@
 
                                                 <td>
                                                     <a href="clear-order.php?purchaseid=<?php echo $row['purchaseid'] ?>" class="btn btn-info">
-                                                        Vaciar pedido
+                                                        Editar pedido
                                                     </a>
                                                 </td>
                                             
@@ -290,9 +290,6 @@
 
     <!-- Data tables for PDF -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
