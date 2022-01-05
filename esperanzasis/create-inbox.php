@@ -110,11 +110,6 @@
                                             <textarea name="description" cols="10" rows="7" class="form-control"></textarea>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>Archivo: </label>
-                                            <input class="form-control form-control-sm" id="formFileSm" type="file" name="image">
-                                        </div>
-
                                         <button type="submit" class="btn btn-primary" name="send">
                                             <i class="far fa-envelope"></i>
                                             Enviar
