@@ -67,7 +67,7 @@
 															<td><?php echo $row['people_order']; ?></td>
 															<td><?php echo $row['comments']; ?></td>
 															
-															<td><?php echo date('M d, Y h:i A', strtotime($row['date_purchase'])) ?></td>
+															<td><?php echo date('Y-m-d h:i A', strtotime($row['date_purchase'])) ?></td>
 															<td><?php echo number_format($row['total'], 2); ?></td>
 															
 															<td class="text-center">

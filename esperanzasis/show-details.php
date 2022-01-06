@@ -99,7 +99,7 @@
                                         ?>
                                         <h5>Cliente: <b><?php echo $name; ?></b></h5>
 
-                                        <span>Fecha: <?php echo date('M d, Y h:i A', strtotime($date_purchase)) ?></span>
+                                        <span>Fecha: <?php echo date('Y-m-d h:i A', strtotime($date_purchase)) ?></span>
                                     </div>
 
                                 </div>
