@@ -96,7 +96,7 @@
                                         ?>
                                         <h5>Cliente: <b><?php echo $client_name; ?></b></h5>
 
-                                        <span>Fecha: <?php echo date('Y-m-d A', strtotime($date_purchase)) ?></span>
+                                        <span>Fecha: <?php echo date('Y-m-d h:i A', strtotime($date_purchase)) ?></span>
 
                                     </div>
 
