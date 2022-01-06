@@ -505,6 +505,40 @@
                                     </div>
                                 </div>
                     </div>
+
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                            <div class="card border-left-secondary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Proveedores (Registrados)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_providers = mysqli_query($conexion, "SELECT * FROM providers");
+                                                        $result_providers = mysqli_num_rows($search_providers);
+
+                                                        echo $result_providers;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-address-card fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-providers.php">
+                                            Proveedores
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
                 </div>
             </div>
 

@@ -54,7 +54,6 @@
                                         <th>Cantidad</th>
                                         <th>Descripción</th>
                                         <th>$Precio Unitario</th>
-                                        <th>Descuento</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -88,22 +87,19 @@
                                         <td>
                                             <?php echo $row['name_product']; ?>
                                         </td>
-    
-                                       
-                                        <td class="d-flex justify-content-center">
-                                           <?php 
-                                                echo number_format($priceNormal, 2);
-                                           
-                                           ?>
-
-                                        </td>
 
                                         <td>
                                             <?php 
                                                 if($discountProduct) {
-                                                    echo number_format($discountProduct, 2);
+                                                    $discountWithSubtotal = $priceNormal - $discountProduct;
+                                                            
+                                                    $subtotal = $quantity * $discountWithSubtotal;
+
+                                                    echo number_format($subtotal, 2);
                                                 } else {
-                                                    echo "N/A";
+                                                    $total_original = $priceNormal * $quantity;
+
+                                                    echo number_format($total_original, 2);
                                                 }
                                             ?>
                                         </td>

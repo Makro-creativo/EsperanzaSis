@@ -30,7 +30,15 @@
 
                 <div class="container">
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Roles de usuario</h2>
+                       <div class="d-flex justify-content-around align-items-center" data-bs-toggle="modal" data-bs-target="#rol">
+                        <h2>Roles de usuario</h2>
+
+                        <button class="btn btn-success btn-sm d-flex align-items-center">
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Crear nuevo Rol 
+                        </button>
+                       </div>
+
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
                             <div class="card shadow-lg">
                                 <div class="card-body">

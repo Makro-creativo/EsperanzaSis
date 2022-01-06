@@ -143,6 +143,7 @@
                                                 while($row = mysqli_fetch_array($result)) {
                                                     $idProduct = $row['productid']; //30
                                                     $priceNormal =  number_format($row['price'], 2);
+                                                    $quantity = $row['quantity'];
 
                                                     //Buscar si es que existe un descuento
                                                     $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$uid' ";
@@ -192,7 +193,7 @@
                                                     <i class="fas fa-dollar-sign"></i>
                                                     <?php 
                                                         if($discountProduct){
-                                                            echo number_format($discountProduct, 2);
+                                                            echo number_format($priceNormal, 2)-number_format($discountProduct, 2);
                                                         }else{
                                                             echo $priceNormal;
                                                         }
@@ -204,22 +205,20 @@
                                                     <i class="fas fa-money-check-alt"></i>
                                                     <?php 
                                                         if($discountProduct) {
-                                                            $subt = $discountProduct+=$discountProduct;
-                                                            echo number_format($subt, 2);
+                                                            $discountWithSubtotal = $priceNormal - $discountProduct;
+                                                            
+                                                            $subtotal = $quantity * $discountWithSubtotal;
+
+                                                            echo number_format($subtotal, 2);
                                                         } else {
-                                                            $subt = $row['price']*$row['quantity'];
-                                                            echo number_format($subt, 2);
+                                                            $total_original = $priceNormal * $quantity;
+
+                                                            echo number_format($total_original, 2);
                                                         }
                                                     
                                                     ?>
                                                     
                                                 </td>
-                                                
-
-                                                <!-- <td>
-                                                    <i class="fas fa-hand-holding-usd"></i>
-                                                    <?php echo number_format($row['total'], 2); ?>
-                                                </td>-->
 
                                                 <td>
                                                     <a href="clear-order.php?purchaseid=<?php echo $row['purchaseid'] ?>" class="btn btn-info">
