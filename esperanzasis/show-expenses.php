@@ -42,6 +42,7 @@
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <div class="table-responsive">
+                                        
                                         <table class="table table-bordered" id="render" width="100%" cellspacing="0">
                                             <thead>
                                                 <th>Fecha</th>
