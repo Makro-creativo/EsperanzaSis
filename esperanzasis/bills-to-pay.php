@@ -70,7 +70,7 @@
                                        ?>
 
                                    
-                                       <strong>Fecha: <?php echo date('M d, Y h:i A', strtotime($row['date_bills_to_pay'])); ?></strong>
+                                       <strong>Fecha: <?php echo date('y-m-d h:i A', strtotime($row['date_bills_to_pay'])); ?></strong>
                                        
                                        <?php }?>
 
