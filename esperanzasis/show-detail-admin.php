@@ -115,7 +115,7 @@
                                         
                                         <?php if($typeUser === "Administrador") {?>
                                             <div class="d-flex justify-content-end">
-                                                <a class="btn btn-dark" href="show-ticket.php?purchaseid=<?php echo $row['purchaseid']; ?>">
+                                                <a class="btn btn-dark" href="show-tickets-for-id.php?purchaseid=<?php echo $row['purchaseid']; ?>">
                                                     Ticket de Compra
                                                 </a>
                                             </div>

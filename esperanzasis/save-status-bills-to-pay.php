@@ -18,7 +18,7 @@
             die("No se pudo guardar correctamente los datos, verifique de nuevo...");
         }
 
-        header("location: show-invoices.php");
+        header("location: show-bills-to-pay.php");
        
     }
 
