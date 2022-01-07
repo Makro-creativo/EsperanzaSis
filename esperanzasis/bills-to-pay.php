@@ -116,11 +116,11 @@
                                                    $result_customers_data = mysqli_query($conexion, $query_customer_data);
 
                                                    while($row = mysqli_fetch_array($result_customers_data)) {
-                                               
+                                                        $nameProvider = $row['name_customer'];
                                                ?>
                                                <h6 class="mb-2">Para:</h6>
                                                <div>
-                                                   <strong>Proveedor: <?php echo $row['name_customer']; ?></strong>
+                                                   <strong>Proveedor: <?php echo $nameProvider; ?></strong>
                                                </div>
                                        
                                                <?php }?>
