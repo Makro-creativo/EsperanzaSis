@@ -101,9 +101,10 @@
                                                <div>
                                                    <strong>Tortillería la Esperanza</strong>
                                                </div>
-                                               <div>Av. Paseo de la Prímavera 2195,</div>
-                                               <div>CP 45006, Zapopan, Jal.</div>
-                                               <div>Teléfono: (33) 3180 5555</div>
+                                               <div>Av. Paseo de la Primavera número #2195</div>
+                                               <div>Colonia Arenales Tapatios Zapopan Jalisco</div>
+                                               <div>Código postal: 45060</div>
+                                               <div>Telefono: 3312 333924</div>
                                            </div>
 
                                            <div class="col-6 col-md-6">
@@ -154,13 +155,13 @@
                                                        <td class="text-left"><?php echo $row['id_provider']; ?></td>
                                                        <td class="item_name"><?php echo $row['name_customer']; ?></td>
                                                        <td class="item_desc d-none d-sm-table-cell">
-                                                           <?php echo number_format($row['amount'], 2); ?>
+                                                           $<?php echo number_format($row['amount'], 2); ?>
                                                        </td>
 
-                                                       <td class="text-left"><?php echo number_format($row['iva'], 2); ?></td>
+                                                       <td class="text-left">$<?php echo number_format($row['iva'], 2); ?></td>
                                                        <td class="text-center"><?php echo $row['concept']; ?></td>
                                                        <td class="text-right">
-                                                           <?php 
+                                                           $<?php 
                                                                $result_calculation = ( $row['amount'] ) + ( $row['iva']);
 
                                                                echo number_format($result_calculation, 2);
@@ -192,14 +193,14 @@
                                                            <td class="left">
                                                                <strong>Iva</strong>
                                                            </td>
-                                                           <td class="text-right bg-light"><?php echo number_format($row['iva'], 2); ?></td>
+                                                           <td class="text-right bg-light">$<?php echo number_format($row['iva'], 2); ?></td>
                                                        </tr>
                                                        <tr>
                                                            <td class="left">
                                                                <strong>Total</strong>
                                                            </td>
                                                            <td class="text-right bg-light">
-                                                               <?php 
+                                                               $<?php 
                                                                    $result_calculation = ( $row['amount'] ) + ( $row['iva']);
 
                                                                    echo number_format($result_calculation, 2);
