@@ -539,6 +539,49 @@
                                     </div>
                                 </div>
                     </div>
+
+                    <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Total de ingresos de (Corte de Caja)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $query_total_cut_box = mysqli_query($conexion, "SELECT * FROM cutbox");
+
+                                                        $total = 0;
+
+                                                        while($row = mysqli_fetch_array($query_total_cut_box)) {
+                                                            $closing_amount = $row['closing_amount'];
+                                                            $payment_services = $row['payment_services'];
+                                                    ?>
+
+                                                    <?php 
+                                                        $total+=$closing_amount+=$payment_services;
+                                                    }?>
+
+                                                    <tr>
+                                                        <th colspan='' class='text-center'>
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                            <?php echo number_format($total, 2);?>
+                                                        </th>
+                                                    </tr> 
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-cash-register fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    
+                                </div>
+                    </div>
                 </div>
             </div>
 
@@ -564,9 +607,7 @@
                                         while($row = mysqli_fetch_array($query)){
                                             $real = $row['amount'];
                                         ?>
-                                        <!--<tr>
-                                            <td class='text-center'><?php echo number_format($real, 2,'.','');?></td>
-                                        </tr>-->
+                                       
                                             <?php
                                                 $total_real+=$real;
                                             }

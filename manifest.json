@@ -1,0 +1,55 @@
+{
+    "name": "EsperanzaSis",
+    "short_name": "EsperanzaSis",
+    "description": "Sistema de pedidos",
+    "background_color": "#2B2B2B",
+    "theme_color": "#229D6D",
+    "orientation": "portrait",
+    "display": "standalone",
+    "start_url": "/erp-esperanza/esperanzasis/login.php",
+    "id": "/erp-esperanza/esperanzasis/login.php",
+    "scope": "./",
+    "lang": "es-MX",
+    "icons": [
+        {
+            "src": "/img/icono_la_esperanza_72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+          },
+          {
+              "src": "/img/icono_la_esperanza-96x96.png",
+              "type": "img/png", 
+              "sizes": "96x96"
+          },
+          {
+              "src": "/img/icono_la_esperanza-128x128.png",
+              "type": "img/png", 
+              "sizes": "128x128"
+          },
+          {
+              "src": "/img/icono_la_esperanza-144x144.png",
+              "type": "img/png", 
+              "sizes": "144x144"
+          },
+          {
+              "src": "/img/icono_la_esperanza-152x152.png",
+              "type": "img/png", 
+              "sizes": "152x152"
+          },
+          {
+              "src": "/img/icono_la_esperanza-192x192.png",
+              "type": "img/png", 
+              "sizes": "192x192"
+          },
+          {
+              "src": "/img/icono_la_esperanza-384x384.png",
+              "type": "img/png", 
+              "sizes": "384x384"
+          },
+          {
+              "src": "/img/icono_la_esperanza_512x512.png",
+              "type": "img/png", 
+              "sizes": "512x512"
+          } 
+        ]
+    }

@@ -9,6 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="assets/img/logo_tortilleria_la_esperanza.svg">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="apple-mobile-web-app-status-bar" content="#db4938">
+    <meta name="theme-color" content="#4e73df">
 
     <title>EsperanzaSis - Login</title>
 
@@ -90,7 +93,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
-
+    
+    <script src="./assets/js/app.js"></script>
 </body>
 
 </html>
