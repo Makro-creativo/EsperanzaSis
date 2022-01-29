@@ -16,8 +16,6 @@ Una vez clonado el proyecto en tu maquina local puedes ingresar a el usando el s
 cd esperanzaSis
 ```
 
-Mira **Deployment** para conocer como desplegar el proyecto.
-
 
 ### Instalación 🔧
 
