@@ -23,9 +23,19 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 
 _Que cosas necesitas para instalar el software y como instalarlas_
 
+Para comenzar a utilizar el proyecto en tu maquina local, primero necesitas tener instalado XAMPP, XAMPP es un servidor que te permite correr el proyecto en servidor local y para eso necesitas ingresar a la siguinte URL.
+
 ```
-Da un ejemplo
+localhost/erp-esperanza/esperanzasis/login.php
 ```
+
+Para importar la base de datos necesitas ingresar a la siguiente URL.
+
+```
+localhost/phpmyadmin/
+```
+
+Dentro de esta URL podras importar la base de datos y comenzar a trabajar
 
 ### Instalación 🔧
 
