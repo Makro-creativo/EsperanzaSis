@@ -1,6 +1,6 @@
-# Título del Proyecto
+# EsperanzaSis
 
-_Acá va un párrafo que describa lo que es el proyecto_
+El ERP la EsperanzaSis, es un sistema que permite crear pedidos, registrar clientes, crear facturas para proveedores y clientes, roles de usuario, clientes con descuento, gastos e ingresos y corte de caja.
 
 ## Comenzando 🚀
 
