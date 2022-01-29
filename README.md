@@ -45,7 +45,7 @@ Las Herramientas con las que se desarrollo el sistema son las siguientes:
 * [VUE.JS](https://vuejs.org/) - Framework del lado del Frontend usado
 * [AXIOS.JS](https://github.com/axios/axios) - Cliente http para hacer peticiones Ajax
 * [BOOTSTRAP CSS](https://getbootstrap.com/docs/5.0/getting-started/introduction/) - Bootstrap css para crear la interfaz del usuario
-* [BOOTSTRAP CSS](https://startbootstrap.com/previews/sb-admin-2) - Tema usado para el proyecto
+* [SB ADMIN 2](https://startbootstrap.com/previews/sb-admin-2) - Tema usado para el proyecto
 
 ## Contribuyendo 🖇️
 
