@@ -40,11 +40,14 @@ Dentro de esta URL podras importar la base de datos y comenzar a trabajar
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
+Las Herramientas con las que se desarrollo el sistema son las siguientes:
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+* [PHP](https://www.php.net/) - El lenguaje usado
+* [MYSQL](https://www.mysql.com/) - Manejador de Base de Datos
+* [VUE.JS](https://vuejs.org/) - Framework del lado del Frontend usado
+* [AXIOS.JS](https://github.com/axios/axios) - Cliente http para hacer peticiones Ajax
+* [BOOTSTRAP CSS](https://getbootstrap.com/docs/5.0/getting-started/introduction/) - Bootstrap css para crear la interfaz del usuario
+* [BOOTSTRAP CSS](https://startbootstrap.com/previews/sb-admin-2) - Tema usado para el proyecto
 
 ## Contribuyendo 🖇️
 
