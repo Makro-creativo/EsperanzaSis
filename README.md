@@ -10,6 +10,12 @@ Primero que nada para clonar el proyecto necesitas el siguiente comando usando G
 git clone https://github.com/Makro-creativo/EsperanzaSis.git
 ```
 
+Una vez clonado el proyecto en tu maquina local puedes ingresar a el usando el siguiente comando:
+
+```cmd
+cd esperanzaSis
+```
+
 Mira **Deployment** para conocer como desplegar el proyecto.
 
 
