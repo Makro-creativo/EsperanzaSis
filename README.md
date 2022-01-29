@@ -4,7 +4,11 @@ El ERP la EsperanzaSis, es un sistema que permite crear pedidos, registrar clien
 
 ## Comenzando 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+Primero que nada para clonar el proyecto necesitas el siguiente comando usando Git
+
+```git
+git clone https://github.com/Makro-creativo/EsperanzaSis.git
+```
 
 Mira **Deployment** para conocer como desplegar el proyecto.
 
