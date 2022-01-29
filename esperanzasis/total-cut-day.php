@@ -23,6 +23,73 @@
 <body id="page-top">
     <div id="wrapper">
         <?php include "./partials/menuLateral.php" ?>
+        
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <?php include "./partials/header.php" ?>
+
+                <div class="container">
+                    <div class="row">
+                    <div class="col-md-8 col-sm-12 col-lg-8 col-xl-8 col-xxl-8 mx-auto">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Total de corte del (Día)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox");
+                                                        
+                                                        $total = 0;
+
+                                                        while($row = mysqli_fetch_array($query_total_morning)) {
+                                                            $closing_amount = $row['closing_amount'];
+                                                            $payment_services = $row['payment_services'];
+
+                                                            $total_cut = $closing_amount + $payment_services;
+                                                    ?>
+
+                                                    <?php 
+                                                        $total+=$total_cut;
+                                                    }?>
+
+
+                                                    <tr>
+                                                        <th colspan='' class='text-center'>
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                            <?php echo number_format($total, 2); ?>
+                                                        </th>
+                                                     </tr> 
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-comment-dollar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-graphic-afternon.php">
+                                            Grafica
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+
+            <?php include "./partials/footer.php" ?>
+
+        </div>
+
     </div>
 
 

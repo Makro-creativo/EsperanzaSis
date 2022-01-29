@@ -36,9 +36,16 @@
                 <?php include "./partials/header.php" ?>
                 
                 <div class="container">
-                    <h2 class="d-flex justify-content-start mb-4">Facturas capturadas</h2>
-
                     <div class="row">
+                    <div class="d-flex justify-content-around align-items-center" data-bs-toggle="modal" data-bs-target="#rol">
+                        <h2>Facturas proveedores</h2>
+
+                        <button class="btn btn-success btn-sm d-flex align-items-center">
+                            <i class="fas fa-file-signature mr-2"></i>
+                            Registrar nueva factura o proveedor
+                        </button>
+                       </div>
+
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
                                 <div class="card-body">
@@ -128,6 +135,227 @@
 
             </div>
 
+             <!-- Modal -->
+             <div class="modal fade" id="rol" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Nuevo proveedor o factura</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                <label>Selecciona una opción: </label>
+                                <select name="status" id="status" onChange="showForm(this.value);" class="form-select">
+                                    <option selected disabled>Elige una opción</option>
+                                    <option value="rol-provider">Nuevo proveedor</option>
+                                    <option value="rol-bills">Nueva factura</option>
+                                </select>
+                            </form>
+
+                            <div id="rol-provider" style="display: none;" class="p-3">
+                                <form action="new-provider.php" method="POST">
+                                        <div class="row">
+                                        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>DNI: </label>
+                                                    <input type="text" placeholder="Ejemplo: 101, 102, 103, etc..." name="dni_provider" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Nombre del proveedor: </label>
+                                                    <input type="text" placeholder="Ejemplo: Leche lala, coca cola, etc..." name="name_provider" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Dirección de la empresa: </label>
+                                                    <input type="text" placeholder="Ejemplo: Gardines del bosque, etc..." name="adress" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Teléfono de contacto: </label>
+                                                    <input type="tel" name="contact" placeholder="Ejemplo: 333 134 4567" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Número de celular: </label>
+                                                    <input type="tel" name="number_cel" class="form-control" placeholder="Ejemplo: 33 135 4678">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Fecha de registro: </label>
+                                                    <input type="date" name="date" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>RFC: </label>
+                                                    <input type="text" placeholder="Ejemplo: MELM8305281H0" class="form-control" name="rfc_provider">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Giro de la empresa: </label>
+                                                    <input type="text" placeholder="Mueblería, Ferretería, etc..." class="form-control" name="giro_provider">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Estatus del proveedor: </label>
+                                                    <select name="status_provider" require required class="form-select">
+                                                        <option selected disabled>Elije un opción</option>
+                                                        <option value="Activo">Activo</option>
+                                                        <option value="Inactivo">Inactivo</option>
+                                                        <option value="Suspendido">Suspendido</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Código postal: </label>
+                                                    <input type="text" placeholder="Ejemplo: 47910, etc..." class="form-control" name="code_postal">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Municipio: </label>
+                                                    <input type="text" placeholder="Ejemplo: San pedro tlaquepaque, etc..." class="form-control" name="municipio_provider">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Correo electronico: </label>
+                                                    <input type="email" name="email_provider" class="form-control" placeholder="Ejemplo: mail@gmail.com">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input type="submit" value="Guardar proveedor" class="btn btn-success btn-block" name="save">
+                                    </form>
+                            </div>
+
+                            <div id="rol-bills" style="display: none;">
+                                
+                            <form action="new-invoice.php" method="POST" class="p-3">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Eligir cliente: </label>
+                                                    <select name="info_client_id" require class="form-select">
+                                                        <option selected disabled>Seleccionar cliente</option>
+                                                        <?php 
+                                                            include "./config/conexion.php";
+
+                                                            $query_customer = "SELECT * FROM clients ORDER BY name_client ASC";
+                                                            $result_customers = mysqli_query($conexion, $query_customer);
+
+                                                            while($row = mysqli_fetch_array($result_customers)) {
+                                                                $id_user = $row['id_user'];
+                                                                $name_customer = $row['name_client'];
+                                                        ?>
+                                                        
+                                                            <option value="<?php echo $id_user."_".$name_customer; ?>"><?php echo $name_customer; ?></option>
+
+                                                        <?php }?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Monto: </label>
+                                                    <input type="text" name="amount" class="form-control" placeholder="Ejemplo: 1500">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Iva: </label>
+                                                    <input type="text" name="iva" class="form-control" placeholder="Ejemplo: 380,">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Concepto: </label>
+                                                    <input type="text" name="concept" class="form-control" placeholder="Ejemplo: Describir servicio, producto, etc...">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Fecha de la factura: </label>
+                                                    <input type="date" name="date_saved" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Fecha de pago de factura: </label>
+                                                    <input type="date" name="date_to_pay_bills" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Eligir opción: </label>
+                                                    <select name="invoice_notes" require required class="form-select">
+                                                        <option disabled selected>Selecciona una opción</option>
+                                                        <option value="Nota">Nota</option>
+                                                        <option value="Factura">Factura</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Número de nota o factura: </label>
+                                                    <input type="text" name="number_notes" class="form-control" placeholder="Ejemplo: 456789, etc...">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input type="submit" value="Registrar factura" class="btn btn-success btn-block" name="saveBills">
+                                    </form>
+                            </div>
+
+                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Modal -->
+
             <?php include "./partials/footer.php" ?>
 
         </div>
@@ -212,5 +440,19 @@
             }
         });
 	</script>
+
+<script>
+        function showForm(id) {
+            if(id === "rol-provider") {
+                $("#rol-provider").show();
+                $("#rol-bills").hide();
+            }
+
+            if(id === "rol-bills") {
+                $("#rol-provider").hide();
+                $("#rol-bills").show();
+            }
+        }
+    </script>
 </body>
 </html>

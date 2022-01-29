@@ -10,8 +10,10 @@
         $createdAt = $_POST['created_at'];
         $description = $_POST['description'];
         $quantity = floatval($_POST['quantity']);
+        $notesOrInovoice = $_POST['notes_or_invoice'];
+        $numberNotes = $_POST['number_notes'];
 
-        $query_save_income = "INSERT INTO ingresos(id_categories, category_name, created_at, description, quantity) VALUES('$idNameCategory', '$nameCategories', '$createdAt', '$description', '$quantity')";
+        $query_save_income = "INSERT INTO ingresos(id_categories, category_name, created_at, description, quantity, notes_or_invoice, number_notes) VALUES('$idNameCategory', '$nameCategories', '$createdAt', '$description', '$quantity', '$notesOrInovoice', '$numberNotes')";
         $result_income = mysqli_query($conexion, $query_save_income);
 
         if(!$result_income) {
@@ -104,6 +106,26 @@
                                                             <option value="<?php echo $id_categories."_".$categoryName; ?>"><?php echo $categoryName; ?></option>
                                                         <?php }?>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Factura o Nota: </label>
+                                                    <select name="notes_or_invoice" require required class="form-select">
+                                                        <option disabled selected>Selecciona una opción</option>
+                                                        <option value="Nota">Nota</option>
+                                                        <option value="Factura">Factura</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Número de factura o nota: </label>
+                                                    <input type="text" placeholder="Ejemplo: 234567GH, etc..." class="form-control" name="number_notes">
                                                 </div>
                                             </div>
                                         </div>

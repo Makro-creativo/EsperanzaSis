@@ -8,9 +8,11 @@
         $iva = number_format($_POST['iva'], 2);
         $concept = $_POST['concept'];
         $date_saved = $_POST['date_saved'];
+        $invoiceNotes = $_POST['invoice_notes'];
+        $numberNotes = $_POST['number_notes'];
         $date_to_pay_bills = $_POST['date_to_pay_bills'];
 
-        echo $query_update_bills = "UPDATE bills SET customer_name='$name_customer', amount='$amount', iva='$iva', concept='$concept', date_saved='$date_saved', date_to_pay_bills='$date_to_pay_bills' WHERE id_user = '$id_customer'";
+        $query_update_bills = "UPDATE bills SET customer_name='$name_customer', amount='$amount', iva='$iva', concept='$concept', date_saved='$date_saved', invoice_notes='$invoiceNotes', number_notes='$numberNotes', date_to_pay_bills='$date_to_pay_bills' WHERE id_user = '$id_customer'";
         $result_update_bills = mysqli_query($conexion, $query_update_bills);
 
         header("location: show-invoices.php");
@@ -67,6 +69,8 @@
                         $iva = $row['iva'];
                         $concept = $row['concept'];
                         $date_saved = $row['date_saved'];
+                        $invoiceNotes = $row['invoice_notes'];
+                        $numberNotes = $row['number_notes'];
                         $date_to_pay_bills = $row['date_to_pay_bills'];
                     }
                 ?>
@@ -90,7 +94,7 @@
                                                         <?php 
                                                             include "./config/conexion.php";
 
-                                                            $query_customer_update = "SELECT * FROM clients";
+                                                            $query_customer_update = "SELECT * FROM clients ORDER BY name_client ASC";
                                                             $result_customers_update = mysqli_query($conexion, $query_customer_update);
 
                                                             while($row = mysqli_fetch_array($result_customers_update)) {
@@ -140,6 +144,26 @@
                                                 <div class="form-group">
                                                     <label>Fecha de pago de factura: </label>
                                                     <input value="<?php echo $date_to_pay_bills; ?>" type="date" name="date_to_pay_bills" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Eligir opción: </label>
+                                                    <select name="invoice_notes" require required class="form-select">
+                                                        <option disabled selected>Selecciona una opción</option>
+                                                        <option value="Notas" <?php if($invoiceNotes == "Notas"){?> selected <?php } ?>>Notas</option>
+                                                        <option value="Factura" <?php if($numberNotes == "Factura"){?> selected <?php } ?>>Factura</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Número de nota o factura: </label>
+                                                    <input value="<?php echo $numberNotes; ?>" type="text" name="number_notes" class="form-control" placeholder="Ejemplo: 456789, etc...">
                                                 </div>
                                             </div>
                                         </div>

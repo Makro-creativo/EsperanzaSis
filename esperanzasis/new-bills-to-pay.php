@@ -73,7 +73,7 @@
                                                         <?php 
                                                             include "./config/conexion.php";
                                                             
-                                                            $search_client = "SELECT * FROM providers";
+                                                            $search_client = "SELECT * FROM providers ORDER BY name_provider ASC";
                                                             $result_search_client = mysqli_query($conexion, $search_client);
 
                                                             while($row = mysqli_fetch_array($result_search_client)) {

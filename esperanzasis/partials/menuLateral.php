@@ -199,7 +199,7 @@
     </div>
 </li>
 
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-file-invoice-dollar"></i>
@@ -213,7 +213,7 @@
             <a class="collapse-item" href="bills-paid.php">Facturas Pagadas</a>
         </div>
     </div>
-</li>
+</li>-->
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNine"
@@ -246,8 +246,8 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeenten"
         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-cash-register"></i>
-        <span>Facturas por pagar</span>
+        <i class="fas fa-wallet"></i>
+        <span>Facturas a proveedores</span>
     </a>
     <div id="collapseFeenten" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
@@ -259,7 +259,7 @@
     </div>
 </li>
 
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeventen"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-user-tag"></i>
@@ -271,7 +271,7 @@
             <a class="collapse-item" href="show-providers.php">Lista de proveedores</a>
         </div>
     </div>
-</li>
+</li> -->
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEleven"
@@ -314,6 +314,26 @@
             <a class="collapse-item" href="total-cut-turn-morning.php">Total de la mañana</a>
             <a class="collapse-item" href="total-cut-turn-afternon.php">Total de la tarde</a>
             <a class="collapse-item" href="total-cut-day.php">Total de día</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#invoice_or_providers"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-folder-open"></i>
+        <span>Facturas y Proveedores</span>
+    </a>
+    <div id="invoice_or_providers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="show-bills-to-pay.php">Facturas proveedores</a>
+            <a class="collapse-item" href="bills-to-paid.php">Facturas pagadas</a>
+            <a class="collapse-item" href="bills-not-to-paid.php">Facturas por pagar</a>
+
+            <hr>
+            <a class="collapse-item" href="show-invoices.php">Facturas clientes</a>
+            <a class="collapse-item" href="invoices-receivable.php">Facturas por Cobrar</a>
+            <a class="collapse-item" href="bills-paid.php">Facturas Pagadas</a>
         </div>
     </div>
 </li>

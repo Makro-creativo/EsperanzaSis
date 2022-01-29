@@ -49,6 +49,8 @@
                                             <th>Iva</th>
                                             <th>Concepto</th>
                                             <th>Fecha</th>
+                                            <th>Factura o Nota</th>
+                                            <th>Número de nota o factura</th>
                                             <th>Total de Factura</th>
 
                                             <?php if($typeUser === "Administrador") {?>
@@ -80,6 +82,8 @@
                                                 <td><?php echo number_format($row['iva'], 2); ?></td>
                                                 <td><?php echo $row['concept']; ?></td>
                                                 <td><?php echo date("d/m/Y", strtotime($row['date_saved'])); ?></td>
+                                                <td><?php echo $row['invoice_notes']; ?></td>
+                                                <td><?php echo $row['number_notes']; ?></td>
                                                 
                                                 <td>
                                                     <?php 

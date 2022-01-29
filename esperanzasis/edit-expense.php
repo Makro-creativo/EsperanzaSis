@@ -11,8 +11,10 @@
         $createdAt = $_POST['created_at'];
         $description = $_POST['description'];
         $amount = floatval($_POST['amount']);
+        $notesOrInvoice = $_POST['notes_or_invoice'];
+        $numberNotes = $_POST['number_notes'];
 
-        $query_edit = "UPDATE gastos SET name_category='$nameCategory', created_at='$createdAt', description='$description', amount='$amount' WHERE id = '$id'";
+        $query_edit = "UPDATE gastos SET name_category='$nameCategory', created_at='$createdAt', description='$description', amount='$amount', notes_or_invoice='$notesOrInvoice', number_notes='$numberNotes' WHERE id = '$id'";
         $result_edit = mysqli_query($conexion, $query_edit);
 
         header("location: show-expenses.php");
@@ -67,6 +69,8 @@
                         $createdAt = $row['created_at'];
                         $description = $row['description'];
                         $amount = $row['amount'];
+                        $notesOrInvoice = $row['notes_or_invoice'];
+                        $numberNotes = $row['number_notes'];
                     }
                 ?>
 
@@ -84,7 +88,7 @@
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Fecha: </label>
-                                                    <input type="date" value="<?php echo $createdAt; ?>" name="created_at" class="form-control" min="<?php echo date('Y-m-d'); ?>">
+                                                    <input type="date" value="<?php echo $createdAt; ?>" name="created_at" class="form-control">
                                                 </div>
                                             </div>
 
@@ -123,6 +127,26 @@
                                                             <option value="<?php echo $idCategory."_".$nameCategory; ?>"><?php echo $nameCategory; ?></option>
                                                         <?php }?>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Factura o nota: </label>
+                                                    <select name="notes_or_invoice" required require class="form-select">
+                                                        <option disabled selected>Selecciona una opción</option>
+                                                        <option value="Factura" <?php if($notesOrInvoice == "Factura"){?> selected <?php } ?>>Factura</option>
+                                                        <option value="Notas" <?php if($notesOrInvoice == "Notas"){?> selected <?php } ?>>Notas</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Número de nota o factura: </label>
+                                                    <input type="text" placeholder="Ejemplo: GHJ123, etc..." class="form-control" name="number_notes">
                                                 </div>
                                             </div>
                                         </div>

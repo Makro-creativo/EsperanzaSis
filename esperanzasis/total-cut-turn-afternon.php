@@ -29,56 +29,73 @@
                 <?php include "./partials/header.php" ?>
 
                 <div class="container">
+                <h2 class="d-flex justify-content-center mb-4">Total de corte de la tarde</h2>
                     <div class="row">
-                        <div class="col-md-8 col-sm-12 col-lg-8 col-xl-8 col-xxl-8 mx-auto">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Total de corte de la (Tarde)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <div class="card shadow-lg">
+                                <div class="card-body">
+                                    <div class="table-responsive-sm">
+                                        <table class="table table-sm table-striped" id="table-render">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" width="2%" class="center">Fecha</th>
+                                                    <th scope="col" width="20%">Persona que entrego</th>
+                                                    <th scope="col" class="d-none d-sm-table-cell" width="50%">Persona que recibio</th>
+
+                                                    <th scope="col" width="10%" class="text-left">Turno</th>
+                                                    <th scope="col" width="8%" class="text-right">Concepto</th>
+                                                    <th scope="col" width="10%" class="text-right">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
                                                     <?php 
                                                         include "./config/conexion.php";
-
-                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox WHERE turn = 'Turno de la tarde'");
+                                                        
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox WHERE hour_opening BETWEEN hour_opening AND hour_saved_cut AND turn = 'Turno de la tarde'");
                                                         
                                                         $total = 0;
 
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
-                                                            $closing_amount = $row['closing_amount'];
-                                                            $payment_services = $row['payment_services'];
-
-                                                            $total_cut = $closing_amount + $payment_services;
+                                                            $closing_amount = $row['closing_amount'];   
+                                                            $total_services = $row['payment_services'];
                                                     ?>
-
-                                                    <?php 
-                                                        $total+=$total_cut;
-                                                    }?>
-
-
                                                     <tr>
-                                                        <th colspan='' class='text-center'>
-                                                            <i class="fas fa-dollar-sign"></i>
-                                                            <?php echo number_format($total, 2); ?>
-                                                        </th>
-                                                     </tr> 
+                                                        <td><?php echo $row['opening_date']; ?></td>
+                                                        <td><?php echo $row['person_delivery']; ?></td>
+                                                        <td>
+                                                            <?php echo $row['person_receive']; ?>
+                                                        </td>
+
+                                                        <td class="text-left"><?php echo $row['turn']; ?></td>
+                                                        <td class="text-center"><?php echo $row['concept']; ?></td>
+                                                        <td class="text-right">
+                                                            $<?php 
+                                                                $total_cut = $closing_amount + $total_services;
+
+                                                                echo number_format($total_cut, 2);
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                                        
+                                                <?php 
+                                                    $total+=$total_cut;
+                                                }?>
+
+                                                <div class="d-flex justify-content-end">
+                                                    <tr>
+                                                        <td>
+                                                            Total Turno: $<?php 
+                                                                echo number_format($total, 2);
+                                                            ?>
+                                                        </td>
+                                                    </tr>
                                                 </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comment-dollar fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="card-footer">
-                                        <a href="show-graphic-afternon.php">
-                                            Grafica
-                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
-                                        </a>
+                                                
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
