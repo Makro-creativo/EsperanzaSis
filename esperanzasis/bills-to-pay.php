@@ -1,7 +1,9 @@
 <?php 
     include "./config/conexion.php";
 
-    session_start();
+    if(!isset($_SESSION)){
+        session_start();
+    }
 
     $typeUser = $_SESSION['Tipo'];
 
