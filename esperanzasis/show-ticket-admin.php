@@ -3,8 +3,9 @@
 
     if(isset($_GET['purchaseid'])) {
         $purchaseid = $_GET['purchaseid'];
+        
 
-        $query_total = "SELECT total FROM orders WHERE purchaseid = '$purchaseid'";
+        $query_total = "SELECT total FROM orders_admin WHERE purchaseid = '$purchaseid'";
         $result_total = mysqli_query($conexion, $query_total);
 
         if($result_total) {
@@ -59,22 +60,10 @@
                             include "./config/conexion.php";
                             $id_pedido = $_GET['purchaseid'];
 
-                            $query_ticket = "SELECT * FROM orders INNER JOIN purchase_detail ON orders.purchaseid = purchase_detail.purchaseid INNER JOIN products ON purchase_detail.productid = products.productid AND purchase_detail.purchaseid = '$id_pedido'";
+                            $query_ticket = "SELECT * FROM orders_admin INNER JOIN purchase_detail_admin ON orders_admin.purchaseid = purchase_detail_admin.purchaseid INNER JOIN products ON purchase_detail_admin.productid = products.productid AND purchase_detail_admin.purchaseid = '$id_pedido' AND id_user = 'Administrador'";
                             $result = mysqli_query($conexion, $query_ticket);
 
-                                while($row = mysqli_fetch_array($result)) {
-                                    $idProduct = $row['productid']; //30
-                                    $priceNormal = number_format($row['price'], 2);
-                                    $idUser = $row['id_user'];
-                                    $quantity = $row['quantity'];
-
-                                    //Buscar si es que existe un descuento
-                                    $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$idUser'";
-                                    $result_price = mysqli_query($conexion, $searchData);
-
-                                    $rowProductDiscount = mysqli_fetch_array($result_price);
-                                    $discountProduct = $rowProductDiscount['discount'];
-                                                        
+                                while($row = mysqli_fetch_array($result)) {                    
                             ?>
 
                             <tr>
@@ -92,17 +81,7 @@
 
                                 <td>
                                     <?php 
-                                        if($discountProduct) {
-                                            $discountWithSubtotal = $priceNormal - $discountProduct;
-                                                                
-                                            $subtotal = $quantity * $discountWithSubtotal;
-
-                                            echo number_format($subtotal, 2);
-                                        } else {
-                                            $total_original = $priceNormal * $quantity;
-
-                                            echo number_format($total_original, 2);
-                                        }
+                                        echo number_format($row['price'], 2);
                                     ?>
                                 </td>
                         <?php }?>

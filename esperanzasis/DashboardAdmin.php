@@ -19,6 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
@@ -33,9 +34,11 @@
                 <?php include "./partials/header.php" ?>
 
             <!-- Content -->
+
             <div class="container">
             <h2 class="text-dark d-flex justify-content-start mb-4">Panel de Control</h2>
-                <div class="row">
+                   
+                <div class="row mt-4">
 
                         <div class="col-xl-3 col-lg-3 col-xxl-3 col-sm-12 col-md-3 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
@@ -540,7 +543,7 @@
                                 </div>
                     </div>
 
-                    <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                             <div class="card border-left-info shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -582,6 +585,41 @@
                                     
                                 </div>
                     </div>
+                    
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                            <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Mis (Pedidos realizados)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_orders_my = mysqli_query($conexion, "SELECT * FROM orders_admin");
+                                                        $result_orders_my = mysqli_num_rows($search_orders_my);
+
+                                                        echo $result_orders_my;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fa-solid fa-bag-shopping fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-all-orders-admin.php">
+                                            Mis pedidos
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
+
                 </div>
             </div>
 

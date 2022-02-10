@@ -125,6 +125,19 @@
         </div>
     </div>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ordersAdmin"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa-solid fa-cart-flatbed"></i>
+        <span>Pedidos Admin</span>
+    </a>
+    <div id="ordersAdmin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="show-all-orders-admin.php">Lista de pedidos admin</a>
+        </div>
+    </div>
+</li>
 <?php }?>
 
 <?php if($typeUser === "Administrador") {?>
@@ -137,6 +150,20 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="show-all-orders.php">Lista de pedidos</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ordersAdmin"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa-solid fa-cart-flatbed"></i>
+        <span>Pedidos Admin</span>
+    </a>
+    <div id="ordersAdmin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-order-admin.php">Crear un nuevo pedido</a>
+            <a class="collapse-item" href="show-all-orders-admin.php">Lista de mis pedidos</a>
         </div>
     </div>
 </li>

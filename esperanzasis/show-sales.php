@@ -30,7 +30,7 @@
 
 				<div class="container">
 					<div class="row">
-						<h2 class="d-flex justify-content-start mb-4">Mis pedidos</h2>
+						<h2 class="d-flex justify-content-start mb-4">Lista de pedidos</h2>
 						<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
 							<div class="card shadow-lg">
 								<div class="card-body">
@@ -50,7 +50,7 @@
 											</thead>
 											<tbody>
 												<?php 
-													include "./config/conexion.php";
+														include "./config/conexion.php";
 
 
 														$query = "SELECT * FROM orders WHERE id_user = '$uid' ORDER BY date_purchase, date_send DESC LIMIT 10 OFFSET 0";
