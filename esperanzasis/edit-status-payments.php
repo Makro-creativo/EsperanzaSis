@@ -1,13 +1,15 @@
 <?php 
     include "./config/conexion.php";
 
-    session_start();
+    if(!isset($_SESSION)){
+        session_start();
+    }
 
     $typeUser = $_SESSION['Tipo'];
 
     $id_customer = $_GET['id_user'];
 
-    $sql = "SELECT * FROM bills WHERE id_user = '$id_user'";
+    $sql = "SELECT * FROM bills WHERE id_user = '$id_customer'";
     $query = $conexion->query($sql);
 
     $data = array();

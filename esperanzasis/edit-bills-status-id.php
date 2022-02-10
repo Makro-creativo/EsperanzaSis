@@ -5,7 +5,6 @@
         session_start();
     }
 
-
     $typeUser = $_SESSION['Tipo'];
 
     $id_provider = $_GET['id_provider'];
