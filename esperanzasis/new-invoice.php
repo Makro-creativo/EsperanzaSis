@@ -14,9 +14,8 @@
         $date_to_pay_bills = $_POST['date_to_pay_bills'];
         $invoiceNotes = $_POST['invoice_notes'];
         $numberNotes = $_POST['number_notes'];
-        $date_bills = $_POST['date_bills'];
 
-        $query_bills = "INSERT INTO bills(id_user, customer_name, amount, iva, concept, date_saved, date_to_pay_bills, invoice_notes, number_notes, date_bills) VALUES('$idClient', '$nameCustomer', '$amount', '$iva', '$concept', '$date_saved', '$date_to_pay_bills', '$invoiceNotes', '$numberNotes', NOW())";
+        $query_bills = "INSERT INTO bills(id_user, customer_name, amount, iva, concept, date_saved, date_to_pay_bills, invoice_notes, number_notes) VALUES('$idClient', '$nameCustomer', '$amount', '$iva', '$concept', '$date_saved', '$date_to_pay_bills', '$invoiceNotes', '$numberNotes')";
         $result_bills = mysqli_query($conexion, $query_bills);
 
         if(!$result_bills) {
