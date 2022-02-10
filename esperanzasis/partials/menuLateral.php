@@ -274,19 +274,17 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeenten"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-wallet"></i>
-        <span>Facturas a proveedores</span>
+        <span>Gestión proveedor</span>
     </a>
     <div id="collapseFeenten" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="new-bills-to-pay.php">Crear factura</a>
-            <a class="collapse-item" href="show-bills-to-pay.php">Lista de facturas</a>
-            <a class="collapse-item" href="bills-to-paid.php">Facturas pagadas</a>
-            <a class="collapse-item" href="bills-not-to-paid.php">Facturas por pagar</a>
+            <a class="collapse-item" href="show-providers.php">Lista de proveedores</a>
         </div>
     </div>
 </li>
 
-<!-- <li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeventen"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-user-tag"></i>
@@ -353,6 +351,7 @@
     </a>
     <div id="invoice_or_providers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-provider-or-client.php">Capturar factura</a>
             <a class="collapse-item" href="show-bills-to-pay.php">Facturas proveedores</a>
             <a class="collapse-item" href="bills-to-paid.php">Facturas pagadas</a>
             <a class="collapse-item" href="bills-not-to-paid.php">Facturas por pagar</a>
