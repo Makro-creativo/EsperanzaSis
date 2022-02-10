@@ -1,8 +1,10 @@
 <?php 
     include "./config/conexion.php";
 
-    session_start();
-    error_reporting(0);
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
     $typeUser = $_SESSION['Tipo'];
     $name = $_SESSION['name'];
