@@ -122,6 +122,7 @@
                                         <?php }?>
 
                                             <thead>
+                                                <th>ID</th>
                                                 <th>Cliente</th>
                                                 <th>Nombre del producto</th>
                                                 <th>Cantidad</th>
@@ -160,6 +161,9 @@
                                                     $discountProduct = $rowProductDiscount['discount'];
                                             ?>
                                             <tr>
+                                                <td>
+                                                    <?php echo $row['purchaseid']; ?>
+                                                </td>
                                                 <td>
                                                     <?php echo $row['client_name']; ?>
                                                 </td>

@@ -83,7 +83,6 @@
                                                 <th>Hora de envío</th>
                                                 <th>Persona quién realizo pedido</th>
                                                 <th>Comentarios</th>
-                                                <th>Calificación</th>
                                                 <th>Detalles del pedido</th>
                                                 <th>Estatus de entrega</th>
                                             </thead>
@@ -92,7 +91,7 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $query_order_admin = "SELECT * FROM orders_admin";
+                                                    $query_order_admin = "SELECT * FROM orders_admin ORDER BY date_send ASC";
                                                     $result_order_admin = mysqli_query($conexion, $query_order_admin);
 
                                                     while($row = mysqli_fetch_array($result_order_admin)) {
@@ -105,7 +104,6 @@
                                                     <td><?php echo date('h:i a', strtotime($row['hour_send'])); ?></td>
                                                     <td><?php echo $row['people_order']; ?></td>
                                                     <td><?php echo $row['comments']; ?></td>
-                                                    <td><?php echo $row['calification']; ?></td>
 
                                                     <td>
                                                         <input type="hidden" name="id_pedido" value="<?php echo $purchaseid; ?>">

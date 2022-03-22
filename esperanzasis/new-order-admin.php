@@ -158,14 +158,21 @@
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Calificación: </label>
-                                                    <select name="calification" require required class="form-select">
-                                                    <option selected disabled>Elija una calificación</option>
-                                                    <option value="1 estrella">1 estrella</option>
-                                                    <option value="2 estrellas">2 estrellas</option>
-                                                    <option value="3 estrellas">3 estrellas</option>
-                                                    <option value="4 estrellas">4 estrellas</option>
-                                                    <option value="5 estrellas">5 estrellas</option>
+                                                    <label>Asignar pedido: </label>
+                                                    <select name="name_delivery" require required class="form-select">
+                                                        <option disabled selected>Seleccionar repartidor</option>
+                                                        <?php 
+                                                            include "./config/conexion.php";
+                                                            
+                                                            $sarch_user_delivery = "SELECT * FROM users WHERE Tipo = 'Repartidor'";
+                                                            $result = mysqli_query($conexion, $sarch_user_delivery);
+
+                                                            while($row = mysqli_fetch_array($result)) {
+                                                                $nameDelivery = $row['name'];
+                                                        ?>
+                                                            <option value="<?php echo $nameDelivery; ?>"><?php echo $nameDelivery; ?></option>
+
+                                                        <?php }?>
                                                     </select>
                                                 </div>
                                             </div>

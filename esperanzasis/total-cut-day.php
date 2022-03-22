@@ -41,9 +41,18 @@
                                                     <?php 
                                                         include "./config/conexion.php";
 
-                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox");
-                                                        
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super WHERE turn = 'Turno de la mañana'");
+                                                        $query_total_two = mysqli_query($conexion, "SELECT * FROM cutbox_ruta WHERE turn = 'Turno de la mañana'");
+
                                                         $total = 0;
+                                                        $total_two = 0;
+
+                                                        while($rowRuta = mysqli_fetch_array($query_total_two)) {
+                                                            $amount = $rowRuta['amount'];
+                                                            $paymentServicesTwo = $rowRuta['payment_services_two'];
+
+                                                            $total_ruta =  $amount + $paymentServicesTwo;
+                                                        
 
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
                                                             $closing_amount = $row['closing_amount'];
@@ -53,6 +62,10 @@
                                                     ?>
 
                                                     <?php 
+                                                        $total_two+=$total_ruta;
+                                                    }?>
+
+                                                    <?php 
                                                         $total+=$total_cut;
                                                     }?>
 
@@ -60,7 +73,11 @@
                                                     <tr>
                                                         <th colspan='' class='text-center'>
                                                             <i class="fas fa-dollar-sign"></i>
-                                                            <?php echo number_format($total, 2); ?>
+                                                            <?php
+                                                                $total_day = $total+=$total_two;
+
+                                                                echo number_format($total_day, 2);
+                                                            ?>
                                                         </th>
                                                      </tr> 
                                                 </div>
@@ -70,13 +87,6 @@
                                             </div>
                                         </div>
 
-                                    </div>
-
-                                    <div class="card-footer">
-                                        <a href="show-graphic-afternon.php">
-                                            Grafica
-                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
-                                        </a>
                                     </div>
                                 </div>
                         </div>

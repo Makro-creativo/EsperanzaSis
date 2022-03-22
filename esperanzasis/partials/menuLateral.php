@@ -167,6 +167,20 @@
         </div>
     </div>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#delivery-man"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa-solid fa-bicycle"></i>
+        <span>Gestión de repartidores</span>
+    </a>
+    <div id="delivery-man" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-delivery-man.php">Crear nuevo repartidor</a>
+            <a class="collapse-item" href="show-deliveries-man.php">Repartidores</a>
+        </div>
+    </div>
+</li>
 <?php }?>
 
 
@@ -335,7 +349,8 @@
     <div id="cutBox" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="new-cut-box.php">Registrar corte de caja</a>
-            <a class="collapse-item" href="show-cut-box.php">Lista de cortes de caja</a>
+            <a class="collapse-item" href="show-cut-box.php">Lista de corte súper</a>
+            <a class="collapse-item" href="show-cut-box-rute.php">Lista de corte ruta</a>
             <a class="collapse-item" href="total-cut-turn-morning.php">Total de la mañana</a>
             <a class="collapse-item" href="total-cut-turn-afternon.php">Total de la tarde</a>
             <a class="collapse-item" href="total-cut-day.php">Total de día</a>

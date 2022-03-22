@@ -1,25 +1,26 @@
 <?php 
     include "./config/conexion.php";
+    
+    if(isset($_POST['editRuta'])) {
+        $idCutRute = $_POST['id_cutbox_ruta'];
+        $array = explode("_", $idCutRute);
+        $idNameRute = $array[0];
 
-    if(isset($_POST['editCut'])) {
-        $idCutSuper = $_POST['id_cut_super'];
-        $array = explode("_", $idCutSuper);
-        $idNameSuper = $array[0];
-
-        $openingDate = $_POST['opening_date'];
-        $personDelivery = $_POST['person_delivery'];
-        $personReceive = $_POST['person_receive'];
+        $openingDateTwo = $_POST['opening_date'];
+        $personDeliveryTwo = $_POST['person_delivery'];
+        $personReceiveTwo = $_POST['person_receive'];
         $turn = $_POST['turn'];
-        $concept = $_POST['concept'];
-        $closingAmount = $_POST['closing_amount'];
-        $paymentServices = $_POST['payment_services'];
-        $numberNotes = $_POST['number_notes'];
+        $conceptTwo = $_POST['concept_two'];
+        $amount = $_POST['amount'];
+        $paymentServicesTwo = $_POST['payment_services_two'];
+        $notes = $_POST['notes'];
 
-        $query_update = "UPDATE cutbox_super SET id_box='$idCutSuper', opening_date='$openingDate', person_delivery='$personDelivery', person_receive='$personReceive', turn='$turn', concept='$concept', closing_amount='$closingAmount', payment_services='$paymentServices', number_notes='$numberNotes' WHERE id_box = '$idCutSuper'";
-        mysqli_query($conexion, $query_update);
+        $query_update_rute = "UPDATE cutbox_ruta SET id_box='$idCutRute', opening_date='$openingDateTwo', person_delivery='$personDeliveryTwo', person_receive='$personReceiveTwo', turn='$turn', concept_two='$conceptTwo', amount='$amount', payment_services_two='$paymentServicesTwo', notes='$notes' WHERE id_box = '$idCutRute'";
+        mysqli_query($conexion, $query_update_rute);
 
-        header("location: show-cut-box.php");
+        header("location: show-cut-box-rute.php");
     }
+
 ?>
 
 
@@ -28,10 +29,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=l, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/img/logo_tortilleria_la_esperanza.svg">
     <title>EsperanzaSis</title>
-
 
     <!-- Custom fonts for this template-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -57,55 +57,56 @@
 
                 <?php 
                     include "./config/conexion.php";
+                    
 
                     if(isset($_GET['id_box'])) {
-                        $idBox = $_GET['id_box'];
+                        $idBoxRuta = $_GET['id_box'];
 
-                        $search_data = "SELECT * FROM cutbox_super WHERE id_box = '$idBox'";
-                        $result = mysqli_query($conexion, $search_data);
+                        $search_cutbox_ruta = "SELECT * FROM cutbox_ruta WHERE id_box = '$idBoxRuta'";
+                        $result_ruta = mysqli_query($conexion, $search_cutbox_ruta);
 
-                        if($result) {
-                            $row = mysqli_fetch_array($result);
+                        if($result_ruta) {
+                            $row = mysqli_fetch_array($result_ruta);
 
-                            $openingDate = $row['opening_date'];
-                            $personDelivery = $row['person_delivery'];
-                            $personReceive = $row['person_receive'];
+                            $openingDateTwo = $row['opening_date'];
+                            $personDeliveryTwo = $row['person_delivery'];
+                            $personReceiveTwo = $row['person_receive'];
                             $turn = $row['turn'];
-                            $concept = $row['concept'];
-                            $closingAmount = $row['closing_amount'];
-                            $paymentServices = $row['payment_services'];
-                            $numberNotes = $row['number_notes'];
+                            $conceptTwo = $row['concept_two'];
+                            $amount = $row['amount'];
+                            $paymentServicesTwo = $row['payment_services_two'];
+                            $notes = $row['notes'];
                         }
                     }
                 ?>
 
                 <div class="container">
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Editar corte de caja súper</h2>
+                        <h2 class="d-flex justify-content-start mb-4">Editar corte de ruta</h2>
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
                                 <div class="card-body">
-                                    <form action="edit-cut-box.php" method="POST">
-                                        <input type="hidden" name="id_cut_super" value="<?php echo $idBox; ?>">
+                                    <form action="edit-cutbox-ruta.php" method="POST">
+                                        <input type="hidden" value="<?php echo $idBoxRuta; ?>" name="id_cutbox_ruta">
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Fecha: </label>
-                                                    <input value="<?php echo $openingDate; ?>" type="date" name="opening_date" class="form-control">
+                                                    <input value="<?php echo $openingDateTwo; ?>" type="date" name="opening_date" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Persona que entrego: </label>
-                                                    <input type="text" value="<?php echo $personDelivery; ?>" name="person_delivery" class="form-control">
+                                                    <label>Persona que entrega: </label>
+                                                    <input value="<?php echo $personDeliveryTwo; ?>" type="text" name="person_delivery" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Persona que recibio: </label>
-                                                    <input type="text" value="<?php echo $personReceive; ?>" name="person_receive" class="form-control">
+                                                    <label>Persona que recibe: </label>
+                                                    <input value="<?php echo $personReceiveTwo; ?>" type="text" name="person_receive" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -121,14 +122,14 @@
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Concepto: </label>
-                                                    <input type="text" value="<?php echo $concept; ?>" name="concept" class="form-control">
+                                                    <input type="text" value="<?php echo $conceptTwo; ?>" name="concept_two" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Monto: </label>
-                                                    <input type="text" value="<?php echo $closingAmount; ?>" name="closing_amount" class="form-control">
+                                                    <input type="text" value="<?php echo $amount; ?>" name="amount" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -137,19 +138,19 @@
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Bauchers: </label>
-                                                    <input type="text" value="<?php echo $paymentServices; ?>" name="payment_services" class="form-control">
+                                                    <input type="text" value="<?php echo $paymentServicesTwo; ?>" name="payment_services_two" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Número de nota o Factura: </label>
-                                                    <input type="text" value="<?php echo $numberNotes; ?>" name="number_notes" class="form-control">
+                                                    <label>Número de nota o factura: </label>
+                                                    <input type="text" value="<?php echo $notes; ?>" name="notes" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <input type="submit" value="Actualizar corte" class="btn btn-success btn-block mt-4" name="editCut">
+                                        <input type="submit" value="Actualizar corte" class="btn btn-success btn-block mt-4" name="editRuta">
                                     </form>
                                 </div>
                             </div>
@@ -158,12 +159,14 @@
                 </div>
 
             </div>
+            <br>
 
             <?php include "./partials/footer.php" ?>
 
         </div>
 
     </div>
+
 
 
 
@@ -194,6 +197,6 @@
 
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script> 
+    <script src="../js/demo/chart-pie-demo.js"></script>
 </body>
 </html>

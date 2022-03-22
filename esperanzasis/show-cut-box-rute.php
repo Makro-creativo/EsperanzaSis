@@ -1,7 +1,10 @@
 <?php 
-    session_start();
+    if(!isset($_SESSION)) {
+        session_start();
+    }
 
     $typeUser = $_SESSION['Tipo'];
+
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +28,7 @@
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body id="page-top">
     <div id="wrapper">
@@ -36,7 +40,7 @@
 
                 <div class="container">
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Corte del súper</h2>
+                        <h2 class="d-flex justify-content-start mb-4">Corte de ruta</h2>
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
                                 <div class="card-body">
@@ -62,50 +66,45 @@
                                                     <?php }?>
                                                 </tr>
                                             </thead>
-
                                             <tbody>
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $dateDelivery = $_GET['date_delivery'];
+                                                    $search_cut_rute = "SELECT * FROM cutbox_ruta";
+                                                    $result_cut_rute = mysqli_query($conexion, $search_cut_rute);
 
-                                                    $sql_query = "SELECT * FROM cutbox_super";
-                                                    $result_query = mysqli_query($conexion, $sql_query);
-
-                                                    while($row = mysqli_fetch_array($result_query)) {                                                
-                                                        
+                                                    while($row = mysqli_fetch_array($result_cut_rute)) {
                                                 ?>
-
                                                 <tr>
-                                                    <td><?php echo date("d/m/Y", strtotime($row['opening_date'])); ?></td>
+                                                    <td><?php echo date('m-d-Y', strtotime($row['opening_date'])); ?></td>
                                                     <td><?php echo $row['person_delivery']; ?></td>
                                                     <td><?php echo $row['person_receive']; ?></td>
                                                     <td><?php echo $row['turn']; ?></td>
-                                                    <td><?php echo $row['concept']; ?></td>
-                                                    <td><?php echo number_format($row['payment_services'], 2); ?></td>
-                                                    <td><?php echo number_format($row['closing_amount'], 2); ?></td>
+                                                    <td><?php echo $row['concept_two']; ?></td>
+                                                    <td><?php echo number_format($row['amount'], 2); ?></td>
+                                                    <td><?php echo number_format($row['payment_services_two'], 2); ?></td>
                                                     <td>
                                                         <?php 
-                                                            $total_cut = $row['closing_amount'] + $row['payment_services'];
+                                                            $total_cut_rute = $row['amount'] + $row['payment_services_two'];
 
-                                                            echo number_format($total_cut, 2);
+                                                            echo number_format($total_cut_rute, 2);
                                                         ?>
                                                     </td>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>
-                                                            <a class="btn btn-success" href="edit-cut-box.php?id_box=<?php echo $row['id_box']; ?>">
-                                                                <i class="fas fa-edit"></i>
+                                                            <a class="btn btn-success" href="edit-cutbox-ruta.php?id_box=<?php echo $row['id_box']; ?>">
+                                                                <i class="fa-solid fa-pen-to-square"></i>
                                                             </a>
                                                         </td>
-                                                    <?php }?>
 
-                                                    <?php if($typeUser === "Administrador") {?>
-                                                        <td>
-                                                            <a class="btn btn-danger" href="delete-cut-box.php?id_box=<?php echo $row['id_box']; ?>">
-                                                                <i class="fas fa-trash-alt"></i>
-                                                            </a>
-                                                        </td>
+                                                        <?php if($typeUser === "Administrador") {?>
+                                                            <td>
+                                                                <a class="btn btn-danger" href="delete-cutbox-ruta.php?id_box=<?php echo $row['id_box']; ?>">
+                                                                    <i class="fa-solid fa-trash-can"></i>
+                                                                </a>
+                                                            </td>
+                                                        <?php }?>
                                                     <?php }?>
                                                 </tr>
 
@@ -127,6 +126,7 @@
         </div>
 
     </div>
+
 
 
 

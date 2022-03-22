@@ -1,37 +1,34 @@
 <?php 
     include "./config/conexion.php";
 
-    if(isset($_POST['cutRegister'])) {
+    if(isset($_POST['saveCut'])) { 
+
+        $search_id = "SELECT id_box FROM cutbox_super";
+
+        // Info table super
         $openingDate = $_POST['opening_date'];
         $personDelivery = $_POST['person_delivery'];
         $personReceive = $_POST['person_receive'];
         $turn = $_POST['turn'];
         $concept = $_POST['concept'];
-        //$openingAmount = $_POST['opening_amount'];
         $closingAmount = $_POST['closing_amount'];
         $paymentServices = $_POST['payment_services'];
-        $hourOpening = $_POST['hour_opening'];
-        $hourSavedCut = $_POST['hour_saved_cut'];
+        $numberNotes = $_POST['number_notes'];
 
-        $query_save_cut_box = "INSERT INTO cutbox(opening_date, person_delivery, person_receive, turn, concept, closing_amount, payment_services, hour_opening, hour_saved_cut) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$concept', '$closingAmount', '$paymentServices', '$hourOpening', '$hourSavedCut')";
-        $result_cut_box = mysqli_query($conexion, $query_save_cut_box);
+        // info table tortillería
+        $conceptTwo = $_POST['concept_two'];
+        $amount = $_POST['amount'];
+        $paymentServicesTwo = $_POST['payment_services_two'];
+        $notes = $_POST['notes'];
 
-        if(!$result_cut_box) {
-            echo '
-            <script>
-            javascript"> 
-                Swal.fire({ 
-                    icon: "error", 
-                    title: "Oops...", 
-                    text: "!No se pudo regitrar la caja correctamente, intente nuevamente...", 
-                    showConfirmButton: true, 
-                    confirmButtonText: "Cerrar" })
-                    .then(function(result) { 
-                        if(result) { 
-                            window.location = "new-cut-box.php"; 
-                        } 
-                    }); 
-            </script>';
+        $query_save_cut_box = "INSERT INTO cutbox_super(opening_date, person_delivery, person_receive, turn, concept, closing_amount, payment_services, number_notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$concept', '$closingAmount', '$paymentServices', '$numberNotes')";
+        $query_save_cut_box_two = "INSERT INTO cutbox_ruta(opening_date, person_delivery, person_receive, turn, concept_two, amount, payment_services_two, notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$conceptTwo', '$amount', '$paymentServicesTwo', '$notes')";
+
+        $result_one = mysqli_query($conexion, $query_save_cut_box);
+        $result_two = mysqli_query($conexion, $query_save_cut_box_two);
+        
+        if(!$result_one && $result_two) {
+            die("No se pudo guardar el corte de caja correctamente, intentelo de nuevo...");
         }
 
         header("location: show-cut-box.php");
@@ -81,6 +78,7 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg border-top">
+                                <h6 class="text-center text-primary mt-4">Concepto Súper</h6>
                                 <div class="card-body">
                                     <form action="new-cut-box.php" method="POST">
                                         <div class="row">
@@ -94,14 +92,14 @@
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Persona que entrega: </label>
-                                                    <input type="text" placeholder="Ejemplo: Jorge Gonzales, etc..." class="form-control" name="person_delivery">
+                                                    <input type="text" placeholder="Fatima, Rigo camejo, etc..." name="person_delivery" class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Persona que recibe: </label>
-                                                    <input type="text" placeholder="Ejemplo: Adrian Hernandez, etc..." class="form-control" name="person_receive">
+                                                    <input type="text" placeholder="Rigo camejo, Hector, etc..." name="person_receive" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -109,7 +107,7 @@
                                         <div class="row">
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Turno que entrega: </label>
+                                                    <label>Turno: </label>
                                                     <select name="turn" require required class="form-select">
                                                         <option selected disabled>Seleccionar turno</option>
                                                         <option value="Turno de la mañana">Turno de la mañana</option>
@@ -122,48 +120,71 @@
                                                 <div class="form-group">
                                                     <label>Concepto: </label>
                                                     <select name="concept" require required class="form-select">
-                                                        <option selected disabled>Seleccione concepto</option>
-                                                        <option value="Comisiónes">Comisiónes</option>
-                                                        <option value="Tortillería">Tortillería</option>
-                                                        <option value="Super">Super</option>
+                                                        <option selected value="Super">Super</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Efectivo: </label>
-                                                    <input type="text" placeholder="Ejemplo: 2500, 1500, etc..." class="form-control" name="payment_services">
+                                                    <label>Monto: </label>
+                                                    <input type="text" placeholder="Ejemplo: 5000, 1500, etc.." name="closing_amount" class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Bauchers: </label>
-                                                    <input type="text" placeholder="Ejemplo: 2500, 1500, etc..." class="form-control" name="closing_amount">
+                                                    <input type="text" placeholder="Ejemplo: 500, 450, 280, etc.." name="payment_services" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Número de nota o Factura: </label>
+                                                    <input type="text" placeholder="Ejemplo: 45678MJ, etc..." class="form-control" name="number_notes">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+
+                                        <h6 class="text-center mt-4 text-primary">Concepto Ruta</h6>
+
+                                        <div class="row mt-4">
+                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                 <div class="form-group">
-                                                    <label>Hora de apertura: </label>
-                                                    <input type="time" name="hour_opening" class="form-control">
+                                                    <label>Concepto: </label>
+                                                    <select name="concept_two" require required class="form-select">
+                                                        <option selected value="Ruta">Ruta</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                 <div class="form-group">
-                                                    <label>Hora de cierre: </label>
-                                                    <input type="time" name="hour_saved_cut" class="form-control">
+                                                    <label>Monto: </label>
+                                                    <input type="text" placeholder="Ejemplo: 6000, 4500, etc.." class="form-control" name="amount">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                                                <div class="form-group">
+                                                    <label>Bauchers: </label>
+                                                    <input type="text" placeholder="Ejemplo: 560, 600, etc..." name="payment_services_two" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                                                <div class="form-group">
+                                                    <label>Número de nota o Factura: </label>
+                                                    <input name="notes" type="text" placeholder="Ejemplo: 422-0001, etc..." class="form-control">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <input type="submit" value="Registrar corte" class="btn btn-success btn-block" name="cutRegister">
+                                        <input type="submit" value="Registrar corte" class="btn btn-success btn-block mt-4" name="saveCut">
                                     </form>
                                 </div>
                             </div>
@@ -172,6 +193,7 @@
                 </div>
 
             </div>
+            <br>
 
             <?php include "./partials/footer.php" ?>
 

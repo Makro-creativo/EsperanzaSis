@@ -34,7 +34,26 @@
 <body>
         <div class="ticket">
             <img src="assets/img/logo_tortilleria_la_esperanza.svg" alt="Logo la esperanza" class="center">
+            <?php 
+                include "./config/conexion.php";
 
+                if(isset($_GET['purchaseid'])) {
+                    $purchaseid = $_GET['purchaseid'];
+                    
+
+                    $query_total = "SELECT * FROM orders_admin WHERE purchaseid = '$purchaseid'";
+                    $result_total = mysqli_query($conexion, $query_total);
+
+                    if($result_total) {
+                        $rowTwo = mysqli_fetch_array($result_total);
+
+                        $hourSend = $rowTwo['hour_send'];
+                        $deliveryMan = $rowTwo['name_delivery'];
+                    }
+                }
+
+                
+            ?>
             <div class="grid-three">
                 <p>Tortillería la Esperanza</p>
                 <p>Av. Paseo de la Primavera número #2195</p>
@@ -42,16 +61,18 @@
             </div>
 
             <div class="column-two">
-                <p>Código postal: 45060</p>
+                <p>Código postal: 45066</p>
                 <p>Telefono: 3312 333924</p>
             </div>
             <table>
                 <thead>
                     <tr>
-                        <th>Dirección de entrega</th>
+                        <th>Cliente</th>
                         <th>Cantidad</th>
                         <th>Descripción</th>
-                        <th>$Precio Unitario</th>
+                        <th>Repartidor</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,10 +89,10 @@
 
                             <tr>
                                 <td>
-                                    <?php echo $row['address_send']; ?>
+                                    <?php echo $row['name_order']; ?>
                                 </td>
 
-                                <td>
+                                <td style="text-align: center;">
                                     <?php echo $row['quantity']; ?>
                                 </td>
 
@@ -79,9 +100,19 @@
                                     <?php echo $row['name_product']; ?>
                                 </td>
 
+                                <td><?php echo $deliveryMan; ?></td>
+
                                 <td>
                                     <?php 
                                         echo number_format($row['price'], 2);
+                                    ?>
+                                </td>
+
+                                <td>
+                                    <?php 
+                                        $subtotal = $row['price'] * $row['quantity'];
+
+                                        echo number_format($subtotal, 2);
                                     ?>
                                 </td>
                         <?php }?>

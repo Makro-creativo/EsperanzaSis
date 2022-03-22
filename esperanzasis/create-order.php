@@ -10,7 +10,7 @@
         $hourSend = $_POST['hour_send'];
         $peopleOrder = $_POST['people_order'];
         $comments = $_POST['comments'];
-        $calification = $_POST['calification'];
+        $nameDelivery = $_POST['name_delivery'];
 
         $arrayCheckProductId = $_POST['productid'];
         $arrayCheckQuantity = $_POST['quantity'];
@@ -18,7 +18,7 @@
         $sizeArray = sizeof($arrayCheckProductId);
 
         // Guardado el pedido
-        $query_new_order = "INSERT INTO orders_admin(id_user, name_order, address_send, date_send, hour_send, people_order, comments, calification, date_purchase) VALUES('$id_user', '$nameClient', '$addressSend', '$dateSend', '$hourSend', '$peopleOrder', '$comments', '$calification', NOW())";
+        $query_new_order = "INSERT INTO orders_admin(id_user, name_order, address_send, date_send, hour_send, people_order, comments, name_delivery, date_purchase) VALUES('$id_user', '$nameClient', '$addressSend', '$dateSend', '$hourSend', '$peopleOrder', '$comments', '$nameDelivery', NOW())";
         $result_orders = mysqli_query($conexion, $query_new_order);
 
         $pid = $conexion->insert_id;

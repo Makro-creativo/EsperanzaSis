@@ -51,13 +51,24 @@
                                                     <?php 
                                                         include "./config/conexion.php";
                                                         
-                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox WHERE hour_opening BETWEEN hour_opening AND hour_saved_cut AND turn = 'Turno de la tarde'");
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super WHERE turn = 'Turno de la tarde'");
+                                                        $query_total_rute = mysqli_query($conexion, "SELECT * FROM cutbox_ruta WHERE turn = 'Turno de la tarde'");
                                                         
                                                         $total = 0;
+                                                        $total_rute = 0;
+
+                                                        while($rowRute = mysqli_fetch_array($query_total_rute)) {
+                                                            $amount = $rowRute['amount'];
+                                                            $paymentServicesTwo = $rowRute['payment_services_two'];
+
+                                                            $total_rute_two = $amount + $paymentServicesTwo;
+
 
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
                                                             $closing_amount = $row['closing_amount'];   
                                                             $total_services = $row['payment_services'];
+
+                                                            $total_super = $closing_amount + $total_services;
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $row['opening_date']; ?></td>
@@ -70,12 +81,14 @@
                                                         <td class="text-center"><?php echo $row['concept']; ?></td>
                                                         <td class="text-right">
                                                             $<?php 
-                                                                $total_cut = $closing_amount + $total_services;
+                                                                $total_cut = $total_rute_two + $total_super;
 
                                                                 echo number_format($total_cut, 2);
                                                             ?>
                                                         </td>
                                                     </tr>
+
+                                                <?php }?>
                                                         
                                                 <?php 
                                                     $total+=$total_cut;

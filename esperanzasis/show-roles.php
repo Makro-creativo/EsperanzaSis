@@ -192,7 +192,22 @@
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6 mt-4">
                                                 <div class="form-group">
                                                     <label>Elije un usuario: </label>
-                                                    <input type="text" name="name" class="form-control" placeholder="Ejemplo: Jose, Miguel, etc.." autocomplete="off">
+                                                    <select name="info_delivery" required require class="form-select">
+                                                        <option disabled selected>Seleccionar repartidor</option>
+                                                        <?php 
+                                                            include "./config/conexion.php";
+                                                                
+                                                            $search_deliveries = "SELECT * FROM delivery_man";
+                                                            $result_deliveries = mysqli_query($conexion, $search_deliveries);
+
+                                                            while($row2 = mysqli_fetch_array($result_deliveries)) {
+                                                                $idDelivery = $row2['id_user'];
+                                                                $nameDelivery = $row2['name'];
+                                                                $lastName = $row2['last_name'];
+                                                        ?>
+                                                            <option value="<?php echo $idDelivery."_".$nameDelivery; ?>"><?php echo $nameDelivery." ".$lastName; ?></option>
+                                                        <?php }?>
+                                                    </select>
                                                 </div>
                                             </div>
 
