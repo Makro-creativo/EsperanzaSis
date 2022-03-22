@@ -77,6 +77,7 @@
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
+                                                <th>ID Pedido</th>
                                                 <th>Cliente</th>
                                                 <th>Dirección de envío</th>
                                                 <th>Fecha de envío</th>
@@ -98,6 +99,7 @@
                                                         $purchaseid = $row['purchaseid'];
                                                 ?>
                                                 <tr>
+                                                    <td><?php echo $row['purchaseid']; ?></td>
                                                     <td><?php echo $row['name_order']; ?></td>
                                                     <td><?php echo $row['address_send']; ?></td>
                                                     <td><?php echo date('d-m-Y', strtotime($row['date_send'])); ?></td>
