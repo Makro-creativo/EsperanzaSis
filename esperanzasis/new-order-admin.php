@@ -1,5 +1,7 @@
 <?php 
-    session_start();
+    if(!isset($_SESSION)) {
+        session_start();
+    }
 
     $typeUser = $_SESSION['Tipo'];
 ?>
@@ -42,7 +44,7 @@
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
                                 <div class="card-body">
-                                    <form action="create-order.php" method="POST" enctype="multipart/form-data">
+                                    <form action="create-order.php" method="POST">
                                         <input type="hidden" value="<?php echo $typeUser; ?>" name="id_user_active_order">
 
                                         <div class="table-responsive">
@@ -65,16 +67,8 @@
                                                         $iterate=0;
 
                                                         while($row = mysqli_fetch_array($result)){ 
-                                                            $idProduct = $row['productid']; //30
                                                             $priceNormal =  number_format($row['price'], 2);
-
-                                                            //Buscar si es que existe un descuento
-                                                            $searchData = "SELECT * FROM promotions WHERE productid='$idProduct' AND id_user = '$uid' ";
-                                                            $result_price = mysqli_query($conexion, $searchData);
-                                                                        
-                                                            $rowProductDiscount = mysqli_fetch_array($result_price);
-                                                            //$discountProduct = $rowProductDiscount['discount'];
-                                                    ?>
+                                                        ?>
                                                             <tr>
                                                                 <!--<td required class="text-center"><input type="checkbox" value="<?php //echo $row['productid']; ?>||<?php //echo $iterate; ?>" name="productid[]" style=""></td>-->
                                                                 <td required class="text-center"><input type="checkbox" value="<?php echo $row['productid']."_".$row['price']; ?>" name="productid[]" style=""></td>
@@ -89,16 +83,6 @@
 
                                                                 <td>
                                                                     <?php echo number_format($row['price'], 2); ?>		
-                                                                </td>
-
-                                                                <td>
-                                                                    <?php 
-                                                                        if($discountProduct) {
-                                                                            echo number_format($discountProduct);
-                                                                        } else {
-                                                                            number_format($priceNormal);
-                                                                        }
-                                                                    ?>
                                                                 </td>
                                                                 
                                                             </tr>
@@ -142,21 +126,21 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                 <div class="form-group">
                                                     <label>Persona quién ordeno pedido: </label>
                                                     <input name="people_order" type="text" placeholder="Ejemplo: Jorge Hernandez, etc..." class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                 <div class="form-group">
                                                     <label>Comentarios: </label>
                                                     <textarea name="comments" rows="1" placeholder="Ejemplo: Buen servicio, siempre a tiempo, etc..." class="form-control"></textarea>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                 <div class="form-group">
                                                     <label>Asignar pedido: </label>
                                                     <select name="name_delivery" require required class="form-select">
@@ -174,6 +158,31 @@
 
                                                         <?php }?>
                                                     </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                                                <div class="form-group">
+                                                    <label>Estatus de pago: </label>
+                                                    <select name="status_payment" id="status_payment" onChange="showRoleId(this.value);" require required class="form-select">
+                                                        <option disabled selected>Selecciona un opción</option>
+                                                        <option value="credito">A credito</option>
+                                                        <option value="contado">A contado</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12" id="credito" style="display: none;">
+                                                <div class="form-group">
+                                                    <label>Número de nota: </label>
+                                                    <input type="text" name="note_cobranza_credito" placeholder="Ejemplo: 03456, etc..." class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12" id="contado" style="display: none;">
+                                                <div class="form-group">
+                                                    <label>Número de nota: </label>
+                                                    <input type="text" name="note_cobranza_credito" placeholder="Ejemplo: 03456, etc..." class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -227,12 +236,26 @@
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
 
-    <script type="text/javascript">
+	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#checkAll").click(function(){
 				$('input:checkbox').not(this).prop('checked', this.checked);
 			});
 		});
 	</script>
+
+    <script>
+        function showRoleId(id) {
+            if(id === "credito") {
+                $("#credito").show();
+                $("#contado").hide();
+            }
+
+            if(id === "contado") {
+                $("#credito").hide();
+                $("#contado").show();
+            }
+        }
+    </script>
 </body>
 </html>
