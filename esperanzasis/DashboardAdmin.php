@@ -643,6 +643,59 @@
                 </div>
             </div>
 
+            <div class="container">
+                <div class="row">
+                <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3 mt-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Cobranza</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_total_orders = mysqli_query($conexion, "SELECT * FROM orders_admin");
+                                                        
+                                                        $total = 0;
+
+                                                        while($rowOrder = mysqli_fetch_array($search_total_orders)) {
+                                                            $totalOrdersAdmin = $rowOrder['total'];
+                                                    ?>
+
+                                                    <?php 
+                                                        $totalNeto = $total+=$totalOrdersAdmin;
+                                                    }?>
+
+                                                    <tr>
+                                                        <th colspan='' class='text-center'>
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                            <?php
+                                                                echo number_format($totalNeto, 2);
+                                                            ?>
+                                                        </th>
+                                                    </tr> 
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fa-solid fa-circle-dollar-to-slot fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-cobranza-for-date.php">
+                                            Grafica de cobranza
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+
             <h2 class="mt-4 d-flex justify-content-center text-dark">Administración de Gastos e Ingresos</h2>
 
             <div class="container p-4">
