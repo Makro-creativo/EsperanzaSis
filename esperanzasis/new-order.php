@@ -1,8 +1,5 @@
 <?php
   	include "./config/conexion.php";
-
-
-	
 ?>
 
 
@@ -133,18 +130,18 @@
 									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
 										<div class="form-group">
 											<label>Fecha de envío: </label>
-											<input type="date"  min="<?php echo date('Y-m-d'); ?>" name="date_send" class="form-control" required>
+											<input type="date" name="date_send" class="form-control" required>
 										</div>
 									</div>
 								</div>
 
 								<div class="row">
-									<div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
 										<label>Comentarios del cliente: </label>
 										<textarea name="comments" rows="4" class="form-control" placeholder="Ejemplo: La recepción es en la cocina o preguntar por el chef, etc..." autocomplete="off" required></textarea>
 									</div>
 
-									<div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-5">
+									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
 										<label>Califica nuestro servicio: </label>
 										<select name="calification" require class="form-select" required>
 											<option selected disabled>Elija una calificación</option>
@@ -154,6 +151,33 @@
 											<option value="4 estrellas">4 estrellas</option>
 											<option value="5 estrellas">5 estrellas</option>
 										</select>
+									</div>
+
+									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+										<div class="form-group">
+											<label>Estatus de pago: </label>
+											<select onChange="showStatusPayment(this.value);" name="status_payment_client" require required class="form-select">
+												<option selected disabled>Selecciona una opción</option>
+												<option value="Credito">A Credito</option>
+												<option value="Contado">A Contado</option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-3" id="Credito" style="display: none;">
+										<div class="form-group">
+											<label>Número de nota: </label>
+											<input type="text" placeholder="Ejemplo: 040456, etc..." name="number_note" class="form-control">
+										</div>
+									</div>
+
+									<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-3" id="Contado" style="display: none;">
+										<div class="form-group">
+											<label>Número de nota: </label>
+											<input type="text" placeholder="Ejemplo: 040458, etc..." name="number_note" class="form-control">
+										</div>
 									</div>
 								</div>
 
@@ -216,6 +240,20 @@
 				$('input:checkbox').not(this).prop('checked', this.checked);
 			});
 		});
+	</script>
+
+	<script>
+		function showStatusPayment(id) {
+			if(id === "Credito") {
+				$("#Credito").show();
+				$("#Contado").hide();
+			}
+
+			if(id === "Contado") {
+				$("#Credito").hide();
+				$("#Contado").show();
+			}
+		}
 	</script>
 </body>
 </html>
