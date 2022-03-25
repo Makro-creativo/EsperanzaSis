@@ -37,6 +37,7 @@
 									<div class="table-responsive">
 										<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 											<thead>
+												<th>ID Pedido</th>
 												<th>Cliente</th>
 												<th>Dirección de entrega</th>
 												<th>Fecha de entrega</th>
@@ -44,6 +45,8 @@
 												<th>Encargado del pedido</th>
 												<th>Comentarios del cliente</th>
 												<th>Fecha que se hizo el pedido</th>
+												<th>Estatus de pago</th>
+												<th>Número de nota</th>
 												<th>Total a pagar</th>
 												<th>Eliminar</th>
 												<th>Detalles del pedido</th>
@@ -60,6 +63,7 @@
 														?>
 														
 														<tr>
+															<td><?php echo $row['purchaseid']; ?></td>
 															<td><?php echo $row['client_name']; ?></td>
 															<td><?php echo $row['address_send']; ?></td>
 															<td><?php echo date("d/m/Y", strtotime($row['date_send'])); ?></td>
@@ -68,6 +72,8 @@
 															<td><?php echo $row['comments']; ?></td>
 															
 															<td><?php echo date('Y-m-d h:i A', strtotime($row['date_purchase'])) ?></td>
+															<td><?php echo $row['status_payment_client']; ?></td>
+															<td><?php echo $row['number_note']; ?></td>
 															<td><?php echo number_format($row['total'], 2); ?></td>
 															
 															<td class="text-center">
@@ -167,8 +173,26 @@
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
 
-	<script>
+	<!-- Scripts for buttons for export to excel -->
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+
+    <script>
 		const table = $('#dataTable').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i>',
+                    titleAttr: 'EXCEL',
+                    className: 'btn btn-success'
+                }
+            ],
 			language: {
 				"decimal": "",
 				"emptyTable": "No hay información",
