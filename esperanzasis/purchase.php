@@ -7,6 +7,8 @@
         $people_order = $_POST['people_order'];
 		$comments = $_POST['comments'];
 		$calification = $_POST['calification'];
+        $statusPaymentClient = $_POST['status_payment_client'];
+        $numberNote = $_POST['number_note'];
 
         $arrayCheck = $_POST['productid'];
         $arrayQuantity = $_POST['quantity'];
@@ -19,7 +21,7 @@
 		$rowClient = mysqli_fetch_array($query_clients);
 		$nameClient = $rowClient['name_client'];
 		$addressClient = $rowClient['address_company'];
-            $query_orders = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, calification, date_purchase) VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', '$calification', NOW())";
+            echo $query_orders = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, calification, date_purchase, status_payment_client, number_note) VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', '$calification', NOW(), '$statusPaymentClient', '$numberNote')";
             $result_orders = mysqli_query($conexion, $query_orders);
             $pid = $conexion->insert_id;
             //RECORRRER CHECKBOX CON CANTIDAD DE PRODUCTO
@@ -69,7 +71,7 @@
         $query_update_orders = "UPDATE orders SET total='$total_neto' WHERE purchaseid = '$pid'";
 		$result_update_orders = mysqli_query($conexion, $query_update_orders);
  		
-		header('location: show-sales.php');	
+		//header('location: show-sales.php');	
 
     }else{
 		?>
