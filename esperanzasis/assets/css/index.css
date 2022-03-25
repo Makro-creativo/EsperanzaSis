@@ -1,0 +1,38 @@
+.navbar-light {
+    background-color:#FFFFFF !important;
+}
+
+#section-delivery {
+    background-color: #FFFFFF;
+    width: 100%;
+    min-height: auto;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.py-7 {
+    padding-bottom: 9rem !important;
+    padding-top: 9rem !important;
+}
+
+.nav-link {
+    font-family: 'Poppins', sans-serif !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 1.2em !important;
+}
+
+.btn-success {
+    border: none !important;
+    border-radius: 10px !important;
+}
+
+.btn {
+    padding: 0.500rem 0.90rem !important;
+}
+
+.title {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.subtitle {
+    font-family: 'Poppins', sans-serif !important;
+}

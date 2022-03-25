@@ -1,0 +1,46 @@
+{
+    "name": "EsperanzaSis",
+    "short_name": "EsperanzaSis",
+    "start_url": "https://tortilleriaesperanzasis.laesperanzatortilleria.com/esperanzasis/",
+    "scope": ".",
+    "id": "/esperanzasis/index.html",
+    "display": "standalone",
+    "background_color": "#259C6C",
+    "theme_color": "#FFFFFF",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false, 
+    "icons": [
+        {
+            "src": "assets/images/icons/iconos_la_esperanza-72.png",
+            "type": "image/png", "sizes": "72x72"
+          },
+          {
+              "src": "assets/images/icons/iconos_la_esperanza-96.png",
+              "type": "image/png", "sizes": "96x96"
+          },
+          {
+              "src": "assets/images/icons/iconos_la_esperanza-128.png",
+              "type": "image/png", "sizes": "128x128"
+          },
+          {
+              "src": "assets/images/icons/iconos_la_esperanza-144.png",
+              "type": "image/png", "sizes": "144x144"
+          },
+          {
+              "src": "assets/images/icons/iconos_la_esperanza-152.png",
+              "type": "image/png", "sizes": "152x152"
+          },
+          {
+              "src": "assets/images/icons/iconos_la_esperanza-192.png",
+              "type": "image/png", "sizes": "192x192"
+          },
+          {
+              "src": "assets/images/icons/iconos_la_esperanza-384.png",
+              "type": "image/png", "sizes": "384x384"
+          },
+          {
+              "src": "assets/images/icons/iconos_la_esperanza_512.png",
+              "type": "image/png", "sizes": "512x512"
+          } 
+        ]
+    }

@@ -9,9 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="assets/img/logo_tortilleria_la_esperanza.svg">
-    <link rel="manifest" href="../manifest.json">
-    <meta name="apple-mobile-web-app-status-bar" content="#db4938">
-    <meta name="theme-color" content="#4e73df">
+    <link rel="shortcut icon" href="assets/img/favicon_makro_web.svg">
 
     <title>EsperanzaSis - Login</title>
 
@@ -20,6 +18,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
@@ -71,7 +70,13 @@
                                         <input type="submit" value="Ingresar" class="btn btn-success btn-block btn-user mt-4">
                                        
                                     </form>
-        
+
+                                    <div>
+                                        <a href="index.html" class="text-dark mt-4 ml-2 d-flex justify-content-center align-items-center">
+                                        <i class="fa-solid fa-arrow-left mr-2"></i>
+                                            Regresar a inicio
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -93,8 +98,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
-    
-    <script src="./assets/js/app.js"></script>
 </body>
 
 </html>
