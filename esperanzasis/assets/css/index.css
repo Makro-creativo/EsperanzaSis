@@ -36,3 +36,9 @@
 .subtitle {
     font-family: 'Poppins', sans-serif !important;
 }
+
+.hero-image {
+    background-image: url('../img/banner-esperanza-2.jpeg');
+    width: 100%;
+    height: 100vh;
+}
