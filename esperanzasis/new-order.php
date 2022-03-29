@@ -130,7 +130,7 @@
 									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
 										<div class="form-group">
 											<label>Fecha de envío: </label>
-											<input type="date" name="date_send" class="form-control" required>
+											<input type="date" name="date_send" class="form-control">
 										</div>
 									</div>
 								</div>
