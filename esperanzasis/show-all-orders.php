@@ -88,7 +88,7 @@
 													include "./config/conexion.php";
 
 
-														$query = "SELECT * FROM orders ORDER BY date_purchase DESC, date_send DESC LIMIT 10 OFFSET 0";
+														$query = "SELECT * FROM orders ORDER BY date_purchase ASC, date_send DESC LIMIT 10 OFFSET 0";
 														$result = mysqli_query($conexion, $query);
 														while($row = mysqli_fetch_array($result)){
 															
