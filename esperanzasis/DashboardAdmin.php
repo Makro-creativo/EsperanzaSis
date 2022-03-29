@@ -742,6 +742,104 @@
                                     </div>
                                 </div>
                     </div>
+
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3 mt-4">
+                            <div class="card border-left-secondary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Cobranza (Clientes a credito)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_total_orders_credito = mysqli_query($conexion, "SELECT * FROM orders WHERE status_payment_client = 'credito'");
+                                                        
+                                                        $total = 0;
+
+                                                        while($rowOrderCredito = mysqli_fetch_array($search_total_orders_credito)) {
+                                                            $totalOrdersCredito = $rowOrderCredito['total'];
+                                                    ?>
+
+                                                    <?php 
+                                                        $totalNeto = $total+=$totalOrdersCredito;
+                                                    }?>
+
+                                                    <tr>
+                                                        <th colspan='' class='text-center'>
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                            <?php
+                                                                echo number_format($totalNeto, 2);
+                                                            ?>
+                                                        </th>
+                                                    </tr> 
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fa-solid fa-circle-dollar-to-slot fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-cobranza-for-credito.php">
+                                            Grafica de cobranza clientes con credito
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3 mt-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Cobranza (De Contado)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_total_orders_contado = mysqli_query($conexion, "SELECT * FROM orders WHERE status_payment_client = 'contado'");
+                                                        
+                                                        $total = 0;
+
+                                                        while($rowOrderContado = mysqli_fetch_array($search_total_orders_contado)) {
+                                                            $totalOrdersContado = $rowOrderContado['total'];
+                                                    ?>
+
+                                                    <?php 
+                                                        $totalNeto = $total+=$totalOrdersContado;
+                                                    }?>
+
+                                                    <tr>
+                                                        <th colspan='' class='text-center'>
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                            <?php
+                                                                echo number_format($totalNeto, 2);
+                                                            ?>
+                                                        </th>
+                                                    </tr> 
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fa-solid fa-circle-dollar-to-slot fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-cobranza-for-contado.php">
+                                            Grafica de cobranza clientes de contado
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
                 </div>
             </div>
 
