@@ -1,6 +1,11 @@
 <?php 
     session_start();
-    error_reporting(0);
+    
+    if(!isset($_SESSION['contador'])) {
+        $_SESSION['contador'] = 0;
+    } else {
+        $_SESSION['contador']++;
+    }
 
     $typeUser = $_SESSION['Tipo'];
 ?>
