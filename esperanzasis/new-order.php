@@ -44,7 +44,6 @@
 								<div class="table-responsive">
 								<table class="table">
 										<thead>
-											<th class="text-center">Seleccionar productos<input type="hidden" id="checkAll"></th>
 											<th>Nombre del producto</th>
 											<th>Tipo de Unidad</th>
 											<th>Cantidad</th>
@@ -73,13 +72,14 @@
 												?>
 													<tr>
 														<!--<td required class="text-center"><input type="checkbox" value="<?php //echo $row['productid']; ?>||<?php //echo $iterate; ?>" name="productid[]" style=""></td>-->
-														<td required class="text-center"><input type="checkbox" value="<?php echo $row['productid']."_".$row['price']; ?>" name="productid[]" style=""></td>
+														<!--<td required class="text-center"><input type="checkbox" value="<?php echo $row['productid']."_".$row['price']; ?>" name="productid[]" style=""></td>-->
 														<td><?php echo $row['name_product']; ?></td>
 
 														<td><?php echo $row['unidad']; ?></td>
 
 														<td>
-															<input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity[]">
+															<input placeholder="Agregar cantidad del producto: 0" type="number" class="form-control" autocomplete="off" name="quantity[]">
+															<input type="hidden" value="<?php echo $row['productid']."_".$row['price']; ?>" name="productid[]">
 															<!--<input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity">-->
 														</td>
 
@@ -143,7 +143,7 @@
 
 									<div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
 										<label>Califica nuestro servicio: </label>
-										<select name="calification" require class="form-select" required>
+										<select name="calification" require class="form-select">
 											<option selected disabled>Elija una calificación</option>
 											<option value="1 estrella">1 estrella</option>
 											<option value="2 estrellas">2 estrellas</option>
@@ -176,7 +176,7 @@
 									<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-3" id="Contado" style="display: none;">
 										<div class="form-group">
 											<label>Número de nota: </label>
-											<input type="text" placeholder="Ejemplo: 040458, etc..." name="number_note" class="form-control">
+											<input type="text" placeholder="Ejemplo: 040458, etc..." name="number_note_two" class="form-control">
 										</div>
 									</div>
 								</div>
