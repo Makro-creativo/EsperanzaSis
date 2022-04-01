@@ -182,7 +182,7 @@
                                             <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12" id="contado" style="display: none;">
                                                 <div class="form-group">
                                                     <label>Número de nota: </label>
-                                                    <input type="text" name="note_cobranza_credito" placeholder="Ejemplo: 03456, etc..." class="form-control">
+                                                    <input type="text" name="note_cobranza_credito_two" placeholder="Ejemplo: 03456, etc..." class="form-control">
                                                 </div>
                                             </div>
                                         </div>

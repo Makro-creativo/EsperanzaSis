@@ -104,6 +104,8 @@
 
                                                     while($row = mysqli_fetch_array($result_order_admin)) {
                                                         $purchaseid = $row['purchaseid'];
+                                                        $noteCredito = $row['note_cobranza_credito'];
+                                                        $noteCreditoTwo = $row['note_cobranza_credito_two'];
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $row['purchaseid']; ?></td>
@@ -114,7 +116,15 @@
                                                     <td><?php echo $row['people_order']; ?></td>
                                                     <td><?php echo $row['comments']; ?></td>
                                                     <td><?php echo $row['status_payment']; ?></td>
-                                                    <td><?php echo $row['note_cobranza_credito']; ?></td>
+                                                    <td>
+                                                        <?php
+                                                            if(!$noteCredito) {
+                                                                echo $noteCreditoTwo;
+                                                            } else {
+                                                                echo $noteCredito;
+                                                            }
+                                                        ?>
+                                                    </td>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>

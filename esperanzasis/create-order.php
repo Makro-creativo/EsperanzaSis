@@ -12,6 +12,7 @@
         $nameDelivery = $_POST['name_delivery'];
         $statusPayment = $_POST['status_payment'];
         $noteCredito = $_POST['note_cobranza_credito'];
+        $noteCreditoTwo = $_POST['note_cobranza_credito_two'];
 
         $arrayCheck = $_POST['productid'];
         $arrayQuantity = $_POST['quantity'];
@@ -20,7 +21,7 @@
     
         //INSERTA ORDER
        
-            echo $query_orders = "INSERT INTO orders_admin(id_user, name_order, address_send, date_send, hour_send, people_order, comments, name_delivery, date_purchase, status_payment, note_cobranza_credito) VALUES('$id_user', '$nameClient', '$addressSend', '$dateSend', '$hourSend', '$peopleOrder', '$comments', '$nameDelivery', NOW(), '$statusPayment', '$noteCredito')";
+            echo $query_orders = "INSERT INTO orders_admin(id_user, name_order, address_send, date_send, hour_send, people_order, comments, name_delivery, date_purchase, status_payment, note_cobranza_credito, note_cobranza_credito_two) VALUES('$id_user', '$nameClient', '$addressSend', '$dateSend', '$hourSend', '$peopleOrder', '$comments', '$nameDelivery', NOW(), '$statusPayment', '$noteCredito', '$noteCreditoTwo')";
             $result_orders = mysqli_query($conexion, $query_orders);     
 
             //$pid = $conexion->insert_id;
