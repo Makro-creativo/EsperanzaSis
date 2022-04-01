@@ -59,7 +59,8 @@
 														$query = "SELECT * FROM orders WHERE id_user = '$uid' ORDER BY date_purchase, date_send DESC LIMIT 10 OFFSET 0";
 														$result = mysqli_query($conexion, $query);
 														while($row = mysqli_fetch_array($result)){
-															
+															$numberNote = $row['number_note'];
+															$numberNoteTwo = $row['number_note_two'];
 														?>
 														
 														<tr>
@@ -73,7 +74,15 @@
 															
 															<td><?php echo date('Y-m-d h:i A', strtotime($row['date_purchase'])) ?></td>
 															<td><?php echo $row['status_payment_client']; ?></td>
-															<td><?php echo $row['number_note']; ?></td>
+															<td>
+																<?php
+																	if(!$numberNote) {
+																		echo $numberNoteTwo;
+																	} else {
+																		echo $numberNote;
+																	}
+																?>
+															</td>
 															<td><?php echo number_format($row['total'], 2); ?></td>
 															
 															<td class="text-center">
