@@ -50,7 +50,6 @@
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
-                                                    <th class="text-center">Seleccionar productos<input type="hidden" id="checkAll"></th>
                                                     <th>Nombre del producto</th>
                                                     <th>Tipo de unidad</th>
                                                     <th>Cantidad</th>
@@ -71,13 +70,14 @@
                                                         ?>
                                                             <tr>
                                                                 <!--<td required class="text-center"><input type="checkbox" value="<?php //echo $row['productid']; ?>||<?php //echo $iterate; ?>" name="productid[]" style=""></td>-->
-                                                                <td required class="text-center"><input type="checkbox" value="<?php echo $row['productid']."_".$row['price']; ?>" name="productid[]" style=""></td>
+                                                                <!--<td required class="text-center"><input type="checkbox" value="<?php echo $row['productid']."_".$row['price']; ?>" name="productid[]" style=""></td>-->
                                                                 <td><?php echo $row['name_product']; ?></td>
 
                                                                 <td><?php echo $row['unidad']; ?></td>
 
                                                                 <td>
-                                                                    <input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity[]">
+                                                                    <input placeholder="Agregar cantidad del producto: 0" type="number" class="form-control" autocomplete="off" name="quantity[]">
+                                                                    <input type="hidden" value="<?php echo $row['productid']."_".$row['price']; ?>" name="productid[]">
                                                                     <!--<input placeholder="Agregar cantidad del producto: 0" type="text" class="form-control" autocomplete="off" name="quantity">-->
                                                                 </td>
 
