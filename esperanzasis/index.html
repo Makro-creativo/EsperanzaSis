@@ -1,92 +1,256 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/img/logo_tortilleria_la_esperanza.svg">
-    <title>EsperanzaSis | Home</title>
-    <link rel="manifest" href="manifest.json">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/index.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/img/logo_tortilleria_la_esperanza.svg">
+  <title>EsperanzaSis | Home</title>
 
-     <!-- Soporte para iOS -->
-     <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperaza-72.png" />
-     <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza-128.png" />
-     <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza-144.png" />
-     <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza-152.png" />
-     <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza-192.png" />
-     <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza-384.png" />
-     <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza_512.png" />
-     <meta name="apple-mobile-web-app-status-bar" content="#26986A" />
-     <meta name="theme-color" content="#26986A" />
+  <link rel="manifest" href="manifest.json">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+
+  <!-- Soporte para iOS -->
+  <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperaza-72.png" />
+  <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza-128.png" />
+  <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza-144.png" />
+  <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza-152.png" />
+  <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza-192.png" />
+  <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza-384.png" />
+  <link rel="apple-touch-icon" href="./assets/images/icons/iconos_la_esperanza_512.png" />
+  <meta name="apple-mobile-web-app-status-bar" content="#26986A" />
+  <meta name="theme-color" content="#26986A" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom p-3">
-        <div class="container">
-          <a class="navbar-brand" href="index.html">
-              <img src="./assets/img/logo_tortillas-logo.png" alt="Logo" width="90" height="90" class="img-fluid">
-              La EsperanzaSis
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+  <!-- Navbar -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="./assets/img/logo_tortilleria_la_esperanza.svg" alt="Logo" width="90" height="90">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link text-dark" href="index.html">Inicio</a>
+                <a href="/" class="nav-link">Inicio</a>
               </li>
 
               <li class="nav-item">
-                <a class="btn btn-success" href="login.php">
-                    <i class="fa-solid fa-user"></i>
-                    Iniciar sesión
-                </a>
+                <a href="login.php" class="btn btn-success">Ingresar</a>
               </li>
             </ul>
+        </div>
+      </div>
+    </nav>
+
+  <!-- End Navbar -->
+
+  <!-- Main Section -->
+
+    <section id="section" class="d-flex py-7">
+      <div class="container align-self-center">
+        <div class="row">
+          <div class="col-lg-7 d-flex">
+            <div class="align-self-center">
+              <h1 class="display-4 text-white fw-bold mb-3">EsperanzaSis, sistema para realizar pedidos</h1>
+
+              <p class="text-muted mb-4"> 
+                EsperanzaSis, es un sistema donde podrás ralizar de manera fácil y simple tus pedidos. Contamos con gran variedad de productos y te los llevamos hasta tu casa.
+              </p>
+              
+              <a href="login.php" class="btn btn-success btn-block">Iniciar sesión</a>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <img src="./assets/img/delivery.jpg" alt="Banner" class="img-fluid img-hero mt-4">
           </div>
         </div>
-      </nav>
-
-    <section id="section-delivery" class="py-7">
-        <div class="container align-self-center">
-            <div class="row">
-                <div class="col-lg-5 d-flex">
-                    <div class="align-self-center">
-                        <h1 class="display-4 text-dark fw-bold mb-3 title">EsperanzaSis</h1>
-
-                        <p class="text-muted mb-4 subtitle">
-                            EsperanzaSis, es un sistema donde podrás ralizar de manera fácil y simple tus pedidos.
-                            Contamos con gran variedad de productos y te los llevamos hasta tu casa.
-                        </p>
-                        
-                        <div class="d-grid gap-2">
-                            <a href="login.php" class="btn btn-success mt-2">
-                                <i class="fa-solid fa-user-gear mr-1"></i>
-                                Ingresar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-7">
-                    <img src="./assets/img/delivery.jpg" alt="Banner" class="img-fluid">
-                </div>
-            </div>
-        </div>
-
-        <p class="mt-4 text-center text-muted">@ La esperanzaSis 2021 - 2022 Derechos Reservados</p>
+      </div>
     </section>
 
+  <!-- End Main section -->
+  
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    <script src="./serviceWorker.js"></script>
-    <script src="./app.js"></script>
+  <!-- Second section -->
+
+  <section class="section-two">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4 d-flex align-items-stretch mt-4">
+          <div class="card shadow-lg">
+            <i class="fa-solid fa-truck mx-auto mt-3 text-success"></i>
+            <div class="card-body">
+              <h5 class="card-title text-center">Entrega a domicilio</h5>
+
+              <p class="card-text text-center">Con el sistema esperanzaSis, puedes realizar tus pedidos de manera rápida y sencilla
+                y tu pedido llegara hasta las puertas de tu negocio o casa.
+              </p>              
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4 d-flex align-items-stretch mt-4">
+          <div class="card shadow-lg">
+            <i class="fa-solid fa-motorcycle mx-auto mt-3 text-success"></i>
+            <div class="card-body">
+              <h5 class="card-title text-center">Repartidores</h5>
+
+              <p class="card-text text-center">Nuestros repartidores haran la entrega del pedido y podrán chequiar el pedido
+                a la hora y fecha en que se entrego
+              </p>              
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4 d-flex align-items-stretch mt-4">
+          <div class="card shadow-lg">
+            <i class="fa-solid fa-person-circle-check mx-auto mt-3 text-success"></i>
+            <div class="card-body">
+              <h5 class="card-title text-center">Clientes</h5>
+
+              <p class="card-text text-center">Como cliente tendrás acceso al sistema para poder realizar tus pedidos de forma sencilla y rápida.
+              </p>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- End second section -->
+
+  <!-- Article -->
+
+    <div class="article">
+      <div class="container align-self-center">
+        <div class="row">
+          <div class="col-lg-7">
+           <img src="./assets/img/panel2.jpg" alt="mockup" class="img-fluid mockup shadow-lg mt-4">
+          </div>
+
+          <div class="col-lg-5 d-flex">
+            <div class="align-self-center">
+              <h2 class="display-4 fw-bold mt-4">Panel de control del administrador</h2>
+
+              <p class="text-muted">
+                Desde el panel de control, el administrador del sitio podrá tener acceso a todos los módulos
+                que tiene el sistema. El sistema cuenta con módulo de pedidos, facturas, proveedores, clientes, etc.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- End Article -->
+
+  <!-- Second article -->
+
+    <div class="article-two">
+      <div class="container align-self-center">
+        <div class="row">
+          <div class="col-lg-5 d-flex">
+            <div class="align-self-center">
+              <h2 class="display-4 fw-bold">
+                Panel de control del cliente
+              </h2>
+
+              <p class="text-muted">
+                Desde el panel de control del cliente, el cliente puede realizar sus pedidos.
+                Estos pedidos serán entregados a domicilio por un repartidor.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-7 mt-4">
+            <img src="./assets/img/panel1.jpg" alt="mockup cliente" class="img-fluid mockup-two shadow-lg">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- End second article -->
+
+  <!-- Secton three -->
+
+    <div class="article-three">
+      <div class="container align-self-center">
+        <div class="row">
+          <div class="col-lg-7">
+            <img src="./assets/img/panel3.jpg" alt="mockup repartidor" class="img-fluid mockup-three shadow-lg mt-4">
+          </div>
+
+          <div class="col-lg-5 d-flex">
+            <div class="align-self-center">
+              <h2 class="display-4 fw-bold mt-4">
+                Panel de control del repartidor
+              </h2>
+
+              <p class="text-muted">
+                En el panel de control de repartidor, el repartidor podrá ver todos los pedidos realizados al día.
+                También podrá chequiar los pedidos a la hora de ser entregados.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- End section three -->
+
+  <!-- Footer -->
+  
+  <div class="footer">
+    <footer class="container py-5">
+      <div class="row">
+        <div class="col-12 col-md">
+          <img src="./assets/img/logo_tortilleria_la_esperanza.svg" alt="Logo" class="img-fluid" width="80" height="80">
+          <small class="d-block mb-3 text-muted">&copy; 2021–2022</small>
+        </div>
+        <div class="col-6 col-md">
+          <h5 class="text-white">Dirección</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="link-secondary" href="#">Av. Paseo de la Prímavera 2195,</a></li>
+            <li><a class="link-secondary" href="#">Col. Arenales Tapatios,</a></li>
+            <li><a class="link-secondary" href="#">CP 45006, Zapopan, Jal.</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5 class="text-white">Teléfonos</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="link-secondary" href="#">Teléfono fijo: (33) 3180 5555</a></li>
+            <li><a class="link-secondary" href="#">Whatsapp: (33) 1233 3924</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5 class="text-white">Redes sociales</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="link-secondary" target="_blank" href="https://www.facebook.com/Tortiller%C3%ADa-la-Esperanza-de-Zapop%C3%A1n-312885932858326/"><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a class="link-secondary" target="_blank" href="https://api.whatsapp.com/send?phone=523312333924"><i class="fa-brands fa-whatsapp"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </div>
+  
+
+  <!-- End footer -->
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  <script src="./serviceWorker.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>

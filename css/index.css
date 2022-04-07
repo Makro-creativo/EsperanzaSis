@@ -1,0 +1,99 @@
+html, body {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+#section {
+    background-color: #12151C !important;
+    width: 100%;
+}
+
+.section-two {
+    background-color: #F3F7FA !important;
+    width: 100% !important;
+    min-height: 40vh !important;
+}
+
+.navbar-dark {
+    background-color: #12151C !important;
+}
+
+.py-7 {
+    padding-bottom: 10rem !important;
+    padding-top: 10rem !important;
+}
+
+.img-hero {
+    border-bottom-left-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+.fa-solid {
+    font-size: 5em !important;
+}
+
+.card {
+    border-bottom-left-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+.article {
+    background-color: #F3F7FA !important;
+    width: 100% !important;
+    min-height: 60vh !important;
+}
+
+.article-two {
+    background-color: #F3F7FA !important;
+    width: 100% !important;
+    min-height: 60vh !important;
+}
+
+.article-three {
+    background-color: #F3F7FA !important;
+    width: 100% !important;
+    min-height: 60vh !important;
+}
+
+.footer {
+    background-color: #12151C !important;
+}
+
+
+.mockup {
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.mockup-two {
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.mockup-three {
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.fa-facebook {
+    font-size: 2em !important;
+}
+
+.fa-whatsapp {
+    font-size: 2em !important;
+}
+
+.btn {
+    border-radius: 10px !important;
+    padding: 0.9rem 1.6rem !important;
+
+}

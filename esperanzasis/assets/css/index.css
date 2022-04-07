@@ -1,17 +1,14 @@
-.navbar-light {
-    background-color:#FFFFFF !important;
-}
-
-#section-delivery {
-    background-color: #FFFFFF;
-    width: 100%;
-    min-height: auto;
+html, body {
     font-family: 'Poppins', sans-serif !important;
 }
 
 .py-7 {
     padding-bottom: 9rem !important;
     padding-top: 9rem !important;
+}
+
+.navbar-light {
+    background-color: red !important;
 }
 
 .nav-link {
@@ -37,8 +34,8 @@
     font-family: 'Poppins', sans-serif !important;
 }
 
-.hero-image {
-    background-image: url('../img/banner-esperanza-2.jpeg');
+#section {
+    background-color: #12151C !important;
     width: 100%;
-    height: 100vh;
+    min-height: 60vh;
 }
