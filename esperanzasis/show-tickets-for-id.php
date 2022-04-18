@@ -40,16 +40,40 @@
                 <p>Colonia Arenales Tapatios Zapopan Jalisco</p>
             </div>
 
-            <div class="column-two">
+            <div class="grid-three">
+                <?php 
+                    include "./config/conexion.php";
+
+                    $search_data_tickets = "SELECT * FROM orders WHERE purchaseid = '$purchaseid'";
+                    $result_data_tickets = mysqli_query($conexion, $search_data_tickets);
+
+                    while($rowTickets = mysqli_fetch_array($result_data_tickets)) { 
+                        $numberNoteOne = $rowTickets['number_note'];
+                        $numberNoteTwo = $rowTickets['number_note_two'];
+                ?>
+
                 <p>Código postal: 45060</p>
                 <p>Telefono: 3312 333924</p>
+                <p>Número de nota:
+                    <?php 
+                        if(!$numberNoteOne) {
+                            echo $numberNoteTwo;
+                        } else {
+                            echo $numberNoteOne;
+                        }
+                    ?>
+                </p>
+
+                <?php }?>
             </div>
             <table>
                 <thead>
                     <tr>
+                        <th>Cliente</th>
                         <th>Dirección de entrega</th>
                         <th>Cantidad</th>
-                        <th>Descripción</th>
+                        <th>Producto</th>
+                        <th>Fecha</th>
                         <th>$Precio Unitario</th>
                     </tr>
                 </thead>
@@ -78,11 +102,12 @@
                             ?>
 
                             <tr>
-                                <td>
+                                <td><?php echo $row['client_name']; ?></td>
+                                <td style="text-align: center;">
                                     <?php echo $row['address_send']; ?>
                                 </td>
 
-                                <td>
+                                <td style="text-align: center !important;">
                                     <?php echo $row['quantity']; ?>
                                 </td>
 
@@ -90,7 +115,9 @@
                                     <?php echo $row['name_product']; ?>
                                 </td>
 
-                                <td>
+                                <td><?php echo $row['date_send']; ?></td>
+
+                                <td style="text-align: center;">
                                     <?php 
                                         if($discountProduct) {
                                             $discountWithSubtotal = $priceNormal - $discountProduct;
