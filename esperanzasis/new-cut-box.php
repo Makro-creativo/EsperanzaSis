@@ -22,12 +22,12 @@
         $notes = $_POST['notes'];
 
         $query_save_cut_box = "INSERT INTO cutbox_super(opening_date, person_delivery, person_receive, turn, concept, closing_amount, payment_services, number_notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$concept', '$closingAmount', '$paymentServices', '$numberNotes')";
-        $query_save_cut_box_two = "INSERT INTO cutbox_ruta(opening_date, person_delivery, person_receive, turn, concept_two, amount, payment_services_two, notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$conceptTwo', '$amount', '$paymentServicesTwo', '$notes')";
+        //$query_save_cut_box_two = "INSERT INTO cutbox_ruta(opening_date, person_delivery, person_receive, turn, concept_two, amount, payment_services_two, notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$conceptTwo', '$amount', '$paymentServicesTwo', '$notes')";
 
         $result_one = mysqli_query($conexion, $query_save_cut_box);
-        $result_two = mysqli_query($conexion, $query_save_cut_box_two);
+        //$result_two = mysqli_query($conexion, $query_save_cut_box_two);
         
-        if(!$result_one && $result_two) {
+        if(!$result_one) {
             die("No se pudo guardar el corte de caja correctamente, intentelo de nuevo...");
         }
 
@@ -74,7 +74,7 @@
                 <?php include "./partials/header.php" ?>
 
                 <div class="container">
-                    <h2 class="d-flex justify-content-start mb-4">Corte de caja</h2>
+                    <h2 class="d-flex justify-content-start mb-4">Super</h2>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg border-top">
@@ -110,8 +110,8 @@
                                                     <label>Turno: </label>
                                                     <select name="turn" require required class="form-select">
                                                         <option selected disabled>Seleccionar turno</option>
-                                                        <option value="Turno de la mañana">Turno de la mañana</option>
-                                                        <option value="Turno de la tarde">Turno de la tarde</option>
+                                                        <option value="Turno de la mañana">Mañana</option>
+                                                        <option value="Turno de la tarde">Tarde</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -143,43 +143,8 @@
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Número de nota o Factura: </label>
+                                                    <label>Tickets: </label>
                                                     <input type="text" placeholder="Ejemplo: 45678MJ, etc..." class="form-control" name="number_notes">
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <h6 class="text-center mt-4 text-primary">Concepto Ruta</h6>
-
-                                        <div class="row mt-4">
-                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
-                                                <div class="form-group">
-                                                    <label>Concepto: </label>
-                                                    <select name="concept_two" require required class="form-select">
-                                                        <option selected value="Ruta">Ruta</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
-                                                <div class="form-group">
-                                                    <label>Monto: </label>
-                                                    <input type="text" placeholder="Ejemplo: 6000, 4500, etc.." class="form-control" name="amount">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
-                                                <div class="form-group">
-                                                    <label>Bauchers: </label>
-                                                    <input type="text" placeholder="Ejemplo: 560, 600, etc..." name="payment_services_two" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
-                                                <div class="form-group">
-                                                    <label>Número de nota o Factura: </label>
-                                                    <input name="notes" type="text" placeholder="Ejemplo: 422-0001, etc..." class="form-control">
                                                 </div>
                                             </div>
                                         </div>
