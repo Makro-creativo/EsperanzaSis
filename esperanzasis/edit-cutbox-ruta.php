@@ -18,7 +18,7 @@
         $query_update_rute = "UPDATE cutbox_ruta SET id_box='$idCutRute', opening_date='$openingDateTwo', person_delivery='$personDeliveryTwo', person_receive='$personReceiveTwo', turn='$turn', concept_two='$conceptTwo', amount='$amount', payment_services_two='$paymentServicesTwo', notes='$notes' WHERE id_box = '$idCutRute'";
         mysqli_query($conexion, $query_update_rute);
 
-        header("location: show-cut-box-rute.php");
+        header("location: show-cut-box-repartidores.php");
     }
 
 ?>
@@ -82,7 +82,7 @@
 
                 <div class="container">
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Editar corte de ruta</h2>
+                        <h2 class="d-flex justify-content-start mb-4">Editar corte de repartidores</h2>
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
                                 <div class="card-body">
