@@ -103,7 +103,7 @@
 
                             <tr>
                                 <td><?php echo $row['client_name']; ?></td>
-                                <td style="text-align: center;">
+                                <td style="text-align: center ;">
                                     <?php echo $row['address_send']; ?>
                                 </td>
 
