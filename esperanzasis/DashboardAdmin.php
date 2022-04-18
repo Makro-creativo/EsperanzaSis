@@ -661,16 +661,16 @@
                                                     <?php 
                                                         include "./config/conexion.php";
 
-                                                        $search_total_orders = mysqli_query($conexion, "SELECT * FROM orders_admin");
+                                                        $search_total_orders = mysqli_query($conexion, "SELECT * FROM cobranza");
                                                         
                                                         $total = 0;
 
                                                         while($rowOrder = mysqli_fetch_array($search_total_orders)) {
-                                                            $totalOrdersAdmin = $rowOrder['total'];
+                                                            $totalCobranza = $rowOrder['cash'];
                                                     ?>
 
                                                     <?php 
-                                                        $totalNeto = $total+=$totalOrdersAdmin;
+                                                        $totalNeto = $total+=$totalCobranza;
                                                     }?>
 
                                                     <tr>
@@ -699,7 +699,7 @@
                                 </div>
                     </div>
 
-                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3 mt-4">
+                    <!--<div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3 mt-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -844,7 +844,7 @@
                                         </a>
                                     </div>
                                 </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
