@@ -5,12 +5,12 @@
 	$total = array();
 
 	for ($month = 1; $month <= 12; $month ++){
-		$sql = "SELECT *, SUM(total) AS total FROM orders_admin WHERE month(date_purchase)='$month' AND year(date_purchase)='$year'";
+		$sql = "SELECT *, SUM(cash) AS cash FROM cobranza WHERE month(date)='$month' AND year(date)='$year'";
         $result_query = mysqli_query($conexion, $sql);
 		
         $row = mysqli_fetch_array($result_query);
 
-		$total[] = $row['total'];
+		$total[] = $row['cash'];
 	}
 
 	$tjan = $total[0];
