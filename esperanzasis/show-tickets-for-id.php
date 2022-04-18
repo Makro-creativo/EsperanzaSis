@@ -33,11 +33,31 @@
 <body>
         <div class="ticket">
             <img src="assets/img/logo_tortilleria_la_esperanza.svg" alt="Logo la esperanza" class="center">
+            <?php 
+                include "./config/conexion.php";
+
+                if(isset($_GET['purchaseid'])) {
+                    $purchaseid = $_GET['purchaseid'];
+                    
+
+                    $query_total = "SELECT * FROM orders WHERE purchaseid = '$purchaseid'";
+                    $result_total = mysqli_query($conexion, $query_total);
+
+                    if($result_total) {
+                        $rowTwo = mysqli_fetch_array($result_total);
+
+                        $dateSend = $rowTwo['date_send'];
+                    }
+                }
+
+                
+            ?>
 
             <div class="grid-three">
                 <p>Tortillería la Esperanza</p>
                 <p>Av. Paseo de la Primavera número #2195</p>
                 <p>Colonia Arenales Tapatios Zapopan Jalisco</p>
+                <p>Fecha: <?php echo $dateSend; ?></p>
             </div>
 
             <div class="grid-three">
@@ -70,11 +90,9 @@
                 <thead>
                     <tr>
                         <th>Cliente</th>
-                        <th>Dirección de entrega</th>
                         <th>Cantidad</th>
                         <th>Producto</th>
-                        <th>Fecha</th>
-                        <th>$Precio Unitario</th>
+                        <th>Precio Unitario</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,9 +121,6 @@
 
                             <tr>
                                 <td><?php echo $row['client_name']; ?></td>
-                                <td style="text-align: center ;">
-                                    <?php echo $row['address_send']; ?>
-                                </td>
 
                                 <td style="text-align: center !important;">
                                     <?php echo $row['quantity']; ?>
@@ -115,7 +130,6 @@
                                     <?php echo $row['name_product']; ?>
                                 </td>
 
-                                <td><?php echo $row['date_send']; ?></td>
 
                                 <td style="text-align: center;">
                                     <?php 
@@ -132,6 +146,7 @@
                                         }
                                     ?>
                                 </td>
+
                         <?php }?>
                 </tbody>
             </table>
