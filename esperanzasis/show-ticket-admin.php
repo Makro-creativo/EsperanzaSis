@@ -28,7 +28,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/img/logo_tortilleria_la_esperanza.svg">
     <title>EsperanzaSis</title>
-
     <link rel="stylesheet" href="assets/css/ticket.css">
 </head>
 <body>
@@ -58,19 +57,41 @@
                 <p>Tortillería la Esperanza</p>
                 <p>Av. Paseo de la Primavera número #2195</p>
                 <p>Colonia Arenales Tapatios Zapopan Jalisco</p>
+                <p>Repartidor: <?php echo $deliveryMan; ?></p>
             </div>
 
-            <div class="column-two">
+            <div class="grid-three">
+                <?php 
+                    include "./config/conexion.php";
+
+                    $search_data_tickets_admin = "SELECT * FROM orders_admin WHERE purchaseid = '$purchaseid'";
+                    $result_data_tickets_admin = mysqli_query($conexion, $search_data_tickets_admin);
+
+                    while($rowTickets = mysqli_fetch_array($result_data_tickets_admin)) {
+                        $noteCobranzaCredito = $rowTickets['note_cobranza_credito'];
+                        $noteCobranzaCreditoTwo = $rowTickets['note_cobranza_credito_two'];
+                        $dateSend = $rowTickets['date_send'];
+                ?>
                 <p>Código postal: 45066</p>
                 <p>Telefono: 3312 333924</p>
+                <p>Número de nota: 
+                    <?php 
+                        if(!$noteCobranzaCredito) {
+                            echo $noteCobranzaCreditoTwo;
+                        } else {
+                            echo $noteCobranzaCredito;
+                        }
+                    ?>
+                </p>
+                <p>Fecha: <?php echo $dateSend; ?></p>
+                <?php }?>
             </div>
             <table>
                 <thead>
                     <tr>
                         <th>Cliente</th>
                         <th>Cantidad</th>
-                        <th>Descripción</th>
-                        <th>Repartidor</th>
+                        <th>Producto</th>
                         <th>Precio Unitario</th>
                         <th>Subtotal</th>
                     </tr>
@@ -96,19 +117,17 @@
                                     <?php echo $row['quantity']; ?>
                                 </td>
 
-                                <td>
+                                <td style="text-align: center;">
                                     <?php echo $row['name_product']; ?>
                                 </td>
 
-                                <td><?php echo $deliveryMan; ?></td>
-
-                                <td>
+                                <td style="text-align: center;">
                                     <?php 
                                         echo number_format($row['price'], 2);
                                     ?>
                                 </td>
 
-                                <td>
+                                <td style="text-align: center;">
                                     <?php 
                                         $subtotal = $row['price'] * $row['quantity'];
 
