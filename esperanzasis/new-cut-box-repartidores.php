@@ -20,9 +20,10 @@
         $amount = $_POST['amount'];
         $paymentServicesTwo = $_POST['payment_services_two'];
         $notes = $_POST['notes'];
+        $gastosSuperRepartidor = $_POST['gastos_super'];
 
         //$query_save_cut_box = "INSERT INTO cutbox_super(opening_date, person_delivery, person_receive, turn, concept, closing_amount, payment_services, number_notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$concept', '$closingAmount', '$paymentServices', '$numberNotes')";
-        $query_save_cut_box_two = "INSERT INTO cutbox_ruta(opening_date, person_delivery, person_receive, turn, concept_two, amount, payment_services_two, notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$conceptTwo', '$amount', '$paymentServicesTwo', '$notes')";
+        $query_save_cut_box_two = "INSERT INTO cutbox_ruta(opening_date, person_delivery, person_receive, turn, concept_two, amount, payment_services_two, notes, gastos_super) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$conceptTwo', '$amount', '$paymentServicesTwo', '$notes', '$gastosSuperRepartidor')";
 
         //$result_one = mysqli_query($conexion, $query_save_cut_box);
         $result_two = mysqli_query($conexion, $query_save_cut_box_two);
@@ -119,7 +120,7 @@
 
                                             <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                 <div class="form-group">
-                                                    <label>Monto: </label>
+                                                    <label>Efectivo: </label>
                                                     <input type="text" placeholder="Ejemplo: 6000, 4500, etc.." class="form-control" name="amount">
                                                 </div>
                                             </div>
@@ -134,13 +135,13 @@
                                             <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                 <div class="form-group">
                                                     <label>Tickets: </label>
-                                                    <input name="notes" type="text" placeholder="Ejemplo: 422-0001, etc..." class="form-control">
+                                                    <input name="notes" type="text" placeholder="Ejemplo: 1500, 4500, etc..." class="form-control">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Turno: </label>
                                                     <select name="turn" require required class="form-select">
@@ -148,6 +149,13 @@
                                                         <option value="Turno de la mañana">Mañana</option>
                                                         <option value="Turno de la tarde">Tarde</option>
                                                     </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Gastos de súper: </label>
+                                                    <input type="text" placeholder="Ejemplo: 5000, 6500, etc..." class="form-control" name="gastos_super">
                                                 </div>
                                             </div>
                                         </div>
