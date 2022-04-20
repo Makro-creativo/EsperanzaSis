@@ -50,15 +50,17 @@
                                                         while($rowRuta = mysqli_fetch_array($query_total_two)) {
                                                             $amount = $rowRuta['amount'];
                                                             $paymentServicesTwo = $rowRuta['payment_services_two'];
+                                                            $gastosRute = $rowRuta['gastos_super'];
 
-                                                            $total_ruta =  $amount + $paymentServicesTwo;
+                                                            $total_ruta =  $amount + $paymentServicesTwo + $gastosRute;
                                                         
 
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
                                                             $closing_amount = $row['closing_amount'];
                                                             $payment_services = $row['payment_services'];
+                                                            $gastosSuper = $row['gastos_super'];
 
-                                                            $total_cut = $closing_amount + $payment_services;
+                                                            $total_cut = $closing_amount + $payment_services + $gastosSuper;
                                                     ?>
 
                                                     <?php 
