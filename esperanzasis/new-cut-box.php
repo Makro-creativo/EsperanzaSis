@@ -20,8 +20,9 @@
         $amount = $_POST['amount'];
         $paymentServicesTwo = $_POST['payment_services_two'];
         $notes = $_POST['notes'];
+        $gastosSuper = $_POST['gastos_super'];
 
-        $query_save_cut_box = "INSERT INTO cutbox_super(opening_date, person_delivery, person_receive, turn, concept, closing_amount, payment_services, number_notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$concept', '$closingAmount', '$paymentServices', '$numberNotes')";
+        $query_save_cut_box = "INSERT INTO cutbox_super(opening_date, person_delivery, person_receive, turn, concept, closing_amount, payment_services, number_notes, gastos_super) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$concept', '$closingAmount', '$paymentServices', '$numberNotes', '$gastosSuper')";
         //$query_save_cut_box_two = "INSERT INTO cutbox_ruta(opening_date, person_delivery, person_receive, turn, concept_two, amount, payment_services_two, notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$conceptTwo', '$amount', '$paymentServicesTwo', '$notes')";
 
         $result_one = mysqli_query($conexion, $query_save_cut_box);
@@ -129,7 +130,7 @@
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Monto: </label>
+                                                    <label>Efectivo: </label>
                                                     <input type="text" placeholder="Ejemplo: 5000, 1500, etc.." name="closing_amount" class="form-control">
                                                 </div>
                                             </div>
@@ -144,7 +145,16 @@
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Tickets: </label>
-                                                    <input type="text" placeholder="Ejemplo: 45678MJ, etc..." class="form-control" name="number_notes">
+                                                    <input type="text" placeholder="Ejemplo: 1500, 2500, etc..." class="form-control" name="number_notes">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                                <div class="for-group">
+                                                    <label>Gastos de súper: </label>
+                                                    <input type="text" placeholder="Ejemplo: 4500, 2500, etc..." class="form-control" name="gastos_super">
                                                 </div>
                                             </div>
                                         </div>
