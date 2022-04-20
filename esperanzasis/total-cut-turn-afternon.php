@@ -60,15 +60,17 @@
                                                         while($rowRute = mysqli_fetch_array($query_total_rute)) {
                                                             $amount = $rowRute['amount'];
                                                             $paymentServicesTwo = $rowRute['payment_services_two'];
+                                                            $gastosRute = $rowRute['gastos_super'];
 
-                                                            $total_rute_two = $amount + $paymentServicesTwo;
+                                                            $total_rute_two = $amount + $paymentServicesTwo + $gastosRute;
 
 
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
                                                             $closing_amount = $row['closing_amount'];   
                                                             $total_services = $row['payment_services'];
+                                                            $gastosSuper = $row['gastos_super'];
 
-                                                            $total_super = $closing_amount + $total_services;
+                                                            $total_super = $closing_amount + $total_services + $gastosSuper;
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $row['opening_date']; ?></td>
