@@ -51,7 +51,9 @@
                                                     <th>Concepto</th>
                                                     <th>Efectivo</th>
                                                     <th>Bauchers</th>
+                                                    <th>Gastos de Súper</th>
                                                     <th>Total</th>
+                                                    <th>Tickets</th>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <th>Editar</th>
@@ -84,13 +86,19 @@
                                                     <td><?php echo $row['concept']; ?></td>
                                                     <td><?php echo number_format($row['payment_services'], 2); ?></td>
                                                     <td><?php echo number_format($row['closing_amount'], 2); ?></td>
+                                                    <td><?php echo number_format($row['gastos_super'], 2); ?></td>
                                                     <td>
                                                         <?php 
-                                                            $total_cut = $row['closing_amount'] + $row['payment_services'];
+                                                            $closingAmount = $row['closing_amount'];
+                                                            $paymentServices = $row['payment_services'];
+                                                            $gastosSuper = $row['gastos_super'];
+
+                                                            $total_cut = $closingAmount+$paymentServices+$gastosSuper;
 
                                                             echo number_format($total_cut, 2);
                                                         ?>
                                                     </td>
+                                                    <td><?php echo number_format($row['number_notes'], 2); ?></td>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>
