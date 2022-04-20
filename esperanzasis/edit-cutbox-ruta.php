@@ -14,8 +14,9 @@
         $amount = $_POST['amount'];
         $paymentServicesTwo = $_POST['payment_services_two'];
         $notes = $_POST['notes'];
+        $gastosSuper = $_POST['gastos_super'];
 
-        $query_update_rute = "UPDATE cutbox_ruta SET id_box='$idCutRute', opening_date='$openingDateTwo', person_delivery='$personDeliveryTwo', person_receive='$personReceiveTwo', turn='$turn', concept_two='$conceptTwo', amount='$amount', payment_services_two='$paymentServicesTwo', notes='$notes' WHERE id_box = '$idCutRute'";
+        $query_update_rute = "UPDATE cutbox_ruta SET id_box='$idCutRute', opening_date='$openingDateTwo', person_delivery='$personDeliveryTwo', person_receive='$personReceiveTwo', turn='$turn', concept_two='$conceptTwo', amount='$amount', payment_services_two='$paymentServicesTwo', notes='$notes', gastos_super='$gastosSuper' WHERE id_box = '$idCutRute'";
         mysqli_query($conexion, $query_update_rute);
 
         header("location: show-cut-box-repartidores.php");
@@ -76,6 +77,7 @@
                             $amount = $row['amount'];
                             $paymentServicesTwo = $row['payment_services_two'];
                             $notes = $row['notes'];
+                            $gastosSuper = $row['gastos_super'];
                         }
                     }
                 ?>
@@ -128,7 +130,7 @@
 
                                             <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Monto: </label>
+                                                    <label>Efectivo: </label>
                                                     <input type="text" value="<?php echo $amount; ?>" name="amount" class="form-control">
                                                 </div>
                                             </div>
@@ -144,8 +146,17 @@
 
                                             <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
-                                                    <label>Número de nota o factura: </label>
+                                                    <label>Tickets: </label>
                                                     <input type="text" value="<?php echo $notes; ?>" name="notes" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                                <div class="form-group">
+                                                    <label>Gastos de Súper: </label>
+                                                    <input type="text" placeholder="Ejemplo: 4500, 5000, etc..." class="form-control" name="gastos_super" value="<?php echo $gastosSuper; ?>">
                                                 </div>
                                             </div>
                                         </div>
