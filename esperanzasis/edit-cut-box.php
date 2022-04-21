@@ -15,8 +15,9 @@
         $paymentServices = $_POST['payment_services'];
         $numberNotes = $_POST['number_notes'];
         $gastosSuper = $_POST['gastos_super'];
+        $recargas = $_POST['recargas'];
 
-        $query_update = "UPDATE cutbox_super SET id_box='$idCutSuper', opening_date='$openingDate', person_delivery='$personDelivery', person_receive='$personReceive', turn='$turn', concept='$concept', closing_amount='$closingAmount', payment_services='$paymentServices', number_notes='$numberNotes', gastos_super='$gastosSuper' WHERE id_box = '$idCutSuper'";
+        $query_update = "UPDATE cutbox_super SET id_box='$idCutSuper', opening_date='$openingDate', person_delivery='$personDelivery', person_receive='$personReceive', turn='$turn', concept='$concept', closing_amount='$closingAmount', payment_services='$paymentServices', number_notes='$numberNotes', gastos_super='$gastosSuper', recargas='$recargas' WHERE id_box = '$idCutSuper'";
         mysqli_query($conexion, $query_update);
 
         header("location: show-cut-box.php");
@@ -77,6 +78,7 @@
                             $paymentServices = $row['payment_services'];
                             $numberNotes = $row['number_notes'];
                             $gastosSuper = $row['gastos_super'];
+                            $recargas = $row['recargas'];
                         }
                     }
                 ?>
@@ -152,10 +154,17 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
                                                 <div class="form-group">
                                                     <label>Gastos de súper: </label>
                                                     <input type="text" placeholder="Ejemplo: 4500, 2500, etc..." class="form-control" name="gastos_super" value="<?php echo $gastosSuper; ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <div class="form-group">
+                                                    <label>Recargas: </label>
+                                                    <input type="text" placeholder="Ejemplo: 4500, 2500, etc..." class="form-control" name="recargas" value="<?php echo $recargas; ?>">
                                                 </div>
                                             </div>
                                         </div>

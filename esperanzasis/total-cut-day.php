@@ -41,32 +41,21 @@
                                                     <?php 
                                                         include "./config/conexion.php";
 
-                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super WHERE turn = 'mañana'");
-                                                        $query_total_two = mysqli_query($conexion, "SELECT * FROM cutbox_super WHERE turn = 'tarde'");
-
-                                                        $total = 0;
-                                                        $total_two = 0;
-
-                                                        while($rowRuta = mysqli_fetch_array($query_total_two)) {
-                                                            $amount = $rowRuta['amount'];
-                                                            $paymentServicesTwo = $rowRuta['payment_services_two'];
-                                                            $gastosRute = $rowRuta['gastos_super'];
-
-                                                            $total_ruta =  $amount + $paymentServicesTwo + $gastosRute;
-                                                        
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super");
+                                                    
+                                                        $total = 0;        
 
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
                                                             $closing_amount = $row['closing_amount'];
                                                             $payment_services = $row['payment_services'];
                                                             $gastosSuper = $row['gastos_super'];
+                                                            $gastosTortilleriaTwo = $row['gastos_tortilleria'];
+                                                            $numberNotesTwo = $row['number_notes'];
+                                                            $recargas = $row['recargas'];
 
-                                                            $total_cut = $closing_amount + $payment_services + $gastosSuper;
+                                                            $total_cut = $closing_amount + $payment_services + $gastosSuper + $gastosTortilleriaTwo + $numberNotes + $recargas;
+
                                                     ?>
-
-                                                    <?php 
-                                                        $total_two+=$total_ruta;
-                                                    }?>
-
                                                     <?php 
                                                         $total+=$total_cut;
                                                     }?>
