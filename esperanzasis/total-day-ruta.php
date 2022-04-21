@@ -41,8 +41,8 @@
                                                     <?php 
                                                         include "./config/conexion.php";
 
-                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super WHERE turn = 'mañana'");
-                                                        $query_total_two = mysqli_query($conexion, "SELECT * FROM cutbox_super WHERE turn = 'tarde'");
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_ruta WHERE turn = 'venta'");
+                                                        $query_total_two = mysqli_query($conexion, "SELECT * FROM cutbox_ruta WHERE turn = 'cobranza'");
 
                                                         $total = 0;
                                                         $total_two = 0;
@@ -56,8 +56,8 @@
                                                         
 
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
-                                                            $closing_amount = $row['closing_amount'];
-                                                            $payment_services = $row['payment_services'];
+                                                            $closing_amount = $row['amount'];
+                                                            $payment_services = $row['payment_services_two'];
                                                             $gastosSuper = $row['gastos_super'];
 
                                                             $total_cut = $closing_amount + $payment_services + $gastosSuper;

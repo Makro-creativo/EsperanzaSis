@@ -21,9 +21,11 @@
         $paymentServicesTwo = $_POST['payment_services_two'];
         $notes = $_POST['notes'];
         $gastosSuperRepartidor = $_POST['gastos_super'];
+        $gastosTortilleria = $_POST['gastos_tortilleria'];
+        $numberNoteRepartidor = $_POST['number_note_repartidor'];
 
         //$query_save_cut_box = "INSERT INTO cutbox_super(opening_date, person_delivery, person_receive, turn, concept, closing_amount, payment_services, number_notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$concept', '$closingAmount', '$paymentServices', '$numberNotes')";
-        $query_save_cut_box_two = "INSERT INTO cutbox_ruta(opening_date, person_delivery, person_receive, turn, concept_two, amount, payment_services_two, notes, gastos_super) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$conceptTwo', '$amount', '$paymentServicesTwo', '$notes', '$gastosSuperRepartidor')";
+        $query_save_cut_box_two = "INSERT INTO cutbox_ruta(opening_date, person_delivery, person_receive, turn, concept_two, amount, payment_services_two, notes, gastos_super, gastos_tortilleria, number_note_repartidor) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$conceptTwo', '$amount', '$paymentServicesTwo', '$notes', '$gastosSuperRepartidor', '$gastosTortilleria', '$numberNoteRepartidor')";
 
         //$result_one = mysqli_query($conexion, $query_save_cut_box);
         $result_two = mysqli_query($conexion, $query_save_cut_box_two);
@@ -134,28 +136,44 @@
 
                                             <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                 <div class="form-group">
-                                                    <label>Tickets: </label>
-                                                    <input name="notes" type="text" placeholder="Ejemplo: 1500, 4500, etc..." class="form-control">
+                                                    <label>Nota de crédito: </label>
+                                                    <input name="notes" type="text" placeholder="Ejemplo: 0589, 1234 etc..." class="form-control">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
-                                                    <label>Turno: </label>
+                                                    <label>Tipo de Ruta: </label>
                                                     <select name="turn" require required class="form-select">
-                                                        <option selected disabled>Seleccionar turno</option>
-                                                        <option value="Turno de la mañana">Mañana</option>
-                                                        <option value="Turno de la tarde">Tarde</option>
+                                                        <option selected disabled>Seleccionar Ruta</option>
+                                                        <option value="Venta">Venta</option>
+                                                        <option value="Cobranza">Cobranza</option>
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Gastos de súper: </label>
                                                     <input type="text" placeholder="Ejemplo: 5000, 6500, etc..." class="form-control" name="gastos_super">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Gastos de tortillería: </label>
+                                                    <input type="text" placeholder="Ejemplo: 5000, 6500, etc..." class="form-control" name="gastos_tortilleria">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                                <div class="form-group">
+                                                    <label>Número de notas: </label>
+                                                    <input type="text" placeholder="Ejemplo: 20, 10, etc..." class="form-control" name="number_note_repartidor">
                                                 </div>
                                             </div>
                                         </div>

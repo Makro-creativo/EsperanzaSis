@@ -52,6 +52,8 @@
                                                     <th>Efectivo</th>
                                                     <th>Bauchers</th>
                                                     <th>Gastos de Súper</th>
+                                                    <th>Gastos de Tortillería</th>
+                                                    <th>Recargas</th>
                                                     <th>Total</th>
                                                     <th>Tickets</th>
 
@@ -87,13 +89,17 @@
                                                     <td><?php echo number_format($row['payment_services'], 2); ?></td>
                                                     <td><?php echo number_format($row['closing_amount'], 2); ?></td>
                                                     <td><?php echo number_format($row['gastos_super'], 2); ?></td>
+                                                    <td><?php echo number_format($row['gastos_tortilleria'], 2); ?></td>
+                                                    <td><?php echo number_format($row['recargas'], 2); ?></td>
                                                     <td>
                                                         <?php 
                                                             $closingAmount = $row['closing_amount'];
                                                             $paymentServices = $row['payment_services'];
                                                             $gastosSuper = $row['gastos_super'];
+                                                            $gastosTrotilleria = $row['gastos_tortilleria'];
+                                                            $recargas = $row['recargas'];
 
-                                                            $total_cut = $closingAmount+$paymentServices+$gastosSuper;
+                                                            $total_cut = $closingAmount+$paymentServices+$gastosSuper+$gastosTrotilleria+$recargas;
 
                                                             echo number_format($total_cut, 2);
                                                         ?>

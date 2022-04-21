@@ -51,18 +51,12 @@
                                                     <?php 
                                                         include "./config/conexion.php";
                                                         
-                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super WHERE turn = 'Turno de la mañana'");
-                                                        $query_total_morning_rute = mysqli_query($conexion, "SELECT * FROM cutbox_ruta WHERE turn = 'Turno de la mañana'");
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super WHERE turn = 'mañana'");
+                                                        
                                                         
                                                         $total = 0;
                                                         $total_rute = 0;
 
-                                                        while($rowRute = mysqli_fetch_array($query_total_morning_rute)) {
-                                                            $amount = $rowRute['amount'];
-                                                            $paymentServicesTwo = $rowRute['payment_services_two'];
-                                                            $gastosRute = $rowRute['gastos_super'];
-
-                                                            $total_rute_two = $amount + $paymentServicesTwo + $gastosRute;
 
 
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
@@ -89,8 +83,6 @@
                                                             ?>
                                                         </td>
                                                     </tr>
-
-                                                <?php }?>
                                                         
                                                 <?php 
                                                     $total+=$total_cut;

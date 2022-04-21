@@ -56,8 +56,10 @@
                                                     <th>Efectivo</th>
                                                     <th>Bauchers</th>
                                                     <th>Gastos de Súper</th>
+                                                    <th>Gastos de Trotillería</th>
+                                                    <th>Número de notas</th>
                                                     <th>Total</th>
-                                                    <th>Tickets</th>
+                                                    <th>Nota de crédito</th>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <th>Editar</th>
@@ -86,18 +88,21 @@
                                                     <td><?php echo number_format($row['amount'], 2); ?></td>
                                                     <td><?php echo number_format($row['payment_services_two'], 2); ?></td>
                                                     <td><?php echo number_format($row['gastos_super'], 2); ?></td>
+                                                    <td><?php echo number_format($row['gastos_tortilleria'], 2); ?></td>
+                                                    <td><?php echo $row['number_note_repartidor']; ?></td>
                                                     <td>
                                                         <?php 
                                                             $amount = $row['amount'];
                                                             $paymentServices = $row['payment_services_two'];
                                                             $gastosSuper = $row['gastos_super'];
+                                                            $gastosTortilleria = $row['gastos_tortilleria'];
 
-                                                            $total_cut_rute = $amount+$paymentServices+$gastosSuper;
+                                                            $total_cut_rute = $amount+$paymentServices+$gastosSuper+$gastosTortilleria;
                                                         
                                                             echo number_format($total_cut_rute, 2);
                                                         ?>
                                                     </td>
-                                                    <td><?php echo number_format($row['notes'], 2); ?></td>
+                                                    <td><?php echo $row['notes']; ?></td>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>

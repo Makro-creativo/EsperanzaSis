@@ -354,7 +354,10 @@
             <a class="collapse-item" href="show-cut-box-repartidores.php">Lista de corte repartidores</a>
             <a class="collapse-item" href="total-cut-turn-morning.php">Total de la mañana</a>
             <a class="collapse-item" href="total-cut-turn-afternon.php">Total de la tarde</a>
+            <a class="collapse-item" href="total-cut-rute-ventas.php">Total de ventas</a>
+            <a class="collapse-item" href="total-cut-rute-cobranza.php">Total de cobranza</a>
             <a class="collapse-item" href="total-cut-day.php">Total de día</a>
+
         </div>
     </div>
 </li>
