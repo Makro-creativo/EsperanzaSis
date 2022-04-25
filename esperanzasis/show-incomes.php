@@ -45,10 +45,8 @@
                                             <thead>
                                                 <th>Fecha</th>
                                                 <th>Descripción</th>
-                                                <th>Cantidad</th>
+                                                <th>Efectivo</th>
                                                 <th>Categoría</th>
-                                                <th>Factura o Nota</th>
-                                                <th>Número de nota o factura</th>
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <th>Editar</th>
@@ -73,8 +71,6 @@
                                                     <td><?php echo $row['description']; ?></td>
                                                     <td><?php echo number_format($row['quantity'], 2); ?></td>
                                                     <td><?php echo $row['category_name']; ?></td>
-                                                    <td><?php echo $row['notes_or_invoice']; ?></td>
-                                                    <td><?php echo $row['number_notes']; ?></td>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>
