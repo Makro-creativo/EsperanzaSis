@@ -11,10 +11,8 @@
         $createdAt = $_POST['created_at'];
         $description = $_POST['description'];
         $quantity = floatval($_POST['quantity']);
-        $notesOrInvoice = $_POST['notes_or_invoice'];
-        $numberNotes = $_POST['number_notes'];
 
-        $query_edit_incomes = "UPDATE ingresos SET category_name='$nameCategories', created_at='$createdAt', description='$description', quantity='$quantity', notes_or_invoice='$notesOrInvoice', number_notes='$numberNotes' WHERE id = '$id'";
+        $query_edit_incomes = "UPDATE ingresos SET category_name='$nameCategories', created_at='$createdAt', description='$description', quantity='$quantity' WHERE id = '$id'";
         $result_edit = mysqli_query($conexion, $query_edit_incomes);
 
         header("location: show-incomes.php");
