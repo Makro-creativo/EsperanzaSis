@@ -67,7 +67,7 @@
                                                             $total_super = $closing_amount + $total_services + $gastosSuper;
                                                     ?>
                                                     <tr>
-                                                        <td><?php echo $row['opening_date']; ?></td>
+                                                        <td><?php echo date('d/m/Y', strtotime($row['opening_date'])); ?></td>
                                                         <td><?php echo $row['person_delivery']; ?></td>
                                                         <td>
                                                             <?php echo $row['person_receive']; ?>
