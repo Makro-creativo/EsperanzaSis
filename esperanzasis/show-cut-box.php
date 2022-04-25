@@ -55,7 +55,7 @@
                                                     <th>Gastos de Tortillería</th>
                                                     <th>Recargas</th>
                                                     <th>Total</th>
-                                                    <th>Tickets</th>
+                                                    <th>Ticket</th>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <th>Editar</th>
@@ -86,8 +86,8 @@
                                                     <td><?php echo $row['person_receive']; ?></td>
                                                     <td><?php echo $row['turn']; ?></td>
                                                     <td><?php echo $row['concept']; ?></td>
-                                                    <td><?php echo number_format($row['payment_services'], 2); ?></td>
                                                     <td><?php echo number_format($row['closing_amount'], 2); ?></td>
+                                                    <td><?php echo number_format($row['payment_services'], 2); ?></td>
                                                     <td><?php echo number_format($row['gastos_super'], 2); ?></td>
                                                     <td><?php echo number_format($row['gastos_tortilleria'], 2); ?></td>
                                                     <td><?php echo number_format($row['recargas'], 2); ?></td>
@@ -97,14 +97,24 @@
                                                             $paymentServices = $row['payment_services'];
                                                             $gastosSuper = $row['gastos_super'];
                                                             $gastosTrotilleria = $row['gastos_tortilleria'];
-                                                            $recargas = $row['recargas'];
+                                                            
 
-                                                            $total_cut = $closingAmount+$paymentServices+$gastosSuper+$gastosTrotilleria+$recargas;
+                                                            $total_cut = $closingAmount+$paymentServices+$gastosSuper+$gastosTrotilleria;
 
                                                             echo number_format($total_cut, 2);
                                                         ?>
                                                     </td>
-                                                    <td><?php echo number_format($row['number_notes'], 2); ?></td>
+                                                    <td>
+                                                        <?php 
+                                                            $numberNotes = $row['number_notes'];
+                                                            $recargas = $row['recargas'];
+
+                                                            $totalTicket = $numberNotes+$recargas;
+
+                                                            echo number_format($totalTicket, 2);
+                                                        ?>
+                                                    </td>
+                                                    
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>

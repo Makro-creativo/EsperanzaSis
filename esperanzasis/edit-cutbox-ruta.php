@@ -12,13 +12,13 @@
         $turn = $_POST['turn'];
         $conceptTwo = $_POST['concept_two'];
         $amount = $_POST['amount'];
-        $paymentServicesTwo = $_POST['payment_services_two'];
+        //$paymentServicesTwo = $_POST['payment_services_two'];
         $notes = $_POST['notes'];
         $gastosSuper = $_POST['gastos_super'];
         $gastosTortilleria = $_POST['gastos_tortilleria'];
         $numberNoteRepartidor = $_POST['number_note_repartidor'];
 
-        $query_update_rute = "UPDATE cutbox_ruta SET id_box='$idCutRute', opening_date='$openingDateTwo', person_delivery='$personDeliveryTwo', person_receive='$personReceiveTwo', turn='$turn', concept_two='$conceptTwo', amount='$amount', payment_services_two='$paymentServicesTwo', notes='$notes', gastos_super='$gastosSuper', gastos_tortilleria='$gastosTortilleria', number_note_repartidor='$numberNoteRepartidor' WHERE id_box = '$idCutRute'";
+        $query_update_rute = "UPDATE cutbox_ruta SET id_box='$idCutRute', opening_date='$openingDateTwo', person_delivery='$personDeliveryTwo', person_receive='$personReceiveTwo', turn='$turn', concept_two='$conceptTwo', amount='$amount', notes='$notes', gastos_super='$gastosSuper', gastos_tortilleria='$gastosTortilleria', number_note_repartidor='$numberNoteRepartidor' WHERE id_box = '$idCutRute'";
         mysqli_query($conexion, $query_update_rute);
 
         header("location: show-cut-box-repartidores.php");
@@ -77,7 +77,7 @@
                             $turn = $row['turn'];
                             $conceptTwo = $row['concept_two'];
                             $amount = $row['amount'];
-                            $paymentServicesTwo = $row['payment_services_two'];
+                            //$paymentServicesTwo = $row['payment_services_two'];
                             $notes = $row['notes'];
                             $gastosSuper = $row['gastos_super'];
                             $gastosTortilleria = $row['gastos_tortilleria'];
@@ -141,14 +141,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
-                                                <div class="form-group">
-                                                    <label>Bauchers: </label>
-                                                    <input type="text" value="<?php echo $paymentServicesTwo; ?>" name="payment_services_two" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                                 <div class="form-group">
                                                     <label>Nota de crédito: </label>
                                                     <input type="text" value="<?php echo $notes; ?>" name="notes" class="form-control">

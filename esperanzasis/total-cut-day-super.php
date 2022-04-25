@@ -29,80 +29,93 @@
                 <?php include "./partials/header.php" ?>
 
                 <div class="container">
+                    <h2 class="d-flex justify-content-center mb-4">Total de corte Súper</h2>
                     <div class="row">
-                    <div class="col-md-8 col-sm-12 col-lg-8 col-xl-8 col-xxl-8 mx-auto">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Total de corte del (Día)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <div class="card shadow-lg">
+                                <div class="card-body">
+                                    <div class="table-responsive-sm">
+                                        <table class="table table-sm table-striped" id="table-render">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" width="2%" class="center">Fecha</th>
+                                                    <th scope="col" width="20%">Persona que entrego</th>
+                                                    <th scope="col" class="d-none d-sm-table-cell" width="50%">Persona que recibio</th>
+
+                                                    <th scope="col" width="10%" class="text-left">Turno</th>
+                                                    <th scope="col" width="8%" class="text-right">Concepto</th>
+                                                    <th scope="col" width="10%" class="text-right">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
                                                     <?php 
                                                         include "./config/conexion.php";
-
-                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_ruta WHERE turn = 'venta'");
-                                                        $query_total_two = mysqli_query($conexion, "SELECT * FROM cutbox_ruta WHERE turn = 'cobranza'");
-
-                                                        $total = 0;
-                                                        $total_two = 0;
-
-                                                        while($rowRuta = mysqli_fetch_array($query_total_two)) {
-                                                            $amount = $rowRuta['amount'];
-                                                            $paymentServicesTwo = $rowRuta['payment_services_two'];
-                                                            $gastosRute = $rowRuta['gastos_super'];
-
-                                                            $total_ruta =  $amount + $paymentServicesTwo + $gastosRute;
                                                         
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super");
+                                                        
+                                                        
+                                                        $total = 0;
+                                                        $total_rute = 0;
+
+
 
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
-                                                            $closing_amount = $row['amount'];
-                                                            $payment_services = $row['payment_services_two'];
+                                                            $closing_amount = $row['closing_amount'];   
+                                                            $total_services = $row['payment_services'];
                                                             $gastosSuper = $row['gastos_super'];
 
-                                                            $total_cut = $closing_amount + $payment_services + $gastosSuper;
+                                                            $total_super = $closing_amount + $total_services + $gastosSuper;
                                                     ?>
-
-                                                    <?php 
-                                                        $total_two+=$total_ruta;
-                                                    }?>
-
-                                                    <?php 
-                                                        $total+=$total_cut;
-                                                    }?>
-
-
                                                     <tr>
-                                                        <th colspan='' class='text-center'>
-                                                            <i class="fas fa-dollar-sign"></i>
-                                                            <?php
-                                                                $total_day = $total+=$total_two;
+                                                        <td><?php echo $row['opening_date']; ?></td>
+                                                        <td><?php echo $row['person_delivery']; ?></td>
+                                                        <td>
+                                                            <?php echo $row['person_receive']; ?>
+                                                        </td>
 
-                                                                echo number_format($total_day, 2);
+                                                        <td class="text-left"><?php echo $row['turn']; ?></td>
+                                                        <td class="text-center"><?php echo $row['concept']; ?></td>
+                                                        <td class="text-right">
+                                                            $<?php 
+                                                                $total_cut = $total_rute_two + $total_super;
+
+                                                                echo number_format($total_cut, 2);
                                                             ?>
-                                                        </th>
-                                                     </tr> 
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comment-dollar fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
+                                                        </td>
+                                                    </tr>
+                                                        
+                                                <?php 
+                                                    $total+=$total_cut;
+                                                }?>
 
+                                                <div class="d-flex justify-content-end">
+                                                    <tr>
+                                                        <td>
+                                                            Total del día: $<?php 
+                                                                echo number_format($total, 2);
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                                
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <br>
 
             <?php include "./partials/footer.php" ?>
 
         </div>
 
     </div>
+
+
 
 
 

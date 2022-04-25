@@ -12,7 +12,7 @@
         $turn = $_POST['turn'];
         $concept = $_POST['concept'];
         $closingAmount = $_POST['closing_amount'];
-        $paymentServices = $_POST['payment_services'];
+        //$paymentServices = $_POST['payment_services'];
         $numberNotes = $_POST['number_notes'];
 
         // info table tortillería
@@ -25,7 +25,7 @@
         $numberNoteRepartidor = $_POST['number_note_repartidor'];
 
         //$query_save_cut_box = "INSERT INTO cutbox_super(opening_date, person_delivery, person_receive, turn, concept, closing_amount, payment_services, number_notes) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$concept', '$closingAmount', '$paymentServices', '$numberNotes')";
-        $query_save_cut_box_two = "INSERT INTO cutbox_ruta(opening_date, person_delivery, person_receive, turn, concept_two, amount, payment_services_two, notes, gastos_super, gastos_tortilleria, number_note_repartidor) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$conceptTwo', '$amount', '$paymentServicesTwo', '$notes', '$gastosSuperRepartidor', '$gastosTortilleria', '$numberNoteRepartidor')";
+        $query_save_cut_box_two = "INSERT INTO cutbox_ruta(opening_date, person_delivery, person_receive, turn, concept_two, amount, notes, gastos_super, gastos_tortilleria, number_note_repartidor) VALUES('$openingDate', '$personDelivery', '$personReceive', '$turn', '$conceptTwo', '$amount', '$notes', '$gastosSuperRepartidor', '$gastosTortilleria', '$numberNoteRepartidor')";
 
         //$result_one = mysqli_query($conexion, $query_save_cut_box);
         $result_two = mysqli_query($conexion, $query_save_cut_box_two);
@@ -129,17 +129,18 @@
 
                                             <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                 <div class="form-group">
-                                                    <label>Bauchers: </label>
-                                                    <input type="text" placeholder="Ejemplo: 560, 600, etc..." name="payment_services_two" class="form-control">
+                                                    <label>Nota de crédito: </label>
+                                                    <input name="notes" type="text" placeholder="Ejemplo: 0589, 1234 etc..." class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                 <div class="form-group">
-                                                    <label>Nota de crédito: </label>
-                                                    <input name="notes" type="text" placeholder="Ejemplo: 0589, 1234 etc..." class="form-control">
+                                                    <label>Número de notas: </label>
+                                                    <input type="text" placeholder="Ejemplo: 20, 10, etc..." class="form-control" name="number_note_repartidor">
                                                 </div>
                                             </div>
+
                                         </div>
 
                                         <div class="row">
@@ -169,14 +170,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
-                                                <div class="form-group">
-                                                    <label>Número de notas: </label>
-                                                    <input type="text" placeholder="Ejemplo: 20, 10, etc..." class="form-control" name="number_note_repartidor">
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <input type="submit" value="Registar corte" class="btn btn-success btn-block" name="save">
                                     </form>

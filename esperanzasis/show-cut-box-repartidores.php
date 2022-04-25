@@ -51,15 +51,14 @@
                                                     <th>Fecha</th>
                                                     <th>Persona que entrega</th>
                                                     <th>Persona que recibe</th>
-                                                    <th>Turno</th>
+                                                    <th>Tipo de ruta</th>
                                                     <th>Concepto</th>
                                                     <th>Efectivo</th>
-                                                    <th>Bauchers</th>
                                                     <th>Gastos de Súper</th>
                                                     <th>Gastos de Trotillería</th>
+                                                    <th>Nota de crédito</th>
                                                     <th>Número de notas</th>
                                                     <th>Total</th>
-                                                    <th>Nota de crédito</th>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <th>Editar</th>
@@ -80,29 +79,31 @@
                                                     while($row = mysqli_fetch_array($result_cut_rute)) {
                                                 ?>
                                                 <tr>
-                                                    <td><?php echo date('m-d-Y', strtotime($row['opening_date'])); ?></td>
+                                                    <td><?php echo date("d/m/Y", strtotime($row['opening_date'])); ?></td>
                                                     <td><?php echo $row['person_delivery']; ?></td>
                                                     <td><?php echo $row['person_receive']; ?></td>
                                                     <td><?php echo $row['turn']; ?></td>
                                                     <td><?php echo $row['concept_two']; ?></td>
                                                     <td><?php echo number_format($row['amount'], 2); ?></td>
-                                                    <td><?php echo number_format($row['payment_services_two'], 2); ?></td>
+                                                    <!--<td><?php echo number_format($row['payment_services_two'], 2); ?></td>-->
                                                     <td><?php echo number_format($row['gastos_super'], 2); ?></td>
                                                     <td><?php echo number_format($row['gastos_tortilleria'], 2); ?></td>
+                                                    <td><?php echo number_format($row['notes'], 2); ?>
                                                     <td><?php echo $row['number_note_repartidor']; ?></td>
+                                                    
                                                     <td>
                                                         <?php 
                                                             $amount = $row['amount'];
-                                                            $paymentServices = $row['payment_services_two'];
                                                             $gastosSuper = $row['gastos_super'];
                                                             $gastosTortilleria = $row['gastos_tortilleria'];
+                                                            $noteCredito = $row['notes'];
 
-                                                            $total_cut_rute = $amount+$paymentServices+$gastosSuper+$gastosTortilleria;
+                                                            $total_cut_rute = $amount+$gastosSuper+$gastosTortilleria+$noteCredito;
                                                         
                                                             echo number_format($total_cut_rute, 2);
                                                         ?>
                                                     </td>
-                                                    <td><?php echo $row['notes']; ?></td>
+                                                   
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>

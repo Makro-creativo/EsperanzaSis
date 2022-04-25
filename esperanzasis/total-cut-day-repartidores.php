@@ -29,9 +29,9 @@
                 <?php include "./partials/header.php" ?>
 
                 <div class="container">
-                    <h2 class="d-flex justify-content-center mb-4">Total de corte de la mañana</h2>
+                <h2 class="d-flex justify-content-center mb-4">Total de corte Repartidores</h2>
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <div class="table-responsive-sm">
@@ -42,7 +42,7 @@
                                                     <th scope="col" width="20%">Persona que entrego</th>
                                                     <th scope="col" class="d-none d-sm-table-cell" width="50%">Persona que recibio</th>
 
-                                                    <th scope="col" width="10%" class="text-left">Turno</th>
+                                                    <th scope="col" width="10%" class="text-left">Tipo de ruta</th>
                                                     <th scope="col" width="8%" class="text-right">Concepto</th>
                                                     <th scope="col" width="10%" class="text-right">Total</th>
                                                 </tr>
@@ -51,17 +51,15 @@
                                                     <?php 
                                                         include "./config/conexion.php";
                                                         
-                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super WHERE turn = 'mañana'");
-                                                        
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_ruta");
                                                         
                                                         $total = 0;
                                                         $total_rute = 0;
 
 
-
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
-                                                            $closing_amount = $row['closing_amount'];   
-                                                            $total_services = $row['payment_services'];
+                                                            $closing_amount = $row['amount'];   
+                                                            $total_services = $row['payment_services_two'];
                                                             $gastosSuper = $row['gastos_super'];
 
                                                             $total_super = $closing_amount + $total_services + $gastosSuper;
@@ -91,7 +89,7 @@
                                                 <div class="d-flex justify-content-end">
                                                     <tr>
                                                         <td>
-                                                            Total Turno: $<?php 
+                                                            Total del día: $<?php 
                                                                 echo number_format($total, 2);
                                                             ?>
                                                         </td>
@@ -114,7 +112,6 @@
         </div>
 
     </div>
-
 
 
 

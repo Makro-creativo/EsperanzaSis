@@ -11,7 +11,7 @@
             die("No se pudo eliminar correctamente el corte, intentelo de nuevo...");
         }
 
-        header("location: show-cut-box-rute.php");
+        header("location: show-cut-box-repartidores.php");
     }
 
 ?>

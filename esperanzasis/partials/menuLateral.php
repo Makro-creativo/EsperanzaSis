@@ -352,12 +352,8 @@
             <a href="show-cut-box.php" class="collapse-item">Lista corte de super</a>
             <a class="collapse-item" href="new-cut-box-repartidores.php">Repartidores</a>
             <a class="collapse-item" href="show-cut-box-repartidores.php">Lista de corte repartidores</a>
-            <a class="collapse-item" href="total-cut-turn-morning.php">Total de la mañana</a>
-            <a class="collapse-item" href="total-cut-turn-afternon.php">Total de la tarde</a>
-            <a class="collapse-item" href="total-cut-rute-ventas.php">Total de ventas</a>
-            <a class="collapse-item" href="total-cut-rute-cobranza.php">Total de cobranza</a>
-            <a class="collapse-item" href="total-cut-day.php">Total de día</a>
-
+            <a class="collapse-item" href="total-cut-day-super.php">Total de día súper</a>
+            <a class="collapse-item" href="total-cut-day-repartidores.php">Total de día repartidores</a>
         </div>
     </div>
 </li>
