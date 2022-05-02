@@ -78,6 +78,7 @@
                             $paymentServices = $row['payment_services'];
                             $numberNotes = $row['number_notes'];
                             $gastosSuper = $row['gastos_super'];
+                            $gastosTortilleria = $row['gastos_tortilleria'];
                             $recargas = $row['recargas'];
                         }
                     }
@@ -154,14 +155,21 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Gastos de súper: </label>
                                                     <input type="text" placeholder="Ejemplo: 4500, 2500, etc..." class="form-control" name="gastos_super" value="<?php echo $gastosSuper; ?>">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Gastos de tortillería: </label>
+                                                    <input type="text" placeholder="Ejemplo: 4500, 2500, etc..." class="form-control" name="gastos_tortilleria" value="<?php echo $gastosTortilleria; ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Recargas: </label>
                                                     <input type="text" placeholder="Ejemplo: 4500, 2500, etc..." class="form-control" name="recargas" value="<?php echo $recargas; ?>">
