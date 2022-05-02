@@ -94,7 +94,7 @@
                                                                 $from_date = $_GET['from_date'];
                                                                 $to_date = $_GET['to_date'];
 
-                                                                $query = "SELECT * FROM cutbox_ruta WHERE opening_date BETWEEN '$from_date' AND '$to_date'";
+                                                                $query = "SELECT * FROM cutbox_ruta WHERE opening_date BETWEEN '$from_date' AND '$to_date' ORDER BY opening_date ASC";
                                                                 $query_run = mysqli_query($conexion, $query);
 
                                                                 $total_row = 0;
@@ -185,7 +185,7 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $search_cut_rute = "SELECT * FROM cutbox_ruta";
+                                                    $search_cut_rute = "SELECT * FROM cutbox_ruta ORDER BY opening_date ASC";
                                                     $result_cut_rute = mysqli_query($conexion, $search_cut_rute);
 
                                                     while($row = mysqli_fetch_array($result_cut_rute)) {
