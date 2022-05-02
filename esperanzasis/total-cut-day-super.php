@@ -54,7 +54,7 @@
                                                         $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super");
                                                         
                                                         
-                                                        $total = 0;
+                                                        $total = 0; 
                                                         $total_rute = 0;
 
 
@@ -63,8 +63,9 @@
                                                             $closing_amount = $row['closing_amount'];   
                                                             $total_services = $row['payment_services'];
                                                             $gastosSuper = $row['gastos_super'];
+                                                            $gastosTortilleria = $row['gastos_tortilleria'];
 
-                                                            $total_super = $closing_amount + $total_services + $gastosSuper;
+                                                            $total_super = $closing_amount + $total_services + $gastosSuper + $gastosTortilleria;
                                                     ?>
                                                     <tr>
                                                         <td><?php echo date('d/m/Y', strtotime($row['opening_date'])); ?></td>
