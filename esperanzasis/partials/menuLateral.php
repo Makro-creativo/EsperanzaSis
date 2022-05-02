@@ -341,6 +341,32 @@
 </li>
 
 <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gastosSuper"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-money-check-alt"></i>
+        <span>Gastos Súper</span>
+    </a>
+    <div id="gastosSuper" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="show-gastos-super.php">Lista de gastos súper</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gastosTortilleria"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-money-check-alt"></i>
+        <span>Gastos Tortillería</span>
+    </a>
+    <div id="gastosTortilleria" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="show-gastos-tortilleria.php">Lista de gastos tortillería</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#cutBox"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-cash-register"></i>
