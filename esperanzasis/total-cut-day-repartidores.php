@@ -51,7 +51,7 @@
                                                     <?php 
                                                         include "./config/conexion.php";
                                                         
-                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_ruta");
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_ruta ORDER BY opening_date ASC");
                                                         
                                                         $total = 0;
                                                         $total_rute = 0;
@@ -65,7 +65,7 @@
                                                             $total_super = $closing_amount + $total_services + $gastosSuper;
                                                     ?>
                                                     <tr>
-                                                        <td><?php echo $row['opening_date']; ?></td>
+                                                        <td><?php echo date("d/m/Y", strtotime($row['opening_date'])); ?></td>
                                                         <td><?php echo $row['person_delivery']; ?></td>
                                                         <td>
                                                             <?php echo $row['person_receive']; ?>
