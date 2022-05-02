@@ -419,6 +419,21 @@
     </div>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reports"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa-solid fa-file-export"></i>
+        <span>Reportes</span>
+    </a>
+    <div id="reports" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="reports-gastos.php">Reportes de gastos</a>
+            <a class="collapse-item" href="reports-ingresos.php">Reportes de ingresos</a>
+            <a class="collapse-item" href="reports-orders.php">Reportes de pedidos</a>
+        </div>
+    </div>
+</li>
+
 <?php }?>
 
 <?php if($typeUser === "SuperAdmin") {?>
