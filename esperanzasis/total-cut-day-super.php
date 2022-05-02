@@ -51,7 +51,7 @@
                                                     <?php 
                                                         include "./config/conexion.php";
                                                         
-                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super");
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super ORDER BY opening_date ASC");
                                                         
                                                         
                                                         $total = 0; 
