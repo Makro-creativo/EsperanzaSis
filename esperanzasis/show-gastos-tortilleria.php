@@ -32,7 +32,115 @@
                     <div class="row">
                         <h2 class="d-flex justify-content-start mb-4">Lista de gastos de tortillería</h2>
 
-                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <div class="card shadow-lg">
+                                        <h6 class="text-center text-primary p-3">Buscar entre fechas</h6>
+
+                                        <div class="card-body">
+                                            <form action="" method="GET">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>De que fecha: </label>
+                                                            <input type="date" name="from_date" class="form-control" value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Hasta que fecha: </label>
+                                                            <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <input type="submit" value="Filtrar" class="btn btn-success btn-block">
+                                            </form>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 colxx-l-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-borderd" id="data" width="100%" cellspacing="0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Fecha</th>
+                                                                <th>Persona que entrego</th>
+                                                                <th>Persona que recibio</th>
+                                                                <th>Turno</th>
+                                                                <th>Concepto</th>
+                                                                <th>Efectivo</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        
+                                                        <?php 
+                                                            include "./config/conexion.php";
+
+                                                            if(isset($_GET['from_date']) && isset($_GET['to_date']))
+                                                            {
+                                                                $from_date = $_GET['from_date'];
+                                                                $to_date = $_GET['to_date'];
+
+                                                                $query = "SELECT * FROM cutbox_ruta WHERE opening_date BETWEEN '$from_date' AND '$to_date' ORDER BY opening_date ASC";
+                                                                $query_run = mysqli_query($conexion, $query);
+
+                                                                $total_row = 0;
+
+                                                                if(mysqli_num_rows($query_run) > 0)
+                                                                {
+                                                                    foreach($query_run as $row)
+                                                                    {
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td><?= date("d/m/Y", strtotime($row['opening_date'])); ?></td>
+                                                                            <td><?= $row['person_delivery']; ?></td>
+                                                                            <td><?= $row['person_receive']; ?></td>
+                                                                            <td><?= $row['turn']; ?></td>
+                                                                            <td><?= $row['concept_two']; ?></td>
+                                                                            <td>
+                                                                                <?php 
+                                                                                    $gastosTortilleria = $row['gastos_tortilleria'];
+
+                                                                                    $total = $gastosTortilleria+$total_row;
+                                                                                    echo number_format($total, 2);
+                                                                                ?>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                        
+                                                                        <?php
+                                                                        $total_neto = $total+$total_neto;
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    echo "<p class='text-center'>No se encontraron resultados...</p>";
+                                                                }
+                                                            }
+                                                        ?>
+                                                            <div class="d-flex justify-content-end">
+                                                                <tr>
+                                                                    <td>
+                                                                        Total de efectivo: $<?php 
+                                                                            echo number_format($total_neto, 2);
+                                                                        ?>
+                                                                    </td>
+                                                                </tr>
+                                                            </div>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-4">
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -75,6 +183,7 @@
                 </div>
 
             </div>
+            <br>
 
             <?php include "./partials/footer.php" ?>
 
