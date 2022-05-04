@@ -169,6 +169,121 @@
 </li>
 
 <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#cutBox"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-cash-register"></i>
+        <span>Corte de Caja</span>
+    </a>
+    <div id="cutBox" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-cut-box.php">Super</a>
+            <a href="show-cut-box.php" class="collapse-item">Lista corte de super</a>
+            <a class="collapse-item" href="new-cut-box-repartidores.php">Repartidores</a>
+            <a class="collapse-item" href="show-cut-box-repartidores.php">Lista de corte repartidores</a>
+            <a class="collapse-item" href="total-cut-day-super.php">Total de día súper</a>
+            <a class="collapse-item" href="total-cut-day-repartidores.php">Total de día repartidores</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNine"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-list"></i>
+        <span>Categorias de gastos</span>
+    </a>
+    <div id="collapseNine" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-categories.php">Crear nueva categoría</a>
+            <a class="collapse-item" href="show-categories.php">Lista de categorias</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTen"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-list"></i>
+        <span>Categorias de ingresos</span>
+    </a>
+    <div id="collapseTen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-categories-income.php">Crear nueva categoría</a>
+            <a class="collapse-item" href="show-categories-income.php">Lista de categorias</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEleven"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-money-check-alt"></i>
+        <span>Gastos</span>
+    </a>
+    <div id="collapseEleven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-expense.php">Crear nuevo gasto</a>
+            <a class="collapse-item" href="show-expenses.php">Lista de gastos</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwelven"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-hand-holding-usd"></i>
+        <span>Ingresos</span>
+    </a>
+    <div id="collapseTwelven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-income.php">Crear nuevo ingreso</a>
+            <a class="collapse-item" href="show-incomes.php">Lista de ingresos</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gastosSuper"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-money-check-alt"></i>
+        <span>Gastos Súper</span>
+    </a>
+    <div id="gastosSuper" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="show-gastos-super.php">Lista de gastos súper</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gastosTortilleria"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-money-check-alt"></i>
+        <span>Gastos Tortillería</span>
+    </a>
+    <div id="gastosTortilleria" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="show-gastos-tortilleria.php">Lista de gastos tortillería</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reports"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa-solid fa-file-export"></i>
+        <span>Reportes</span>
+    </a>
+    <div id="reports" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="reports-gastos.php">Reportes de gastos</a>
+            <a class="collapse-item" href="reports-ingresos.php">Reportes de ingresos</a>
+            <a class="collapse-item" href="reports-corte-super.php">Reportes corte súper</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#delivery-man"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fa-solid fa-bicycle"></i>
@@ -256,33 +371,6 @@
     </div>
 </li>-->
 
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNine"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-list"></i>
-        <span>Categorias de gastos</span>
-    </a>
-    <div id="collapseNine" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-categories.php">Crear nueva categoría</a>
-            <a class="collapse-item" href="show-categories.php">Lista de categorias</a>
-        </div>
-    </div>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTen"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-list"></i>
-        <span>Categorias de ingresos</span>
-    </a>
-    <div id="collapseTen" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-categories-income.php">Crear nueva categoría</a>
-            <a class="collapse-item" href="show-categories-income.php">Lista de categorias</a>
-        </div>
-    </div>
-</li>
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeenten"
@@ -312,77 +400,6 @@
     </div>
 </li> -->
 
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEleven"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-money-check-alt"></i>
-        <span>Gastos</span>
-    </a>
-    <div id="collapseEleven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-expense.php">Crear nuevo gasto</a>
-            <a class="collapse-item" href="show-expenses.php">Lista de gastos</a>
-        </div>
-    </div>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwelven"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-hand-holding-usd"></i>
-        <span>Ingresos</span>
-    </a>
-    <div id="collapseTwelven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-income.php">Crear nuevo ingreso</a>
-            <a class="collapse-item" href="show-incomes.php">Lista de ingresos</a>
-        </div>
-    </div>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gastosSuper"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-money-check-alt"></i>
-        <span>Gastos Súper</span>
-    </a>
-    <div id="gastosSuper" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="show-gastos-super.php">Lista de gastos súper</a>
-        </div>
-    </div>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gastosTortilleria"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-money-check-alt"></i>
-        <span>Gastos Tortillería</span>
-    </a>
-    <div id="gastosTortilleria" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="show-gastos-tortilleria.php">Lista de gastos tortillería</a>
-        </div>
-    </div>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#cutBox"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-cash-register"></i>
-        <span>Corte de Caja</span>
-    </a>
-    <div id="cutBox" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-cut-box.php">Super</a>
-            <a href="show-cut-box.php" class="collapse-item">Lista corte de super</a>
-            <a class="collapse-item" href="new-cut-box-repartidores.php">Repartidores</a>
-            <a class="collapse-item" href="show-cut-box-repartidores.php">Lista de corte repartidores</a>
-            <a class="collapse-item" href="total-cut-day-super.php">Total de día súper</a>
-            <a class="collapse-item" href="total-cut-day-repartidores.php">Total de día repartidores</a>
-        </div>
-    </div>
-</li>
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCobranza"
@@ -415,21 +432,6 @@
             <a class="collapse-item" href="show-invoices.php">Facturas clientes</a>
             <a class="collapse-item" href="invoices-receivable.php">Facturas por Cobrar</a>
             <a class="collapse-item" href="bills-paid.php">Facturas Pagadas</a>
-        </div>
-    </div>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reports"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa-solid fa-file-export"></i>
-        <span>Reportes</span>
-    </a>
-    <div id="reports" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="reports-gastos.php">Reportes de gastos</a>
-            <a class="collapse-item" href="reports-ingresos.php">Reportes de ingresos</a>
-            <a class="collapse-item" href="reports-orders.php">Reportes de pedidos</a>
         </div>
     </div>
 </li>
