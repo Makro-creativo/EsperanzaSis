@@ -71,6 +71,9 @@
                                                         <th>Concepto</th>
                                                         <th>Efectivo</th>
                                                         <th>Bauchers</th>
+                                                        <th>Gastos de Súper</th>
+                                                        <th>Gastos de Tortillería</th>
+                                                        <th>Ticket</th>
                                                         <th>Recargas</th>
                                                         <th>Total de efectivo</th>
                                                     </tr>
@@ -85,7 +88,7 @@
                                                                 $from_date = $_GET['from_date'];
                                                                 $to_date = $_GET['to_date'];
 
-                                                                $query = "SELECT * FROM cutbox_super WHERE opening_date BETWEEN '$from_date' AND '$to_date' ORDER BY opening_date ASC";
+                                                                $query = "SELECT * FROM cutbox_super WHERE opening_date BETWEEN '$from_date' AND '$to_date' AND turn = 'mañana' ORDER BY opening_date ASC";
                                                                 $query_run = mysqli_query($conexion, $query);
 
                                                                 $total_row = 0;
@@ -102,24 +105,29 @@
                                                                             <td><?= $row['turn']; ?></td>
                                                                             <td><?= $row['concept']; ?></td>
                                                                             <td><?php echo number_format($row['closing_amount'], 2); ?></td>
+                                                                            <td><?php echo number_format($row['gastos_super'], 2); ?></td>
+                                                                            <td><?php echo number_format($row['gastos_tortilleria'], 2); ?></td>
+                                                                            <td><?php echo number_format($row['number_notes'], 2); ?></td>
                                                                             <td><?php echo number_format($row['payment_services'], 2); ?></td>
                                                                             <td><?php echo number_format($row['recargas'], 2); ?></td>
                                                                             <td>
-                                                                                <?php 
-                                                                                    $closingAmount = $row['closing_amount'];
-                                                                                    $paymentServices = $row['payment_services'];
-                                                                                    $recargas = $row['recargas'];
+                                                                            <?php 
+                                                                                $closingAmount = $row['closing_amount'];
+                                                                                $paymentServices = $row['payment_services'];
+                                                                                $gastosSuper = $row['gastos_super'];
+                                                                                $gastosTrotilleria = $row['gastos_tortilleria'];
                                                                                 
 
-                                                                                    $total = $closingAmount + $paymentServices + $recargas;
-                                                                                    echo number_format($total, 2);
-                                                                                ?>
+                                                                                $total_cut = $closingAmount+$paymentServices+$gastosSuper+$gastosTrotilleria;
+
+                                                                                echo number_format($total_cut, 2);
+                                                                             ?>
                                                                             </td>
                                                                         </tr>
 
                                                                         
                                                                         <?php
-                                                                        $total_neto = $total_row+=$total;
+                                                                        $total_neto = $total_row+=$total_cut;
                                                                     }
                                                                 }
                                                                 else
