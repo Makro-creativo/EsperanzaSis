@@ -61,7 +61,7 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $query_incomes = "SELECT * FROM ingresos";
+                                                    $query_incomes = "SELECT * FROM ingresos ORDER BY created_at ASC";
                                                     $result_incomes = mysqli_query($conexion, $query_incomes);
 
                                                     while($row = mysqli_fetch_array($result_incomes)) {
