@@ -63,7 +63,7 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $query_expenses = "SELECT * FROM gastos";
+                                                    $query_expenses = "SELECT * FROM gastos ORDER BY created_at DESC";
                                                     $result_expenses = mysqli_query($conexion, $query_expenses);
 
                                                     while($row = mysqli_fetch_array($result_expenses)) {
