@@ -278,7 +278,9 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="reports-gastos.php">Reportes de gastos</a>
             <a class="collapse-item" href="reports-ingresos.php">Reportes de ingresos</a>
-            <a class="collapse-item" href="reports-corte-super.php">Reportes corte súper</a>
+            <a class="collapse-item" href="reports-corte-super.php">Corte súper mañana</a>
+            <a class="collapse-item" href="reports-turn-afternoon.php">Corte súper tarde</a>
+            <!--<a class="collapse-item" href="unifications-of-expenses.php">Gastos unificados</a>-->
         </div>
     </div>
 </li>
@@ -310,6 +312,20 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="new-product.php">Crear producto</a>
             <a class="collapse-item" href="show-products.php">Ver lista de productos</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#products-admin"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-box-open"></i>
+        <span>Productos Admin</span>
+    </a>
+    <div id="products-admin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-product-admin.php">Crear producto</a>
+            <a class="collapse-item" href="show-products-admin.php">Ver lista de productos</a>
         </div>
     </div>
 </li>
