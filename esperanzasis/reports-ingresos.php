@@ -80,7 +80,7 @@
                                                                 $from_date = $_GET['from_date'];
                                                                 $to_date = $_GET['to_date'];
 
-                                                                $query = "SELECT * FROM ingresos WHERE created_at BETWEEN '$from_date' AND '$to_date' ORDER BY created_at ASC";
+                                                                $query = "SELECT * FROM ingresos WHERE created_at BETWEEN '$from_date' AND '$to_date' ORDER BY created_at DESC";
                                                                 $query_run = mysqli_query($conexion, $query);
 
                                                                 $total_row = 0;
