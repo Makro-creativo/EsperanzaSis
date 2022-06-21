@@ -271,7 +271,7 @@
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reports"
         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa-solid fa-file-export"></i>
+        <i class="bi bi-file-earmark-arrow-down-fill"></i>
         <span>Reportes</span>
     </a>
     <div id="reports" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -280,6 +280,10 @@
             <a class="collapse-item" href="reports-ingresos.php">Reportes de ingresos</a>
             <a class="collapse-item" href="reports-corte-super.php">Corte súper mañana</a>
             <a class="collapse-item" href="reports-turn-afternoon.php">Corte súper tarde</a>
+            <a class="collapse-item" href="reports-total-efectivo-bauchers-gastos.php">Total de venta mañana</a>
+            <a class="collapse-item" href="reports-total-efectivo-bauchers-gastos-afternoon.php">Total de venta tarde</a>
+            <a class="collapse-item" href="reports-total-efectivo.php">Total de venta efectivo</a>
+            <a class="collapse-item" href="reports-total-credito.php">Total de venta crédito</a>
             <!--<a class="collapse-item" href="unifications-of-expenses.php">Gastos unificados</a>-->
         </div>
     </div>
