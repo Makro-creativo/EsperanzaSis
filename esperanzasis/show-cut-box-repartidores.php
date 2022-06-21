@@ -81,6 +81,11 @@
                                                                 <th>Persona que recibio</th>
                                                                 <th>Turno</th>
                                                                 <th>Concepto</th>
+                                                                <th>Efectivo</th>
+                                                                <th>Gastos de Súper</th>
+                                                                <th>Gastos de Tortillería</th>
+                                                                <th>Nota de crédito</th>
+                                                                <th>Número de notas</th>
                                                                 <th>Total del corte</th>
                                                             </tr>
                                                         </thead>
@@ -110,6 +115,11 @@
                                                                             <td><?= $row['person_receive']; ?></td>
                                                                             <td><?= $row['turn']; ?></td>
                                                                             <td><?= $row['concept_two']; ?></td>
+                                                                            <td><?= number_format($row['amount'], 2); ?></td>
+                                                                            <td><?= number_format($row['gastos_super'], 2); ?></td>
+                                                                            <td><?= number_format($row['gastos_tortilleria'], 2); ?></td>
+                                                                            <td><?= number_format($row['notes'], 2); ?></td>
+                                                                            <td><?= $row['number_note_repartidor']; ?></td>
                                                                             <td>
                                                                                 <?php 
                                                                                     $closingAmount = $row['amount'];
@@ -293,6 +303,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#filter').DataTable({
+                "paging": false,
+                "processing": true,
+                "serverSide": true,
+                'serverMethod': 'post',
+                "ajax": "server.php",
+                dom: 'Bfrtip',
+                buttons: [
+                    {extend: 'copy', attr: {id: 'allan'}}, 'csv'
+                ]
+            });
+
+        });
+    </script>
 
     <script>
 		const table = $('#dataTable').DataTable({
