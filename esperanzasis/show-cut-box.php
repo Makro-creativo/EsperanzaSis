@@ -19,6 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
@@ -46,7 +47,7 @@
 
                                         <div class="card-body">
                                             <form action="" method="GET">
-                                                <div class="row">
+                                                <div class="row mt-3">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>De que fecha: </label>
@@ -64,85 +65,100 @@
                                                 <button type="submit" class="btn btn-success btn-block">Filtrar</button>
                                             </form>
                                         </div>
+                                        
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 colxx-l-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered" width="100%" cellspacing="0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Fecha</th>
+                                                                    <th>Persona que entrego</th>
+                                                                    <th>Persona que recibio</th>
+                                                                    <th>Turno</th>
+                                                                    <th>Concepto</th>
+                                                                    <th>Efectivo</th>
+                                                                    <th>Bauchers</th>
+                                                                    <th>Gastos de Súper</th>
+                                                                    <th>Gastos de Trotillería</th>
+                                                                    <th>Recargas</th>
+                                                                    <th>Ticket</th>
+                                                                    <th>Total del corte</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            
+                                                            <?php 
+                                                                include "./config/conexion.php";
 
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 colxx-l-12">
-                                                <div class="table-responsive">
-                                                    <table class="table table-borderd" id="data" width="100%" cellspacing="0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Fecha</th>
-                                                                <th>Persona que entrego</th>
-                                                                <th>Persona que recibio</th>
-                                                                <th>Turno</th>
-                                                                <th>Concepto</th>
-                                                                <th>Total del corte</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        
-                                                        <?php 
-                                                            include "./config/conexion.php";
-
-                                                            if(isset($_GET['from_date']) && isset($_GET['to_date']))
-                                                            {
-                                                                $from_date = $_GET['from_date'];
-                                                                $to_date = $_GET['to_date'];
-
-                                                                $query = "SELECT * FROM cutbox_super WHERE opening_date BETWEEN '$from_date' AND '$to_date' ORDER BY opening_date ASC";
-                                                                $query_run = mysqli_query($conexion, $query);
-
-                                                                $total_row = 0;
-
-                                                                if(mysqli_num_rows($query_run) > 0)
+                                                                if(isset($_GET['from_date']) && isset($_GET['to_date']))
                                                                 {
-                                                                    foreach($query_run as $row)
+                                                                    $from_date = $_GET['from_date'];
+                                                                    $to_date = $_GET['to_date'];
+
+                                                                    $query = "SELECT * FROM cutbox_super WHERE opening_date BETWEEN '$from_date' AND '$to_date' ORDER BY opening_date DESC";
+                                                                    $query_run = mysqli_query($conexion, $query);
+
+                                                                    $total_row = 0;
+
+                                                                    if(mysqli_num_rows($query_run) > 0)
                                                                     {
-                                                                        ?>
-                                                                        <tr>
-                                                                            <td><?= date("d/m/Y", strtotime($row['opening_date'])); ?></td>
-                                                                            <td><?= $row['person_delivery']; ?></td>
-                                                                            <td><?= $row['person_receive']; ?></td>
-                                                                            <td><?= $row['turn']; ?></td>
-                                                                            <td><?= $row['concept']; ?></td>
-                                                                            <td>
-                                                                                <?php 
-                                                                                    $closingAmount = $row['closing_amount'];
-                                                                                    $paymentServices = $row['payment_services'];
-                                                                                    $gastosSuper = $row['gastos_super'];
-                                                                                    $gastosTrotilleria = $row['gastos_tortilleria'];
+                                                                        foreach($query_run as $row)
+                                                                        {
+                                                                            ?>
+                                                                            <tr>
+                                                                                <td><?= date("d/m/Y", strtotime($row['opening_date'])); ?></td>
+                                                                                <td><?= $row['person_delivery']; ?></td>
+                                                                                <td><?= $row['person_receive']; ?></td>
+                                                                                <td><?= $row['turn']; ?></td>
+                                                                                <td><?= $row['concept']; ?></td>
+                                                                                <td><?= number_format($row['closing_amount'], 2); ?></td>
+                                                                                <td><?= number_format($row['payment_services'], 2); ?></td>
+                                                                                <td><?= number_format($row['gastos_super'], 2); ?></td>
+                                                                                <td><?= number_format($row['gastos_tortilleria'], 2); ?></td>
+                                                                                <td><?= number_format($row['recargas'], 2); ?></td>
+                                                                                <td><?= number_format($row['number_notes'], 2); ?></td>
+                                                                                <td>
+                                                                                    <?php 
+                                                                                        $closingAmount = $row['closing_amount'];
+                                                                                        $paymentServices = $row['payment_services'];
+                                                                                        $gastosSuper = $row['gastos_super'];
+                                                                                        $gastosTrotilleria = $row['gastos_tortilleria'];
 
-                                                                                    $total = $closingAmount + $paymentServices + $gastosSuper + $gastosTrotilleria;
-                                                                                    echo number_format($total, 2);
-                                                                                ?>
-                                                                            </td>
-                                                                        </tr>
+                                                                                        $total = $closingAmount + $paymentServices + $gastosSuper + $gastosTrotilleria;
+                                                                                        echo number_format($total, 2);
+                                                                                    ?>
+                                                                                </td>
+                                                                            </tr>
 
-                                                                        
-                                                                        <?php
-                                                                        $total_neto = $total_row+=$total;
+                                                                            
+                                                                            <?php
+                                                                            $total_neto = $total_row+=$total;
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        echo "<p class='text-center'>No se encontraron resultados...</p>";
                                                                     }
                                                                 }
-                                                                else
-                                                                {
-                                                                    echo "<p class='text-center'>No se encontraron resultados...</p>";
-                                                                }
-                                                            }
-                                                        ?>
-                                                            <div class="d-flex justify-content-end">
-                                                                <tr>
-                                                                    <td>
-                                                                        Total: $<?php 
-                                                                            echo number_format($total_neto, 2);
-                                                                        ?>
-                                                                    </td>
-                                                                </tr>
-                                                            </div>
-                                                        </tbody>
-                                                    </table>
+                                                            ?>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <tr>
+                                                                        <td>
+                                                                            Total: $<?php 
+                                                                                echo number_format($total_neto, 2);
+                                                                            ?>
+                                                                        </td>
+                                                                    </tr>
+                                                                </div>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -184,7 +200,7 @@
 
                                                     $dateDelivery = $_GET['date_delivery'];
 
-                                                    $sql_query = "SELECT * FROM cutbox_super ORDER BY opening_date ASC";
+                                                    $sql_query = "SELECT * FROM cutbox_super ORDER BY opening_date DESC";
                                                     $result_query = mysqli_query($conexion, $sql_query);
 
                                                     while($row = mysqli_fetch_array($result_query)) {                                                
@@ -217,12 +233,7 @@
                                                     </td>
                                                     <td>
                                                         <?php 
-                                                            $numberNotes = $row['number_notes'];
-                                                            $recargas = $row['recargas'];
-
-                                                            $totalTicket = $numberNotes+$recargas;
-
-                                                            echo number_format($totalTicket, 2);
+                                                            echo number_format($row['number_notes'], 2);
                                                         ?>
                                                     </td>
                                                     
@@ -302,7 +313,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
-
     <script>
 		const table = $('#dataTable').DataTable({
             dom: 'lBfrtip',
@@ -337,14 +347,5 @@
 			
 		});
 	</script>
-
-    <script>
-        $('#data').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'excel'
-            ]
-        } );
-    </script>
 </body>
 </html>
