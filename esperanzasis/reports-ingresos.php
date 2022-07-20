@@ -121,6 +121,32 @@
                                             </table>
                                         </div>
                                     </div>
+
+                                    <div class="row mt-2">
+                                                        <p class="text-primary text-center">Exportar a excel entre fechas</p>
+                                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 cool-xxl-12">
+                                                            <form method="POST" class="form" action="report-ingresos-export.php">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <input type="date" name="date1" class="form-control">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <input type="date" name="date2" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="d-grid gap-2">
+                                                                    <input type="submit" name="generate-report-ingresos" value="Descargar" class="btn btn-success">
+                                                                </div>
+                                                            </form>
+                                                            <br>
+                                                        </div>
+                                                    </div>
                                 </div>
                             </div>
                         </div>
