@@ -1,15 +1,3 @@
-<?php 
-    session_start();
-    
-    if(!isset($_SESSION['contador'])) {
-        $_SESSION['contador'] = 0;
-    } else {
-        $_SESSION['contador']++;
-    }
-
-    $typeUser = $_SESSION['Tipo'];
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,12 +8,14 @@
     <title>EsperanzaSis</title>
 
     <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -554,35 +544,28 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Total de ingresos de (Corte de Caja)</div>
+                                                    Total de ingresos de (Corte de Caja Súper)</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                     <?php 
                                                         include "./config/conexion.php";
 
                                                         $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_super");
-                                                        $query_total_two = mysqli_query($conexion, "SELECT * FROM cutbox_ruta");
+                                                        //$query_total_two = mysqli_query($conexion, "SELECT * FROM cutbox_ruta");
                                                         
 
                                                         $total = 0;
                                                         $total_two = 0;
-
-                                            
-                                                        while($rowRuta = mysqli_fetch_array($query_total_two)) {
-                                                            $amount = $rowRuta['amount'];
-                                                            $paymentServicesTwo = $rowRuta['payment_services_two'];
-
-                                                            $total_ruta =  $amount + $paymentServicesTwo;
                                                         
 
                                                         while($row = mysqli_fetch_array($query_total_morning)) {
                                                             $closing_amount = $row['closing_amount'];
                                                             $payment_services = $row['payment_services'];
+                                                            $gastosSuper = $row['gastos_super'];
+                                                            $gastosTortilleria = $row['gastos_tortilleria'];
+                                                            
 
-                                                            $total_cut = $closing_amount + $payment_services;
+                                                            $total_cut = $closing_amount+$payment_services+$gastosSuper+$gastosTortilleria;
                                                     ?>
-                                                    <?php 
-                                                        $total_two+=$total_ruta;
-                                                    }?>
 
                                                     <?php 
                                                        $total+=$total_cut;
@@ -592,7 +575,7 @@
                                                         <th colspan='' class='text-center'>
                                                             <i class="fas fa-dollar-sign"></i>
                                                             <?php
-                                                                $total_day = $total+=$total_two;
+                                                                $total_day = $total+=$total;
 
                                                                 echo number_format($total_day, 2);
                                                             ?>
@@ -603,6 +586,9 @@
                                             <div class="col-auto">
                                                 <i class="fas fa-cash-register fa-2x text-gray-300"></i>
                                             </div>
+
+                                            
+
                                         </div>
 
                                     </div>
@@ -695,6 +681,151 @@
                                             Grafica de cobranza
                                             <i class="fas fa-long-arrow-alt-right mr-2"></i>
                                         </a>
+                                    </div>
+                                </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3 mt-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Total de ingresos de (Corte de Caja Repartidores)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $query_total_morning = mysqli_query($conexion, "SELECT * FROM cutbox_ruta");
+                                                        //$query_total_two = mysqli_query($conexion, "SELECT * FROM cutbox_ruta");
+                                                        
+
+                                                        $total = 0;
+                                                        $total_two = 0;
+                                                        
+
+                                                        while($row = mysqli_fetch_array($query_total_morning)) {
+                                                            $closing_amount = $row['amount'];
+                                                            $notes = $row['notes'];
+                                                            $gastosSuper = $row['gastos_super'];
+                                                            $gastosTortilleria = $row['gastos_tortilleria'];
+                                                            
+
+                                                            $total_cut = $closing_amount+$notes+$gastosSuper+$gastosTortilleria;
+                                                    ?>
+
+                                                    <?php 
+                                                       $total+=$total_cut;
+                                                    }?>
+
+                                                    <tr>
+                                                        <th colspan='' class='text-center'>
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                            <?php
+                                                                $total_day = $total+=$total;
+
+                                                                echo number_format($total_day, 2);
+                                                            ?>
+                                                        </th>
+                                                    </tr> 
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-cash-register fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-graphic-repartidores.php">
+                                            Grafica
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3 mt-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Total de ventas a crédito</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_total_orders_credito = mysqli_query($conexion, "SELECT * FROM ordens_admin WHERE status_payment = 'credito'");
+                                                        
+                                                        $total = 0;
+
+                                                        while($rowOrder = mysqli_fetch_array($search_total_orders_credito)) {
+                                                            $totalCobranza = $rowOrder['monto'];
+                                                    ?>
+
+                                                    <?php 
+                                                        $totalNeto = $total+=$totalCobranza;
+                                                    }?>
+
+                                                    <tr>
+                                                        <th colspan='' class='text-center'>
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                            <?php
+                                                                echo number_format($totalNeto, 2);
+                                                            ?>
+                                                        </th>
+                                                    </tr> 
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="bi bi-credit-card-fill fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3 mt-4">
+                            <div class="card border-left-secondary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Total de ventas a contado</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $search_total_orders_credito = mysqli_query($conexion, "SELECT * FROM ordens_admin WHERE status_payment = 'contado'");
+                                                        
+                                                        $total_contado = 0;
+
+                                                        while($rowOrderTwo = mysqli_fetch_array($search_total_orders_credito)) {
+                                                            $totalCobranzaTwo = $rowOrderTwo['monto'];
+                                                    ?>
+
+                                                    <?php 
+                                                        $totalNetoTwo = $total_contado+=$totalCobranzaTwo;
+                                                    }?>
+
+                                                    <tr>
+                                                        <th colspan='' class='text-center'>
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                            <?php
+                                                                echo number_format($totalNetoTwo, 2);
+                                                            ?>
+                                                        </th>
+                                                    </tr> 
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="bi bi-cash-coin fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                     </div>

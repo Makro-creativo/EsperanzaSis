@@ -105,20 +105,21 @@
 
                                                     $id_order = $_GET['purchaseid'];
 
-                                                    $query_detail_order = "SELECT * FROM orders_admin INNER JOIN purchase_detail_admin ON orders_admin.purchaseid = purchase_detail_admin.purchaseid INNER JOIN products ON purchase_detail_admin.productid = products.productid AND purchase_detail_admin.purchaseid = '$id_order' AND id_user = 'Administrador'";
+                                                    $query_detail_order = "SELECT * FROM orders_admin INNER JOIN purchase_detail_admin ON orders_admin.purchaseid = purchase_detail_admin.purchaseid INNER JOIN products ON purchase_detail_admin.productid = products.productid AND purchase_detail_admin.purchaseid = '$id_order'";
                                                     $result_detail_order = mysqli_query($conexion, $query_detail_order);
 
                                                     while($row = mysqli_fetch_array($result_detail_order)) {
+                                                        
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $row['purchaseid']; ?></td>
                                                     <td><?php echo $row['name_order']; ?></td>
                                                     <td><?php echo $row['name_product']; ?></td>
-                                                    <td><?php echo $row['quantity']; ?></td>
+                                                    <td><?php echo $row['quantity']; ?></td> 
                                                     <td><?php echo $row['address_send']; ?></td>
                                                     <td><?php echo date('h:i a', strtotime($row['hour_send'])); ?></td>
                                                     <td><?php echo $row['people_order']; ?></td>
-                                                    <th><?php echo $row['name_delivery']; ?></th>
+                                                    <th><span class="badge bg-primary"><?php echo $row['name_delivery']; ?></span></th>
                                                     <td><?php echo number_format($row['price'], 2); ?></td>
                                                     <td>
                                                         <?php 

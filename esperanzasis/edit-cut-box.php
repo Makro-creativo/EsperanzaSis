@@ -15,9 +15,10 @@
         $paymentServices = $_POST['payment_services'];
         $numberNotes = $_POST['number_notes'];
         $gastosSuper = $_POST['gastos_super'];
+        $gastosTortilleria =$_POST['gastos_tortilleria'];
         $recargas = $_POST['recargas'];
 
-        $query_update = "UPDATE cutbox_super SET id_box='$idCutSuper', opening_date='$openingDate', person_delivery='$personDelivery', person_receive='$personReceive', turn='$turn', concept='$concept', closing_amount='$closingAmount', payment_services='$paymentServices', number_notes='$numberNotes', gastos_super='$gastosSuper', recargas='$recargas' WHERE id_box = '$idCutSuper'";
+        $query_update = "UPDATE cutbox_super SET id_box='$idCutSuper', opening_date='$openingDate', person_delivery='$personDelivery', person_receive='$personReceive', turn='$turn', concept='$concept', closing_amount='$closingAmount', payment_services='$paymentServices', number_notes='$numberNotes', gastos_super='$gastosSuper', gastos_tortilleria='$gastosTortilleria', recargas='$recargas' WHERE id_box = '$idCutSuper'";
         mysqli_query($conexion, $query_update);
 
         header("location: show-cut-box.php");

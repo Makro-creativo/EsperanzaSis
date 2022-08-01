@@ -1,4 +1,5 @@
 <?php
+    
     include "./config/conexion.php";
 
     if(isset($_POST['newOrder'])){
@@ -21,7 +22,7 @@
     
         //INSERTA ORDER
        
-            echo $query_orders = "INSERT INTO orders_admin(id_user, name_order, address_send, date_send, hour_send, people_order, comments, name_delivery, date_purchase, status_payment, note_cobranza_credito, note_cobranza_credito_two) VALUES('$id_user', '$nameClient', '$addressSend', '$dateSend', '$hourSend', '$peopleOrder', '$comments', '$nameDelivery', NOW(), '$statusPayment', '$noteCredito', '$noteCreditoTwo')";
+            $query_orders = "INSERT INTO orders_admin(id_user, name_order, address_send, date_send, hour_send, people_order, comments, name_delivery, date_purchase, status_payment, note_cobranza_credito, note_cobranza_credito_two) VALUES('$id_user', '$nameClient', '$addressSend', '$dateSend', '$hourSend', '$peopleOrder', '$comments', '$nameDelivery', NOW(), '$statusPayment', '$noteCredito', '$noteCreditoTwo')";
             $result_orders = mysqli_query($conexion, $query_orders);     
 
             //$pid = $conexion->insert_id;
@@ -56,8 +57,9 @@
 			$result_purchase_detail = mysqli_query($conexion, $query_purchase_detail);
             
             //Validacion producto con o sin descuento
-            $query_products = "SELECT * FROM products INNER JOIN promotions ON products.productid = promotions.productid INNER JOIN purchase_detail ON products.productid = purchase_detail.productid WHERE products.productid = '$id_product' AND promotions.id_user = '$id_user' ";
+            $query_products = "SELECT * FROM products INNER JOIN promotions ON products.productid = promotions.productid INNER JOIN purchase_detail ON products.productid = purchase_detail.productid WHERE products.productid = '$id_product' AND promotions.id_user = '$id_user'";
 		    $result_products = mysqli_query($conexion, $query_products);
+
 
             $products_contain_discount = mysqli_num_rows($result_products);
                 
@@ -91,7 +93,7 @@
 		?>
 		<script>
 			window.alert('Por favor selecciona un producto');
-			window.location.href='new-order_admin.php';
+			window.location.href='new-order-admin.php';
 		</script>
 		<?php
 	}

@@ -23,7 +23,7 @@
 		$rowClient = mysqli_fetch_array($query_clients);
 		$nameClient = $rowClient['name_client'];
 		$addressClient = $rowClient['address_company'];
-            echo $query_orders = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, calification, date_purchase, status_payment_client, number_note, number_note_two) VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', '$calification', NOW(), '$statusPaymentClient', '$numberNote', '$numberNoteTwo')";
+            $query_orders = "INSERT INTO orders (id_user, client_name, address_send, date_send, hour_send, people_order, comments, calification, date_purchase, status_payment_client, number_note, number_note_two) VALUES ('$id_user','$nameClient', '$addressClient', '$date_send', '$hour_send', '$people_order', '$comments', '$calification', NOW(), '$statusPaymentClient', '$numberNote', '$numberNoteTwo')";
             $result_orders = mysqli_query($conexion, $query_orders);
             
 

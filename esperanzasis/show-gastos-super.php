@@ -84,7 +84,7 @@
                                                                 $from_date = $_GET['from_date'];
                                                                 $to_date = $_GET['to_date'];
 
-                                                                $query = "SELECT * FROM cutbox_super WHERE opening_date BETWEEN '$from_date' AND '$to_date' ORDER BY opening_date ASC";
+                                                                $query = "SELECT * FROM cutbox_super WHERE opening_date BETWEEN '$from_date' AND '$to_date' ORDER BY opening_date DESC";
                                                                 $query_run = mysqli_query($conexion, $query);
 
                                                                 $total_row = 0;

@@ -66,7 +66,7 @@
                                                         $iterate=0;
 
                                                         while($row = mysqli_fetch_array($result)){ 
-                                                            $priceNormal =  number_format($row['price'], 2);
+                                                            //$priceNormal =  number_format($row['price'], 2);
                                                         ?>
                                                             <tr>
                                                                 <!--<td required class="text-center"><input type="checkbox" value="<?php //echo $row['productid']; ?>||<?php //echo $iterate; ?>" name="productid[]" style=""></td>-->
@@ -82,7 +82,7 @@
                                                                 </td>
 
                                                                 <td>
-                                                                    <?php echo number_format($row['price'], 2); ?>		
+                                                                    <?php echo number_format($row['price'], 2); ?>
                                                                 </td>
                                                                 
                                                             </tr>

@@ -162,8 +162,10 @@
     </a>
     <div id="ordersAdmin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-order-admin.php">Crear un nuevo pedido</a>
-            <a class="collapse-item" href="show-all-orders-admin.php">Lista de mis pedidos</a>
+            <a class="collapse-item" href="new-orders-admin-test.php">Crear un nuevo pedido</a>
+            <a class="collapse-item" href="show-orders-admin-test.php">Lista de mis pedidos</a>
+            <a class="collapse-item" href="show-all-orders-credito.php">Pedidos a crédito</a>
+            <a class="collapse-item" href="show-all-orders-contado.php">Pedidos a contado</a>
         </div>
     </div>
 </li>

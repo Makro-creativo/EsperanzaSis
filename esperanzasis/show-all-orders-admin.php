@@ -111,11 +111,11 @@
                                                     <td><?php echo $row['purchaseid']; ?></td>
                                                     <td><?php echo $row['name_order']; ?></td>
                                                     <td><?php echo $row['address_send']; ?></td>
-                                                    <td><?php echo date('d-m-Y', strtotime($row['date_send'])); ?></td>
+                                                    <td><?php echo date('d/m/Y', strtotime($row['date_send'])); ?></td>
                                                     <td><?php echo date('h:i a', strtotime($row['hour_send'])); ?></td>
                                                     <td><?php echo $row['people_order']; ?></td>
                                                     <td><?php echo $row['comments']; ?></td>
-                                                    <td><?php echo $row['status_payment']; ?></td>
+                                                    <td><span class="badge bg-success"><?php echo $row['status_payment']; ?></span></td>
                                                     <td>
                                                         <?php
                                                             if(!$noteCredito) {
