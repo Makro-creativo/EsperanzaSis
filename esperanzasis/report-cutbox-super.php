@@ -10,7 +10,7 @@ if(isset($_POST['generate-report'])) {
 
 	$salida = fopen('php://output', 'w');
 
-	fputcsv($salida, array('ID', 'Fecha', 'Persona que entrego', 'Persona que recibio', 'Turno', 'Concepto', 'Efectivo', 'Bauchers', 'Gastos Súper', 'Gastos Tortillería', 'Ticket', 'Recargas', 'Total de efectivo'));
+	fputcsv($salida, array('ID', 'Fecha', 'Persona que entrego', 'Persona que recibio', 'Turno', 'Concepto', 'Efectivo', 'Bauchers', 'Gastos Súper', 'Gastos Tortillería', 'Recargas', 'Ticket', 'Total de efectivo'));
 	
 	$reporteCsv = $conexion->query("SELECT * FROM cutbox_super WHERE opening_date BETWEEN '$date1' AND '$date2' ORDER BY opening_date DESC");
 
@@ -22,11 +22,11 @@ if(isset($_POST['generate-report'])) {
                 $filaR['turn'],
                 $filaR['concept'],
                 $filaR['closing_amount'],
+				$filaR['payment_services'],
                 $filaR['gastos_super'],
                 $filaR['gastos_tortilleria'],
+				$filaR['recargas'],
                 $filaR['number_notes'],
-                $filaR['payment_services'],
-                $filaR['recargas'],
                 $filaR['closing_amount']+$filaR['payment_services']+$filaR['gastos_super']+$filaR['gastos_tortilleria'],
 	));
 
