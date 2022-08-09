@@ -136,6 +136,7 @@
                                                                         
                                                                         <?php
                                                                         $total_neto = $total_row+=$total;
+                                                                        $totalEfectivo = $total_efectivo+=$amount;
                                                                     }
                                                                 }
                                                                 else
@@ -152,7 +153,7 @@
                                                                         ?>
                                                                     </td>
                                                                 </tr>
-                                                            </div>
+                                                            </div>  
                                                         </tbody>
                                                     </table>
                                                 </div>
