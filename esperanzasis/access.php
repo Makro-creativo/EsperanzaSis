@@ -19,6 +19,7 @@
         $_SESSION['user'] = $user;
         $_SESSION['Tipo'] = $row['tipo'];
         $_SESSION['UID'] = $row['id_user'];
+        $_SESSION['UID2'] = $row['id_user'];
 
         // Redireccionar según el tipo de usuario
         if($profile == "Cliente") {

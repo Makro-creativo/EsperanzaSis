@@ -39,6 +39,19 @@
             </script>
         <?php } ?>
 
+        <?php
+        if(isset($_GET['verify'])) {
+        ?>       
+
+            <script>
+                Swal.fire(
+                    'Error',
+                    'El número de nota que intentas registrar ya existe, intenta con uno nuevo...',
+                    'error'
+                )
+            </script>
+        <?php } ?>
+
         <?php include "./partials/menuLateral.php" ?>
 
         <div id="content-wrapper" class="d-flex flex-column">
@@ -80,28 +93,43 @@
 
                                         <div class="container">
                                             <div class="row">
-                                                <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                                                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                     <div class="form-group">
                                                         <label>Nombre del cliente: </label>
-                                                        <input type="text" placeholder="Nombre del cliente..." name="name_client" id="name_client" class="form-control" required autofocus>
+                                                        
+                                                        <select name="id_client" class="form-control">
+                                                            <option selected disabled>Seleccionar cliente</option>
+                                                            <?php 
+                                                                include "./config/conexion.php";
+
+                                                                $search_clients = "SELECT * FROM clients ORDER BY name_client ASC";
+                                                                $result_client = mysqli_query($conexion, $search_clients);
+
+                                                                while($rowClient = mysqli_fetch_array($result_client)) {
+                                                                    $nameClient = $rowClient['name_client'];
+                                                                    $idClient = $rowClient['id_user'];
+                                                            ?>
+                                                                <option value="<?php echo $idClient; ?>"><?php echo $nameClient; ?></option>
+                                                            <?php }?>
+                                                        </select>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                                                <!--<div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
                                                     <div class="form-group">
                                                         <label>Dirección de entrega: </label>
                                                         <input type="text" placeholder="Direccion de entrega..." class="form-control" name="adress_send" id="adress_send" required>
                                                     </div>
-                                                </div>
+                                                </div>-->
 
-                                                <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                                                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                     <div class="form-group">
                                                         <label>Hora de entrega: </label>
                                                         <input type="time" name="hour_send" class="form-control" required>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 col-xxl-3">
+                                                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                     <div class="form-group">
                                                         <label>Fecha de envío: </label>
                                                         <input type="date" name="date_send" class="form-control" required>

@@ -8,8 +8,8 @@
 	$uid = $_SESSION['UID'];
 
 	$date = date("Y-m-d H:i:s");
-	$nameClient = $_POST['name_client'];
-	$adressSend = $_POST['adress_send'];	
+	//$nameClient = $_POST['name_client'];
+	//$adressSend = $_POST['adress_send'];	
 	$hourSend = $_POST['hour_send'];
 	$dateSend = $_POST['date_send'];
 	$peopleOrder = $_POST['people_order'];
@@ -19,9 +19,11 @@
 	$numberNote = $_POST['note_cobranza_credito'];
 	$numberNoteTwo = $_POST['note_cobranza_credito_two'];
 	$totalVenta = $_POST['total_venta'];
+	$idClient = $_POST['id_client'];
 
-	$sql = "INSERT INTO ordens_admin (date, id_user, name_client, adress_send, hour_send, date_send, people_order, comments, name_delivery, status_payment, note_cobranza_credito, note_cobranza_credito_two, monto) 
-	VALUES ('$date', '$uid', '$nameClient', '$adressSend', '$hourSend', '$dateSend', '$peopleOrder', '$comments', '$nameDelivery', '$statusPayment', '$numberNote', '$numberNoteTwo', '$totalVenta');";
+
+	$sql = "INSERT INTO ordens_admin (date, id_user, hour_send, date_send, people_order, comments, name_delivery, status_payment, note_cobranza_credito, note_cobranza_credito_two, monto, id_client) 
+	VALUES ('$date', '$uid', '$hourSend', '$dateSend', '$peopleOrder', '$comments', '$nameDelivery', '$statusPayment', '$numberNote', '$numberNoteTwo', '$totalVenta', '$idClient');";
 	$save = mysqli_query($conexion, $sql);
 
 	$query = mysqli_query($conexion, "SELECT * FROM order_temporal ORDER BY id DESC");

@@ -31,10 +31,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body class="page-top">
     <div id="wrapper">
         <?php include "./partials/menuLateral.php" ?>
+
+        <?php   
+             if(isset($_GET['bien'])){
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Listo',
+                    text: 'Se actualizo correctamente!',
+                    icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    .then(function() {
+                        window.location = "show-all-orders-contado.php";
+                });
+            </script>
+        <?php } ?>
 
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
@@ -59,8 +76,13 @@
                                                     <th>Comentarios</th>
                                                     <th>Estatus de pago</th>
                                                     <th>Número de nota</th>
+                                            
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <th>Detalle del pedido</th>
+                                                    <?php }?>
+
+                                                    <?php if($typeUser === "Administrador") {?>
+                                                        <th>Cambiar estado</th>
                                                     <?php }?>
                                                 </tr>
                                             </thead>
@@ -99,6 +121,18 @@
                                                             <a href="show-detail-order.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary btn-sm">
                                                                 <i class="bi bi-eye-fill"></i>
                                                             </a>
+                                                        </td>
+                                                    <?php }?>
+
+                                                    <?php if($typeUser === "Administrador") {?>
+                                                        <td class="text-center">
+                                                            <form action="change-status-credito.php" method="POST">
+                                                                <input type="hidden" value="<?php echo $row['purchaseid']; ?>" name="id_credito">
+
+                                                                <button type="submit" class="btn btn-success btn-sm" name="changesStatus">
+                                                                    <i class="fa-regular fa-circle-check"></i>
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     <?php }?>
                                                 </tr>

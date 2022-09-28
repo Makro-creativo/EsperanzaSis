@@ -99,7 +99,7 @@
                                                     include "./config/conexion.php";
                                                     $idOrder = $_GET['purchaseid'];
 
-                                                    $search_order_detail = "SELECT * FROM ordens_admin INNER JOIN details_ordens_admin ON ordens_admin.purchaseid = details_ordens_admin.purchaseid WHERE ordens_admin.purchaseid = '$idOrder'";
+                                                    $search_order_detail = "SELECT * FROM ordens_admin INNER JOIN details_ordens_admin ON ordens_admin.purchaseid = details_ordens_admin.purchaseid INNER JOIN clients ON ordens_admin.id_client = clients.id_user WHERE ordens_admin.purchaseid = '$idOrder'";
                                                     $result_order_detail = mysqli_query($conexion, $search_order_detail);
 
                                                     while($row = mysqli_fetch_array($result_order_detail)) {
@@ -109,7 +109,7 @@
                                                     <td><?php echo $row['name_client']; ?></td>
                                                     <td><?php echo $row['name_product']; ?></td>
                                                     <td><?php echo $row['quantity']; ?></td>
-                                                    <td><?php echo $row['adress_send'];  ?></td>
+                                                    <td><?php echo $row['address_company'];  ?></td>
                                                     <td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
                                                     <td><?php echo date("m/d/Y", strtotime($row['date_send'])); ?></td>
                                                     <td><?php echo $row['people_order']; ?></td>

@@ -42,7 +42,148 @@
                     <div class="row">
                         <h2 class="d-flex justify-content-start mb-4">Lista de pedidos</h2>
 
-                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <div class="card shadow-lg">
+                                        <h6 class="text-center text-primary p-3">Buscar entre fechas</h6>
+
+                                        <div class="card-body">
+                                            <form action="" method="GET">
+                                                <div class="row mt-3">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>De que fecha: </label>
+                                                            <input type="date" name="from_date" value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Hasta que fecha: </label>
+                                                            <input type="date" name="to_date" value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Cliente: </label>
+                                                            <select name="name_client" class="form-control">
+                                                                <option selected disabled>Seleccionar cliente</option>
+                                                                <?php 
+                                                                    include "./config/conexion.php";
+
+                                                                    $search_name_client = "SELECT * FROM ordens_admin ORDER BY name_client ASC";
+                                                                    $result_name_client = mysqli_query($conexion, $search_name_client);
+
+                                                                    while($rowClient = mysqli_fetch_array($result_name_client)) {
+                                                                        $nameClient = $rowClient['name_client'];
+                                                                ?>
+                                                                    <option value="<?php echo $nameClient; ?>"><?php echo $nameClient; ?></option>
+                                                                <?php }?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-success btn-block">Filtrar</button>
+                                            </form>
+                                        </div>
+
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 colxx-l-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered" width="100%" cellspacing="0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Cliente</th>
+                                                                    <th>Dirección de entrega</th>
+                                                                    <th>Fecha de entrega</th>
+                                                                    <th>Hora de entrega</th>
+                                                                    <th>Persona quién realizo el pedido</th>
+                                                                    <th>Comentarios</th>
+                                                                    <th>Estatus de pago</th>
+                                                                    <th>Número de nota</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            
+                                                            <?php 
+                                                                include "./config/conexion.php";
+
+                                                                if(isset($_GET['from_date']) && isset($_GET['to_date']))
+                                                                {
+                                                                    $from_date = $_GET['from_date'];
+                                                                    $to_date = $_GET['to_date'];
+                                                                    $nameClient = $_GET['name_client'];
+
+                                                                    $query = "SELECT * FROM ordens_admin WHERE date_send BETWEEN '$from_date' AND '$to_date' AND name_client = '$nameClient' ORDER BY date_send DESC";
+                                                                    $query_run = mysqli_query($conexion, $query);
+
+                                                                    $total_row = 0;
+
+                                                                    if(mysqli_num_rows($query_run) > 0)
+                                                                    {
+                                                                        foreach($query_run as $row)
+                                                                            $numberNoteOne = $row['note_cobranza_credito'];
+                                                                            $numberNoteTwo = $row['note_cobranza_credito_two'];
+                                                                            $amount = $row['monto'];
+                                                                        {
+                                                                            ?>
+                                                                            <tr>
+                                                                                <td><?= $row['name_client'] ?></td>
+                                                                                <td><?= $row['adress_send']; ?></td>
+                                                                                <td><?= date("m/d/Y", strtotime($row['date_send'])); ?></td>
+                                                                                <td><?= date("h:i a", strtotime($row['hour_send'])); ?></td>
+                                                                                <td><?= $row['people_order']; ?></td>
+                                                                                <td><?= $row['comments'] ?></td>
+                                                                                <td><span class="badge bg-primary"><?= $row['status_payment'] ?></span></td>
+                                                                                <td>
+                                                                                    <?php 
+                                                                                        if(!$numberNoteOne) {
+                                                                                            echo $numberNoteTwo;
+                                                                                        } else {
+                                                                                            echo $numberNoteOne;
+                                                                                        }
+                                                                                    ?>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            
+                                                                            <?php
+                                                                            $total_neto = $total_row+=$amount;
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        echo "<p class='text-center'>No se encontraron resultados...</p>";
+                                                                    }
+                                                                }
+                                                            ?>
+                                                                <div class="d-flex justify-content-end">
+                                                                    <tr>
+                                                                        <td>
+                                                                            Total: $<?php 
+                                                                                echo number_format($total_neto, 2);
+                                                                            ?>
+                                                                        </td>
+                                                                    </tr>
+                                                                </div>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+            
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-4">
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -71,7 +212,7 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $search_order_admin = "SELECT * FROM ordens_admin ORDER BY purchaseid ASC";
+                                                    $search_order_admin = "SELECT * FROM ordens_admin INNER JOIN clients ON ordens_admin.id_client = clients.id_user ORDER BY purchaseid ASC";
                                                     $result_order_admin = mysqli_query($conexion, $search_order_admin);
 
                                                     while($row = mysqli_fetch_array($result_order_admin)) {
@@ -80,7 +221,7 @@
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $row['name_client']; ?></td>
-                                                    <td><?php echo $row['adress_send']; ?></td>
+                                                    <td><?php echo $row['address_company']; ?></td>
                                                     <td><?php echo date("m/d/Y", strtotime($row['date_send'])); ?></td>
                                                     <td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
                                                     <td><?php echo $row['people_order']; ?></td>
