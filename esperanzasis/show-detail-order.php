@@ -86,10 +86,8 @@
                                                     <th>Cliente</th>
                                                     <th>Nombre del producto</th>
                                                     <th>Cantidad</th>
-                                                    <th>Dirección de entrega</th>
                                                     <th>Hora de entrega</th>
                                                     <th>Fecha de entrega</th>
-                                                    <th>Persona que solicito pedido</th>
                                                     <th>Precio</th>
                                                     <th>Subtotal</th>
                                                 </tr>
@@ -99,7 +97,7 @@
                                                     include "./config/conexion.php";
                                                     $idOrder = $_GET['purchaseid'];
 
-                                                    $search_order_detail = "SELECT * FROM ordens_admin INNER JOIN details_ordens_admin ON ordens_admin.purchaseid = details_ordens_admin.purchaseid INNER JOIN clients ON ordens_admin.id_client = clients.id_user WHERE ordens_admin.purchaseid = '$idOrder'";
+                                                    $search_order_detail = "SELECT * FROM ordens_admin INNER JOIN details_ordens_admin ON ordens_admin.purchaseid = details_ordens_admin.purchaseid WHERE ordens_admin.purchaseid = '$purchaseid'";
                                                     $result_order_detail = mysqli_query($conexion, $search_order_detail);
 
                                                     while($row = mysqli_fetch_array($result_order_detail)) {
@@ -109,10 +107,8 @@
                                                     <td><?php echo $row['name_client']; ?></td>
                                                     <td><?php echo $row['name_product']; ?></td>
                                                     <td><?php echo $row['quantity']; ?></td>
-                                                    <td><?php echo $row['address_company'];  ?></td>
                                                     <td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
                                                     <td><?php echo date("m/d/Y", strtotime($row['date_send'])); ?></td>
-                                                    <td><?php echo $row['people_order']; ?></td>
                                                     <td><?php echo number_format($row['price'], 2); ?></td>
                                                     <td>
                                                         <?php 
@@ -125,7 +121,7 @@
                                                 <?php }?>
                                                 <h3 class="text-dark font-weight-bold">
                                                     Total a Pagar:
-                                                    <?php echo number_format($total, 2); ?>
+                                                    <?php echo $total; ?>
                                                 </h3>
                                             </tbody>
                                         </table>

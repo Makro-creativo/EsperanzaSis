@@ -8,22 +8,18 @@
 	$uid = $_SESSION['UID'];
 
 	$date = date("Y-m-d H:i:s");
-	//$nameClient = $_POST['name_client'];
-	//$adressSend = $_POST['adress_send'];	
-	$hourSend = $_POST['hour_send'];
+	$nameClient = $_POST['name_client'];	
 	$dateSend = $_POST['date_send'];
 	$peopleOrder = $_POST['people_order'];
 	$comments = $_POST['comments'];
-	$nameDelivery = $_POST['name_delivery'];
 	$statusPayment = $_POST['status_payment'];
 	$numberNote = $_POST['note_cobranza_credito'];
 	$numberNoteTwo = $_POST['note_cobranza_credito_two'];
 	$totalVenta = $_POST['total_venta'];
-	$idClient = $_POST['id_client'];
 
 
-	$sql = "INSERT INTO ordens_admin (date, id_user, hour_send, date_send, people_order, comments, name_delivery, status_payment, note_cobranza_credito, note_cobranza_credito_two, monto, id_client) 
-	VALUES ('$date', '$uid', '$hourSend', '$dateSend', '$peopleOrder', '$comments', '$nameDelivery', '$statusPayment', '$numberNote', '$numberNoteTwo', '$totalVenta', '$idClient');";
+	$sql = "INSERT INTO ordens_admin (date, id_user, name_client, date_send, comments, status_payment, note_cobranza_credito, note_cobranza_credito_two, monto) 
+	VALUES ('$date', '$uid', '$nameClient', '$dateSend', '$comments', '$statusPayment', '$numberNote', '$numberNoteTwo', '$totalVenta');";
 	$save = mysqli_query($conexion, $sql);
 
 	$query = mysqli_query($conexion, "SELECT * FROM order_temporal ORDER BY id DESC");
@@ -36,7 +32,6 @@
 
 		$searchO = "SELECT * FROM ordens_admin ORDER BY purchaseid DESC";
         $query_order = mysqli_query($conexion, $searchO);
-
 		$row_order = mysqli_fetch_array($query_order);  	
 		$pid = $row_order['purchaseid'];
 
@@ -50,6 +45,6 @@
 
 		$delete = mysqli_query($conexion, "DELETE FROM order_temporal");
 
-		header("location: show-orders-admin-test.php");
+		header("location: show-detail-order.php");
 
 ?>

@@ -13,7 +13,7 @@ if($action == 'ajax'){
 	if (isset($_POST['name_product'])){
 		
 		$nameProduct = mysqli_real_escape_string($conexion,(strip_tags($_POST["name_product"],ENT_QUOTES)));
-		$quantity = intval($_POST['quantity']);
+		$quantity = $_POST['quantity'];
 		$price = floatval($_POST['price']);
 		$unidad = mysqli_real_escape_string($conexion,(strip_tags($_POST["unidad"],ENT_QUOTES)));
 		$sql = "INSERT INTO order_temporal (name_product, quantity, price, unidad) VALUES ('$nameProduct', '$quantity', '$price', '$unidad');";
@@ -27,6 +27,7 @@ if($action == 'ajax'){
 	
 	while($row = mysqli_fetch_array($query)){
 			$total = $row['quantity']*$row['price'];
+			$suma+=$total;
 			$total = number_format($total, 2);
 		?>
 	<tr>
@@ -46,10 +47,9 @@ if($action == 'ajax'){
 	</tr>	
 		<?php
 		$items++;
-		$suma+=$total;
 	}
 	$neto = $suma;
-	$total = $neto
+	
 	?>
 	<tr>
 		<td colspan='7'>
@@ -64,7 +64,9 @@ if($action == 'ajax'){
 			<p>Subtotal :</p>
 		</td>
 		<th class='text-right'>
-			<?php echo number_format($neto, 2);?>
+			<?php echo number_format($suma,2);?>
+			<?php $total = $neto; ?>
+		
 		</th>
 		<td></td>
 	</tr>

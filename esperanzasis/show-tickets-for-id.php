@@ -139,7 +139,7 @@
                     include "./config/conexion.php";
                     $idOrder = $_GET['purchaseid'];
 
-                    $search_order_ticket = "SELECT * FROM ordens_admin INNER JOIN details_ordens_admin ON ordens_admin.purchaseid = details_ordens_admin.purchaseid INNER JOIN clients ON ordens_admin.id_client = clients.id_user WHERE ordens_admin.purchaseid = '$idOrder'";
+                    $search_order_ticket = "SELECT * FROM ordens_admin INNER JOIN details_ordens_admin ON ordens_admin.purchaseid = details_ordens_admin.purchaseid WHERE ordens_admin.purchaseid = '$idOrder'";
                     $result_order_ticket = mysqli_query($conexion, $search_order_ticket);
 
                     while($row = mysqli_fetch_array($result_order_ticket)) {
@@ -165,7 +165,7 @@
             <hr class="style5">
             <div class="content">
                 <p class="d-flex justify-content-end text-dark fw-bold mt-3">
-                    Total Neto: $ <?php echo number_format($total, 2); ?>
+                    Total Neto: $ <?php echo $total; ?>
                     <hr class="style5">
                 </p>
             </div>

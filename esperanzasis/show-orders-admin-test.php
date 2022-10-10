@@ -191,10 +191,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Cliente</th>
-                                                    <th>Dirección de entrega</th>
                                                     <th>Fecha de entrega</th>
                                                     <th>Hora de entrega</th>
-                                                    <th>Persona quién realizo el pedido</th>
                                                     <th>Comentarios</th>
                                                     <th>Estatus de pago</th>
                                                     <th>Número de nota</th>
@@ -212,7 +210,7 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $search_order_admin = "SELECT * FROM ordens_admin INNER JOIN clients ON ordens_admin.id_client = clients.id_user ORDER BY purchaseid ASC";
+                                                    $search_order_admin = "SELECT * FROM ordens_admin ORDER BY purchaseid ASC";
                                                     $result_order_admin = mysqli_query($conexion, $search_order_admin);
 
                                                     while($row = mysqli_fetch_array($result_order_admin)) {
@@ -221,10 +219,8 @@
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $row['name_client']; ?></td>
-                                                    <td><?php echo $row['address_company']; ?></td>
                                                     <td><?php echo date("m/d/Y", strtotime($row['date_send'])); ?></td>
                                                     <td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
-                                                    <td><?php echo $row['people_order']; ?></td>
                                                     <td><?php echo $row['comments']; ?></td>
                                                     <td><?php echo $row['status_payment']; ?></td>
                                                     <td>
