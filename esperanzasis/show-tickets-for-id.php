@@ -97,7 +97,7 @@
                     $idOrder = $_GET['purchaseid'];
                     
 
-                    $query_orders = "SELECT * FROM ordens_admin WHERE purchaseid = '$idOrder'";
+                    $query_orders = "SELECT * FROM ordens_admin INNER JOIN status_payment ON ordens_admin.purchaseid = status_payment.order_id WHERE purchaseid = '$idOrder'";
                     $result_orders = mysqli_query($conexion, $query_orders);
 
                     if($result_orders) {
@@ -106,6 +106,7 @@
                         $createdAt = $rowTwo['date_send'];
                         $numberNoteOne = $rowTwo['note_cobranza_credito'];
                         $numberNoteTwo = $rowTwo['note_cobranza_credito_two'];
+                        $statusPayment = $rowTwo['payment_status'];
                     }
                 } 
             ?>
@@ -123,6 +124,8 @@
                         echo $numberNoteOne;
                     }
                 ?>
+                <br>
+                Estatus de pago: <?php echo $statusPayment; ?>
             </p>
 
             <table>

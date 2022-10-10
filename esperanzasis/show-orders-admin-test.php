@@ -29,9 +29,28 @@
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body id="page-top">
     <div id="wrapper">
+
+    <?php   
+            if(isset($_GET['success'])){
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Listo',
+                    text: 'Se guardo correctamente!',
+                    icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    .then(function() {
+                        window.location = "show-orders-admin-test.php";
+                });
+            </script>
+        <?php } ?>
+
         <?php include "./partials/menuLateral.php" ?>
         
         <div id="content-wrapper" class="d-flex flex-column">
@@ -198,6 +217,10 @@
                                                     <th>Número de nota</th>
 
                                                     <?php if($typeUser === "Administrador") {?>
+                                                        <th>Estatus de pago</th>
+                                                    <?php }?>
+
+                                                    <?php if($typeUser === "Administrador") {?>
                                                         <th>Detalle del pedido</th>
                                                     <?php }?>
                                                     
@@ -216,6 +239,7 @@
                                                     while($row = mysqli_fetch_array($result_order_admin)) {
                                                         $numberNoteOne = $row['note_cobranza_credito'];
                                                         $numberNoteTwo = $row['note_cobranza_credito_two'];
+                                                        $purchaseid = $row['purchaseid'];
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $row['name_client']; ?></td>
@@ -229,9 +253,54 @@
                                                                 echo $numberNoteTwo;
                                                             } else {
                                                                 echo $numberNoteOne;
-                                                            }
+                                                            }   
                                                         ?>
                                                     </td>
+                                                    
+                                                    <?php if($typeUser === "Administrador") {?>
+                                                        <td class="text-center">
+                                                           <?php 
+                                                                $search_status = "SELECT * FROM ordens_admin INNER JOIN status_payment ON ordens_admin.purchaseid = status_payment.order_id WHERE status_payment.order_id = '$purchaseid'";
+                                                                $result_status = mysqli_query($conexion, $search_status);
+
+                                                                $data_status = mysqli_fetch_array($result_status);
+
+                                                                $number_payment_status = mysqli_num_rows($result_status);
+
+                                                                if($number_payment_status === 0) {
+
+                                                                
+                                                           ?>
+
+                                                            <form action="created_status_payment.php" method="POST">
+                                                                <input type="hidden" name="order_id" value="<?php echo $purchaseid; ?>">
+                                                                <select name="payment_status" class="form-control">
+                                                                    <option value="Por pagar">Por pagar</option>
+                                                                    <option value="Pagado">Pagado</option>
+                                                                </select>
+
+                                                                <input type="submit" value="Guardar" class="btn btn-secondary btn-sm btn-block" name="save">
+                                                            </form>
+
+                                                            <?php } else if($number_payment_status === 'Pagado') { ?>
+                                                                <form action="created_status_payment.php" method="POST">
+                                                                    <input type="hidden" name="order_id" value="<?php echo $purchaseid; ?>">
+                                                                    <select name="payment_status" class="form-control">
+                                                                        <option selected disabled>Selecciona una opción</option>
+                                                                        <option value="Pagado">Pagado</option>
+                                                                    </select>
+
+                                                                    <input type="submit" value="Guardar" class="btn btn-secondary btn-sm btn-block" name="save">
+                                                                </form>
+                                                            <?php } else {?>
+                                                                <span class="badge badge-success"><?php echo $data_status['payment_status']; ?>
+                                                                    <i class="fa-solid fa-money-bill-1-wave"></i>
+                                                                </span>
+                                                            <?php }?>
+                                                        </td>
+                                                    
+                                                    <?php }?>
+
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td class="text-center"> 
                                                             <a href="show-detail-order.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary btn-sm">

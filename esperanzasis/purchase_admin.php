@@ -45,6 +45,6 @@
 
 		$delete = mysqli_query($conexion, "DELETE FROM order_temporal");
 
-		header("location: show-detail-order.php");
+		header("location: show-orders-admin-test.php");
 
 ?>
