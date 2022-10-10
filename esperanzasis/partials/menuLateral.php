@@ -166,6 +166,7 @@
             <a class="collapse-item" href="show-orders-admin-test.php">Lista de mis pedidos</a>
             <a class="collapse-item" href="show-all-orders-credito.php">Pedidos a crédito</a>
             <a class="collapse-item" href="show-all-orders-contado.php">Pedidos a contado</a>
+            <a class="collapse-item" href="show-all-orders-payments.php">Pedidos pagados</a>
         </div>
     </div>
 </li>
