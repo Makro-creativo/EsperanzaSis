@@ -217,7 +217,7 @@
                                                     <th>Número de nota</th>
 
                                                     <?php if($typeUser === "Administrador") {?>
-                                                        <th>Estatus de pago</th>
+                                                        <th>Pago</th>
                                                     <?php }?>
 
                                                     <?php if($typeUser === "Administrador") {?>
@@ -233,7 +233,7 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $search_order_admin = "SELECT * FROM ordens_admin ORDER BY purchaseid ASC";
+                                                    $search_order_admin = "SELECT * FROM ordens_admin ORDER BY date ASC";
                                                     $result_order_admin = mysqli_query($conexion, $search_order_admin);
 
                                                     while($row = mysqli_fetch_array($result_order_admin)) {
@@ -260,7 +260,7 @@
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td class="text-center">
                                                            <?php 
-                                                                $search_status = "SELECT * FROM ordens_admin INNER JOIN status_payment ON ordens_admin.purchaseid = status_payment.order_id WHERE status_payment.order_id = '$purchaseid'";
+                                                                $search_status = "SELECT * FROM ordens_admin INNER JOIN status_payment_orders ON ordens_admin.purchaseid = status_payment_orders.order_id WHERE status_payment_orders.order_id = '$purchaseid'";
                                                                 $result_status = mysqli_query($conexion, $search_status);
 
                                                                 $data_status = mysqli_fetch_array($result_status);
@@ -275,6 +275,7 @@
                                                             <form action="created_status_payment.php" method="POST">
                                                                 <input type="hidden" name="order_id" value="<?php echo $purchaseid; ?>">
                                                                 <select name="payment_status" class="form-control">
+                                                                    <option selected disabled>Seleccionar una opción</option>
                                                                     <option value="Por pagar">Por pagar</option>
                                                                     <option value="Pagado">Pagado</option>
                                                                 </select>
@@ -282,21 +283,15 @@
                                                                 <input type="submit" value="Guardar" class="btn btn-secondary btn-sm btn-block" name="save">
                                                             </form>
 
-                                                            <?php } else if($number_payment_status === 'Pagado') { ?>
-                                                                <form action="created_status_payment.php" method="POST">
-                                                                    <input type="hidden" name="order_id" value="<?php echo $purchaseid; ?>">
-                                                                    <select name="payment_status" class="form-control">
-                                                                        <option selected disabled>Selecciona una opción</option>
-                                                                        <option value="Pagado">Pagado</option>
-                                                                    </select>
-
-                                                                    <input type="submit" value="Guardar" class="btn btn-secondary btn-sm btn-block" name="save">
-                                                                </form>
-                                                            <?php } else {?>
+                                                            <?php } else if($data_status['payment_status'] === 'Pagado') { ?>
                                                                 <span class="badge badge-success"><?php echo $data_status['payment_status']; ?>
                                                                     <i class="fa-solid fa-money-bill-1-wave"></i>
                                                                 </span>
-                                                            <?php }?>
+                                                            <?php } else if($data_status['payment_status'] === 'Por pagar') { ?>
+                                                                <span class="badge badge-danger"><?php echo $data_status['payment_status']; ?>
+                                                                    <i class="fa-solid fa-money-check-dollar"></i>
+                                                                </span>
+                                                            <?php } ?>
                                                         </td>
                                                     
                                                     <?php }?>

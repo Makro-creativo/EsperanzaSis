@@ -167,6 +167,7 @@
             <a class="collapse-item" href="show-all-orders-credito.php">Pedidos a crédito</a>
             <a class="collapse-item" href="show-all-orders-contado.php">Pedidos a contado</a>
             <a class="collapse-item" href="show-all-orders-payments.php">Pedidos pagados</a>
+            <a class="collapse-item" href="show-all-orders-payables.php">Pedidos por pagar</a>
         </div>
     </div>
 </li>

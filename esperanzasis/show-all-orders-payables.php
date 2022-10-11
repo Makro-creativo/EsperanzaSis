@@ -35,6 +35,22 @@
 </head>
 <body class="page-top">
     <div id="wrapper">
+
+        <?php   
+            if(isset($_GET['success'])){
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Listo',
+                    text: 'Se guardo correctamente!',
+                    icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    .then(function() {
+                        window.location = "show-all-orders-payments.php";
+                });
+            </script>
+        <?php } ?>
         <?php include "./partials/menuLateral.php" ?>
 
         <div id="content-wrapper" class="d-flex flex-column">
@@ -43,7 +59,7 @@
 
                 <div class="container">
                     <div class="row">
-                        <h2 class="d-flex justify-content-start mb-4">Pedidos pagados</h2>
+                        <h2 class="d-flex justify-content-start mb-4">Pedidos por pagar</h2>
 
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
@@ -64,13 +80,17 @@
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <th>Detalle del pedido</th>
                                                     <?php }?>
+
+                                                    <?php  if($typeUser === "Administrador") {?>
+                                                        <th>Cambiar a pagado</th>
+                                                    <?php }?>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $search_orders_to_credito = "SELECT * FROM ordens_admin INNER JOIN status_payment_orders ON ordens_admin.purchaseid = status_payment_orders.order_id WHERE payment_status = 'Pagado'";
+                                                    $search_orders_to_credito = "SELECT * FROM ordens_admin INNER JOIN status_payment_orders ON ordens_admin.purchaseid = status_payment_orders.order_id WHERE payment_status = 'Por pagar'";
                                                     $result_orders_to_credito = mysqli_query($conexion, $search_orders_to_credito);
 
                                                     while($row = mysqli_fetch_array($result_orders_to_credito)) {
@@ -94,8 +114,8 @@
                                                     
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td class="text-center">
-                                                            <span class="badge bg-success">
-                                                                <?php echo $row['payment_status']; ?> <i class="fa-solid fa-money-bill-1-wave"></i>
+                                                            <span class="badge bg-danger">
+                                                                <?php echo $row['payment_status']; ?> <i class="fa-solid fa-money-check-dollar"></i>
                                                             </span>
                                                         </td>
                                                     <?php }?>
@@ -105,6 +125,18 @@
                                                             <a href="show-detail-order.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary btn-sm">
                                                                 <i class="bi bi-eye-fill"></i>
                                                             </a>
+                                                        </td>
+                                                    <?php }?>
+
+                                                    <?php if($typeUser === "Administrador") {?>
+                                                        <td class="text-center">
+                                                            <form action="change-to-payment-for-not-payment.php" method="POST">
+                                                                <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
+
+                                                                <button type="submit" class="btn btn-success" name="click">
+                                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                                </button>
+                                                            </form>
                                                         </td>
                                                     <?php }?>
 

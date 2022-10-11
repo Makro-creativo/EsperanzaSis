@@ -97,7 +97,7 @@
                     $idOrder = $_GET['purchaseid'];
                     
 
-                    $query_orders = "SELECT * FROM ordens_admin INNER JOIN status_payment ON ordens_admin.purchaseid = status_payment.order_id WHERE purchaseid = '$idOrder'";
+                    $query_orders = "SELECT * FROM ordens_admin INNER JOIN status_payment_orders ON ordens_admin.purchaseid = status_payment_orders.order_id WHERE purchaseid = '$idOrder'";
                     $result_orders = mysqli_query($conexion, $query_orders);
 
                     if($result_orders) {
@@ -167,17 +167,13 @@
             </table>
             <hr class="style5">
             <div class="content">
-                <p class="d-flex justify-content-end text-dark fw-bold mt-3">
+                <p class="d-flex justify-content-end text-dark fw-bold">
                     Total Neto: $ <?php echo $total; ?>
                     <hr class="style5">
                 </p>
             </div>
             <p class="centered text-dark fw-bold">¡GRACIAS POR SU COMPRA!</p>
 
-            <div>
-                <p class="text-center text-dark fw-bold">Escanea nuestro QR</p>
-                <img src="./assets/img/qr-code.png" alt="QR" class="img-fluid">
-            </div>
         </div>
         <button onclick="printTicket()" class="hidden-print btn-print">Imprimir ticket</button>
         <script>
