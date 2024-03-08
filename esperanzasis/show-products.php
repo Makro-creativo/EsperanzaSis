@@ -1,10 +1,3 @@
-<?php 
-    error_reporting(0);
-    session_start();
-
-    $typeUser = $_SESSION['Tipo'];
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -26,9 +19,27 @@
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body id="page-top">
     <div id="wrapper">
+        <?php   
+            if(isset($_GET['delete'])){
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Listo',
+                    text: 'Se elimino correctamente el producto!',
+                    icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                    .then(function() {
+                        window.location = "show-products.php";
+                });
+            </script>
+        <?php } ?>
+
         <?php include "./partials/menuLateral.php" ?>
 
         <div id="content-wrapper" class="d-flex flex-column">
@@ -45,16 +56,15 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <td>Id</td>
-                                                <td>Nombre del producto</td>
-                                                <td>Precio</td>
-                                                <td>Tipo de Unidad</td>
+                                                <th>Nombre del producto</th>
+                                                <th>Precio</th>
+                                                <th>Tipo de Unidad</th>
                     
                                                 <?php if($typeUser === "Administrador") {?>
-                                                    <td>Editar</td>
+                                                    <th>Editar</th>
                                                 <?php }?>
                                                 <?php if($typeUser === "Administrador") {?>
-                                                    <td>Eliminar</td>
+                                                    <th>Eliminar</th>
                                                 <?php }?>
                                             </tr>
                                         </thead>
@@ -62,34 +72,30 @@
                                             <?php  
                                                 include "./config/conexion.php";
 
-                                                $query = "SELECT * FROM products ORDER BY productid ASC";
+                                                $query = "SELECT * FROM products WHERE status_deleted = 0 ORDER BY name_product DESC";
                                                 $result = mysqli_query($conexion, $query);
 
                                                 while($row = mysqli_fetch_array($result)) {
                                             ?>
                                             
                                             <tr>
-                                                <td><?php echo $row['productid']; ?></td>
                                                 <td><?php echo $row['name_product']; ?></td>
                                                 <td><?php echo number_format($row['price'], 2); ?></td>
                                                 <td><?php echo $row['unidad']; ?></td>
-                                                
 
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a href="edit-product.php?productid=<?php echo $row['productid']; ?>" class="btn btn-success">
-                                                            Editar
-                                                            <i class="fas fa-edit mr-2"></i>
+                                                        <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-success">
+                                                            <i class="fas fa-edit"></i>
                                                         </a>
                                                     </td>
                                                 <?php }?>
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a href="delete-product.php?productid=<?php echo $row['productid']; ?>" class="btn btn-danger">
-                                                            Eliminar
-                                                            <i class="fas fa-trash-alt mr-2"></i>
+                                                        <a href="delete-product.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">
+                                                            <i class="fa-solid fa-trash"></i>
                                                         </a>
                                                     </td>
                                                 <?php }?>

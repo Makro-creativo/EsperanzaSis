@@ -37,7 +37,69 @@
                 <div class="container">
                     <h2 class="d-flex justify-content-start mb-4">Lista de Ingresos</h2>
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-3">
+                                <div class="card shadow-lg">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <form action="" method="POST">
+                                                    <div class="form-group">
+                                                        <label>Filtrar por descripción</label>
+                                                        <select name="description" class="form-control">
+                                                            <option selected disabled>Seleccionar descripción</option>
+                                                            <?php
+                                                            include "./config/conexion.php";
+
+                                                            $search_filter_for_description = "SELECT DISTINCT description FROM ingresos ORDER BY description DESC";
+                                                            $result_filter_description = mysqli_query($conexion, $search_filter_for_description);
+
+                                                            while ($rowDescription = mysqli_fetch_array($result_filter_description)) {
+
+                                                            ?>
+                                                                <option value="<?php echo $rowDescription['description']; ?>"><?php echo $rowDescription['description']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        Filtrar
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <form action="" method="POST">
+                                                    <div class="form-group">
+                                                        <label>Filtrar por categoría</label>
+                                                        <select name="category_name" class="form-control">
+                                                            <option selected disabled>Seleccionar categoría</option>
+                                                            <?php
+                                                            include "./config/conexion.php";
+
+                                                            $search_filter_for_category = "SELECT DISTINCT category_name FROM ingresos ORDER BY category_name DESC";
+                                                            $result_filter_for_category = mysqli_query($conexion, $search_filter_for_category);
+
+                                                            while ($rowCategory = mysqli_fetch_array($result_filter_for_category)) {
+
+                                                            ?>
+                                                                <option value="<?php echo $rowCategory['category_name']; ?>"><?php echo $rowCategory['category_name']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        Filtrar
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-3">
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -61,7 +123,18 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $query_incomes = "SELECT * FROM ingresos ORDER BY created_at ASC";
+                                                    if(isset($_POST['description'])) {
+                                                        $description = $_POST['description'];
+
+                                                        $query_incomes = "SELECT * FROM ingresos WHERE description='$description' ORDER BY description DESC";
+                                                    } else if(isset($_POST['category_name'])) {
+                                                        $category = $_POST['category_name'];
+
+                                                        $query_incomes = "SELECT * FROM ingresos WHERE category_name='$category' ORDER BY category_name DESC";
+                                                    } else  {
+                                                        $query_incomes = "SELECT * FROM ingresos ORDER BY created_at ASC";
+                                                    }
+
                                                     $result_incomes = mysqli_query($conexion, $query_incomes);
 
                                                     while($row = mysqli_fetch_array($result_incomes)) {

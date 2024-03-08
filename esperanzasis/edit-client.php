@@ -2,25 +2,15 @@
     include "./config/conexion.php";
 
     if(isset($_POST['editClient'])) {
-        $id_user = $_POST['id_clients_edit'];
+        $id_client = $_POST['id_clients_edit'];
         $name_client = $_POST['name_client'];
-        $address_fiscal = $_POST['address_fiscal'];
-        $address_company = $_POST['address_company'];
-        $giro_company = $_POST['giro_company'];
-        $rfc = $_POST['rfc'];
-        $manager_payments = $_POST['manager_payments'];
-        $activate = $_POST['activate'];
-        $tel = $_POST['tel'];
-        $cel = $_POST['cel'];
-        $email = $_POST['email'];
-        $cp = $_POST['cp'];
-        //$descuento = $_POST['descuento'];
-        $municipio = $_POST['municipio'];
 
-        $query_update = "UPDATE clients SET name_client='$name_client', address_fiscal='$address_fiscal', address_company='$address_company', giro_company='$giro_company', rfc='$rfc', manager_payments='$manager_payments', activate='$activate', tel='$tel', cel='$cel', email='$email', cp='$cp', municipio='$municipio' WHERE id_user = '$id_user'";
-        mysqli_query($conexion, $query_update);
+        $query_update = "UPDATE clients SET name_client='$name_client', status_deleted='0', updated_at=NOW() WHERE id = '$id_client'";
+        $result = mysqli_query($conexion, $query_update);
 
-        header("location: show-clients.php");
+        if($result) {
+            echo "<script>window.location='edit-client.php?success'; </script>";
+        }
     }
 
 ?>
@@ -47,9 +37,26 @@
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body id="page-top">
     <div id="wrapper">
+        <?php   
+            if(isset($_GET['success'])){
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Listo',
+                    text: 'Se actualizo correctamente!',
+                    icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    .then(function() {
+                        window.location = "show-clients.php";
+                });
+            </script>
+        <?php } ?>
+
         <?php include "./partials/menuLateral.php" ?>
 
         <div id="content-wrapper" class="d-flex flex-column">
@@ -59,30 +66,17 @@
                 <?php 
                     include "./config/conexion.php";
 
-                    if(isset($_GET["id_user"])) {
-                        $id_user = $_GET['id_user'];
+                    if(isset($_GET["id"])) {
+                        $id_client = $_GET['id'];
                     }
                 
-                        $query = "SELECT * FROM clients WHERE id_user = $id_user";
+                        $query = "SELECT * FROM clients WHERE id = $id_client";
                         $result = mysqli_query($conexion, $query);
                 
                         if($result) {
                             $row = mysqli_fetch_array($result);
                 
                             $name_client = $row['name_client'];
-                            $address_fiscal = $row['address_fiscal'];
-                            $name_company = $row['name_company'];
-                            $address_company = $row['address_company'];
-                            $giro_company = $row['giro_company'];
-                            $rfc = $row['rfc'];
-                            $manager_payments = $row['manager_payments'];
-                            $activate = $row['activate'];
-                            $tel = $row['tel'];
-                            $cel = $row['cel'];
-                            $email = $row['email'];
-                            $cp = $row['cp'];
-                            $descuento = $row['descuento'];
-                            $municipio = $row['municipio'];
                         }
                 
                 ?>
@@ -97,96 +91,12 @@
 
                                 <div class="card-body">
                                     <form action="edit-client.php" method="POST">
-                                    <input type="hidden" name="id_clients_edit" value="<?php echo $id_user; ?>">
+                                    <input type="hidden" name="id_clients_edit" value="<?php echo $id_client; ?>">
                                         <div class="row">
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                                 <div class="form-group">
                                                     <label>Editar nombre del cliente: </label>
                                                     <input type="text" placeholder="Editar nombre del cliente" name="name_client" value="<?php echo $name_client; ?>" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <label>Editar Dirección Fiscal: </label>
-                                                <input type="text" class="form-control" name="address_fiscal" value="<?php echo $address_fiscal; ?>">
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <label>Editar código postal: </label>
-                                                <input type="text" class="form-control" name="cp" value="<?php echo $cp; ?>">
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Dirección de la empres: </label>
-                                                    <input type="text" value="<?php echo $address_company; ?>" class="form-control" name="address_company" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Giro de la empresa: </label>
-                                                    <input type="text" value="<?php echo $giro_company; ?>" class="form-control" name="giro_company" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Municipio: </label>
-                                                    <input type="text" value="<?php echo $municipio; ?>" class="form-control" name="municipio" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Editar RFC: </label>
-                                                    <input type="text" value="<?php echo $rfc; ?>" class="form-control" name="rfc" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Encargado de compras: </label>
-                                                    <input type="text" value="<?php echo $manager_payments; ?>" class="form-control" name="manager_payments" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Estado: </label>
-                                                    <select name="activate" require class="form-select">
-                                                        <option selected disabled>Elije una opción</option>
-                                                        <option value="Activo" <?php if($activate == "Activo"){?> selected <?php } ?>>Activo</option>
-                                                        <option value="Inactivo" <?php if($activate == "Inactivo"){?> selected <?php } ?>>Inactivo</option>
-                                                        <option value="Suspendido" <?php if($activate == "Suspendido"){?> selected <?php } ?>>Suspendido</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Número de teléfono: </label>
-                                                    <input type="text" value="<?php echo $tel; ?>" name="tel" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Número de celular: </label>
-                                                    <input type="text" value="<?php echo $cel; ?>" name="cel" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Correo electronico: </label>
-                                                    <input type="email" value="<?php echo $email; ?>" name="email" class="form-control">
                                                 </div>
                                             </div>
                                         </div>

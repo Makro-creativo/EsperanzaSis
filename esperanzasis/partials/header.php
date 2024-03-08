@@ -54,6 +54,64 @@
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
+        
+        <!-- Nav Item - Alerts -->
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter" onclick="cleanNotificationPayments()" id="count-notification-payments">
+                    <?php 
+                        include "./config/conexion.php";
+
+                        $search_count_notification = "SELECT * FROM new_orders_admin COUNT WHERE status_payment = 'credito' AND notification_status = 0 ORDER BY created_at DESC LIMIT 10";
+                        $result_count_notification = mysqli_query($conexion, $search_count_notification);
+
+                        $count_notification_to_credito = mysqli_num_rows($result_count_notification);
+
+                        if($count_notification_to_credito > 0){
+                            echo $count_notification_to_credito."+";
+                        } else {
+                            echo $count_notification_to_credito;
+                        }
+                    ?>
+                </span>
+            </a>
+            <!-- Dropdown - Alerts -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header bg-success border-success">
+                    Notificaciones
+                </h6>
+                <?php 
+                    include "./config/conexion.php";
+
+                    $show_data_notification = "SELECT clients.name_client, new_orders_admin.status_payment, new_orders_admin.id AS order_id, 
+                    DATE_FORMAT(new_orders_admin.date_send, '%m/%d/%Y') AS date_send_formatted 
+                    FROM new_orders_admin 
+                    INNER JOIN clients ON new_orders_admin.client_id = clients.id 
+                    WHERE new_orders_admin.status_payment = 'credito' 
+                    AND new_orders_admin.status_deleted = 0
+                    ORDER BY new_orders_admin.created_at DESC LIMIT 10";
+                    $result_data_notification = mysqli_query($conexion, $show_data_notification);
+
+                    while($rowNotification = mysqli_fetch_array($result_data_notification)) {
+                ?>
+                <a class="dropdown-item d-flex align-items-center" href="show-ticket-for-client-id.php?id=<?php echo $rowNotification['order_id']; ?>">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-success">
+                            <i class="fa-solid fa-money-check-dollar text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500"><?php echo $rowNotification['date_send_formatted']; ?></div>
+                        <span class="font-weight-bold"><?php echo $rowNotification['name_client']; ?> - <span class="badge bg-primary text-white"><?php echo $rowNotification['status_payment']; ?></span></span>
+                    </div>
+                </a>
+                <?php }?>
+                <a class="dropdown-item text-center small text-gray-500" href="show-all-orders-credito.php">Ver todas las notificaciones</a>
+            </div>
+        </li>
 
         <div class="topbar-divider d-none d-sm-block"></div>
         <!-- Nav Item - User Information -->

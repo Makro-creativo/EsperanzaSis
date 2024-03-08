@@ -10,8 +10,9 @@
         $createdAt = $_POST['created_at'];
         $description = $_POST['description'];
         $amount = floatval($_POST['amount']);
+        $typeMethod = $_POST['type_method'];
 
-        $query_save_expense = "INSERT INTO gastos(id_category, name_category, created_at, description, amount) VALUES('$idName', '$nameCategory', '$createdAt', '$description', '$amount')";
+        $query_save_expense = "INSERT INTO gastos(id_category, name_category, created_at, description, amount, type_method) VALUES('$idName', '$nameCategory', '$createdAt', '$description', '$amount', '$typeMethod')";
         $result_expense = mysqli_query($conexion, $query_save_expense);
 
         if(!$result_expense) {
@@ -79,7 +80,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Efectivo: </label>
                                                     <input type="text" class="form-control" name="amount" placeholder="Ejemplo: 900">
@@ -87,7 +88,7 @@
                                             </div>
 
 
-                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
                                                 <div class="form-group">
                                                     <label>Categoría: </label>
                                                     <select name="id_category_expense" require required class="form-select">
@@ -104,6 +105,17 @@
                                                         ?>
                                                             <option value="<?php echo $idCategory."_".$nameCategory; ?>"><?php echo $nameCategory; ?></option>
                                                         <?php }?>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <div class="form-group">
+                                                    <label>Método de pago: </label>
+                                                    <select name="type_method" class="form-select" required>
+                                                        <option selected disabled>Seleccionar opción</option>
+                                                        <option value="efectivo">Efectivo</option>
+                                                        <option value="bancos">Bancos</option>
                                                     </select>
                                                 </div>
                                             </div>

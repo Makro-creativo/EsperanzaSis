@@ -141,7 +141,7 @@
 <?php }?>
 
 <?php if($typeUser === "Administrador") {?>
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-truck"></i>
@@ -152,22 +152,25 @@
             <a class="collapse-item" href="show-all-orders.php">Lista de pedidos</a>
         </div>
     </div>
-</li>
+</li>-->
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ordersAdmin"
         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa-solid fa-cart-flatbed"></i>
+        <i class="fas fa-truck"></i>
         <span>Pedidos Admin</span>
     </a>
     <div id="ordersAdmin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-orders-admin-test.php">Crear un nuevo pedido</a>
-            <a class="collapse-item" href="show-orders-admin-test.php">Lista de mis pedidos</a>
+            <a class="collapse-item" href="new-orders-admin.php">Crear un nuevo pedido</a>
+            <a class="collapse-item" href="show-new-orders-admin.php">Lista de mis pedidos</a>
+            <a class="collapse-item" href="change-status-payment-orders.php">Cambiar estado de pago</a>
             <a class="collapse-item" href="show-all-orders-credito.php">Pedidos a crédito</a>
             <a class="collapse-item" href="show-all-orders-contado.php">Pedidos a contado</a>
-            <a class="collapse-item" href="show-all-orders-payments.php">Pedidos pagados</a>
-            <a class="collapse-item" href="show-all-orders-payables.php">Pedidos por pagar</a>
+            <!--<a class="collapse-item" href="show-all-orders-cobrado.php">Pedidos cobrados</a>-->
+            <!--<a class="collapse-item" href="show-all-orders-payments.php">Pedidos pagados</a>-->
+            <!--<a class="collapse-item" href="show-all-orders-payables.php">Pedidos por pagar</a>-->
+            <a class="collapse-item" href="delete-orders-for-month.php">Eliminar pedidos por mes</a>
         </div>
     </div>
 </li>
@@ -186,6 +189,48 @@
             <a class="collapse-item" href="show-cut-box-repartidores.php">Lista de corte repartidores</a>
             <a class="collapse-item" href="total-cut-day-super.php">Total de día súper</a>
             <a class="collapse-item" href="total-cut-day-repartidores.php">Total de día repartidores</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-user-friends"></i>
+        <span>Gestión de Clientes</span>
+    </a>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-client.php">Registrar nuevo cliente</a>
+            <a class="collapse-item" href="show-clients.php">Ver lista de clientes</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#products"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-box-open"></i>
+        <span>Gestión de productos</span>
+    </a>
+    <div id="products" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-product.php">Registrar nuevo producto</a>
+            <a class="collapse-item" href="show-products.php">Lista de productos</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#productsClients"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa-solid fa-people-carry-box"></i>
+        <span>Clientes con productos</span>
+    </a>
+    <div id="productsClients" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="new-asign-product.php">Asignar producto</a>
+            <a class="collapse-item" href="show-asign-product.php">Listado</a>
         </div>
     </div>
 </li>
@@ -282,18 +327,22 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="reports-gastos.php">Reportes de gastos</a>
             <a class="collapse-item" href="reports-ingresos.php">Reportes de ingresos</a>
+            <a class="collapse-item" href="reports-tortilleria.php">Reportes tortilleria</a>
             <a class="collapse-item" href="reports-corte-super.php">Corte súper mañana</a>
             <a class="collapse-item" href="reports-turn-afternoon.php">Corte súper tarde</a>
             <a class="collapse-item" href="reports-total-efectivo-bauchers-gastos.php">Total de venta mañana</a>
             <a class="collapse-item" href="reports-total-efectivo-bauchers-gastos-afternoon.php">Total de venta tarde</a>
             <a class="collapse-item" href="reports-total-efectivo.php">Total de venta efectivo</a>
             <a class="collapse-item" href="reports-total-credito.php">Total de venta crédito</a>
+            <a class="collapse-item" href="reports-orders-for-month.php">Reporte de pedidos</a>
+            <a class="collapse-item" href="reports-gastos-for-category.php">Reporte de gastos <br>categoría</a>
+            <a class="collapse-item" href="reports-ingreos-for-category.php">Reporte de ingresos <br>categoría</a>
             <!--<a class="collapse-item" href="unifications-of-expenses.php">Gastos unificados</a>-->
         </div>
     </div>
 </li>
 
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#delivery-man"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fa-solid fa-bicycle"></i>
@@ -305,12 +354,12 @@
             <a class="collapse-item" href="show-deliveries-man.php">Repartidores</a>
         </div>
     </div>
-</li>
+</li>-->
 <?php }?>
 
 
 <?php if($typeUser === "Administrador") {?>
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-box-open"></i>
@@ -322,9 +371,9 @@
             <a class="collapse-item" href="show-products.php">Ver lista de productos</a>
         </div>
     </div>
-</li>
+</li>-->
 
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#products-admin"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-box-open"></i>
@@ -336,23 +385,9 @@
             <a class="collapse-item" href="show-products-admin.php">Ver lista de productos</a>
         </div>
     </div>
-</li>
+</li>-->
 
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-user-friends"></i>
-        <span>Gestión de Clientes</span>
-    </a>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="new-client.php">Registrar nuevo cliente</a>
-            <a class="collapse-item" href="show-clients.php">Ver lista de clientes</a>
-        </div>
-    </div>
-</li>
-
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-user-tag"></i>
@@ -363,9 +398,9 @@
             <a class="collapse-item" href="show-roles.php">Roles de usuarios</a>
         </div>
     </div>
-</li>
+</li>-->
 
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-tags"></i>
@@ -377,7 +412,7 @@
             <a class="collapse-item" href="show-promotions.php">Lista de descuentos</a>
         </div>
     </div>
-</li>
+</li>->>
 
 <!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
@@ -396,7 +431,7 @@
 </li>-->
 
 
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeenten"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-wallet"></i>
@@ -408,7 +443,7 @@
             <a class="collapse-item" href="show-providers.php">Lista de proveedores</a>
         </div>
     </div>
-</li>
+</li>-->
 
 <!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeventen"
@@ -425,7 +460,7 @@
 </li> -->
 
 
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCobranza"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fa-solid fa-money-check-dollar"></i>
@@ -437,9 +472,9 @@
             <a class="collapse-item" href="show-cobranza.php">Lista de cobranza</a>
         </div>
     </div>
-</li>
+</li>-->
 
-<li class="nav-item">
+<!--<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#invoice_or_providers"
         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-folder-open"></i>
@@ -458,7 +493,7 @@
             <a class="collapse-item" href="bills-paid.php">Facturas Pagadas</a>
         </div>
     </div>
-</li>
+</li>-->
 
 <?php }?>
 
@@ -474,6 +509,20 @@
                 <a class="collapse-item" href="new-admin.php">Registrar nuevo Admin</a>
                 <a class="collapse-item" href="show-admin.php">Roles de admin</a>
                 <a class="collapse-item" href="show-roles.php">Roles de usuario</a>
+            </div>
+        </div>
+    </li>
+    
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrdersDelete"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fa-solid fa-trash-arrow-up"></i>
+            <span>Pedidos eliminados</span>
+        </a>
+        <div id="collapseOrdersDelete" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="show-orders-deleted_temporarily.php">Lista de pedidos</a>
             </div>
         </div>
     </li>

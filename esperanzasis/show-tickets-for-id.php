@@ -78,6 +78,26 @@
                 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             }
 
+            .btn-print-2 {
+                background-color: #fafafa;
+                margin: 1rem;
+                padding: 1rem;
+                border: 2px solid #ccc;
+                text-decoration: none;
+                /* IMPORTANTE */
+                text-align: center;
+                width: 120px;
+                background-color: #2AA452;
+                color: #fafafa;
+                cursor: pointer;
+                border-color: #2AA452;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+
+            .btn-print-2:hover {
+                color: #fafafa;
+            }
+
 
             @media print {
                 .hidden-print,
@@ -104,10 +124,12 @@
                         $rowTwo = mysqli_fetch_array($result_orders);
 
                         $createdAt = $rowTwo['date_send'];
-                        $numberNoteOne = $rowTwo['note_cobranza_credito'];
-                        $numberNoteTwo = $rowTwo['note_cobranza_credito_two'];
+                        $numberNote = $rowTwo['note_cobranza_credito'];
+                        //$numberNoteTwo = $rowTwo['note_cobranza_credito_two'];
                         $statusPayment = $rowTwo['payment_status'];
                     }
+
+                    $numberNoteOne = $rowTwo['note_cobranza_credito'];
                 } 
             ?>
             <p class="centered fw-bold">Tortillería la Esperanza
@@ -117,12 +139,9 @@
                 <br>Ticket No <?php echo $idOrder; ?>
                 <br>Código postal: 45060
                 <br>Telefono: 3312 333924
-                <br>Número de nota: <?php 
-                    if(!$numberNoteOne) {
-                        echo $numberNoteTwo;
-                    } else {
-                        echo $numberNoteOne;
-                    }
+                <br>Número de nota: 
+                <?php 
+                    echo $numberNoteOne;
                 ?>
                 <br>
                 Estatus de pago: <?php echo $statusPayment; ?>
@@ -131,10 +150,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th class="quantity text-center">Cliente</th>
-                        <th class="quantity text-center">Cant</th>
-                        <th class="description text-center">Producto</th>
-                        <th class="price text-center">Precio</th>
+                        <th class="quantity text-center" style="font-size: 1.3rem!important;">Cliente</th>
+                        <th class="quantity text-center" style="font-size: 1.3rem!important;">Cant</th>
+                        <th class="description text-center" style="font-size: 1.3rem!important;">Producto</th>
+                        <th class="price text-center" style="font-size: 1.3rem!important;">Precio</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -142,7 +161,7 @@
                     include "./config/conexion.php";
                     $idOrder = $_GET['purchaseid'];
 
-                    $search_order_ticket = "SELECT * FROM ordens_admin INNER JOIN details_ordens_admin ON ordens_admin.purchaseid = details_ordens_admin.purchaseid WHERE ordens_admin.purchaseid = '$idOrder'";
+                    $search_order_ticket = "SELECT ordens_admin.name_client, details_ordens_admin.quantity, details_ordens_admin.price, details_ordens_admin.name_product FROM ordens_admin INNER JOIN details_ordens_admin ON ordens_admin.purchaseid = details_ordens_admin.purchaseid WHERE ordens_admin.purchaseid = '$idOrder'";
                     $result_order_ticket = mysqli_query($conexion, $search_order_ticket);
 
                     while($row = mysqli_fetch_array($result_order_ticket)) {
@@ -150,24 +169,24 @@
                                                         
                     ?>
                     <tr>
-                        <td class="text-center"><?php echo $row['name_client']; ?></td>
+                        <td class="text-center" style="font-size: 1.2rem !important;"><?php echo $row['name_client']; ?></td>
 
-                        <td style="text-align: center !important;">
+                        <td style="text-align: center !important; font-size: 1.2rem !important;">
                             <?php echo $row['quantity']; ?>
                         </td>
 
-                        <td class="text-center">
+                        <td class="text-center" style="font-size: 1.2rem!important;">
                             <?php echo $row['name_product']; ?>
                         </td>
 
-                        <td><?php echo number_format($row['price'], 2); ?></td>
+                        <td style="font-size: 1.2rem!important;"><?php echo number_format($row['price'], 2); ?></td>
 
                     <?php }?>
                 </tbody>
             </table>
             <hr class="style5">
             <div class="content">
-                <p class="d-flex justify-content-end text-dark fw-bold">
+                <p class="d-flex justify-content-end text-dark fw-bold" style="font-size: 1.2rem!important;">
                     Total Neto: $ <?php echo $total; ?>
                     <hr class="style5">
                 </p>
@@ -175,7 +194,8 @@
             <p class="centered text-dark fw-bold">¡GRACIAS POR SU COMPRA!</p>
 
         </div>
-        <button onclick="printTicket()" class="hidden-print btn-print">Imprimir ticket</button>
+        <button onclick="printTicket()" class="hidden-print btn-print">Imprimir ticket</button><br><br>
+        <a href="new-orders-admin-test.php" class="btn-print-2">Nuevo pedido</a>
         <script>
             function printTicket() {
                 window.print();

@@ -3,28 +3,13 @@
 
     if(isset($_POST['saveClient'])) {
         $name_client = $_POST['name_client'];
-        $address_fiscal = $_POST['address_fiscal'];
-        $address_company = $_POST['address_company'];
-        $giro_company = $_POST['giro_company'];
-        $rfc = $_POST['rfc'];
-        $manager_payments = $_POST['manager_payments'];
-        $activate = $_POST['activate'];
-        $tel = $_POST['tel'];
-        $cel = $_POST['cel'];
-        $email = $_POST['email'];
-        $cp = $_POST['cp'];
-        $municipio = $_POST['municipio'];
         
-        $query_client = "INSERT INTO clients(name_client, address_fiscal, address_company, giro_company, rfc, manager_payments, activate, tel, cel, email, cp, municipio) VALUES('$name_client', '$address_fiscal', '$address_company', '$giro_company', '$rfc', '$manager_payments', '$activate', '$tel', '$cel', '$email', '$cp', '$municipio')";
+        $query_client = "INSERT INTO clients(name_client, status_deleted, created_at) VALUES('$name_client', '0', NOW())";
         $result = mysqli_query($conexion, $query_client);
 
-        if(!$result) {
-            die("No se pudo guardar el cliente, verifique de nuevo sus datos");
+        if($result) {
+            echo "<script>window.location='new-client.php?success'; </script>";
         }
-
-        json_encode($result);
-
-        header("location: show-clients.php");
     }
 
 ?>
@@ -51,9 +36,26 @@
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body id="page-top">
     <div id="wrapper">
+        <?php   
+            if(isset($_GET['success'])){
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Listo',
+                    text: 'Se guardo correctamente!',
+                    icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    .then(function() {
+                        window.location = "show-clients.php";
+                });
+            </script>
+        <?php } ?>
+
         <?php include "./partials/menuLateral.php" ?>
 
         <div id="content-wrapper" class="d-flex flex-column">
@@ -69,101 +71,13 @@
                                 <div class="card-header">Registrar nuevo cliente</div>
 
                                 <div class="card-body" id="app">
-                                    <form @submit.prevent="createClient()" method="POST">
+                                    <form action="new-client.php" method="POST">
                                     
                                         <div class="row">
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                                 <div class="form-group">
-                                                    <label>Nombre de la empresa: </label>
-                                                    <input v-model="name" name="name_client" type="text" placeholder="Ejemplo: Hotel malibu, Hotel hd, etc ..." autocomplete="off" class="form-control" required autofocus>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Dirección Fiscal: </label>
-                                                    <input v-model="address_fiscal" autocomplete="off" name="address_fiscal" type="text" placeholder="Ejemplo: Calle santa cecilia #345" autocomplete="off" class="form-control" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Código postal: </label>
-                                                    <input v-model="cp" name="cp" type="text" placeholder="Ejemplo: 47910, etc.." autocomplete="off" class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Dirección de la empresa: </label>
-                                                    <input type="text" placeholder="Ejemplo: Avenida los Arcos..." class="form-control" name="address_company" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Giro de la empresa: </label>
-                                                    <input type="text" placeholder="Ejemplo: Mueblería, ferretería, etc..." class="form-control" name="giro_company" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Municipio: </label>
-                                                    <input type="text" placeholder="Ejemplo: San pedro tlaquepaque, etc..." class="form-control" name="municipio" required>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>RFC: </label>
-                                                    <input type="text" placeholder="MELM8305281H0" class="form-control" name="rfc" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Encargado de compras: </label>
-                                                    <input type="text" placeholder="Ejemplo: Mariano gonzales" class="form-control" name="manager_payments">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Estatus del cliente: </label>
-                                                    <select name="activate" require class="form-select">
-                                                        <option selected disabled>Elije una opción</option>
-                                                        <option value="Activo">Activo</option>
-                                                        <option value="Inactivo">Inactivo</option>
-                                                        <option value="Suspendido">Suspendido</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Número de teléfono: </label>
-                                                    <input type="text" placeholder="Ejemplo: 393 93 5 35 13" name="tel" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Número de celular: </label>
-                                                    <input type="text" placeholder="Ejemplo: 333 102 3456" name="cel" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                <div class="form-group">
-                                                    <label>Correo electronico: </label>
-                                                    <input type="email" placeholder="Ejemplo: jose@gmail.com" name="email" class="form-control">
+                                                    <label>Nombre del cliente: </label>
+                                                    <input name="name_client" type="text" placeholder="Ejemplo: Jose Hernandez Gutierrez ..." autocomplete="off" class="form-control" required autofocus>
                                                 </div>
                                             </div>
                                         </div>

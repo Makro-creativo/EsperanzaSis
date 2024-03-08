@@ -43,6 +43,38 @@
 
                 <div class="container">
                     <div class="row">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <div class="card shadow-lg">
+                            <p class="text-primary text-center p-3">Exportar a excel entre fechas</p>
+                                <div class="card-body">
+                                    <form method="POST" class="form" action="report-order-payments.php">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="date" name="date1" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="date" name="date2" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" name="generate-report" value="Descargar" class="btn btn-success">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <div class="container">
+                    <div class="row">
                         <h2 class="d-flex justify-content-start mb-4">Pedidos pagados</h2>
 
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">

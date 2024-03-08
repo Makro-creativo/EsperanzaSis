@@ -1,16 +1,14 @@
 <?php 
     include "./config/conexion.php";
 
-    if(isset($_GET['productid'])) {
-        $productid = $_GET['productid'];
+    if(isset($_GET['id'])) {
+        $productid = $_GET['id'];
 
-        $query = "DELETE FROM products WHERE productid = $productid";
-        $result = mysqli_query($conexion, $query);
+        $query_delete = "UPDATE products SET status_deleted='1', deleted_at=NOW() WHERE id = '$productid'";
+        $result = mysqli_query($conexion, $query_delete);
 
-        if(!$result) {
-            die("No se realizo correctamente la operación");
+        if($result) {
+            echo "<script>window.location='show-products.php?delete'; </script>";
         }
-
-        header("location: show-products.php");
     }
 ?>

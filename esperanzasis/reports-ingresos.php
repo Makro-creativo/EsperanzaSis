@@ -34,98 +34,12 @@
 
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                             <div class="card shadow-lg">
-                                <h6 class="text-center text-primary p-3">Generar reporte</h6>
 
                                 <div class="card-body">
-                                    <form action="" method="GET">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>De que fecha: </label>
-                                                    <input type="date" name="from_date" class="form-control" value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Hasta que fecha: </label>
-                                                    <input type="date" name="to_date" class="form-control" value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <input type="submit" value="Filtrar" class="btn btn-success btn-block">
-                                    </form>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Fecha</th>
-                                                        <th>Nombre de la categoría</th>
-                                                        <th>Descripción</th>
-                                                        <th>Efectivo</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                        
-                                                        <?php 
-                                                            include "./config/conexion.php";
-
-                                                            if(isset($_GET['from_date']) && isset($_GET['to_date']))
-                                                            {
-                                                                $from_date = $_GET['from_date'];
-                                                                $to_date = $_GET['to_date'];
-
-                                                                $query = "SELECT * FROM ingresos WHERE created_at BETWEEN '$from_date' AND '$to_date' ORDER BY created_at DESC";
-                                                                $query_run = mysqli_query($conexion, $query);
-
-                                                                $total_row = 0;
-
-                                                                if(mysqli_num_rows($query_run) > 0)
-                                                                {
-                                                                    foreach($query_run as $row)
-                                                                    {
-                                                                        ?>
-                                                                        <tr>
-                                                                            <td><?= date("d/m/Y", strtotime($row['created_at'])); ?></td>
-                                                                            <td><?= $row['category_name']; ?></td>
-                                                                            <td><?= $row['description']; ?></td>
-                                                                            <td><?= number_format($row['quantity'], 2); ?></td>
-                                                                        </tr>
-
-                                                                        
-                                                                        <?php
-                                                                        $total_neto = $total_row+=$row['quantity'];
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    echo "<p class='text-center'>No se encontraron resultados...</p>";
-                                                                }
-                                                            }
-                                                        ?>
-                                                            <div class="d-flex justify-content-end">
-                                                                <tr>
-                                                                    <td>
-                                                                        Total: $<?php 
-                                                                            echo number_format($total_neto, 2);
-                                                                        ?>
-                                                                    </td>
-                                                                </tr>
-                                                            </div>
-                                                        </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-
                                     <div class="row mt-2">
                                                         <p class="text-primary text-center">Exportar a excel entre fechas</p>
                                                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 cool-xxl-12">
-                                                            <form method="POST" class="form" action="report-ingresos-export.php">
+                                                            <form method="POST" class="form" action="report-ingresos-export-tortilleria.php">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
@@ -148,10 +62,54 @@
                                                         </div>
                                                     </div>
                                 </div>
+
+                                
                             </div>
                         </div>
                     </div>
                 </div>
+                <br><br>
+
+                <!--<div class="container">
+                    <div class="row">
+                        <h2 class="d-flex jusitify-content-start mb-4">Buscar entre fechas de ingresos Súper</h2>    
+
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <div class="card shadow-lg">
+
+                                <div class="card-body">
+                                    <div class="row mt-2">
+                                                        <p class="text-primary text-center">Exportar a excel entre fechas</p>
+                                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 cool-xxl-12">
+                                                            <form method="POST" class="form" action="report-ingresos-export-super.php">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <input type="date" name="date1" class="form-control">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <input type="date" name="date2" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="d-grid gap-2">
+                                                                    <input type="submit" name="generate-report-ingresos" value="Descargar" class="btn btn-success">
+                                                                </div>
+                                                            </form>
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
 
             </div>
             <br>

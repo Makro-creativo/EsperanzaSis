@@ -10,16 +10,17 @@
 	$date = date("Y-m-d H:i:s");
 	$nameClient = $_POST['name_client'];	
 	$dateSend = $_POST['date_send'];
-	$peopleOrder = $_POST['people_order'];
-	$comments = $_POST['comments'];
+	//$peopleOrder = $_POST['people_order'];
+	//$comments = $_POST['comments'];
 	$statusPayment = $_POST['status_payment'];
-	$numberNote = $_POST['note_cobranza_credito'];
-	$numberNoteTwo = $_POST['note_cobranza_credito_two'];
+	$numberNote = FLOOR(RAND()*(99-1)+1);
+	//$numberNoteTwo = $_POST['note_cobranza_credito_two'];
+	//$numberNoteCobrada = $_POST['note_cobrada'];
 	$totalVenta = $_POST['total_venta'];
 
 
-	$sql = "INSERT INTO ordens_admin (date, id_user, name_client, date_send, comments, status_payment, note_cobranza_credito, note_cobranza_credito_two, monto) 
-	VALUES ('$date', '$uid', '$nameClient', '$dateSend', '$comments', '$statusPayment', '$numberNote', '$numberNoteTwo', '$totalVenta');";
+	$sql = "INSERT INTO ordens_admin (date, id_user, name_client, date_send, status_payment, note_cobranza_credito, monto, delete_tempory) 
+	VALUES ('$date', '$uid', '$nameClient', '$dateSend', '$statusPayment', '$numberNote', '$totalVenta', '0');";
 	$save = mysqli_query($conexion, $sql);
 
 	$query = mysqli_query($conexion, "SELECT * FROM order_temporal ORDER BY id DESC");
@@ -47,4 +48,4 @@
 
 		header("location: show-orders-admin-test.php");
 
-?>
+?>	

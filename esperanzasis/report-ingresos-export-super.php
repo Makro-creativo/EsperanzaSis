@@ -6,13 +6,13 @@ $date2 = $_POST['date2'];
 
 if(isset($_POST['generate-report-ingresos'])) {
 	header('Content-Type:text/csv; charset=latin1');
-	header('Content-Disposition: attachment; filename="Reporte_de_ingresos.csv"');
+	header('Content-Disposition: attachment; filename="Reporte_de_ingresos-super.csv"');
 
 	$salida = fopen('php://output', 'w');
 
 	fputcsv($salida, array('ID', 'Fecha', 'Nombre de la categoría', 'descripción', 'Efectivo'));
 	
-	$reporteCsv = $conexion->query("SELECT * FROM ingresos WHERE created_at BETWEEN '$date1' AND '$date2' ORDER BY created_at DESC");
+	$reporteCsv = $conexion->query("SELECT * FROM ingresos WHERE created_at BETWEEN '$date1' AND '$date2' AND category_name = 'SUPER' ORDER BY created_at DESC");
 
 	while($filaR = $reporteCsv->fetch_assoc())
 		fputcsv($salida, array($filaR['id_categories'], 

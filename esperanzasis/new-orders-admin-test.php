@@ -111,50 +111,19 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                    <div class="form-group">
-                                                        <label>Persona quién ordeno: </label>
-                                                        <input type="text" placeholder="Nombre de la persona quién solicito el pedido..." class="form-control" name="people_order" required>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
-                                                    <div class="form-group">
-                                                        <label>Comentarios: </label>
-                                                        <input type="text" placeholder="Comentarios..." class="form-control" name="comments">
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4" required>
+                                                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12" required>
                                                     <div class="form-group">
                                                         <label>Estatus de pago: </label>
-                                                        <select name="status_payment" class="form-control" id="status_payment" onChange="showRoleId(this.value);" required>
+                                                        <select name="status_payment" class="form-control" required>
                                                             <option selected disabled>Seleccionar una opción</option>
                                                             <option value="credito">A credito</option>
                                                             <option value="contado">A contado</option>
+                                                            <option value="cobrado">Cobrado</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12" id="credito" style="display: none;">
-                                                    <div class="form-group">
-                                                        <label>Número de nota: </label>
-                                                        <input type="text" name="note_cobranza_credito" placeholder="Ejemplo: 03456, etc..." class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12" id="contado" style="display: none;">
-                                                    <div class="form-group">
-                                                        <label>Número de nota: </label>
-                                                        <input type="text" name="note_cobranza_credito_two" placeholder="Ejemplo: 03456, etc..." class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 

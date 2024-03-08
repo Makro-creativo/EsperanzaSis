@@ -196,9 +196,10 @@
                 </div>
 
             </div>
-            <br>
+            <br><br><br><br>
 
             <?php include "./partials/footer.php" ?>
+            <br><br>
 
         </div>
 

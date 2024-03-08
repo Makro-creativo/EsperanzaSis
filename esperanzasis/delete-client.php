@@ -1,16 +1,14 @@
 <?php 
     include "./config/conexion.php";
 
-    if(isset($_GET['id_user'])) {
-        $id_user = $_GET['id_user'];
+    if(isset($_GET['id'])) {
+        $id_client = $_GET['id'];
 
-        $query = "DELETE FROM clients WHERE id_user = $id_user";
-        $result = mysqli_query($conexion, $query);
+        $query_delete = "UPDATE clients SET status_deleted='1', deleted_at=NOW() WHERE id = '$id_client'";
+        $result_delete = mysqli_query($conexion, $query_delete);
 
-        if(!$result) {
-            die("No pudimos eliminar correctamente el cliente, verifique de nuevo");
+        if($result_delete) {
+            echo "<script>window.location='show-clients.php?delete'; </script>";
         }
-
-        header("location: show-clients.php");
     }
 ?>

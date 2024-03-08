@@ -38,7 +38,72 @@
                     <h2 class="d-flex justify-content-start mb-4">Lista de Gastos</h2>
 
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-3">
+                                <div class="card shadow-lg">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <form action="" method="POST">
+                                                    <div class="form-group">
+                                                        <label>Filtrar por descripción</label>
+                                                        <select name="description" class="form-control">
+                                                            <option selected disabled>Seleccionar descripción</option>
+                                                            <?php
+                                                            include "./config/conexion.php";
+
+                                                            $search_filter_for_description = "SELECT description FROM gastos GROUP BY description ORDER BY description DESC";
+                                                            $result_filter_description = mysqli_query($conexion, $search_filter_for_description);
+
+                                                            while ($rowDescription = mysqli_fetch_array($result_filter_description)) {
+
+                                                            ?>
+                                                                <option value="<?php echo $rowDescription['description']; ?>"><?php echo $rowDescription['description']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        Filtrar
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xxl-6">
+                                                <form action="" method="POST">
+                                                    <div class="form-group">
+                                                        <label>Filtrar por categoría</label>
+                                                        <select name="name_category" class="form-control">
+                                                            <option selected disabled>Seleccionar categoría</option>
+                                                            <?php
+                                                            include "./config/conexion.php";
+
+                                                            $search_filter_for_category = "SELECT name_category FROM gastos GROUP BY name_category ORDER BY name_category DESC";
+                                                            $result_filter_for_category = mysqli_query($conexion, $search_filter_for_category);
+
+                                                            while ($rowCategory = mysqli_fetch_array($result_filter_for_category)) {
+
+                                                            ?>
+                                                                <option value="<?php echo $rowCategory['name_category']; ?>"><?php echo $rowCategory['name_category']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        Filtrar
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-3">
                             <div class="card shadow-lg">
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -49,6 +114,7 @@
                                                 <th>Descripción</th>
                                                 <th>Efectivo</th>
                                                 <th>Categoría</th>
+                                                <th>Método de pago</th>
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <th>Editar</th>
@@ -63,16 +129,37 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $query_expenses = "SELECT * FROM gastos ORDER BY created_at DESC";
+                                                    if(isset($_POST['description'])) {
+                                                        $description = $_POST['description'];
+
+                                                        $query_expenses = "SELECT * FROM gastos WHERE description='$description' ORDER BY created_at DESC";
+                                                    } else if(isset($_POST['name_category'])) {
+                                                        $category = $_POST['name_category'];
+
+                                                        $query_expenses = "SELECT * FROM gastos WHERE name_category='$category' ORDER BY created_at DESC";
+                                                    } else {
+                                                        $query_expenses = "SELECT * FROM gastos ORDER BY created_at DESC";
+                                                    }
+
                                                     $result_expenses = mysqli_query($conexion, $query_expenses);
 
                                                     while($row = mysqli_fetch_array($result_expenses)) {
+                                                        $typeMethod = $row['type_method'];
                                                 ?>
                                                 <tr>
                                                     <td><?php echo date("d/m/Y", strtotime($row['created_at'])); ?></td>
                                                     <td><?php echo $row['description']; ?></td>
                                                     <td><?php echo number_format($row['amount'], 2); ?></td>
                                                     <td><?php echo $row['name_category']; ?></td>
+                                                    <td>
+                                                        <?php 
+                                                            if(!$typeMethod) {
+                                                                echo "No hay método de pago agregado";
+                                                            } else {
+                                                                echo $typeMethod;
+                                                            }
+                                                        ?>
+                                                    </td>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>
@@ -149,8 +236,8 @@
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 
-	<script>
-		$('#render').DataTable({
+    <script>
+		const table = $('#render').DataTable({
             dom: 'lBfrtip',
             buttons: [
                 {
@@ -160,32 +247,30 @@
                     className: 'btn btn-success'
                 }
             ],
-            "order": [[ 3, "desc" ]],
-            "language": {
-                "sProcessing":    "Procesando...",
-                "sLengthMenu":    "Mostrar _MENU_ registros",
-                "sZeroRecords":   "No se encontraron resultados",
-                "sEmptyTable":    "Ningún dato disponible en esta tabla",
-                "sInfo":          "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty":     "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix":   "",
-                "sSearch":        "Buscar:",
-                "sUrl":           "",
-                "sInfoThousands":  ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst":    "Primero",
-                    "sLast":    "Último",
-                    "sNext":    "Siguiente",
-                    "sPrevious": "Anterior"
-                },
-                "oAria": {
-                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                }
-            }
-        });
+			language: {
+				"decimal": "",
+				"emptyTable": "No hay información",
+				"info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+				"infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+				"infoFiltered": "(Filtrado de _MAX_ total entradas)",
+				"infoPostFix": "",
+				"thousands": ",",
+				"lengthMenu": "Mostrar _MENU_ Entradas",
+				"loadingRecords": "Cargando...",
+				"processing": "Procesando...",
+				"search": "Buscar:",
+				"zeroRecords": "Sin resultados encontrados",
+				"paginate": {
+					"first": "Primero",
+					"last": "Ultimo",
+					"next": "Siguiente",
+					"previous": "Anterior"
+				}
+			},
+			
+		});
 	</script>
+
+	
 </body>
 </html>

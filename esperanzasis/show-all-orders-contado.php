@@ -42,6 +42,38 @@
 
                 <div class="container">
                     <div class="row">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <div class="card shadow-lg">
+                            <p class="text-primary text-center p-3">Exportar a excel entre fechas</p>
+                                <div class="card-body">
+                                    <form method="POST" class="form" action="report-order-contado.php">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="date" name="date1" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="date" name="date2" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" name="generate-report" value="Descargar" class="btn btn-success">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <div class="container">
+                    <div class="row">
                         <h2 class="d-flex justify-content-start mb-4">Pedidos a contado</h2>
 
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
@@ -52,13 +84,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>Cliente</th>
-                                                    <th>Dirección de entrega</th>
                                                     <th>Fecha de entrega</th>
-                                                    <th>Hora de entrega</th>
-                                                    <th>Persona quién realizo el pedido</th>
-                                                    <th>Comentarios</th>
                                                     <th>Estatus de pago</th>
                                                     <th>Número de nota</th>
+                                                    <th>Total</th>
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <th>Detalle del pedido</th>
                                                     <?php }?>
@@ -68,35 +97,31 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $search_orders_to_credito = "SELECT * FROM ordens_admin WHERE status_payment = 'contado'";
+                                                    $search_orders_to_credito = "SELECT new_orders_admin.id AS order_id, new_orders_admin.status_payment, new_orders_admin.number_note, 
+                                                    new_orders_admin.amount, new_orders_admin.date_send, clients.name_client FROM new_orders_admin INNER JOIN purchase_detail_admin 
+                                                    ON new_orders_admin.id = purchase_detail_admin.id INNER JOIN clients ON clients.id = new_orders_admin.client_id 
+                                                    WHERE new_orders_admin.status_payment = 'contado' AND new_orders_admin.status_deleted = 0 ORDER BY new_orders_admin.created_at DESC";
                                                     $result_orders_to_credito = mysqli_query($conexion, $search_orders_to_credito);
 
                                                     while($row = mysqli_fetch_array($result_orders_to_credito)) {
-                                                        $noteOne = $row['note_cobranza_credito'];
-                                                        $noteTwo = $row['note_cobranza_credito_two'];
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $row['name_client']; ?></td>
-                                                    <td><?php echo $row['adress_send']; ?></td>
                                                     <td><?php echo date("m/d/Y", strtotime($row['date_send'])); ?></td>
-                                                    <td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
-                                                    <td><?php echo $row['people_order']; ?></td>
-                                                    <td><?php echo $row['comments']; ?></td>
                                                     <td class="text-center">
                                                         <span class="badge bg-primary"><?php echo $row['status_payment']; ?></span>
                                                     </td>
                                                     <td>
                                                         <?php
-                                                            if(!$noteOne) {
-                                                                echo $noteTwo;
-                                                            } else {
-                                                                echo $noteOne;
-                                                            }
+                                                            echo $row['number_note'];
                                                         ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo number_format($row['amount'], 2); ?>
                                                     </td>
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td class="text-center"> 
-                                                            <a href="show-detail-order.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary btn-sm">
+                                                            <a href="show-ticket-for-client-id.php?id=<?php echo $row['order_id']; ?>" class="btn btn-primary btn-sm">
                                                                 <i class="bi bi-eye-fill"></i>
                                                             </a>
                                                         </td>

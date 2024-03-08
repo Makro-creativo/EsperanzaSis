@@ -190,6 +190,96 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-3">
+                                <div class="card shadow-lg">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <form action="" method="POST">
+                                                    <div class="form-group">
+                                                        <label>Filtrar por persona que entrego</label>
+                                                        <select name="person_delivery" class="form-control">
+                                                            <option selected disabled>Seleccionar persona que entego</option>
+                                                            <?php
+                                                            include "./config/conexion.php";
+
+                                                            $search_filter_people_delivery = "SELECT DISTINCT person_delivery FROM cutbox_ruta ORDER BY person_delivery DESC";
+                                                            $result_filter = mysqli_query($conexion, $search_filter_people_delivery);
+
+                                                            while ($rowPerson = mysqli_fetch_array($result_filter)) {
+
+                                                            ?>
+                                                                <option value="<?php echo $rowPerson['person_delivery']; ?>"><?php echo $rowPerson['person_delivery']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        Filtrar
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <form action="" method="POST">
+                                                    <div class="form-group">
+                                                        <label>Filtrar por persona que recibio</label>
+                                                        <select name="person_receive" class="form-control">
+                                                            <option selected disabled>Seleccionar persona que recibio</option>
+                                                            <?php
+                                                            include "./config/conexion.php";
+
+                                                            $search_filter_people_receibe = "SELECT DISTINCT person_receive FROM cutbox_ruta ORDER BY person_receive DESC";
+                                                            $result_filter_receibe = mysqli_query($conexion, $search_filter_people_receibe);
+
+                                                            while ($rowReceibe = mysqli_fetch_array($result_filter_receibe)) {
+
+                                                            ?>
+                                                                <option value="<?php echo $rowReceibe['person_receive']; ?>"><?php echo $rowReceibe['person_receive']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        Filtrar
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 col-xxl-4">
+                                                <form action="" method="POST">
+                                                    <div class="form-group">
+                                                        <label>Filtrar por turno</label>
+                                                        <select name="turn" class="form-control">
+                                                            <option selected disabled>Seleccionar turno</option>
+                                                            <?php
+                                                            include "./config/conexion.php";
+
+                                                            $search_filter_turn = "SELECT DISTINCT turn FROM cutbox_ruta ORDER BY turn DESC";
+                                                            $result_filter_turn = mysqli_query($conexion, $search_filter_turn);
+
+                                                            while ($rowTurn = mysqli_fetch_array($result_filter_turn)) {
+
+                                                            ?>
+                                                                <option value="<?php echo $rowTurn['turn']; ?>"><?php echo $rowTurn['turn']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        Filtrar
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
                         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12 mt-4">
                             <div class="card shadow-lg">
                                 <div class="card-body">
@@ -222,7 +312,22 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $search_cut_rute = "SELECT * FROM cutbox_ruta ORDER BY opening_date ASC";
+                                                    if(isset($_POST['person_delivery'])) {
+                                                        $personDelivery = $_POST['person_delivery'];
+
+                                                        $search_cut_rute = "SELECT * FROM cutbox_ruta WHERE person_delivery='$personDelivery' ORDER BY person_delivery DESC";
+                                                    } else if(isset($_POST['person_receive'])) {
+                                                        $personReceive = $_POST['person_receive'];
+
+                                                        $search_cut_rute = "SELECT * FROM cutbox_ruta WHERE person_receive='$personReceive' ORDER BY person_receive DESC";
+                                                    } else if(isset($_POST['turn'])) {
+                                                        $turn = $_POST['turn'];
+
+                                                        $search_cut_rute = "SELECT * FROM cutbox_ruta WHERE turn='$turn' ORDER BY turn DESC";
+                                                    } else {
+                                                        $search_cut_rute = "SELECT * FROM cutbox_ruta ORDER BY opening_date ASC";
+                                                    }
+
                                                     $result_cut_rute = mysqli_query($conexion, $search_cut_rute);
 
                                                     while($row = mysqli_fetch_array($result_cut_rute)) {

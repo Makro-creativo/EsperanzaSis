@@ -2,17 +2,17 @@
     include "./config/conexion.php";
 
     if(isset($_POST['editProduct'])) {
-        $Id_product = $_POST['id_product_edit'];
+        $id_product = $_POST['id_product_edit'];
         $name_product = $_POST['name_product'];
         $price = number_format($_POST['price'], 2);
         $unidad = $_POST['unidad'];
         
+        $query_update = "UPDATE products SET name_product='$name_product', price='$price', unidad='$unidad', status_deleted='0', updated_at=NOW() WHERE id = '$id_product'";
+        $result_update = mysqli_query($conexion, $query_update);
 
-        $queryUpdate = "UPDATE products SET name_product='$name_product', price='$price', unidad='$unidad' WHERE productid = '$Id_product'";
-        mysqli_query($conexion, $queryUpdate);
-
-
-        header("location: show-products.php");
+        if($result_update) {
+            echo "<script>window.location='edit-product.php?success'; </script>";
+        }
     }
 ?>
 
@@ -37,21 +37,53 @@
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body id="page-top">
     <div id="wrapper">
+        <?php   
+            if(isset($_GET['success'])){
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Listo',
+                    text: 'Se actualizo correctamente el producto!',
+                    icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    .then(function() {
+                        window.location = "show-products.php";
+                });
+            </script>
+        <?php } ?>
+
         <?php include "./partials/menuLateral.php" ?>
 
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
                 <?php include "./partials/header.php" ?>
 
+                <?php 
+                    if(isset($_GET['id'])) {
+                        $idClient = $_GET['id'];
+                    }
+
+                    $search_client_for_id = "SELECT * FROM clients WHERE id = '$idClient'";
+                    $result_client_for_id = mysqli_query($conexion, $search_client_for_id);
+
+                    if($result_client_for_id) {
+                        $row = mysqli_fetch_array($result_client_for_id);
+
+                        $id_client = $row['id'];
+                    }
+                ?>
+
                 <?php
-                    if(isset($_GET['productid'])) {
-                        $productid = $_GET['productid'];
+                    if(isset($_GET['id'])) {
+                        $productid = $_GET['id'];
                     }
                     
-                    $query = "SELECT * FROM products WHERE productid = $productid";
+                    $query = "SELECT * FROM products WHERE id = $productid";
                         $result = mysqli_query($conexion, $query);
                 
                         if($result) {

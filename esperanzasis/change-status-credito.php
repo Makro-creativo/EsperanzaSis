@@ -4,7 +4,7 @@
     if(isset($_POST['changesStatus'])) {
         $purchaseid = $_POST['id_credito'];
 
-        $query_update = "UPDATE ordens_admin SET status_payment='contado' WHERE purchaseid = '$purchaseid'";
+        $query_update = "UPDATE new_orders_admin SET status_payment='contado' WHERE id = '$purchaseid'";
         $result = mysqli_query($conexion, $query_update);
 
         if($result) {

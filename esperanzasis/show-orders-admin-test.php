@@ -31,11 +31,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body id="page-top">
     <div id="wrapper">
 
-    <?php   
+        <?php   
+            if(isset($_GET['delete'])){
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Listo',
+                    text: 'Se elimino correctamente!',
+                    icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                    .then(function() {
+                        window.location = "show-orders-admin-test.php";
+                });
+            </script>
+        <?php } ?>
+
+        <?php   
             if(isset($_GET['success'])){
         ?>
             <script>
@@ -65,33 +82,20 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
                                     <div class="card shadow-lg">
-                                        <h6 class="text-center text-primary p-3">Buscar entre fechas</h6>
+                                        <h6 class="text-center text-primary p-3">Buscar por cliente</h6>
 
                                         <div class="card-body">
                                             <form action="" method="GET">
                                                 <div class="row mt-3">
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label>De que fecha: </label>
-                                                            <input type="date" name="from_date" value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label>Hasta que fecha: </label>
-                                                            <input type="date" name="to_date" value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>" class="form-control">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Cliente: </label>
-                                                            <select name="name_client" class="form-control">
+                                                            <select name="name" class="form-control js-example-basic-single" value="<?php if(isset($_GET['name'])){ echo $_GET['name']; } ?>">
                                                                 <option selected disabled>Seleccionar cliente</option>
                                                                 <?php 
                                                                     include "./config/conexion.php";
 
-                                                                    $search_name_client = "SELECT * FROM ordens_admin ORDER BY name_client ASC";
+                                                                    $search_name_client = "SELECT * FROM ordens_admin GROUP BY name_client ORDER BY name_client ASC";
                                                                     $result_name_client = mysqli_query($conexion, $search_name_client);
 
                                                                     while($rowClient = mysqli_fetch_array($result_name_client)) {
@@ -99,6 +103,26 @@
                                                                 ?>
                                                                     <option value="<?php echo $nameClient; ?>"><?php echo $nameClient; ?></option>
                                                                 <?php }?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Estatus de pago: </label>
+                                                            <select name="status" class="form-control js-example-basic-single" value="<?php if(isset($_GET['status'])){ echo $_GET['status']; } ?>">
+                                                                    <option selected disabled>Selecciona estado de pago</option>
+                                                                    <?php 
+                                                                        include './config/conexion.php';
+
+                                                                        $search_status = "SELECT DISTINCT status_payment FROM ordens_admin ORDER BY status_payment ASC";
+                                                                        $result_status = mysqli_query($conexion, $search_status);
+
+                                                                        while($rowStatus = mysqli_fetch_array($result_status)) {
+                                                                            $status = $rowStatus['status_payment'];
+                                                                    ?>
+                                                                        <option value="<?php echo $status; ?>"><?php echo $status; ?></option>
+                                                                    <?php }?>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -118,11 +142,11 @@
                                                                     <th>Cliente</th>
                                                                     <th>Dirección de entrega</th>
                                                                     <th>Fecha de entrega</th>
-                                                                    <th>Hora de entrega</th>
                                                                     <th>Persona quién realizo el pedido</th>
                                                                     <th>Comentarios</th>
                                                                     <th>Estatus de pago</th>
                                                                     <th>Número de nota</th>
+                                                                    <th>Monto</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -130,47 +154,61 @@
                                                             <?php 
                                                                 include "./config/conexion.php";
 
-                                                                if(isset($_GET['from_date']) && isset($_GET['to_date']))
+                                                                if(isset($_GET['name']) && isset($_GET['status']))
                                                                 {
-                                                                    $from_date = $_GET['from_date'];
-                                                                    $to_date = $_GET['to_date'];
-                                                                    $nameClient = $_GET['name_client'];
+                                                                    $arrayClient = $_GET['name'];
+                                                                    $statusPayment = $_GET['status'];
+                                                                    $total_neto = 0;
 
-                                                                    $query = "SELECT * FROM ordens_admin WHERE date_send BETWEEN '$from_date' AND '$to_date' AND name_client = '$nameClient' ORDER BY date_send DESC";
+                                                                    $query = "SELECT * FROM ordens_admin WHERE name_client = '$arrayClient' AND status_payment = '$statusPayment' ORDER BY name_client DESC";
                                                                     $query_run = mysqli_query($conexion, $query);
 
                                                                     $total_row = 0;
 
-                                                                    if(mysqli_num_rows($query_run) > 0)
-                                                                    {
-                                                                        foreach($query_run as $row)
+                                                                    if(mysqli_num_rows($query_run) > 0) {
+                                                                        while($row = mysqli_fetch_array($query_run)) {
+                                                                            $nameClientResult = $row['name_client'];
+                                                                            $adressSend = $row['adress_send'];
+                                                                            $dateSend = $row['date_send'];
+                                                                            $people_order = $row['people_order'];
+                                                                            $commets = $row['comments'];
+                                                                            $statusPayment = $row['status_payment'];
                                                                             $numberNoteOne = $row['note_cobranza_credito'];
                                                                             $numberNoteTwo = $row['note_cobranza_credito_two'];
                                                                             $amount = $row['monto'];
-                                                                        {
-                                                                            ?>
-                                                                            <tr>
-                                                                                <td><?= $row['name_client'] ?></td>
-                                                                                <td><?= $row['adress_send']; ?></td>
-                                                                                <td><?= date("m/d/Y", strtotime($row['date_send'])); ?></td>
-                                                                                <td><?= date("h:i a", strtotime($row['hour_send'])); ?></td>
-                                                                                <td><?= $row['people_order']; ?></td>
-                                                                                <td><?= $row['comments'] ?></td>
-                                                                                <td><span class="badge bg-primary"><?= $row['status_payment'] ?></span></td>
-                                                                                <td>
-                                                                                    <?php 
-                                                                                        if(!$numberNoteOne) {
-                                                                                            echo $numberNoteTwo;
-                                                                                        } else {
-                                                                                            echo $numberNoteOne;
-                                                                                        }
-                                                                                    ?>
-                                                                                </td>
-                                                                            </tr>
 
-                                                                            
-                                                                            <?php
-                                                                            $total_neto = $total_row+=$amount;
+                                                                            $total_neto += $row['monto'];
+
+                                                                            ?>
+                                                                                <tr>
+                                                                                    <td><?php echo $nameClientResult; ?></td>
+                                                                                    <td>
+                                                                                        <?php 
+                                                                                            if($adressSend) {
+                                                                                                echo $adressSend;
+                                                                                            } else {
+                                                                                                echo "N/A";
+                                                                                            }
+                                                                                        ?>
+                                                                                    </td>
+                                                                                    <td><?php echo date('d/m/Y', strtotime($dateSend)); ?></td>
+                                                                                    <td><?php echo $people_order; ?></td>
+                                                                                    <td><?php echo $commets; ?></td>
+                                                                                    <td><span class="badge bg-primary"><?php echo $statusPayment; ?></span></td>
+                                                                                    <td>
+                                                                                        <?php 
+                                                                                            if($numberNoteOne) {
+                                                                                                echo $numberNote;
+                                                                                            } else {
+                                                                                                echo $numberNoteTwo;
+                                                                                            }
+                                                                                        ?>
+                                                                                    </td>
+                                                                                    <td><?php echo "$".$amount; ?></td>
+                                                                                </tr>
+
+                                                                            <?php 
+
                                                                         }
                                                                     }
                                                                     else
@@ -181,7 +219,7 @@
                                                             ?>
                                                                 <div class="d-flex justify-content-end">
                                                                     <tr>
-                                                                        <td>
+                                                                        <td colspan="8" class="text-center bg-success" style="color: white !important;">
                                                                             Total: $<?php 
                                                                                 echo number_format($total_neto, 2);
                                                                             ?>
@@ -211,14 +249,8 @@
                                                 <tr>
                                                     <th>Cliente</th>
                                                     <th>Fecha de entrega</th>
-                                                    <th>Hora de entrega</th>
-                                                    <th>Comentarios</th>
                                                     <th>Estatus de pago</th>
                                                     <th>Número de nota</th>
-
-                                                    <?php if($typeUser === "Administrador") {?>
-                                                        <th>Pago</th>
-                                                    <?php }?>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <th>Detalle del pedido</th>
@@ -233,19 +265,18 @@
                                                 <?php 
                                                     include "./config/conexion.php";
 
-                                                    $search_order_admin = "SELECT * FROM ordens_admin ORDER BY date ASC";
+                                                    $search_order_admin = "SELECT * FROM ordens_admin WHERE delete_tempory = 0 ORDER BY date DESC";
                                                     $result_order_admin = mysqli_query($conexion, $search_order_admin);
 
                                                     while($row = mysqli_fetch_array($result_order_admin)) {
                                                         $numberNoteOne = $row['note_cobranza_credito'];
                                                         $numberNoteTwo = $row['note_cobranza_credito_two'];
                                                         $purchaseid = $row['purchaseid'];
+                                                        $total = $row['monto'];
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $row['name_client']; ?></td>
                                                     <td><?php echo date("m/d/Y", strtotime($row['date_send'])); ?></td>
-                                                    <td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
-                                                    <td><?php echo $row['comments']; ?></td>
                                                     <td><?php echo $row['status_payment']; ?></td>
                                                     <td>
                                                         <?php 
@@ -256,49 +287,10 @@
                                                             }   
                                                         ?>
                                                     </td>
-                                                    
-                                                    <?php if($typeUser === "Administrador") {?>
-                                                        <td class="text-center">
-                                                           <?php 
-                                                                $search_status = "SELECT * FROM ordens_admin INNER JOIN status_payment_orders ON ordens_admin.purchaseid = status_payment_orders.order_id WHERE status_payment_orders.order_id = '$purchaseid'";
-                                                                $result_status = mysqli_query($conexion, $search_status);
-
-                                                                $data_status = mysqli_fetch_array($result_status);
-
-                                                                $number_payment_status = mysqli_num_rows($result_status);
-
-                                                                if($number_payment_status === 0) {
-
-                                                                
-                                                           ?>
-
-                                                            <form action="created_status_payment.php" method="POST">
-                                                                <input type="hidden" name="order_id" value="<?php echo $purchaseid; ?>">
-                                                                <select name="payment_status" class="form-control">
-                                                                    <option selected disabled>Seleccionar una opción</option>
-                                                                    <option value="Por pagar">Por pagar</option>
-                                                                    <option value="Pagado">Pagado</option>
-                                                                </select>
-
-                                                                <input type="submit" value="Guardar" class="btn btn-secondary btn-sm btn-block" name="save">
-                                                            </form>
-
-                                                            <?php } else if($data_status['payment_status'] === 'Pagado') { ?>
-                                                                <span class="badge badge-success"><?php echo $data_status['payment_status']; ?>
-                                                                    <i class="fa-solid fa-money-bill-1-wave"></i>
-                                                                </span>
-                                                            <?php } else if($data_status['payment_status'] === 'Por pagar') { ?>
-                                                                <span class="badge badge-danger"><?php echo $data_status['payment_status']; ?>
-                                                                    <i class="fa-solid fa-money-check-dollar"></i>
-                                                                </span>
-                                                            <?php } ?>
-                                                        </td>
-                                                    
-                                                    <?php }?>
 
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td class="text-center"> 
-                                                            <a href="show-detail-order.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary btn-sm">
+                                                            <a href="show-detail-order-admin.php?purchaseid=<?php echo $purchaseid; ?>" class="btn btn-primary btn-sm">
                                                                 <i class="bi bi-eye-fill"></i>
                                                             </a>
                                                         </td>
@@ -375,6 +367,8 @@
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
 		const table = $('#dataTable').DataTable({
             dom: 'lBfrtip',
@@ -406,8 +400,13 @@
 					"previous": "Anterior"
 				}
 			},
-			
+            "order": []
 		});
 	</script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 </body>
 </html>

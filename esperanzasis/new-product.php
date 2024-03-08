@@ -2,18 +2,21 @@
     include "./config/conexion.php";
 
     if(isset($_POST['savedProducts'])) {
+        $id_client = $_POST['id_client'];
+        $arrayClient = explode("_", $id_client);
+        $idClient = $arrayClient[0];
+        $nameClient = $arrayClient[1];
+
         $name_product = $_POST['name_product'];
         $price = number_format($_POST['price'], 2);
         $unidad = $_POST['unidad'];
 
-        $query_products = "INSERT INTO products(name_product, price, unidad) VALUES ('$name_product', '$price', '$unidad')";
+        $query_products = "INSERT INTO products(name_product, price, unidad, status_deleted, created_at) VALUES ('$name_product', '$price', '$unidad', '0', NOW())";
         $result = mysqli_query($conexion, $query_products);
 
-        if(!$result) {
-            die("No se pudo guardar el producto");
+        if($result) {
+            echo "<script>window.location='new-product.php?success'; </script>";
         }
-
-        header("location: show-products.php");
     }
 
 ?>
@@ -39,10 +42,29 @@
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body id="page-top">
     <div>
     <div id="wrapper">
+        <?php   
+            if(isset($_GET['success'])){
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Listo',
+                    text: 'Se guardo correctamente el producto!',
+                    icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    .then(function() {
+                        window.location = "show-products.php";
+                });
+            </script>
+        <?php } ?>
+
         <?php include "./partials/menuLateral.php" ?>
 
         <div id="content-wrapper" class="d-flex flex-column">
@@ -114,7 +136,7 @@
 
 
 
-
+    
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
@@ -126,6 +148,12 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 
     <!-- Data tables -->
     <script src="../vendor/datatables/jquery.dataTables.js"></script>

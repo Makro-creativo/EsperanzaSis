@@ -27,9 +27,26 @@
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body id="page-top">
     <div id="wrapper">
+        <?php   
+            if(isset($_GET['delete'])){
+        ?>
+            <script>
+                Swal.fire({
+                    title: 'Listo',
+                    text: 'Se elimino correctamente el cliente!',
+                    icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                    .then(function() {
+                        window.location = "show-clients.php";
+                });
+            </script>
+        <?php } ?>
+
         <?php include "./partials/menuLateral.php" ?>
 
         <div id="content-wrapper" class="d-flex flex-column">
@@ -47,20 +64,8 @@
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <td>Id</td>
-                                                    <td>Nombre completo del cliente</td>
-                                                    <td>Dirección del cliente</td>
-                                                    <td>Dirección de la empresa</td>
-                                                    <td>Giro de la empresa</td>
-                                                    <td>RFC</td>
-                                                    <td>Encargado de compras</td>
-                                                    <td>Estatus</td>
-                                                    <td>Número de teléfono</td>
-                                                    <td>Celular</td>
-                                                    <td>Correo electronico</td>
-                                                    <td>Código postal</td>
-                                                    <td>Municipio</td>
-
+                                                    <th>Nombre del cliente</th>
+                                                    
                                                     <?php if($typeUser === "Administrador") {?>
                                                         <td>Editar</td>
                                                     <?php }?>
@@ -74,41 +79,28 @@
                                             <?php  
                                                 include "./config/conexion.php";
 
-                                                $query = "SELECT * FROM clients ORDER BY id_user ASC";
+                                                $query = "SELECT * FROM clients WHERE status_deleted = 0 ORDER BY created_at ASC";
                                                 $result = mysqli_query($conexion, $query);
 
                                                 while($row = mysqli_fetch_array($result)) {
                                             ?>
                                             
                                             <tr>
-                                                <td><?php echo $row['id_user']; ?></td>
                                                 <td><?php echo $row['name_client']; ?></td>
-                                                <td><?php echo $row['address_fiscal']; ?></td>
-                                                <td><?php echo $row['address_company']; ?></td>
-                                                <td><?php echo $row['giro_company']; ?></td>
-                                                <td><?php echo $row['rfc']; ?></td>
-                                                <td><?php echo $row['manager_payments']; ?></td>
-                                                <td><?php echo $row['activate']; ?></td>
-                                                <td><?php echo $row['tel']; ?></td>
-                                                <td><?php echo $row['cel']; ?></td>
-                                                <td><?php echo $row['email']; ?></td>
-                                                <td><?php echo $row['cp']; ?></td>
-                                                <td><?php echo $row['municipio']; ?></td>
-
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a href="edit-client.php?id_user=<?php echo $row['id_user']; ?>" class="btn btn-success">
+                                                        <a href="edit-client.php?id=<?php echo $row['id']; ?>" class="btn btn-success">
                                                             
-                                                            <i class="fas fa-edit mr-2"></i>
+                                                            <i class="fas fa-edit"></i>
                                                         </a>
                                                     </td>
                                                 <?php }?>
 
                                                 <?php if($typeUser === "Administrador") {?>
                                                     <td>
-                                                        <a href="delete-client.php?id_user=<?php echo $row['id_user']; ?>" class="btn btn-danger">
-                                                            <i class="fas fa-trash-alt mr-2 "></i>
+                                                        <a href="delete-client.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </td>
                                                 <?php }?>

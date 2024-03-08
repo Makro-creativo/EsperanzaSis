@@ -1,14 +1,15 @@
-<?php 
-    if(!isset($_SESSION)) {
-        session_start();
-    }
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-    $typeUser = $_SESSION['Tipo'];
+$typeUser = $_SESSION['Tipo'];
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,10 +19,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom styles for this template-->
@@ -33,29 +32,62 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
+
 <body class="page-top">
     <div id="wrapper">
         <?php include "./partials/menuLateral.php" ?>
 
-        <?php   
-             if(isset($_GET['bien'])){
+        <?php
+        if (isset($_GET['bien'])) {
         ?>
             <script>
                 Swal.fire({
-                    title: 'Listo',
-                    text: 'Se actualizo correctamente!',
-                    icon: 'success',
+                        title: 'Listo',
+                        text: 'Se actualizo correctamente!',
+                        icon: 'success',
                         confirmButtonText: 'Ok'
                     })
                     .then(function() {
                         window.location = "show-all-orders-contado.php";
-                });
+                    });
             </script>
         <?php } ?>
 
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
                 <?php include "./partials/header.php" ?>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <div class="card shadow-lg">
+                            <p class="text-primary text-center p-3">Exportar a excel entre fechas</p>
+                                <div class="card-body">
+                                    <form method="POST" class="form" action="report-order-credito.php">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="date" name="date1" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="date" name="date2" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <input type="submit" name="generate-report" value="Descargar" class="btn btn-success">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
 
                 <div class="container">
                     <div class="row">
@@ -69,74 +101,67 @@
                                             <thead>
                                                 <tr>
                                                     <th>Cliente</th>
-                                                    <th>Dirección de entrega</th>
                                                     <th>Fecha de entrega</th>
-                                                    <th>Hora de entrega</th>
-                                                    <th>Persona quién realizo el pedido</th>
-                                                    <th>Comentarios</th>
                                                     <th>Estatus de pago</th>
                                                     <th>Número de nota</th>
-                                            
-                                                    <?php if($typeUser === "Administrador") {?>
-                                                        <th>Detalle del pedido</th>
-                                                    <?php }?>
+                                                    <th>Total</th>
 
-                                                    <?php if($typeUser === "Administrador") {?>
+                                                    <?php if ($typeUser === "Administrador") { ?>
+                                                        <th>Detalle del pedido</th>
+                                                    <?php } ?>
+
+                                                    <?php if ($typeUser === "Administrador") { ?>
                                                         <th>Cambiar estado</th>
-                                                    <?php }?>
+                                                    <?php } ?>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php 
-                                                    include "./config/conexion.php";
+                                                <?php
+                                                include "./config/conexion.php";
 
-                                                    $search_orders_to_credito = "SELECT * FROM ordens_admin WHERE status_payment = 'credito'";
-                                                    $result_orders_to_credito = mysqli_query($conexion, $search_orders_to_credito);
+                                                $search_orders_to_credito = "SELECT new_orders_admin.id AS order_id, new_orders_admin.status_payment, new_orders_admin.number_note, 
+                                                new_orders_admin.amount, new_orders_admin.date_send, clients.name_client FROM new_orders_admin INNER JOIN purchase_detail_admin 
+                                                ON new_orders_admin.id = purchase_detail_admin.id INNER JOIN clients ON clients.id = new_orders_admin.client_id 
+                                                WHERE new_orders_admin.status_payment = 'credito' AND new_orders_admin.status_deleted = 0 ORDER BY new_orders_admin.created_at DESC";
+                                                $result_orders_to_credito = mysqli_query($conexion, $search_orders_to_credito);
 
-                                                    while($row = mysqli_fetch_array($result_orders_to_credito)) {
-                                                        $noteOne = $row['note_cobranza_credito'];
-                                                        $noteTwo = $row['note_cobranza_credito_two'];
+                                                while ($row = mysqli_fetch_array($result_orders_to_credito)) {
                                                 ?>
-                                                <tr>
-                                                    <td><?php echo $row['name_client']; ?></td>
-                                                    <td><?php echo $row['adress_send']; ?></td>
-                                                    <td><?php echo date("m/d/Y", strtotime($row['date_send'])); ?></td>
-                                                    <td><?php echo date('h:i A', strtotime(($row['hour_send']))); ?></td>
-                                                    <td><?php echo $row['people_order']; ?></td>
-                                                    <td><?php echo $row['comments']; ?></td>
-                                                    <td class="text-center">
-                                                        <span class="badge bg-primary"><?php echo $row['status_payment']; ?></span>
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                            if(!$noteOne) {
-                                                                echo $noteTwo;
-                                                            } else {
-                                                                echo $noteOne;
-                                                            }
-                                                        ?>
-                                                    </td>
-                                                    <?php if($typeUser === "Administrador") {?>
-                                                        <td class="text-center"> 
-                                                            <a href="show-detail-order.php?purchaseid=<?php echo $row['purchaseid']; ?>" class="btn btn-primary btn-sm">
-                                                                <i class="bi bi-eye-fill"></i>
-                                                            </a>
-                                                        </td>
-                                                    <?php }?>
-
-                                                    <?php if($typeUser === "Administrador") {?>
+                                                    <tr>
+                                                        <td><?php echo $row['name_client']; ?></td>
+                                                        <td><?php echo date("m/d/Y", strtotime($row['date_send'])); ?></td>
                                                         <td class="text-center">
-                                                            <form action="change-status-credito.php" method="POST">
-                                                                <input type="hidden" value="<?php echo $row['purchaseid']; ?>" name="id_credito">
-
-                                                                <button type="submit" class="btn btn-success btn-sm" name="changesStatus">
-                                                                    <i class="fa-regular fa-circle-check"></i>
-                                                                </button>
-                                                            </form>
+                                                            <span class="badge bg-primary"><?php echo $row['status_payment']; ?></span>
                                                         </td>
-                                                    <?php }?>
-                                                </tr>
-                                                <?php }?>
+                                                        <td>
+                                                            <?php
+                                                                echo $row['number_note'];
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo number_format($row['amount'], 2); ?>
+                                                        </td>
+                                                        <?php if ($typeUser === "Administrador") { ?>
+                                                            <td class="text-center">
+                                                                <a href="show-ticket-for-client-id.php?id=<?php echo $row['order_id']; ?>" class="btn btn-primary btn-sm">
+                                                                    <i class="bi bi-eye-fill"></i>
+                                                                </a>
+                                                            </td>
+                                                        <?php } ?>
+
+                                                        <?php if ($typeUser === "Administrador") { ?>
+                                                            <td class="text-center">
+                                                                <form action="change-status-credito.php" method="POST">
+                                                                    <input type="hidden" value="<?php echo $row['order_id']; ?>" name="id_credito">
+
+                                                                    <button type="submit" class="btn btn-success btn-sm" name="changesStatus">
+                                                                        <i class="fa-regular fa-circle-check"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </td>
+                                                        <?php } ?>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -154,7 +179,7 @@
         </div>
 
     </div>
-    
+
 
 
 
@@ -201,39 +226,38 @@
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 
-	<script>
-		const table = $('#dataTable').DataTable({
+    <script>
+        const table = $('#dataTable').DataTable({
             dom: 'lBfrtip',
-            buttons: [
-                {
-                    extend: 'excel',
-                    text: '<i class="fas fa-file-excel"></i>',
-                    titleAttr: 'EXCEL',
-                    className: 'btn btn-success'
+            buttons: [{
+                extend: 'excel',
+                text: '<i class="fas fa-file-excel"></i>',
+                titleAttr: 'EXCEL',
+                className: 'btn btn-success'
+            }],
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
                 }
-            ],
-			language: {
-				"decimal": "",
-				"emptyTable": "No hay información",
-				"info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-				"infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-				"infoFiltered": "(Filtrado de _MAX_ total entradas)",
-				"infoPostFix": "",
-				"thousands": ",",
-				"lengthMenu": "Mostrar _MENU_ Entradas",
-				"loadingRecords": "Cargando...",
-				"processing": "Procesando...",
-				"search": "Buscar:",
-				"zeroRecords": "Sin resultados encontrados",
-				"paginate": {
-					"first": "Primero",
-					"last": "Ultimo",
-					"next": "Siguiente",
-					"previous": "Anterior"
-				}
-			},
-			
-		});
-	</script>
+            },
+
+        });
+    </script>
 </body>
+
 </html>

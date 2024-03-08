@@ -27,6 +27,7 @@
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body id="page-top">
     <div id="wrapper">
@@ -70,6 +71,41 @@
                                     <div class="card-footer">
                                         <a href="show-roles.php">
                                             lista de roles de usuario
+                                            <i class="fas fa-long-arrow-alt-right mr-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-xxl-4 col-sm-12 col-md-4 mb-4">
+                                <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Pedidos Eliminados (Temporalmente)</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <?php 
+                                                        include "./config/conexion.php";
+
+                                                        $query = mysqli_query($conexion, "SELECT * FROM ordens_admin WHERE delete_tempory = 1");
+
+                                                        $orders_deleted_temporarily_count = mysqli_num_rows($query);
+
+                                                        echo $orders_deleted_temporarily_count;
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fa-solid fa-trash-can-arrow-up fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <a href="show-orders-deleted_temporarily.php">
+                                            lista de pedidos eliminado
                                             <i class="fas fa-long-arrow-alt-right mr-2"></i>
                                         </a>
                                     </div>
